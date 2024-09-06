@@ -1,0 +1,273 @@
+
+
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>https://ghimireprashant.com/</id>
+  <title>Prashant Ghimire</title>
+  <subtitle>Prashant Home - Documentation and More</subtitle>
+  <updated>2024-09-06T22:36:06+10:00</updated>
+  <author>
+    <name>Prashant G</name>
+    <uri>https://ghimireprashant.com/</uri>
+  </author>
+  <link rel="self" type="application/atom+xml" href="https://ghimireprashant.com/feed.xml"/>
+  <link rel="alternate" type="text/html" hreflang="en"
+    href="https://ghimireprashant.com/"/>
+  <generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator>
+  <rights> © 2024 Prashant G </rights>
+  <icon>/assets/img/favicons/favicon.ico</icon>
+  <logo>/assets/img/favicons/favicon-96x96.png</logo>
+
+
+  
+  <entry>
+    <title>Useful Linux Commands for Hacking</title>
+    <link href="https://ghimireprashant.com/posts/Useful-Commands/" rel="alternate" type="text/html" title="Useful Linux Commands for Hacking" />
+    <published>2023-03-19T22:34:31+11:00</published>
+  
+    <updated>2023-03-19T22:34:31+11:00</updated>
+  
+    <id>https://ghimireprashant.com/posts/Useful-Commands/</id>
+    <content src="https://ghimireprashant.com/posts/Useful-Commands/" />
+    <author>
+      <name>Prashant G</name>
+    </author>
+
+  
+    
+    <category term="Hacking" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      Common Linux Commands for Hacking.
+
+
+  
+    
+      Command
+      Description
+      Example
+    
+  
+  
+    
+      hostname
+      Displays the hostname of the machine
+      hostname
+    
+    
+      uname -a
+      Displays Sys information, may help to find kernel vulneribilities
+      uname -a
+    
+    
+      /proc/version
+      Information about processess, helps to find kernel and compiler info
+...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Let’s Block Our Ads For Free and Also Keep Our Children safe</title>
+    <link href="https://ghimireprashant.com/posts/Dns/" rel="alternate" type="text/html" title="Let’s Block Our Ads For Free and Also Keep Our Children safe" />
+    <published>2023-03-05T01:00:00+11:00</published>
+  
+    <updated>2023-03-05T01:00:00+11:00</updated>
+  
+    <id>https://ghimireprashant.com/posts/Dns/</id>
+    <content src="https://ghimireprashant.com/posts/Dns/" />
+    <author>
+      <name>Prashant G</name>
+    </author>
+
+  
+    
+    <category term="Networking" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      Let’s Block ads, those annoying little popups, with NextDNS. Before, we start that, let’s understand the concept of DNS.
+
+DNS according to Cloudflare is a Phonebook of Internet. It translates your domain name to ip  address. Each computer or device connected to internet has different IP address and its too much for us to remember those numbers. So instead of need to remembering addresses we hav...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>You need to use Password Manager right NOW!!</title>
+    <link href="https://ghimireprashant.com/posts/Bitwarden/" rel="alternate" type="text/html" title="You need to use Password Manager right NOW!!" />
+    <published>2023-02-23T22:34:31+11:00</published>
+  
+    <updated>2023-02-23T22:34:31+11:00</updated>
+  
+    <id>https://ghimireprashant.com/posts/Bitwarden/</id>
+    <content src="https://ghimireprashant.com/posts/Bitwarden/" />
+    <author>
+      <name>Prashant G</name>
+    </author>
+
+  
+    
+    <category term="CyberSecurity" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      Let’s see how many account do you have in the internet? Facebook, Gmail, Instagram, Twitter, Bank Account. Ah yeah Bank Account. Do you use same password for everything or atleast multiple accounts and never even changed that 2010 password you created and its everywhere. That my friend is a Red Flag.
+
+Look, I am aware, Internet Security seems like a bi66g deal to manage. But let me tell you a s...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Vulnhub Kioptrix Walkthrough Part 2</title>
+    <link href="https://ghimireprashant.com/posts/Vulnhub-Kioptrix-P-2/" rel="alternate" type="text/html" title="Vulnhub Kioptrix Walkthrough Part 2" />
+    <published>2022-12-22T23:11:31+11:00</published>
+  
+    <updated>2022-12-22T23:11:31+11:00</updated>
+  
+    <id>https://ghimireprashant.com/posts/Vulnhub-Kioptrix-P-2/</id>
+    <content src="https://ghimireprashant.com/posts/Vulnhub-Kioptrix-P-2/" />
+    <author>
+      <name>Prashant G</name>
+    </author>
+
+  
+    
+    <category term="Walkthrough" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      
+
+Default username: John
+Default Password: TwoCows2
+
+
+NIKTO
+
+
+  Web Vulneribility Scanner
+
+
+nikto -host url
+
+nikto -h target ip
+
+
+
+  Findings
+    
+      Outdated Applications - Google common exploits for given Version
+ 1) Apache
+ 2) mod_ssl
+ 3) openssl
+  2) mod_ssl
+ 1) vulnerable to a remote buffer overflow
+  3) Little bit of Directory Busting
+    
+  
+
+
+DIRBUSTER
+
+  Directory Busting / Finding ...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Vulnhub Kioptrix Walkthrough Part 1</title>
+    <link href="https://ghimireprashant.com/posts/Vulnhub-Kioptrix-P-1/" rel="alternate" type="text/html" title="Vulnhub Kioptrix Walkthrough Part 1" />
+    <published>2022-12-18T23:11:31+11:00</published>
+  
+    <updated>2022-12-18T23:11:31+11:00</updated>
+  
+    <id>https://ghimireprashant.com/posts/Vulnhub-Kioptrix-P-1/</id>
+    <content src="https://ghimireprashant.com/posts/Vulnhub-Kioptrix-P-1/" />
+    <author>
+      <name>Prashant G</name>
+    </author>
+
+  
+    
+    <category term="Walkthrough" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      
+
+Default username: John
+Default Password: TwoCows2
+
+Tips: Save your all Scans in text/image for future use
+
+Lets find our IP
+
+  Start Virtual Machine
+  ip a in your main OS terminal, this will give us ip of our target machine
+  Now go to your main machine Kali run sudo arp-scan -l
+
+
+
+This will give us IP address, Mac Address and Vendor
+We are looking for our matching IP. or Azureware/VMware
+
+
+...
+    </summary>
+  
+
+  </entry>
+
+</feed>
+
+

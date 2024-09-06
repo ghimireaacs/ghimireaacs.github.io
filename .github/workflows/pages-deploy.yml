@@ -1,37 +1,42 @@
-name: 'Build & Release'
+name: Build & Deploy
+
 on:
   push:
     branches:
-      - master
+      - main
     paths-ignore:
       - .gitignore
       - README.md
       - LICENSE
 
 jobs:
-  build-release:
-
+  build-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b  # 3.2.2
-
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # for posts's lastmod
+          fetch-depth: 0  # To capture full commit history for Jekyll
 
+      # Step 2: Set up Ruby
       - name: Setup Ruby
-        uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf  # 1.115.3
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.2.2
           bundler-cache: true
 
-      - name: Check baseurl
-        run: |
-          baseurl="$(grep '^baseurl:' _config.yml | sed "s/.*: *//;s/['\"]//g;s/#.*//")"
-          if [[ -n $baseurl ]]; then
-            echo "BASE_URL=$baseurl" >> $GITHUB_ENV
-          fi
+      # Step 3: Install dependencies and build the Jekyll site
+      - name: Install dependencies
+        run: bundle install
 
-      - name: Deploy
-        run: bash tools/release.sh
+      - name: Build the site
+        run: bundle exec jekyll build
+
+      # Step 4: Deploy the built site to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site  # Folder with the built site

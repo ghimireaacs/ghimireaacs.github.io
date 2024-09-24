@@ -1,17 +1,17 @@
 
 
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <id>https://ghimireprashant.com/</id>
+  <id>https://ashishghimire.com/</id>
   <title>Prashant Ghimire</title>
   <subtitle>Prashant Home - Documentation and More</subtitle>
-  <updated>2024-09-06T22:36:06+10:00</updated>
+  <updated>2024-09-24T18:24:07+10:00</updated>
   <author>
     <name>Prashant G</name>
-    <uri>https://ghimireprashant.com/</uri>
+    <uri>https://ashishghimire.com/</uri>
   </author>
-  <link rel="self" type="application/atom+xml" href="https://ghimireprashant.com/feed.xml"/>
+  <link rel="self" type="application/atom+xml" href="https://ashishghimire.com/feed.xml"/>
   <link rel="alternate" type="text/html" hreflang="en"
-    href="https://ghimireprashant.com/"/>
+    href="https://ashishghimire.com/"/>
   <generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator>
   <rights> © 2024 Prashant G </rights>
   <icon>/assets/img/favicons/favicon.ico</icon>
@@ -21,13 +21,13 @@
   
   <entry>
     <title>Useful Linux Commands for Hacking</title>
-    <link href="https://ghimireprashant.com/posts/Useful-Commands/" rel="alternate" type="text/html" title="Useful Linux Commands for Hacking" />
+    <link href="https://ashishghimire.com/posts/Useful-Commands/" rel="alternate" type="text/html" title="Useful Linux Commands for Hacking" />
     <published>2023-03-19T22:34:31+11:00</published>
   
     <updated>2023-03-19T22:34:31+11:00</updated>
   
-    <id>https://ghimireprashant.com/posts/Useful-Commands/</id>
-    <content src="https://ghimireprashant.com/posts/Useful-Commands/" />
+    <id>https://ashishghimire.com/posts/Useful-Commands/</id>
+    <content src="https://ashishghimire.com/posts/Useful-Commands/" />
     <author>
       <name>Prashant G</name>
     </author>
@@ -79,13 +79,13 @@
   
   <entry>
     <title>Let’s Block Our Ads For Free and Also Keep Our Children safe</title>
-    <link href="https://ghimireprashant.com/posts/Dns/" rel="alternate" type="text/html" title="Let’s Block Our Ads For Free and Also Keep Our Children safe" />
+    <link href="https://ashishghimire.com/posts/Dns/" rel="alternate" type="text/html" title="Let’s Block Our Ads For Free and Also Keep Our Children safe" />
     <published>2023-03-05T01:00:00+11:00</published>
   
     <updated>2023-03-05T01:00:00+11:00</updated>
   
-    <id>https://ghimireprashant.com/posts/Dns/</id>
-    <content src="https://ghimireprashant.com/posts/Dns/" />
+    <id>https://ashishghimire.com/posts/Dns/</id>
+    <content src="https://ashishghimire.com/posts/Dns/" />
     <author>
       <name>Prashant G</name>
     </author>
@@ -115,13 +115,13 @@ DNS according to Cloudflare is a Phonebook of Internet. It translates your domai
   
   <entry>
     <title>You need to use Password Manager right NOW!!</title>
-    <link href="https://ghimireprashant.com/posts/Bitwarden/" rel="alternate" type="text/html" title="You need to use Password Manager right NOW!!" />
+    <link href="https://ashishghimire.com/posts/Bitwarden/" rel="alternate" type="text/html" title="You need to use Password Manager right NOW!!" />
     <published>2023-02-23T22:34:31+11:00</published>
   
     <updated>2023-02-23T22:34:31+11:00</updated>
   
-    <id>https://ghimireprashant.com/posts/Bitwarden/</id>
-    <content src="https://ghimireprashant.com/posts/Bitwarden/" />
+    <id>https://ashishghimire.com/posts/Bitwarden/</id>
+    <content src="https://ashishghimire.com/posts/Bitwarden/" />
     <author>
       <name>Prashant G</name>
     </author>
@@ -151,13 +151,13 @@ Look, I am aware, Internet Security seems like a bi66g deal to manage. But let m
   
   <entry>
     <title>Vulnhub Kioptrix Walkthrough Part 2</title>
-    <link href="https://ghimireprashant.com/posts/Vulnhub-Kioptrix-P-2/" rel="alternate" type="text/html" title="Vulnhub Kioptrix Walkthrough Part 2" />
+    <link href="https://ashishghimire.com/posts/Vulnhub-Kioptrix-P-2/" rel="alternate" type="text/html" title="Vulnhub Kioptrix Walkthrough Part 2" />
     <published>2022-12-22T23:11:31+11:00</published>
   
     <updated>2022-12-22T23:11:31+11:00</updated>
   
-    <id>https://ghimireprashant.com/posts/Vulnhub-Kioptrix-P-2/</id>
-    <content src="https://ghimireprashant.com/posts/Vulnhub-Kioptrix-P-2/" />
+    <id>https://ashishghimire.com/posts/Vulnhub-Kioptrix-P-2/</id>
+    <content src="https://ashishghimire.com/posts/Vulnhub-Kioptrix-P-2/" />
     <author>
       <name>Prashant G</name>
     </author>
@@ -218,13 +218,13 @@ DIRBUSTER
   
   <entry>
     <title>Vulnhub Kioptrix Walkthrough Part 1</title>
-    <link href="https://ghimireprashant.com/posts/Vulnhub-Kioptrix-P-1/" rel="alternate" type="text/html" title="Vulnhub Kioptrix Walkthrough Part 1" />
+    <link href="https://ashishghimire.com/posts/Vulnhub-Kioptrix-P-1/" rel="alternate" type="text/html" title="Vulnhub Kioptrix Walkthrough Part 1" />
     <published>2022-12-18T23:11:31+11:00</published>
   
     <updated>2022-12-18T23:11:31+11:00</updated>
   
-    <id>https://ghimireprashant.com/posts/Vulnhub-Kioptrix-P-1/</id>
-    <content src="https://ghimireprashant.com/posts/Vulnhub-Kioptrix-P-1/" />
+    <id>https://ashishghimire.com/posts/Vulnhub-Kioptrix-P-1/</id>
+    <content src="https://ashishghimire.com/posts/Vulnhub-Kioptrix-P-1/" />
     <author>
       <name>Prashant G</name>
     </author>

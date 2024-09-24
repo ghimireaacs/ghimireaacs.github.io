@@ -23,6 +23,10 @@
   type: github-custom
   icon: 'fab fa-github'
   url: 'https://github.com/ghimireaacs'
+
+  type: linktree
+  icon: 'fa-brands fa-centos'
+  url: 'https://linktr.ee/aacsghimire'
 # -
 #   type: linkedin
 #   icon: 'fab fa-linkedin'

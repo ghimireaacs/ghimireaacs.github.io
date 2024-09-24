@@ -29,7 +29,7 @@ description: >-                        # used by seo meta and the atom feed
  Prashant Home - Documentation and More
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: 'https://ghimireprashant.com'
+url: 'https://ashishghimire.com'
 
 github:
   username: ghimireaacs             # change to your github username
@@ -37,11 +37,11 @@ twitter:
   username: ghimireaacs            # change to your twitter username
 tryhackme:
   username: ghostaacs
+linktree:
+  username: ghimireaacs
 
 discord:
   invitelink: /
-tiktok:
-  username: '@ashish-ghimire'
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
@@ -53,7 +53,7 @@ social:
      - https://tryhackme.com/p/ghostaacs       # change to your github homepage
     # Uncomment below to add more social links
      - https://tryhackme.com/p/ghostaacs
-    # - https://www.linkedin.com/in/username
+     - https://linktr.ee/aacsghimire
 
 
 # ↑ --------------------------

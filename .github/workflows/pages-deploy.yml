@@ -1,43 +1,46 @@
 name: Build & Deploy
 
 on:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - .gitignore
-      - README.md
-      - LICENSE
+    push:
+        branches:
+            - main
+        paths-ignore:
+            - .gitignore
+            - README.md
+            - LICENSE
 
 jobs:
-  build-deploy:
-    runs-on: ubuntu-latest
+    build-deploy:
+        runs-on: ubuntu-latest
 
-    steps:
-      # Step 1: Checkout the code
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # To capture full commit history for Jekyll
+        steps:
+            # Step 1: Checkout the code
+            - name: Checkout code
+              uses: actions/checkout@v3
+              with:
+                  fetch-depth: 0 # To capture full commit history for Jekyll
 
-      # Step 2: Set up Ruby
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.2.2
-          bundler-cache: true
+            # Step 2: Set up Ruby
+            - name: Setup Ruby
+              uses: ruby/setup-ruby@v1
+              with:
+                  ruby-version: 3.2.2
+                  bundler-cache: true
 
-      # Step 3: Install dependencies and build the Jekyll site
-      - name: Install dependencies
-        run: bundle install
+            # Step 3: Install dependencies and build the Jekyll site
+            - name: Install dependencies
+              run: bundle install
 
-      - name: Build the site
-        run: bundle exec jekyll build
+            - name: Build the site
+              run: bundle exec jekyll build
 
-      # Step 4: Deploy the built site to GitHub Pages
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site  # Folder with the built site
-          publish_branch: gh-pages  # Ensure this is set to 'gh-pages'
+            - name: Add custom Domain
+              run: echo "ashishghimire.com" > ./_site/CNAME
+
+            # Step 4: Deploy the built site to GitHub Pages
+            - name: Deploy to GitHub Pages
+              uses: peaceiris/actions-gh-pages@v3
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: ./_site # Folder with the built site
+                  publish_branch: gh-pages # Ensure this is set to 'gh-pages'

@@ -4,6 +4,7 @@ source "https://rubygems.org"
 
 gem "jekyll-theme-chirpy", "~> 6.0", ">= 6.0.1"
 
+gem "jekyll-json"
 group :test do
   gem "html-proofer", "~> 3.18"
 end

@@ -5,25 +5,29 @@
    
     `yay -S rbenv`
    
-3. Initialize rbenv and store it in '~/.zshrc'
+2. Initialize rbenv and store it in '~/.zshrc'
 
     `rbenv init`
     `v ~/.zshrc`
     `eval "$(rbenv init - zsh)"`
-   
-5. Install ruby 3.2.2 Required for this project
+
+3. Install Ruby Build plugin for 'rbenv install' to work
+
+    `git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build`
+
+3. Install ruby 3.2.2 Required for this project
 
    `rbenv install 3.2.2`
-   
-7. Change director to thi project and set local ruby version
+
+4. Change director to thi project and set local ruby version
 
     `z ghimireaacs.github.io`
     `rbenv local 3.2.2`
    
-9. Install all dependencies
+5. Install all dependencies
 
     `bundle install`
    
-11. Run on localhost
+6. Run on localhost
 
     `bundle exec jekyll serve --verbose`

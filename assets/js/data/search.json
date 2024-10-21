@@ -1,6 +1,23 @@
 [
   
   {
+    "title": "Update All Apps with One Line Of Code in Windows",
+    "url": "/posts/Install-Package-Manager-In-Windows-11/",
+    "categories": "Windows",
+    "tags": "Windows, Winget, Software, Install",
+    "date": "2024-10-21 05:19:38 +1100",
+    
+
+
+
+
+
+    
+    "snippet": "Its a headache to update each softwares on Windows. Its tough to update something manually.We do not use Microsoft Store, Microsoft. Please Leave us alone. With said that, Microsoftstore do have a ...",
+    "content": "Its a headache to update each softwares on Windows. Its tough to update something manually.We do not use Microsoft Store, Microsoft. Please Leave us alone. With said that, Microsoftstore do have a very important application there though and we can use that to update anyand everything, well most of it.WingetWingetWinget is an Open Source Windows Package Manager designed to run from Command Line Interface (Terminal). From one simple command you can Install your favorite package, uninstall non-necessary ones and Update, those needed to be updated. Also it lists all the package you have installed in your system, and export it. You can format your pc and install all those packages by importing them, or give it to your non tech savvy friends so they can install those cool softwares.Let’s Dive into itWinget comes pre installed in Windows 11(21H2 and later).To verify thisGo to Terminal and execute following command:`winget –version`If it shows the version Skip the installation part, otherwise follow the installation.Install Winget:Go To Winget.It will open Microsoft Store. Click on Get.Once Installed, restart your pc.Running WingetHead straight to terminal and execute following command:      Winget Help      winget --help            Find Winget Packages      winget find vscode      This will look for vscode in the Packages.‘Id’ is very useful here, you may want to copy it.(just select and right click)Lets install VScode.winget install Microsoft.VisualStudioCode` (right click for paste)So installation is done.Lets see the list,winget export -o C:\\Path\\to\\exported.jsonSimilary to importwinget import -i C:\\Path\\to\\exported.jsonUpgradeTo upgrade all available packages:winget upgrade --allFollow the Prompts and….Done!Wrap Up  Install winget  Install, Update and Uninstall from CLI  Upgrade Everything available with one line"
+  },
+  
+  {
     "title": "Useful Linux Commands for Hacking",
     "url": "/posts/Useful-Commands/",
     "categories": "Hacking",
@@ -49,6 +66,23 @@
     
     "snippet": "Let’s see how many account do you have in the internet? Facebook, Gmail, Instagram, Twitter, Bank Account. Ah yeah Bank Account. Do you use same password for everything or atleast multiple accounts...",
     "content": "Let’s see how many account do you have in the internet? Facebook, Gmail, Instagram, Twitter, Bank Account. Ah yeah Bank Account. Do you use same password for everything or atleast multiple accounts and never even changed that 2010 password you created and its everywhere. That my friend is a Red Flag.Look, I am aware, Internet Security seems like a bi66g deal to manage. But let me tell you a secret. You dot have to be the most secure person, just don’t be the easiest target. That’s all it is. You don’t want to be victim of some kid who watched a 10 minute Youtube video. Be wise, we’ll worry about smart later.And who is wiser than the one who don’t only protect his past but also his future, right? RIGHT?Alright, let’s get into it.Make your Password ComplicatedThink of a book that has every word in English language, does it even exist? Everything? EVERYTHING? Well, it does, its called &gt;! Dictionary. A normal dictionary with 600,000 words would be 250MB. If you look for a big wordlists in google today you can download almost 45 GB of it. Point is, its not just dictionary terms that are vulnerable today but mixtures of letters, numbers and symbols too. I mean you don’t want to put ‘Passw0rd or Pa$$w0rd’ as your password, the hackers are smart enough to keep those terms in the wordlists.Through the years, with so many breaches, we have collected a huge database of passwords around the world. Real world passwords used in real life. So there we have it A big book of passwords. Oh also these breaches do have email/username tied to them. There’s a good chance you’d find yourself with your password next to it.Here, let’s go to a site that tells us if we’ve ever been breached. Go to haveibeenpwned.com, type your email and see what it says. You can even write your password and see if it’s been ever breached. Site is secure.  :bulb: Tip: Trust but verify.Look at That. I am safe, are you?Now next Step!We have established we are not going to use weak password. Now what?Now we create strong passwords or pass phrases or pass-novels. You got the point. Make a word or sentence no one will guess, for each site and remember it.Password ManagerA password manager is something that saves your Password. Your device whether Apple, Android or your PC browser, already comes with password mananger. Remember when you go to a site and the id and passwords are already there? and everytime you use username and password in new site, there’s that annoying popup asking you to save your password. Yeah, that’s password manager.Even google and apple saves your passwords.Native or DefaultFor google, go to passwords.google.com. Sign in and there are your passwords saved in google.For browsers like chrome, Edge, Safari, go to Settings&gt;Profile&gt;Passwords.These comes with default so its easy for you to have multiple passwords. Apple |  Settings &gt; Passwords Android |  Settings &gt; General Management &gt; Passwords and Autofill. Microsoft Edge |  Settings &gt;Profile &gt; Passwords. Firefox |  Settings &gt; Privacy &amp; Security &gt; Logins and Passwords &gt; Saved Logins.Third Party SoftwaresAmong third party softwares there are Some Paid, others free. NordPass, LesPass, KeePassXC, and one of the Popular Bitwarden.These Password Managers do not only save but also helps you to create passwords for you. But do not forget your Master Password and generate a strong one that you cna remember, One complex password should’t be tough to remember, have a faith.Wrap Up  Do Not use same passwords Multiple Times  Use Complex Passwords  Generate Passwords more than 12 letters.  Use Password Managers to Save or help you create Passwords  Create a strong Master Password and Remember it."
+  },
+  
+  {
+    "title": "Install AppImage Softwares in Linux",
+    "url": "/posts/Installing-AppImage-Softwares-In-Linux/",
+    "categories": "Linux",
+    "tags": "Linux, AppImage, Software, Install",
+    "date": "2023-02-17 03:10:16 +1100",
+    
+
+
+
+
+
+    
+    "snippet": "AppImage is a software Distribution format for Linux. It is getting popular these days for the following reasons.Why to use AppImage?  Portable : They can run on Multiple Linux Distribution without...",
+    "content": "AppImage is a software Distribution format for Linux. It is getting popular these days for the following reasons.Why to use AppImage?  Portable : They can run on Multiple Linux Distribution without modification and without compatibility issue.  Versatile : It can be used to distributed as Graphical or Command Line applications.  Convenient : Can be downloaded and run with single click without any administrative privileges or installation.  Easy To Use : AppImages are self Contained software. There is no need to install any dependencies or libraries. This makes installation process easier and faster.How To Integrate on System  Download the appImage file  Download icon for your app  Copy Both files it on folder /home/user/folder/  Right click on the appImage file,  click Permission      Check ‘Allow executing file as program’ or    chmod +x ~/folder/minecraft.AppImage        Create a text File     [Desktop Entry] Type=Application Name=Minecraft Comment=Minecraft Icon=/home/user/folder/Minecraft/icon.png Exec=/home/user/folder/Minecraft/minecraft Terminal=false Categories=Minecraft;game        💡 Tip: Here, Icon is place of your icon and Exec is location of your application. We are using Minecraft as example here. Replace these with your folder and file names.  Save file in .local/share/applications/appName.desktop  Save as .desktop format.  Log Out or Restart System.And now you can run your appImage as usual application without problem.UninstallSimply Delete those 2 files. Voila.Despite Being One of the User Friendly Format, Flatpaks are considered better due to its security and Can be updated later."
   },
   
   {

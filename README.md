@@ -8,26 +8,31 @@
 2. Initialize rbenv and store it in '~/.zshrc'
 
     `rbenv init`
+   
     `v ~/.zshrc`
+
     `eval "$(rbenv init - zsh)"`
 
-3. Install Ruby Build plugin for 'rbenv install' to work
+4. Install Ruby Build plugin for 'rbenv install' to work
 
-    `git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build`
+    `git clone https://github.com/rbenv/ruby-build.git`
+
+   `"$(rbenv root)"/plugins/ruby-build`
 
 3. Install ruby 3.2.2 Required for this project
 
    `rbenv install 3.2.2`
 
-4. Change director to thi project and set local ruby version
+4. Change directory to this project and set local ruby version
 
-    `z ghimireaacs.github.io`
-    `rbenv local 3.2.2`
+   `z ghimireaacs.github.io`
+
+   `rbenv local 3.2.2`
    
-5. Install all dependencies
+6. Install all dependencies
 
     `bundle install`
    
-6. Run on localhost
+7. Run on localhost
 
     `bundle exec jekyll serve --verbose`

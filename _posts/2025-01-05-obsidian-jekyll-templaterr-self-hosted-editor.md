@@ -2,7 +2,7 @@
 layout: post
 title: "Obsidian + Jekyll + Templaterr Self Hosted Editor"
 date: 2025-01-05T04:25:05+00:00
-draft: false
+draft: true
 categories:
 tags: 
 description: "Creating an Admin Panel for Jekyll for Posts using Obsidian"

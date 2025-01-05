@@ -7,7 +7,7 @@ categories:
 tags: 
 description: "Creating an Admin Panel for Jekyll for Posts using Obsidian"
 image:
-    path: /assets/img/headers/default.webp
+ path: /assets/img/headers/default.webp
 ---
 
 

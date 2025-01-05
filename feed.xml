@@ -4,7 +4,7 @@
   <id>https://ashishghimire.com/</id>
   <title>Prashant Ghimire</title>
   <subtitle>Prashant Home - Documentation and More</subtitle>
-  <updated>2025-01-05T16:54:18+11:00</updated>
+  <updated>2025-01-05T22:49:01+11:00</updated>
   <author>
     <name>Prashant G</name>
     <uri>https://ashishghimire.com/</uri>
@@ -22,9 +22,9 @@
   <entry>
     <title></title>
     <link href="https://ashishghimire.com/posts/2025-01-05-obsidian-jekyll-templaterr-self-hosted-editor/" rel="alternate" type="text/html" title="" />
-    <published>2025-01-05T16:54:18+11:00</published>
+    <published>2025-01-05T22:49:01+11:00</published>
   
-    <updated>2025-01-05T16:54:03+11:00</updated>
+    <updated>2025-01-05T22:47:48+11:00</updated>
   
     <id>https://ashishghimire.com/posts/2025-01-05-obsidian-jekyll-templaterr-self-hosted-editor/</id>
     <content src="https://ashishghimire.com/posts/2025-01-05-obsidian-jekyll-templaterr-self-hosted-editor/" />
@@ -44,8 +44,9 @@
 
 
 
-      For a while i was searching for something to work as admin panel for my static blog site. There were few options like Forestry.io
+      For a while i was searching for something to work as admin panel for my static blog site. There are few options like Tina CMS but it needs a bit more configuration than what i wanted. I do confess i set it up once than abandoned it and never got around configuring it again so i wanted more simpler one, where i could just open up app, write and post. That’s the beauty of Markdown and Obsidian.
 
+...
     </summary>
   
 

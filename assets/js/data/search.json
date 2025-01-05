@@ -1,6 +1,23 @@
 [
   
   {
+    "title": null,
+    "url": "/posts/2025-01-05-obsidian-jekyll-templaterr-self-hosted-editor/",
+    "categories": "",
+    "tags": "",
+    "date": "2025-01-05 16:36:05 +1100",
+    
+
+
+
+
+
+    
+    "snippet": "For a while i was searching for something to work as admin panel for my static blog site. There were few options like Forestry.io",
+    "content": "For a while i was searching for something to work as admin panel for my static blog site. There were few options like Forestry.io"
+  },
+  
+  {
     "title": "Update All Apps with One Line Of Code in Windows",
     "url": "/posts/Install-Package-Manager-In-Windows-11/",
     "categories": "Windows",

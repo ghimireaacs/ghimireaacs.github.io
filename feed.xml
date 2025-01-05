@@ -4,7 +4,7 @@
   <id>https://ashishghimire.com/</id>
   <title>Prashant Ghimire</title>
   <subtitle>Prashant Home - Documentation and More</subtitle>
-  <updated>2025-01-05T15:22:34+11:00</updated>
+  <updated>2025-01-05T16:36:05+11:00</updated>
   <author>
     <name>Prashant G</name>
     <uri>https://ashishghimire.com/</uri>
@@ -17,6 +17,39 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title></title>
+    <link href="https://ashishghimire.com/posts/2025-01-05-obsidian-jekyll-templaterr-self-hosted-editor/" rel="alternate" type="text/html" title="" />
+    <published>2025-01-05T16:36:05+11:00</published>
+  
+    <updated>2025-01-05T16:36:05+11:00</updated>
+  
+    <id>https://ashishghimire.com/posts/2025-01-05-obsidian-jekyll-templaterr-self-hosted-editor/</id>
+    <content src="https://ashishghimire.com/posts/2025-01-05-obsidian-jekyll-templaterr-self-hosted-editor/" />
+    <author>
+      <name>Prashant G</name>
+    </author>
+
+  
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      For a while i was searching for something to work as admin panel for my static blog site. There were few options like Forestry.io
+
+    </summary>
+  
+
+  </entry>
 
   
   <entry>
@@ -66,7 +99,7 @@ Winget is an Open Source Windows Package Manager designed to run from Comma...
     <link href="https://ashishghimire.com/posts/Useful-Commands/" rel="alternate" type="text/html" title="Useful Linux Commands for Hacking" />
     <published>2023-03-19T22:34:31+11:00</published>
   
-    <updated>2023-03-19T22:34:31+11:00</updated>
+    <updated>2025-01-05T16:35:49+11:00</updated>
   
     <id>https://ashishghimire.com/posts/Useful-Commands/</id>
     <content src="https://ashishghimire.com/posts/Useful-Commands/" />
@@ -185,49 +218,6 @@ DNS according to Cloudflare is a Phonebook of Internet. It translates your domai
       Let’s see how many account do you have in the internet? Facebook, Gmail, Instagram, Twitter, Bank Account. Ah yeah Bank Account. Do you use same password for everything or atleast multiple accounts and never even changed that 2010 password you created and its everywhere. That my friend is a Red Flag.
 
 Look, I am aware, Internet Security seems like a bi66g deal to manage. But let me tell you a s...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>Install AppImage Softwares in Linux</title>
-    <link href="https://ashishghimire.com/posts/Installing-AppImage-Softwares-In-Linux/" rel="alternate" type="text/html" title="Install AppImage Softwares in Linux" />
-    <published>2023-02-17T03:10:16+11:00</published>
-  
-    <updated>2023-02-17T03:10:16+11:00</updated>
-  
-    <id>https://ashishghimire.com/posts/Installing-AppImage-Softwares-In-Linux/</id>
-    <content src="https://ashishghimire.com/posts/Installing-AppImage-Softwares-In-Linux/" />
-    <author>
-      <name>Prashant G</name>
-    </author>
-
-  
-    
-    <category term="Linux" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      AppImage is a software Distribution format for Linux. It is getting popular these days for the following reasons.
-
-
-
-Why to use AppImage?
-
-
-  Portable : They can run on Multiple Linux Distribution without modification and without compatibility issue.
-  Versatile : It can be used to distributed as Graphical or Command Line applications.
-  Convenient : Can be downloaded and run with single click ...
     </summary>
   
 

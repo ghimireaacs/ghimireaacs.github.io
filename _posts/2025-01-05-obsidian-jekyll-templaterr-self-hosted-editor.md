@@ -8,7 +8,6 @@ tags:
 description: "Creating an Admin Panel for Jekyll for Posts using Obsidian"
 image:
 	path: /assets/img/headers/default.webp
-
 ---
 
 For a while i was searching for something to work as admin panel for my static blog site. There were few options like [Forestry.io]()

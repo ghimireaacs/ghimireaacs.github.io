@@ -3,6 +3,8 @@
 source "https://rubygems.org"
 
 gem "jekyll-theme-chirpy", "~> 6.0", ">= 6.0.1"
+gem "jekyll-sitemap"
+
 
 gem "jekyll-json"
 group :test do

@@ -36,3 +36,28 @@
 7. Run on localhost
 
     `bundle exec jekyll serve --verbose`
+
+# Adding Blogs
+
+1. Write You Blog
+    
+    - Create a file markdown inside `_posts`
+    - Rename file in `YYYY-MM-DD-slug-of-file.md`.
+    - Copy Front Matter and Replace with relevant data.
+    - Write your blog.
+
+2. Image formatting
+    
+    - Install libwebp. `sudo apt install webp` in ubuntu or `sudo pacman -S libwebp` for Arch Linux.
+    
+    ### Manual Conversion
+    
+    - convert desired file to webp `cwebp image.jpg -o image.webp` manually
+    - copy it to correct destination. i.e "assets/img/posts/image.webp" for posts.
+
+    ### Auto Conversion
+
+    - From your root folder
+    - Make convert.sh executable `chmod +x convert.sh`
+    - run `./convert.sh`
+    - This will convert all files to webp, put them in relevant path and remove original files.

@@ -6,7 +6,7 @@ categories: Walkthrough
 tags: arch archinstall install Linux
 description: "Installing Arch Linux Hard Way"
 image:
- path: /assets/img/headers/Archinstall.webp
+ path: /assets/img/headers/ArchInstall.webp
 ---
 
 

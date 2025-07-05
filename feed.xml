@@ -4,7 +4,7 @@
   <id>https://ashishghimire.com/</id>
   <title>Prashant Ghimire</title>
   <subtitle>Prashant Home - Documentation and More</subtitle>
-  <updated>2025-07-06T02:50:23+10:00</updated>
+  <updated>2025-07-06T02:59:13+10:00</updated>
   <author>
     <name>Prashant G</name>
     <uri>https://ashishghimire.com/</uri>
@@ -24,7 +24,7 @@
     <link href="https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way/" rel="alternate" type="text/html" title="Installing Arch Linux Hard Way" />
     <published>2025-07-06T00:11:31+10:00</published>
   
-    <updated>2025-07-06T02:50:02+10:00</updated>
+    <updated>2025-07-06T02:58:41+10:00</updated>
   
     <id>https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way/</id>
     <content src="https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way/" />
@@ -79,6 +79,55 @@ ARCH
 
     
    ...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Installing Docker and Setting Permission</title>
+    <link href="https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/" rel="alternate" type="text/html" title="Installing Docker and Setting Permission" />
+    <published>2025-07-06T00:11:31+10:00</published>
+  
+    <updated>2025-07-06T00:11:31+10:00</updated>
+  
+    <id>https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/</id>
+    <content src="https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/" />
+    <author>
+      <name>Prashant G</name>
+    </author>
+
+  
+    
+    <category term="Walkthrough" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      Installing Docker
+
+
+  Setup docker’s apt repo
+
+
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-ar...
     </summary>
   
 
@@ -219,64 +268,6 @@ Winget
 Winget
 
 Winget is an Open Source Windows Package Manager designed to run from Comma...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>Useful Linux Commands for Hacking</title>
-    <link href="https://ashishghimire.com/posts/Useful-Commands/" rel="alternate" type="text/html" title="Useful Linux Commands for Hacking" />
-    <published>2023-03-19T22:34:31+11:00</published>
-  
-    <updated>2025-01-05T16:35:49+11:00</updated>
-  
-    <id>https://ashishghimire.com/posts/Useful-Commands/</id>
-    <content src="https://ashishghimire.com/posts/Useful-Commands/" />
-    <author>
-      <name>Prashant G</name>
-    </author>
-
-  
-    
-    <category term="Hacking" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      Common Linux Commands for Hacking.
-
-
-  
-    
-      Command
-      Description
-      Example
-    
-  
-  
-    
-      hostname
-      Displays the hostname of the machine
-      hostname
-    
-    
-      uname -a
-      Displays Sys information, may help to find kernel vulneribilities
-      uname -a
-    
-    
-      /proc/version
-      Information about processess, helps to find kernel and compiler info
-...
     </summary>
   
 

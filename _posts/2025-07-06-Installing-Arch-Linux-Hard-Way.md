@@ -327,10 +327,10 @@ Know your network
 `sudo pacman -S linux-headers`
 
 ---
-<details>
-<summary>‼️Expand And Follow ONLY IF YOU HAVE GPU </summary>
 
-#### NVIDIA
+## Follow ONLY IF YOU HAVE GPU
+
+### NVIDIA
 
 `sudo pacman -S nvidia-dkms libglvnd nvidia-utils opencl-nvidia lib32-libglvnd lib32-nvidia-utils lib32-opencl-nvidia nvidia-settings`
 
@@ -368,11 +368,10 @@ Know your network
 	When=PostTransaction
 	Exec=/usr/bin/mkinitcpio -P
     ```
-</details>
 
 ---
 
-### Else, Continue...
+## Else, Continue...
 
 `exit`
 

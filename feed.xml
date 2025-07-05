@@ -4,7 +4,7 @@
   <id>https://ashishghimire.com/</id>
   <title>Prashant Ghimire</title>
   <subtitle>Prashant Home - Documentation and More</subtitle>
-  <updated>2025-07-06T03:04:38+10:00</updated>
+  <updated>2025-07-06T03:08:07+10:00</updated>
   <author>
     <name>Prashant G</name>
     <uri>https://ashishghimire.com/</uri>
@@ -90,7 +90,7 @@ ARCH
     <link href="https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/" rel="alternate" type="text/html" title="Installing Docker and Setting Permission" />
     <published>2025-07-06T00:11:31+10:00</published>
   
-    <updated>2025-07-06T03:04:20+10:00</updated>
+    <updated>2025-07-06T03:07:51+10:00</updated>
   
     <id>https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/</id>
     <content src="https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/" />
@@ -118,16 +118,13 @@ ARCH
   
     Setup docker’s apt repo
 
-     # Add Docker's official GPG key:
- sudo apt-get update
- sudo apt-get install ca-certificates curl
- sudo install -m 0755 -d /etc/apt/keyrings
- sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
- sudo chmod a+r /etc/apt/keyrings/docker.asc
-
- # Add the repository to Apt sources:
- echo \
- "deb [arch=$(...
+         sudo apt-get update
+     sudo apt-get install ca-certificates curl
+     sudo install -m 0755 -d /etc/apt/keyrings
+     sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+     sudo chmod a+r /etc/apt/keyrings/docker.asc
+     echo \
+     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt...
     </summary>
   
 

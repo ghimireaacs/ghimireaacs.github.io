@@ -45,7 +45,7 @@
 <meta property="twitter:title" content="Installing Docker and Setting Permission" />
 <meta name="twitter:site" content="@ghimireaacs" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-07-06T03:04:20+10:00","datePublished":"2025-07-06T00:11:31+10:00","description":"Installing Docker and Setting Permission","headline":"Installing Docker and Setting Permission","image":"https://ashishghimire.com/assets/img/headers/dockerInstall.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/"},"url":"https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-07-06T03:07:51+10:00","datePublished":"2025-07-06T00:11:31+10:00","description":"Installing Docker and Setting Permission","headline":"Installing Docker and Setting Permission","image":"https://ashishghimire.com/assets/img/headers/dockerInstall.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/"},"url":"https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -715,7 +715,7 @@
 
 <time
   
-  data-ts="1751735060"
+  data-ts="1751735271"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -773,7 +773,7 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="133 words"
+  title="120 words"
 >
   <em>1 min</em> read</span>
 
@@ -790,45 +790,39 @@
   <li>
     <p>Setup docker’s apt repo</p>
 
-    <pre><code class="language-Bash"> # Add Docker's official GPG key:
- sudo apt-get update
- sudo apt-get install ca-certificates curl
- sudo install -m 0755 -d /etc/apt/keyrings
- sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
- sudo chmod a+r /etc/apt/keyrings/docker.asc
-
- # Add the repository to Apt sources:
- echo \
- "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
- $(. /etc/os-release &amp;&amp; echo "$VERSION_CODENAME") stable" | \
- sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
- sudo apt-get update
+    <pre><code class="language-Bash">     sudo apt-get update
+     sudo apt-get install ca-certificates curl
+     sudo install -m 0755 -d /etc/apt/keyrings
+     sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+     sudo chmod a+r /etc/apt/keyrings/docker.asc
+     echo \
+     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+     $(. /etc/os-release &amp;&amp; echo "$VERSION_CODENAME") stable" | \
+     sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+     sudo apt-get update
 </code></pre>
   </li>
   <li>
     <p>Install Latest Docker and its dependencies</p>
+
+    <p><code class="language-plaintext highlighter-rouge">sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</code></p>
+  </li>
+  <li>
+    <p>Create Docker group (Most likely already created)</p>
+
+    <p><code class="language-plaintext highlighter-rouge">sudo groupadd docker</code></p>
+  </li>
+  <li>
+    <p>Add user to the group</p>
+
+    <p><code class="language-plaintext highlighter-rouge">sudo usermod -aG docker $USER</code></p>
+  </li>
+  <li>
+    <p>Logout and Log Back in or restart or ..</p>
+
+    <p><code class="language-plaintext highlighter-rouge">newgrp docker</code></p>
   </li>
 </ol>
-
-<p><code class="language-plaintext highlighter-rouge">sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</code></p>
-
-<ol>
-  <li>Create Docker group (Most likely already created)</li>
-</ol>
-
-<p><code class="language-plaintext highlighter-rouge">sudo groupadd docker</code></p>
-
-<ol>
-  <li>Add user to the group</li>
-</ol>
-
-<p><code class="language-plaintext highlighter-rouge">sudo usermod -aG docker $USER</code></p>
-
-<ol>
-  <li>Logout and Log Back in or restart or ..</li>
-</ol>
-
-<p><code class="language-plaintext highlighter-rouge">newgrp docker</code></p>
 
 <blockquote>
   <p>⚠️ This will ensure you will not need to run “sudo” everytime you run docker and also fixes most Permission error.</p>

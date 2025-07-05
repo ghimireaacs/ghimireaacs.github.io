@@ -4,7 +4,7 @@
   <id>https://ashishghimire.com/</id>
   <title>Prashant Ghimire</title>
   <subtitle>Prashant Home - Documentation and More</subtitle>
-  <updated>2025-06-23T07:30:15+10:00</updated>
+  <updated>2025-07-05T20:06:22+10:00</updated>
   <author>
     <name>Prashant G</name>
     <uri>https://ashishghimire.com/</uri>
@@ -17,6 +17,70 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>Setting Up Active Directory</title>
+    <link href="https://ashishghimire.com/posts/Setting-Up-Active-Directory/" rel="alternate" type="text/html" title="Setting Up Active Directory" />
+    <published>2025-07-05T10:00:00+10:00</published>
+  
+    <updated>2025-07-05T10:00:00+10:00</updated>
+  
+    <id>https://ashishghimire.com/posts/Setting-Up-Active-Directory/</id>
+    <content src="https://ashishghimire.com/posts/Setting-Up-Active-Directory/" />
+    <author>
+      <name>Prashant G</name>
+    </author>
+
+  
+    
+    <category term="Active" />
+    
+    <category term="Directory" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      At first Download ISOs
+
+  Windows Server Eval 2022
+  Windows 10 Enterprise
+
+
+Setup Domain Controller
+
+
+  NEW VM
+  Typical
+  Server ISO
+  Split
+  Make sure its 60 GB
+  Finish
+  Edit
+  Add 8GB RAM
+  Remove Floppy Drive (Recommended)
+
+
+Install
+
+  Next &amp;gt; Install Now
+  Standard Evaluation Desktop Experience
+  Custom Install
+  New &amp;gt; Default &amp;gt; Apply &amp;gt; Ok
+  Next
+  Done
+  For This purpose se...
+    </summary>
+  
+
+  </entry>
 
   
   <entry>
@@ -183,42 +247,6 @@ Winget is an Open Source Windows Package Manager designed to run from Comma...
       Let’s Block ads, those annoying little popups, with NextDNS. Before, we start that, let’s understand the concept of DNS.
 
 DNS according to Cloudflare is a Phonebook of Internet. It translates your domain name to ip  address. Each computer or device connected to internet has different IP address and its too much for us to remember those numbers. So instead of need to remembering addresses we hav...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>You need to use Password Manager right NOW!!</title>
-    <link href="https://ashishghimire.com/posts/Bitwarden/" rel="alternate" type="text/html" title="You need to use Password Manager right NOW!!" />
-    <published>2023-02-23T22:34:31+11:00</published>
-  
-    <updated>2023-02-23T22:34:31+11:00</updated>
-  
-    <id>https://ashishghimire.com/posts/Bitwarden/</id>
-    <content src="https://ashishghimire.com/posts/Bitwarden/" />
-    <author>
-      <name>Prashant G</name>
-    </author>
-
-  
-    
-    <category term="CyberSecurity" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      Let’s see how many account do you have in the internet? Facebook, Gmail, Instagram, Twitter, Bank Account. Ah yeah Bank Account. Do you use same password for everything or atleast multiple accounts and never even changed that 2010 password you created and its everywhere. That my friend is a Red Flag.
-
-Look, I am aware, Internet Security seems like a bi66g deal to manage. But let me tell you a s...
     </summary>
   
 

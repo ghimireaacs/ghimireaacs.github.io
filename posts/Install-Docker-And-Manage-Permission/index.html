@@ -45,7 +45,7 @@
 <meta property="twitter:title" content="Installing Docker and Setting Permission" />
 <meta name="twitter:site" content="@ghimireaacs" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-07-06T03:07:51+10:00","datePublished":"2025-07-06T00:11:31+10:00","description":"Installing Docker and Setting Permission","headline":"Installing Docker and Setting Permission","image":"https://ashishghimire.com/assets/img/headers/dockerInstall.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/"},"url":"https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-07-06T03:08:59+10:00","datePublished":"2025-07-06T00:11:31+10:00","description":"Installing Docker and Setting Permission","headline":"Installing Docker and Setting Permission","image":"https://ashishghimire.com/assets/img/headers/dockerInstall.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/"},"url":"https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -715,7 +715,7 @@
 
 <time
   
-  data-ts="1751735271"
+  data-ts="1751735339"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -790,16 +790,16 @@
   <li>
     <p>Setup docker’s apt repo</p>
 
-    <pre><code class="language-Bash">     sudo apt-get update
-     sudo apt-get install ca-certificates curl
-     sudo install -m 0755 -d /etc/apt/keyrings
-     sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-     sudo chmod a+r /etc/apt/keyrings/docker.asc
-     echo \
-     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-     $(. /etc/os-release &amp;&amp; echo "$VERSION_CODENAME") stable" | \
-     sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
-     sudo apt-get update
+    <pre><code class="language-Bash"> sudo apt-get update
+ sudo apt-get install ca-certificates curl
+ sudo install -m 0755 -d /etc/apt/keyrings
+ sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+ sudo chmod a+r /etc/apt/keyrings/docker.asc
+ echo \
+ "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+ $(. /etc/os-release &amp;&amp; echo "$VERSION_CODENAME") stable" | \
+ sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+ sudo apt-get update
 </code></pre>
   </li>
   <li>

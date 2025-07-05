@@ -4,7 +4,7 @@
   <id>https://ashishghimire.com/</id>
   <title>Prashant Ghimire</title>
   <subtitle>Prashant Home - Documentation and More</subtitle>
-  <updated>2025-07-05T20:08:44+10:00</updated>
+  <updated>2025-07-06T02:08:37+10:00</updated>
   <author>
     <name>Prashant G</name>
     <uri>https://ashishghimire.com/</uri>
@@ -17,6 +17,72 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>Installing Arch Linux Hard Way</title>
+    <link href="https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way/" rel="alternate" type="text/html" title="Installing Arch Linux Hard Way" />
+    <published>2025-07-06T00:11:31+10:00</published>
+  
+    <updated>2025-07-06T00:11:31+10:00</updated>
+  
+    <id>https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way/</id>
+    <content src="https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way/" />
+    <author>
+      <name>Prashant G</name>
+    </author>
+
+  
+    
+    <category term="Walkthrough" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      Before Installation
+
+
+  Backup your data
+  Download Balena Etcher &amp;amp; ISO of ARCH Linux
+  Burn ISO to a USB
+  Restart
+
+
+Boot
+
+
+  Press DEL and load to BIOS mode
+  Change Boot Priorities to USB
+  Reboot
+
+
+ARCH
+
+
+  
+    Load ‘Arch Linux Install Medium’
+  
+  
+    Connect Your Arch to internet
+
+    iwctl --passphrase "$WIFIPASSWORD" station wlan0 connect $WIFINAME
+  
+  
+    ping 8.8.8.8
+
+    
+   ...
+    </summary>
+  
+
+  </entry>
 
   
   <entry>
@@ -211,42 +277,6 @@ Winget is an Open Source Windows Package Manager designed to run from Comma...
       /proc/version
       Information about processess, helps to find kernel and compiler info
 ...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>Let’s Block Our Ads For Free and Also Keep Our Children safe</title>
-    <link href="https://ashishghimire.com/posts/Dns/" rel="alternate" type="text/html" title="Let’s Block Our Ads For Free and Also Keep Our Children safe" />
-    <published>2023-03-05T01:00:00+11:00</published>
-  
-    <updated>2023-03-05T01:00:00+11:00</updated>
-  
-    <id>https://ashishghimire.com/posts/Dns/</id>
-    <content src="https://ashishghimire.com/posts/Dns/" />
-    <author>
-      <name>Prashant G</name>
-    </author>
-
-  
-    
-    <category term="Networking" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      Let’s Block ads, those annoying little popups, with NextDNS. Before, we start that, let’s understand the concept of DNS.
-
-DNS according to Cloudflare is a Phonebook of Internet. It translates your domain name to ip  address. Each computer or device connected to internet has different IP address and its too much for us to remember those numbers. So instead of need to remembering addresses we hav...
     </summary>
   
 

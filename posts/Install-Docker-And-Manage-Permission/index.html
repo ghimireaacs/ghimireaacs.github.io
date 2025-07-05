@@ -45,7 +45,7 @@
 <meta property="twitter:title" content="Installing Docker and Setting Permission" />
 <meta name="twitter:site" content="@ghimireaacs" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-07-06T03:01:40+10:00","datePublished":"2025-07-06T00:11:31+10:00","description":"Installing Docker and Setting Permission","headline":"Installing Docker and Setting Permission","image":"https://ashishghimire.com/assets/img/headers/dockerInstall.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/"},"url":"https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-07-06T03:04:20+10:00","datePublished":"2025-07-06T00:11:31+10:00","description":"Installing Docker and Setting Permission","headline":"Installing Docker and Setting Permission","image":"https://ashishghimire.com/assets/img/headers/dockerInstall.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/"},"url":"https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -715,7 +715,7 @@
 
 <time
   
-  data-ts="1751734900"
+  data-ts="1751735060"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -803,30 +803,32 @@
  $(. /etc/os-release &amp;&amp; echo "$VERSION_CODENAME") stable" | \
  sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
  sudo apt-get update
-
 </code></pre>
   </li>
   <li>
     <p>Install Latest Docker and its dependencies</p>
-
-    <p><code class="language-plaintext highlighter-rouge">sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</code></p>
-  </li>
-  <li>
-    <p>Create Docker group (Most likely already created)</p>
-
-    <p><code class="language-plaintext highlighter-rouge">sudo groupadd docker</code></p>
-  </li>
-  <li>
-    <p>Add user to the group</p>
-
-    <p><code class="language-plaintext highlighter-rouge">sudo usermod -aG docker $USER</code></p>
-  </li>
-  <li>
-    <p>Logout and Log Back in or restart or ..</p>
-
-    <p><code class="language-plaintext highlighter-rouge">newgrp docker</code></p>
   </li>
 </ol>
+
+<p><code class="language-plaintext highlighter-rouge">sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</code></p>
+
+<ol>
+  <li>Create Docker group (Most likely already created)</li>
+</ol>
+
+<p><code class="language-plaintext highlighter-rouge">sudo groupadd docker</code></p>
+
+<ol>
+  <li>Add user to the group</li>
+</ol>
+
+<p><code class="language-plaintext highlighter-rouge">sudo usermod -aG docker $USER</code></p>
+
+<ol>
+  <li>Logout and Log Back in or restart or ..</li>
+</ol>
+
+<p><code class="language-plaintext highlighter-rouge">newgrp docker</code></p>
 
 <blockquote>
   <p>⚠️ This will ensure you will not need to run “sudo” everytime you run docker and also fixes most Permission error.</p>

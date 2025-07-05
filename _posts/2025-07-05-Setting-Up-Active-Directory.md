@@ -6,7 +6,7 @@ categories: Active Directory
 tags: Active-Directory guide walkthrough TCM-SEC AD
 description: "Setting Up Active Directory PNPT Method"
 image:
- path: /assets/img/headers/tcmsec.webp
+ path: /assets/img/headers/activeDirectory.webp
 ---
 
 At first Download ISOs

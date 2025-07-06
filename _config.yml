@@ -63,7 +63,7 @@ social:
 # Web Analytics Settings
 analytics:
     google:
-        id: 'G-6R79VFXVBX' # Fill with your Google Analytics ID
+        id: 'G-K3ZE89DCP9' # Fill with your Google Analytics ID
     adsense:
         client: 'ca-pub-1234567890123456' # Fill with your Google AdSense Client ID
         slot: '1234567890' # Fill with your Google AdSense Slot ID

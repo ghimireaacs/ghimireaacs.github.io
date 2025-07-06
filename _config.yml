@@ -64,6 +64,9 @@ social:
 analytics:
     google:
         id: 'G-6R79VFXVBX' # Fill with your Google Analytics ID
+    adsense:
+        client: 'ca-pub-1234567890123456' # Fill with your Google AdSense Client ID
+        slot: '1234567890' # Fill with your Google AdSense Slot ID
     goatcounter:
         id: # fill in your GoatCounter ID
 

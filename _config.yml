@@ -32,6 +32,7 @@ description: >- # used by seo meta and the atom feed
 url: 'https://ashishghimire.com'
 plugin:
     - jekyll-site-map
+    - jekyll-feed
 
 github:
     username: ghimireaacs # change to your github username

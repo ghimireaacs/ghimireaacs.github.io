@@ -4,7 +4,7 @@
   <id>https://ashishghimire.com/</id>
   <title>Prashant Ghimire</title>
   <subtitle>Prashant Home - Documentation and More</subtitle>
-  <updated>2025-07-24T01:00:28+10:00</updated>
+  <updated>2025-07-24T01:02:37+10:00</updated>
   <author>
     <name>Prashant G</name>
     <uri>https://ashishghimire.com/</uri>
@@ -17,6 +17,42 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>Installing Proxmox and Post Installation</title>
+    <link href="https://ashishghimire.com/posts/Install-Proxmox-And-Post-Installation/" rel="alternate" type="text/html" title="Installing Proxmox and Post Installation" />
+    <published>2025-07-23T23:32:00+10:00</published>
+  
+    <updated>2025-07-24T01:02:14+10:00</updated>
+  
+    <id>https://ashishghimire.com/posts/Install-Proxmox-And-Post-Installation/</id>
+    <content src="https://ashishghimire.com/posts/Install-Proxmox-And-Post-Installation/" />
+    <author>
+      <name>Prashant G</name>
+    </author>
+
+  
+    
+    <category term="Walkthrough" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      Its 2025 most of us have a spare piece of Desktop or Laptop lying around, which seems like is not worth much. But using Proxmox that piece of old tech can make your life easier without a lot of trouble. You will not need a brand new unique system to run a server. Any PC should be fine after 2010, check specs for PCs that are older than 2010.
+
+We will be Making a Bootable USB, Installing Proxmox...
+    </summary>
+  
+
+  </entry>
 
   
   <entry>
@@ -223,48 +259,6 @@ Install
       Introduction
 
 For a while i was searching for something to work as admin panel for my static blog site. There are few options like Tina CMS but it needs a bit more configuration than what i wanted. I do confess i set it up once than abandoned it and never got around configuring it again so i wanted more simpler one, where i could just open up app, write and post. That’s the beauty of Markdown a...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>Update All Apps with One Line Of Code in Windows</title>
-    <link href="https://ashishghimire.com/posts/Install-Package-Manager-In-Windows-11/" rel="alternate" type="text/html" title="Update All Apps with One Line Of Code in Windows" />
-    <published>2024-10-21T05:19:38+11:00</published>
-  
-    <updated>2024-10-21T05:19:38+11:00</updated>
-  
-    <id>https://ashishghimire.com/posts/Install-Package-Manager-In-Windows-11/</id>
-    <content src="https://ashishghimire.com/posts/Install-Package-Manager-In-Windows-11/" />
-    <author>
-      <name>Prashant G</name>
-    </author>
-
-  
-    
-    <category term="Windows" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      Its a headache to update each softwares on Windows. Its tough to update something manually.
-We do not use Microsoft Store, Microsoft. Please Leave us alone. With said that, Microsoft
-store do have a very important application there though and we can use that to update any
-and everything, well most of it.
-Winget
-
-Winget
-
-Winget is an Open Source Windows Package Manager designed to run from Comma...
     </summary>
   
 

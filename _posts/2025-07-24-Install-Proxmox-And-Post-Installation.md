@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Installing Proxmox and Post Installation"
-date: 2025-07-24T14:32:00+11:00
+date: 2025-07-24T00:32:00+11:00
 categories: Walkthrough
 tags: proxmox homelab
 description: "Installing Proxmox and Post Installation using Community Script"

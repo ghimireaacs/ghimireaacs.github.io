@@ -15,15 +15,15 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # 3.0.2
+        uses: actions/checkout@v4 # 3.0.2
 
         with:
           fetch-depth: 0  # for posts's lastmod
 
       - name: Setup Ruby
-        uses: ruby/setup-ruby@250fcd6a742febb1123a77a841497ccaa8b9e939 # v1.152.0
+        uses: ruby/setup-ruby@v1 # v1.152.0
         with:
-          ruby-version: 3.2.2
+          ruby-version: '3.2.2'
           bundler-cache: true
 
       - name: Test Site

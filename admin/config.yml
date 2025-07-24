@@ -5,15 +5,22 @@ backend:
   auth_type: implicit
   app_id: "Ov23lifdvRXO8FdBuH37"
 
+# 1. Global media folder (required). This will be the default for thumbnails.
+media_folder: "assets/img/headers"
+public_folder: "/assets/img/headers"
+
+# 2. Global media library configuration (required).
+media_library:
+  name: image
+  config:
+    multiple: false
+
 collections:
   - name: "posts"
     label: "Posts"
     folder: "_posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    # Default media path for this collection (will be used by the "Thumbnail" field)
-    media_folder: "assets/img/headers"
-    public_folder: "/assets/img/headers"
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "post" }
       - { label: "Title", name: "title", widget: "string" }
@@ -25,6 +32,6 @@ collections:
       - label: "Body"
         name: "body"
         widget: "markdown"
-        # Specific media path just for images uploaded in the body editor
+        # 3. Specific override for images uploaded in the post body.
         media_folder: "assets/img/posts"
         public_folder: "/assets/img/posts"

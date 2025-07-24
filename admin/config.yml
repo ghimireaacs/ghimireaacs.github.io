@@ -3,10 +3,7 @@ backend:
   repo: ghimireaacs/ghimireaacs.github.io
   branch: main
   auth_type: implicit
-  app_id: Ov23lifdvRXO8FdBuH37
-
-media_folder: "assets/img/headers"
-public_folder: "/assets/img/headers"
+  app_id: "Ov23lifdvRXO8FdBuH37"
 
 collections:
   - name: "posts"
@@ -14,6 +11,9 @@ collections:
     folder: "_posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    # Default media path for this collection (will be used by the "Thumbnail" field)
+    media_folder: "assets/img/headers"
+    public_folder: "/assets/img/headers"
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "post" }
       - { label: "Title", name: "title", widget: "string" }
@@ -22,4 +22,9 @@ collections:
       - { label: "Tags", name: "tags", widget: "list", required: false }
       - { label: "Description", name: "description", widget: "string", required: false }
       - { label: "Thumbnail", name: "image", widget: "image", required: false }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        # Specific media path just for images uploaded in the body editor
+        media_folder: "assets/img/posts"
+        public_folder: "/assets/img/posts"

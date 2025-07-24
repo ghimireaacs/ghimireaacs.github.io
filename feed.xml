@@ -4,7 +4,7 @@
   <id>https://ashishghimire.com/</id>
   <title>Prashant Ghimire</title>
   <subtitle>Prashant Home - Documentation and More</subtitle>
-  <updated>2025-07-24T01:02:37+10:00</updated>
+  <updated>2025-07-25T07:25:07+10:00</updated>
   <author>
     <name>Prashant G</name>
     <uri>https://ashishghimire.com/</uri>
@@ -24,7 +24,7 @@
     <link href="https://ashishghimire.com/posts/Install-Proxmox-And-Post-Installation/" rel="alternate" type="text/html" title="Installing Proxmox and Post Installation" />
     <published>2025-07-23T23:32:00+10:00</published>
   
-    <updated>2025-07-24T01:02:14+10:00</updated>
+    <updated>2025-07-25T06:40:57+10:00</updated>
   
     <id>https://ashishghimire.com/posts/Install-Proxmox-And-Post-Installation/</id>
     <content src="https://ashishghimire.com/posts/Install-Proxmox-And-Post-Installation/" />
@@ -60,7 +60,7 @@ We will be Making a Bootable USB, Installing Proxmox...
     <link href="https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way/" rel="alternate" type="text/html" title="Installing Arch Linux Hard Way" />
     <published>2025-07-06T00:11:31+10:00</published>
   
-    <updated>2025-07-06T02:58:41+10:00</updated>
+    <updated>2025-07-25T06:40:57+10:00</updated>
   
     <id>https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way/</id>
     <content src="https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way/" />
@@ -126,7 +126,7 @@ ARCH
     <link href="https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/" rel="alternate" type="text/html" title="Installing Docker and Setting Permission" />
     <published>2025-07-06T00:11:31+10:00</published>
   
-    <updated>2025-07-06T03:08:59+10:00</updated>
+    <updated>2025-07-25T06:40:57+10:00</updated>
   
     <id>https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/</id>
     <content src="https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/" />
@@ -172,7 +172,7 @@ ARCH
     <link href="https://ashishghimire.com/posts/Setting-Up-Active-Directory/" rel="alternate" type="text/html" title="Setting Up Active Directory" />
     <published>2025-07-05T10:00:00+10:00</published>
   
-    <updated>2025-07-05T20:08:26+10:00</updated>
+    <updated>2025-07-25T06:40:57+10:00</updated>
   
     <id>https://ashishghimire.com/posts/Setting-Up-Active-Directory/</id>
     <content src="https://ashishghimire.com/posts/Setting-Up-Active-Directory/" />
@@ -182,9 +182,7 @@ ARCH
 
   
     
-    <category term="Active" />
-    
-    <category term="Directory" />
+    <category term="Active Directory" />
     
   
 
@@ -232,19 +230,21 @@ Install
 
   
   <entry>
-    <title>Obsidian, Jekyll and Templaterr Self Hosted Editor.</title>
-    <link href="https://ashishghimire.com/posts/obsidian-jekyll-templaterr-self-hosted-editor/" rel="alternate" type="text/html" title="Obsidian, Jekyll and Templaterr Self Hosted Editor." />
-    <published>2025-01-05T15:25:05+11:00</published>
+    <title>Update All Apps with One Line Of Code in Windows</title>
+    <link href="https://ashishghimire.com/posts/Install-Package-Manager-In-Windows-11/" rel="alternate" type="text/html" title="Update All Apps with One Line Of Code in Windows" />
+    <published>2024-10-21T05:19:38+11:00</published>
   
-    <updated>2025-01-12T13:47:23+11:00</updated>
+    <updated>2025-07-25T06:40:57+10:00</updated>
   
-    <id>https://ashishghimire.com/posts/obsidian-jekyll-templaterr-self-hosted-editor/</id>
-    <content src="https://ashishghimire.com/posts/obsidian-jekyll-templaterr-self-hosted-editor/" />
+    <id>https://ashishghimire.com/posts/Install-Package-Manager-In-Windows-11/</id>
+    <content src="https://ashishghimire.com/posts/Install-Package-Manager-In-Windows-11/" />
     <author>
       <name>Prashant G</name>
     </author>
 
   
+    
+    <category term="Windows" />
     
   
 
@@ -256,9 +256,15 @@ Install
 
 
 
-      Introduction
+      Its a headache to update each softwares on Windows. Its tough to update something manually.
+We do not use Microsoft Store, Microsoft. Please Leave us alone. With said that, Microsoft
+store do have a very important application there though and we can use that to update any
+and everything, well most of it.
+Winget
 
-For a while i was searching for something to work as admin panel for my static blog site. There are few options like Tina CMS but it needs a bit more configuration than what i wanted. I do confess i set it up once than abandoned it and never got around configuring it again so i wanted more simpler one, where i could just open up app, write and post. That’s the beauty of Markdown a...
+Winget
+
+Winget is an Open Source Windows Package Manager designed to run from Comma...
     </summary>
   
 

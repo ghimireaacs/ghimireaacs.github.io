@@ -1,0 +1,25 @@
+backend:
+  name: github
+  repo: ghimireaacs/ghimireaacs.github.io
+  branch: main
+  auth_type: implicit
+  app_id: Ov23lifdvRXO8FdBuH37
+
+media_folder: "assets/img/headers"
+public_folder: "/assets/img/headers"
+
+collections:
+  - name: "posts"
+    label: "Posts"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "post" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Category", name: "category", widget: "string", required: true }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Description", name: "description", widget: "string", required: false }
+      - { label: "Thumbnail", name: "image", widget: "image", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }

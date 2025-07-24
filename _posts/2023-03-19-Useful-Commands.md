@@ -1,12 +1,11 @@
 ---
 layout: post
 title: "Useful Linux Commands for Hacking"
-date: 2023-03-19T22:34:31+11:00
-categories: Hacking
-tags: commands Hacking Privilege-Escalation
+date: 2023-03-19 22:34:31 +1100
+category: Hacking
+tags: [commands, Hacking, Privilege-Escalation]
 description: "Common Linux Commands for Hacking."
-image:
- path: /assets/img/headers/linuxCommands.webp
+image: /assets/img/headers/linuxCommands.webp
 ---
 
 

@@ -1,12 +1,11 @@
 ---
 layout: post
 title: "Vulnhub Kioptrix Walkthrough Part 1"
-date: 2022-12-18T23:11:31+11:00
-categories: Walkthrough
-tags: vulnhub kioptrix guide walkthrough TCM-SEC net-discover arp-scan
+date: 2022-12-18 23:11:31 +1100
+category: Walkthrough
+tags: [vulnhub, kioptrix, guide, walkthrough, TCM-SEC, net-discover, arp-scan]
 description: "Vulnhub Kioptrix Walkthrough Part 1"
-image:
- path: /assets/img/headers/tcmsec.webp
+image: /assets/img/headers/tcmsec.webp
 ---
 
 ![tcmsec](/assets/img/headers/tcmsec.webp)

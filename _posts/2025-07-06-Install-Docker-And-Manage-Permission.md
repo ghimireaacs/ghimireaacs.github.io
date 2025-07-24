@@ -1,12 +1,11 @@
 ---
 layout: post
 title: "Installing Docker and Setting Permission"
-date: 2025-07-06T01:11:31+11:00
-categories: Walkthrough
-tags: docker homelab
+date: 2025-07-06 01:11:31 +1100
+category: Walkthrough
+tags: [docker, homelab]
 description: "Installing Docker and Setting Permission"
-image:
- path: /assets/img/headers/dockerInstall.webp
+image: /assets/img/headers/dockerInstall.webp
 ---
 
 

@@ -1,14 +1,12 @@
 ---
 layout: post
 title: "Installing Arch Linux Hard Way"
-date: 2025-07-06T01:11:31+11:00
-categories: Walkthrough
-tags: arch archinstall install Linux
+date: 2025-07-06 01:11:31 +1100
+category: Walkthrough
+tags: [arch, archinstall, install, Linux]
 description: "Installing Arch Linux Hard Way"
-image:
- path: /assets/img/headers/ArchInstall.webp
+image: /assets/img/headers/ArchInstall.webp
 ---
-
 
 ## Before Installation
 

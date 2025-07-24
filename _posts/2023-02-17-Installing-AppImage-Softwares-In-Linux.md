@@ -1,14 +1,12 @@
 ---
 layout: post
 title: "Install AppImage Softwares in Linux"
-date: 2023-02-17T03:10:16+11:00
-categories: Linux
-tags: Linux AppImage Software Install
+date: 2023-02-17 03:10:16 +1100
+category: Linux
+tags: [Linux, AppImage, Software, Install]
 description: "How to Install AppIMages Software in Linux"
-image:
- path: /assets/img/headers/appimg.webp
+image: /assets/img/headers/appimg.webp
 ---
-
 
 AppImage is a software Distribution format for Linux. It is getting popular these days for the following reasons.
 

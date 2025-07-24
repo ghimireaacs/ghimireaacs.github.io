@@ -1,12 +1,11 @@
 ---
 layout: post
 title: "Installing Proxmox and Post Installation"
-date: 2025-07-24T00:32:00+11:00
-categories: Walkthrough
-tags: proxmox homelab
+date: 2025-07-24 00:32:00 +1100
+category: Walkthrough
+tags: [proxmox, homelab]
 description: "Installing Proxmox and Post Installation using Community Script"
-image:
- path: /assets/img/headers/proxmox.webp
+image: /assets/img/headers/proxmox.webp
 ---
 
 Its 2025 most of us have a spare piece of Desktop or Laptop lying around, which seems like is not worth much. But using Proxmox that piece of old tech can make your life easier without a lot of trouble. You will not need a brand new unique system to run a server. Any PC should be fine after 2010, check specs for PCs that are older than 2010.

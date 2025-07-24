@@ -1,13 +1,13 @@
 ---
 layout: post
 title: "You need to use Password Manager right NOW!!"
-date: 2023-02-23T22:34:31+11:00
-categories: CyberSecurity
-tags: security password guide
+date: 2023-02-23 22:34:31 +1100
+category: CyberSecurity
+tags: [security, password, guide]
 description: "With data breaches everywhere, internet security is a major concern. Even if you do not want to go through any hassle, here are the minimum steps that will put you from easy targets to hard."
-image:
- path: /assets/img/headers/bitwarden.webp
+image: /assets/img/headers/bitwarden.webp
 ---
+
 Let's see how many account do you have in the internet? Facebook, Gmail, Instagram, Twitter, <mark>Bank Account</mark>. Ah yeah Bank Account. Do you use same password for everything or atleast multiple accounts and never even changed that 2010 password you created and its everywhere. That my friend is a Red Flag.
 
 Look, I am aware, Internet Security seems like a bi66g deal to manage. But let me tell you a secret. _You dot have to be the most secure person, just don't be the easiest target_. That's all it is. You don't want to be victim of some kid who watched a 10 minute Youtube video. Be wise, we'll worry about smart later.

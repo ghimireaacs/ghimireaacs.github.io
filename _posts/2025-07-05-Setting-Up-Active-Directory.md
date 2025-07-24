@@ -2,11 +2,10 @@
 layout: post
 title: "Setting Up Active Directory"
 date: 2025-07-05 00:00:00 +0000
-categories: Active Directory
-tags: Active-Directory guide walkthrough TCM-SEC AD
+category: Active Directory
+tags: [Active-Directory, guide, walkthrough, TCM-SEC, AD]
 description: "Setting Up Active Directory PNPT Method"
-image:
- path: /assets/img/headers/activeDirectory.webp
+image: /assets/img/headers/activeDirectory.webp
 ---
 
 At first Download ISOs

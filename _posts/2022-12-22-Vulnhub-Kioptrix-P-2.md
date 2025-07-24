@@ -1,14 +1,12 @@
 ---
 layout: post
 title: "Vulnhub Kioptrix Walkthrough Part 2"
-date: 2022-12-22T23:11:31+11:00
-categories: Walkthrough
-tags: vulnhub kioptrix guide walkthrough TCM-SEC nikto dirbuster burpsuite
+date: 2022-12-22 23:11:31 +1100
+category: Walkthrough
+tags: [vulnhub, kioptrix, guide, walkthrough, TCM-SEC, nikto, dirbuster, burpsuite]
 description: "Vulnhub Kioptrix Walkthrough Part 2"
-image:
- path: /assets/img/headers/tcmsec.webp
+image: /assets/img/headers/tcmsec.webp
 ---
-
 ![tcmsec](/assets/img/headers/tcmsec.webp)
 
 ```bash

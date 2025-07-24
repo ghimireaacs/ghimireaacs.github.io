@@ -1,10 +1,5 @@
 backend:
-  name: github
-  repo: ghimireaacs/ghimireaacs.github.io
-  branch: main
-  base_url: https://decap-server.vercel.app
-  auth_endpoint: /api/auth
-
+  name: git-gateway
 # Set the default media folder for Thumbnails
 media_folder: "assets/img/headers"
 public_folder: "/assets/img/headers"

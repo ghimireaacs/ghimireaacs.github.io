@@ -1,9 +1,12 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: ghimireaacs/ghimireaacs.github.io
   branch: main
+  auth_type: implicit
+  app_id: Ov23lifdvRXO8FdBuH37
 
-media_folder: "assets/img/posts"
-public_folder: "/assets/img/posts"
+media_folder: "assets/img/headers"
+public_folder: "/assets/img/headers"
 
 collections:
   - name: "posts"

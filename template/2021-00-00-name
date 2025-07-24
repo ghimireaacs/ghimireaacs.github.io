@@ -1,12 +1,11 @@
 ---
 layout: post
-title: "Some Title"
-date: 2021-01-01 09:00:00 -0500
-categories: homelab
-tags: homelab rancher kubernetes
-description: "Some Description"
-image:
- path: /assets/img/headers/header.webp
+title: "Vulnhub Kioptrix Walkthrough Part 1"
+date: 2022-12-18 23:11:31 +1100
+category: Walkthrough
+tags: [vulnhub, kioptrix, guide, walkthrough, TCM-SEC, net-discover, arp-scan]
+description: "Vulnhub Kioptrix Walkthrough Part 1"
+image: /assets/img/headers/tcmsec.webp
 ---
 
 [![Some Title](https://img.youtube.com/vi/BBBBBBBBBBBB/0.jpg)](https://www.youtube.com/watch?v=BBBBBBBBBBBB "Some Title")

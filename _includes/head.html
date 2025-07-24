@@ -1,0 +1,22 @@
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+{%- if page.sitemap.lastmod -%}
+  <meta name="sitemap_lastmod" content="{{ page.sitemap.lastmod | date_to_xmlschema }}">
+{%- endif -%}
+
+{% seo %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+
+{%- include assets-css.html -%}
+
+<script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
+
+{%- include_cached analytics.html -%}
+{%- include_cached comments.html -%}
+
+<script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>

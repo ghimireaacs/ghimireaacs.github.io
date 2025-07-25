@@ -90,7 +90,7 @@ analytics:
 img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar: /assets/img/avatar.png # change to your avatar image path
+avatar: /assets/img/propic.webp # change to your avatar image path
 
 # boolean type, the global switch for ToC in posts.
 toc: true

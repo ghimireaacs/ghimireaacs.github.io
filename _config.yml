@@ -65,7 +65,7 @@ social:
 # Web Analytics Settings
 analytics:
     google:
-        id: 'G-6R79VFXVBX' # Fill with your Google Analytics ID
+        id: G-K3ZE89DCP9 # Fill with your Google Analytics ID
     goatcounter:
         id: # fill in your GoatCounter ID
 

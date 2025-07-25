@@ -1,0 +1,64 @@
+/*
+  Custom Decap CMS styles to match the Chirpy Dark Theme.
+  File: admin/custom-styles.css
+*/
+
+/* Main background color for the entire app */
+#nc-root>div {
+    background-color: #1b1b1e !important;
+}
+
+/* The header bar at the top */
+div[class*="StyledTopBar-"] {
+    background-color: #2a2a2e;
+    border-bottom: 1px solid #444;
+}
+
+/* The left sidebar containing collections */
+nav[class*="AppSidebar-"] {
+    background-color: #2a2a2e;
+    border-right: 1px solid #444;
+}
+
+/* "New Post" and other primary buttons */
+a[class*="StyledButton-sc"],
+button[class*="StyledButton-sc"] {
+    background-color: #0d6efd !important;
+    /* A nice blue for contrast */
+}
+
+/* General text color for readability */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label,
+span,
+div,
+p,
+a {
+    color: #e1e1e1;
+}
+
+/* The list of posts in the collection view */
+div[class*="ListView-"] {
+    background-color: #1b1b1e;
+}
+
+/* Individual post cards in the list */
+a[class*="Card-"] {
+    background-color: #2a2a2e;
+    border: 1px solid #444;
+}
+
+a[class*="Card-"]:hover {
+    background-color: #3a3a3e;
+}
+
+/* The main editor and content area */
+div[class*="EditorContainer-"] {
+    background-color: #2a2a2e;
+}

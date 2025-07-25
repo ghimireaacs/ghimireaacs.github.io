@@ -26,7 +26,8 @@ title: Prashant Ghimire # the main title
 tagline: IT | Junior Pentester | HomeLab | Full Nerd  # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
-    Prashant Home - Documentation and More
+    A personal blog of Prashant Ghimire, a junior pentester and home lab enthusiast.
+    It covers topics on IT, cybersecurity, and personal projects.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: 'https://ashishghimire.com'

@@ -4,7 +4,7 @@
   <id>https://ashishghimire.com/</id>
   <title>Prashant Ghimire</title>
   <subtitle>A personal blog of Prashant Ghimire, a junior pentester and home lab enthusiast. It covers topics on IT, cybersecurity, and personal projects.</subtitle>
-  <updated>2025-07-26T05:30:21+10:00</updated>
+  <updated>2025-08-09T16:06:22+10:00</updated>
   <author>
     <name>Prashant G</name>
     <uri>https://ashishghimire.com/</uri>
@@ -17,6 +17,51 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>How I Utilize Github to Store and Download My Public SSH Keys</title>
+    <link href="https://ashishghimire.com/posts/How-I-Utilize-Github-For-SSH/" rel="alternate" type="text/html" title="How I Utilize Github to Store and Download My Public SSH Keys" />
+    <published>2025-08-09T02:32:00+10:00</published>
+  
+    <updated>2025-08-09T02:32:00+10:00</updated>
+  
+    <id>https://ashishghimire.com/posts/How-I-Utilize-Github-For-SSH/</id>
+    <content src="https://ashishghimire.com/posts/How-I-Utilize-Github-For-SSH/" />
+    <author>
+      <name>Prashant G</name>
+    </author>
+
+  
+    
+    <category term="Homelab" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      The first thing I do after I install a fresh new VM is SSH into that machine and use it locally. Now i will not rant about SSH and its uses and why you need it or why it’s better than web console. So, let’s get to the point.
+
+Logging In
+
+There are two ways we can login to server:
+
+
+  Key Pair Method
+  Username/Password
+
+
+Although SSH is very secure protocol in on itself, it is not totally immun...
+    </summary>
+  
+
+  </entry>
 
   
   <entry>
@@ -223,48 +268,6 @@ Install
   Next
   Done
   For This purpose se...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>Update All Apps with One Line Of Code in Windows</title>
-    <link href="https://ashishghimire.com/posts/Install-Package-Manager-In-Windows-11/" rel="alternate" type="text/html" title="Update All Apps with One Line Of Code in Windows" />
-    <published>2024-10-21T05:19:38+11:00</published>
-  
-    <updated>2025-07-25T06:40:57+10:00</updated>
-  
-    <id>https://ashishghimire.com/posts/Install-Package-Manager-In-Windows-11/</id>
-    <content src="https://ashishghimire.com/posts/Install-Package-Manager-In-Windows-11/" />
-    <author>
-      <name>Prashant G</name>
-    </author>
-
-  
-    
-    <category term="Windows" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      Its a headache to update each softwares on Windows. Its tough to update something manually.
-We do not use Microsoft Store, Microsoft. Please Leave us alone. With said that, Microsoft
-store do have a very important application there though and we can use that to update any
-and everything, well most of it.
-Winget
-
-Winget
-
-Winget is an Open Source Windows Package Manager designed to run from Comma...
     </summary>
   
 

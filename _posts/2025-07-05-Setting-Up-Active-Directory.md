@@ -8,6 +8,8 @@ description: "Setting Up Active Directory PNPT Method"
 image: /assets/img/headers/activeDirectory.webp
 ---
 
+> ‼️This is a setup for Penetration Testing in Local Network and never meant for production.
+
 At first Download ISOs
 - [Windows Server Eval 2022](https://www.microsoft.com/en-us/evalcenter/download-windows-server-2022)
 - [Windows 10 Enterprise](https://www.microsoft.com/en-us/evalcenter/download-windows-10-enterprise)

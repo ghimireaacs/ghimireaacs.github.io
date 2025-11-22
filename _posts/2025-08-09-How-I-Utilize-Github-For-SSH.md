@@ -113,5 +113,5 @@ Copy this command, change it to the `github-username` you saved your public key 
 
 Now you can access your Machine.
 
-> [!TIP]
 > If your private key is compromised in anyway remove this newly added line from `authorized_keys`.
+{: .prompt-tip }

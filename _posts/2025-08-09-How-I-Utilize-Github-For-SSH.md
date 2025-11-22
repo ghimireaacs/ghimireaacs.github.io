@@ -59,15 +59,24 @@ This should always be on your local machine and nowhere else but you can use Pas
 Now this is the best part, you can store this anywhere but i would recommend it to store in Github or Launchpad. For me, I use Github a lot so i choose Github.
 
 1. Go to Github Settings
+
    ![](assets/img/posts/ebde93544f57e002c486e5b57e611c2c.webp)
 2. On Access Tab choose `SSH and GPG Keys`
+
    ![](assets/img/posts/9c6fe9e312380988b65b7521a0a2aff3.webp)
+
 3. Click on New SSH Key
+
    ![](assets/img/posts/62e39e14921f61e435decc112e9c2a96.webp)
+
 4. Set a Title, Key Type: `Authentication Key`
+
 5. Key: Now paste contents of `id_25519.pub` ‼️ Check its `.pub`.
+
 6. Add SSH Key
+
    ![](assets/img/posts/069032f2bce598e18d1e8885fd000002.webp)
+
 7. Fill up your 2FA and Submit.
 
 Now you will see List of public Keys in your account.
@@ -104,4 +113,5 @@ Copy this command, change it to the `github-username` you saved your public key 
 
 Now you can access your Machine.
 
-> 💡 Pro Tip: If your private key is compromised in anyway remove this newly added line from `authorized_keys`.
+> [!TIP]
+> If your private key is compromised in anyway remove this newly added line from `authorized_keys`.

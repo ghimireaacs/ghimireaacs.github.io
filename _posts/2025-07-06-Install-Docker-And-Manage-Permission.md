@@ -46,4 +46,5 @@ image: /assets/img/headers/dockerInstall.webp
 
 
 
-> ⚠️ This will ensure you will not need to run "sudo" everytime you run docker and also fixes most Permission error.
+> [!WARNING]
+> This will ensure you will not need to run "sudo" everytime you run docker and also fixes most Permission error.

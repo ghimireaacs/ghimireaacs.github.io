@@ -58,11 +58,13 @@ image: /assets/img/headers/ArchInstall.webp
 
 ### Verify partitions
 
-	`lsblk` - notice there is no partition on your disk
+`lsblk` 
+
+- notice there is no partition on your disk
 
 ### Partitioning
 	
-	`cgdisk /dev/sdc`
+	cgdisk /dev/sdc
 
 - Press any key to continue
 
@@ -82,10 +84,12 @@ image: /assets/img/headers/ArchInstall.webp
 - Name your Drive: 'boot'
 
 ### SWAP MEMORY
+
+
 > When you run out of RAM this memory is used.
-	
 > Make this regardless of your RAM Size
-	
+{: .prompt-info }
+
 - Highlight  and go to BIG size 'free space' (probably 3rd option)
 - "NEW" again
 - First Sector: (Default):  (leave Blank and press "ENTER")
@@ -132,6 +136,7 @@ image: /assets/img/headers/ArchInstall.webp
     'y' to confirm if it asks
 
 - `mkfs.ext4 /dev/sdc4`
+	>[!tip]
     > Hint: press up arrow and change sdc3 to sdc4
 
 ### Mounting the drives
@@ -231,7 +236,8 @@ Move to first part of your script and change, mine is Australia Sydney so i will
 	
 `echo archish > /etc/hostname`
 
-> ⚠️ instead of 'archish' use whatever name you want
+> [!TIP]
+> instead of 'archish' use whatever name you want
 
 ### IF YOU HAVE SSD
 
@@ -250,12 +256,14 @@ Go all the way down to \[multilib] and remove # from both line
 
     `passwd`
 
->⚠️ Type password enter, it wont show it but its writing
+> [!IMPORTANT]
+> Type password enter, it wont show it but its writing
 
 ### Add User
 `useradd -m -g users -G wheel,storage,power -s /bin/bash ghost`
 
->⚠️ instead of ghost write your own username
+> [!IMPORTANT]
+> instead of ghost write your own username
 
 - give that user password
 
@@ -415,4 +423,5 @@ REBOOT
 
 
 
-> 💡 This is straight method to install arch linux "hard way". If you get any error or prefer different way, consult [Arch Wiki Installation Guide](https://wiki.archlinux.org/title/Installation_guide).
+> [!TIP]
+> This is straight method to install arch linux "hard way". If you get any error or prefer different way, consult [Arch Wiki Installation Guide](https://wiki.archlinux.org/title/Installation_guide).

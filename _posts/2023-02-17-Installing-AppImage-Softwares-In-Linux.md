@@ -47,7 +47,8 @@ AppImage is a software Distribution format for Linux. It is getting popular thes
     Categories=Minecraft;game
     ```
 
-> 💡 **Tip:** Here, Icon is place of your icon and Exec is location of your application. We are using Minecraft as example here. Replace these with your folder and file names.
+> [!TIP]
+> Here, Icon is place of your icon and Exec is location of your application. We are using Minecraft as example here. Replace these with your folder and file names.
 
 8. Save file in `.local/share/applications/appName.desktop`
 9. Save as .desktop format.

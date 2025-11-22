@@ -87,7 +87,8 @@ _*Note: more extension more time*_
 - At the bottom there is *Webalizer 2.01*
 - Lets note that
 
-> Note: Check through files and sources for possible Passwords and Leaks
+> [!NOTE]
+> Check through files and sources for possible Passwords and Leaks
 
 
 ### METASPLOIT

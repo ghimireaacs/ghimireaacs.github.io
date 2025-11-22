@@ -21,7 +21,8 @@ Think of a book that has every word in English language, does it even exist? Eve
 Through the years, with so many breaches, we have collected a huge database of passwords around the world. Real world passwords used in real life. So there we have it <mark>A big book of passwords</mark>. Oh also these breaches do have email/username tied to them. There's a good chance you'd find yourself with your password next to it.
 
 Here, let's go to a site that tells us if we've ever been breached. Go to [haveibeenpwned.com](https://haveibeenpwned.com), type your email and see what it says. You can even write your password and see if it's been ever breached. Site is secure.
-> :bulb: **Tip:** Trust but verify.
+> [!TIP]
+> Trust but verify.
 
 ![haveibeenpwned](/assets/img/posts/haveibeenpwned.webp)
 

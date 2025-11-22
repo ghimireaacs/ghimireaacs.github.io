@@ -47,7 +47,8 @@ Before Installing Proxmox we have to make a bootable USB drive. And our system r
 5. Select your USB as boot device.
 6. Now this will boot to Proxmox Installation.
 
-> 💡 Boot Configuration GUI varies with motherboard manufacturer. Please look for your specific Motherboard Bios settings in the internet.
+> [!TIP]
+> Boot Configuration GUI varies with motherboard manufacturer. Please look for your specific Motherboard Bios settings in the internet.
 
 
 # Installation

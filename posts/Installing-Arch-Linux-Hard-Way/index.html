@@ -45,7 +45,7 @@
 <meta property="twitter:title" content="Installing Arch Linux Hard Way" />
 <meta name="twitter:site" content="@ghimireaacs" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-07-25T06:40:57+10:00","datePublished":"2025-07-06T00:11:31+10:00","description":"Installing Arch Linux Hard Way","headline":"Installing Arch Linux Hard Way","image":"https://ashishghimire.com/assets/img/headers/ArchInstall.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way/"},"url":"https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-11-22T16:57:44+11:00","datePublished":"2025-07-06T00:11:31+10:00","description":"Installing Arch Linux Hard Way","headline":"Installing Arch Linux Hard Way","image":"https://ashishghimire.com/assets/img/headers/ArchInstall.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way/"},"url":"https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -357,44 +357,122 @@
     div.highlight::-webkit-scrollbar-track {
         background-color: transparent;
     }
+
+    /* Premium Image Styling */
+    .post-content img,
+    .content img {
+        border-radius: 12px;
+        /* Match code blocks */
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        /* Subtle depth */
+        border: 1px solid rgba(240, 246, 252, 0.1);
+        /* Subtle border for contrast */
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 2rem auto;
+        /* Center and give space */
+    }
+
+    .post-content img:hover,
+    .content img:hover {
+        transform: scale(1.01);
+        /* Tiny zoom on hover */
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+        /* Deeper shadow */
+    }
 </style>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        // Find all inline code elements
-        var inlineCodes = document.querySelectorAll(":not(pre) > code");
+        // 1. Inline Code Copy Functionality
+        function copyToClipboard(text, element) {
+            function showSuccess() {
+                var originalBg = element.style.backgroundColor;
+                var originalBorder = element.style.borderColor;
+                var originalColor = element.style.color;
 
+                element.style.backgroundColor = "rgba(46, 160, 67, 0.5)";
+                element.style.borderColor = "rgba(46, 160, 67, 1)";
+                element.style.color = "#ffffff";
+                element.style.transition = "none";
+
+                setTimeout(function () {
+                    element.style.transition = "background-color 0.5s ease, color 0.5s ease";
+                    element.style.backgroundColor = "";
+                    element.style.borderColor = "";
+                    element.style.color = "";
+                }, 600);
+            }
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(showSuccess).catch(function (err) {
+                    console.warn("Clipboard API failed, trying fallback...", err);
+                    fallbackCopy(text, showSuccess);
+                });
+            } else {
+                fallbackCopy(text, showSuccess);
+            }
+        }
+
+        function fallbackCopy(text, successCallback) {
+            var textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.position = "fixed";
+            textArea.style.opacity = "0";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            try {
+                var successful = document.execCommand('copy');
+                if (successful && successCallback) successCallback();
+            } catch (err) {
+                console.error("Fallback copy failed: ", err);
+            }
+
+            document.body.removeChild(textArea);
+        }
+
+        var inlineCodes = document.querySelectorAll(":not(pre) > code");
         inlineCodes.forEach(function (code) {
             code.setAttribute("title", "Click to copy");
-
             code.addEventListener("click", function (e) {
                 e.preventDefault();
                 e.stopPropagation();
-
-                var text = code.innerText;
-
-                navigator.clipboard.writeText(text).then(function () {
-                    // Visual feedback
-                    var originalBg = code.style.backgroundColor;
-                    var originalBorder = code.style.borderColor;
-                    var originalColor = code.style.color;
-
-                    // Green flash
-                    code.style.backgroundColor = "rgba(46, 160, 67, 0.5)";
-                    code.style.borderColor = "rgba(46, 160, 67, 1)";
-                    code.style.color = "#ffffff";
-                    code.style.transition = "none"; // Instant change
-
-                    setTimeout(function () {
-                        code.style.transition = "background-color 0.5s ease, color 0.5s ease";
-                        code.style.backgroundColor = ""; // Revert to CSS
-                        code.style.borderColor = "";
-                        code.style.color = "";
-                    }, 600);
-                }).catch(function (err) {
-                    console.error("Failed to copy text: ", err);
-                });
+                copyToClipboard(code.innerText, code);
             });
+        });
+
+        // 2. GFM Alerts (Mapped to Theme Classes)
+        const alerts = {
+            "NOTE": "prompt-info",
+            "TIP": "prompt-tip",
+            "IMPORTANT": "prompt-danger",
+            "WARNING": "prompt-warning",
+            "CAUTION": "prompt-danger"
+        };
+
+        document.querySelectorAll("blockquote").forEach(blockquote => {
+            const firstElement = blockquote.firstElementChild;
+            if (!firstElement) return;
+
+            const content = firstElement.innerHTML;
+            const match = content.match(/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/i);
+
+            if (match) {
+                const type = match[1].toUpperCase();
+                const className = alerts[type];
+
+                if (className) {
+                    blockquote.classList.add(className);
+                    // Remove the [!TYPE] text
+                    firstElement.innerHTML = content.replace(/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*<br>?/i, "").replace(/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*/i, "");
+                }
+            }
         });
     });
 </script>
@@ -1251,13 +1329,13 @@
 
 <time
   
-  data-ts="1753389657"
+  data-ts="1763791064"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
   
 >
-  Jul 25, 2025
+  Nov 22, 2025
 </time>
 
         </span>
@@ -1309,7 +1387,7 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="1096 words"
+  title="1095 words"
 >
   <em>6 min</em> read</span>
 
@@ -1397,18 +1475,18 @@
 
 <h3 id="verify-partitions"><span class="me-2">Verify partitions</span><a href="#verify-partitions" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 
-<div class="language-plaintext highlighter-rouge"><div class="code-header">
-        <span data-label-text="Plaintext"><i class="fas fa-code fa-fw small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>`lsblk` - notice there is no partition on your disk
-</pre></td></tr></tbody></table></code></div></div>
+<p><code class="language-plaintext highlighter-rouge">lsblk</code></p>
+
+<ul>
+  <li>notice there is no partition on your disk</li>
+</ul>
 
 <h3 id="partitioning"><span class="me-2">Partitioning</span><a href="#partitioning" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 
 <div class="language-plaintext highlighter-rouge"><div class="code-header">
         <span data-label-text="Plaintext"><i class="fas fa-code fa-fw small"></i></span>
       <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>`cgdisk /dev/sdc`
+</pre></td><td class="rouge-code"><pre>cgdisk /dev/sdc
 </pre></td></tr></tbody></table></code></div></div>
 
 <ul>
@@ -1446,12 +1524,10 @@
 </ul>
 
 <h3 id="swap-memory"><span class="me-2">SWAP MEMORY</span><a href="#swap-memory" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-<blockquote>
-  <p>When you run out of RAM this memory is used.</p>
-</blockquote>
 
-<blockquote>
-  <p>Make this regardless of your RAM Size</p>
+<blockquote class="prompt-info">
+  <p>When you run out of RAM this memory is used.
+Make this regardless of your RAM Size</p>
 </blockquote>
 
 <ul>
@@ -1524,7 +1600,8 @@
   </li>
   <li><code class="language-plaintext highlighter-rouge">mkfs.ext4 /dev/sdc4</code>
     <blockquote>
-      <p>Hint: press up arrow and change sdc3 to sdc4</p>
+      <p>[!tip]
+Hint: press up arrow and change sdc3 to sdc4</p>
     </blockquote>
   </li>
 </ul>
@@ -1655,7 +1732,8 @@
 <p><code class="language-plaintext highlighter-rouge">echo archish &gt; /etc/hostname</code></p>
 
 <blockquote>
-  <p>⚠️ instead of ‘archish’ use whatever name you want</p>
+  <p>[!TIP]
+instead of ‘archish’ use whatever name you want</p>
 </blockquote>
 
 <h3 id="if-you-have-ssd"><span class="me-2">IF YOU HAVE SSD</span><a href="#if-you-have-ssd" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
@@ -1682,14 +1760,16 @@
 </ul>
 
 <blockquote>
-  <p>⚠️ Type password enter, it wont show it but its writing</p>
+  <p>[!IMPORTANT]
+Type password enter, it wont show it but its writing</p>
 </blockquote>
 
 <h3 id="add-user"><span class="me-2">Add User</span><a href="#add-user" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 <p><code class="language-plaintext highlighter-rouge">useradd -m -g users -G wheel,storage,power -s /bin/bash ghost</code></p>
 
 <blockquote>
-  <p>⚠️ instead of ghost write your own username</p>
+  <p>[!IMPORTANT]
+instead of ghost write your own username</p>
 </blockquote>
 
 <ul>
@@ -1890,7 +1970,8 @@ initrd /initramfs-linux.img
 <p>REBOOT</p>
 
 <blockquote>
-  <p>💡 This is straight method to install arch linux “hard way”. If you get any error or prefer different way, consult <a href="https://wiki.archlinux.org/title/Installation_guide">Arch Wiki Installation Guide</a>.</p>
+  <p>[!TIP]
+This is straight method to install arch linux “hard way”. If you get any error or prefer different way, consult <a href="https://wiki.archlinux.org/title/Installation_guide">Arch Wiki Installation Guide</a>.</p>
 </blockquote>
 
   </div>
@@ -2052,27 +2133,6 @@ initrd /initramfs-linux.img
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Install-Docker-And-Manage-Permission/">Installing Docker and Setting Permission</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/How-I-Utilize-Github-For-SSH/">How I Utilize Github to Store and Download My Public SSH Keys</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/Setting-Up-Active-Directory/">Setting Up Active Directory</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
           <a href="/posts/Installing-AppImage-Softwares-In-Linux/">Install AppImage Softwares in Linux</a>
         </li>
       
@@ -2081,6 +2141,27 @@ initrd /initramfs-linux.img
         
         <li class="text-truncate lh-lg">
           <a href="/posts/Bitwarden/">You need to use Password Manager right NOW!!</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Install-Docker-And-Manage-Permission/">Installing Docker and Setting Permission</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Installing-Arch-Linux-Hard-Way/">Installing Arch Linux Hard Way</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Vulnhub-Kioptrix-P-2/">Vulnhub Kioptrix Walkthrough Part 2</a>
         </li>
       
     </ul>

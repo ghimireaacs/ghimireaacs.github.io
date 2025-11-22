@@ -357,44 +357,122 @@
     div.highlight::-webkit-scrollbar-track {
         background-color: transparent;
     }
+
+    /* Premium Image Styling */
+    .post-content img,
+    .content img {
+        border-radius: 12px;
+        /* Match code blocks */
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        /* Subtle depth */
+        border: 1px solid rgba(240, 246, 252, 0.1);
+        /* Subtle border for contrast */
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 2rem auto;
+        /* Center and give space */
+    }
+
+    .post-content img:hover,
+    .content img:hover {
+        transform: scale(1.01);
+        /* Tiny zoom on hover */
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+        /* Deeper shadow */
+    }
 </style>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        // Find all inline code elements
-        var inlineCodes = document.querySelectorAll(":not(pre) > code");
+        // 1. Inline Code Copy Functionality
+        function copyToClipboard(text, element) {
+            function showSuccess() {
+                var originalBg = element.style.backgroundColor;
+                var originalBorder = element.style.borderColor;
+                var originalColor = element.style.color;
 
+                element.style.backgroundColor = "rgba(46, 160, 67, 0.5)";
+                element.style.borderColor = "rgba(46, 160, 67, 1)";
+                element.style.color = "#ffffff";
+                element.style.transition = "none";
+
+                setTimeout(function () {
+                    element.style.transition = "background-color 0.5s ease, color 0.5s ease";
+                    element.style.backgroundColor = "";
+                    element.style.borderColor = "";
+                    element.style.color = "";
+                }, 600);
+            }
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(showSuccess).catch(function (err) {
+                    console.warn("Clipboard API failed, trying fallback...", err);
+                    fallbackCopy(text, showSuccess);
+                });
+            } else {
+                fallbackCopy(text, showSuccess);
+            }
+        }
+
+        function fallbackCopy(text, successCallback) {
+            var textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.position = "fixed";
+            textArea.style.opacity = "0";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            try {
+                var successful = document.execCommand('copy');
+                if (successful && successCallback) successCallback();
+            } catch (err) {
+                console.error("Fallback copy failed: ", err);
+            }
+
+            document.body.removeChild(textArea);
+        }
+
+        var inlineCodes = document.querySelectorAll(":not(pre) > code");
         inlineCodes.forEach(function (code) {
             code.setAttribute("title", "Click to copy");
-
             code.addEventListener("click", function (e) {
                 e.preventDefault();
                 e.stopPropagation();
-
-                var text = code.innerText;
-
-                navigator.clipboard.writeText(text).then(function () {
-                    // Visual feedback
-                    var originalBg = code.style.backgroundColor;
-                    var originalBorder = code.style.borderColor;
-                    var originalColor = code.style.color;
-
-                    // Green flash
-                    code.style.backgroundColor = "rgba(46, 160, 67, 0.5)";
-                    code.style.borderColor = "rgba(46, 160, 67, 1)";
-                    code.style.color = "#ffffff";
-                    code.style.transition = "none"; // Instant change
-
-                    setTimeout(function () {
-                        code.style.transition = "background-color 0.5s ease, color 0.5s ease";
-                        code.style.backgroundColor = ""; // Revert to CSS
-                        code.style.borderColor = "";
-                        code.style.color = "";
-                    }, 600);
-                }).catch(function (err) {
-                    console.error("Failed to copy text: ", err);
-                });
+                copyToClipboard(code.innerText, code);
             });
+        });
+
+        // 2. GFM Alerts (Mapped to Theme Classes)
+        const alerts = {
+            "NOTE": "prompt-info",
+            "TIP": "prompt-tip",
+            "IMPORTANT": "prompt-danger",
+            "WARNING": "prompt-warning",
+            "CAUTION": "prompt-danger"
+        };
+
+        document.querySelectorAll("blockquote").forEach(blockquote => {
+            const firstElement = blockquote.firstElementChild;
+            if (!firstElement) return;
+
+            const content = firstElement.innerHTML;
+            const match = content.match(/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/i);
+
+            if (match) {
+                const type = match[1].toUpperCase();
+                const className = alerts[type];
+
+                if (className) {
+                    blockquote.classList.add(className);
+                    // Remove the [!TYPE] text
+                    firstElement.innerHTML = content.replace(/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*<br>?/i, "").replace(/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*/i, "");
+                }
+            }
         });
     });
 </script>
@@ -1429,27 +1507,6 @@ We are looking for our matching IP. or <em>Azureware/VMware</em></p>
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Install-Docker-And-Manage-Permission/">Installing Docker and Setting Permission</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/How-I-Utilize-Github-For-SSH/">How I Utilize Github to Store and Download My Public SSH Keys</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/Setting-Up-Active-Directory/">Setting Up Active Directory</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
           <a href="/posts/Installing-AppImage-Softwares-In-Linux/">Install AppImage Softwares in Linux</a>
         </li>
       
@@ -1458,6 +1515,27 @@ We are looking for our matching IP. or <em>Azureware/VMware</em></p>
         
         <li class="text-truncate lh-lg">
           <a href="/posts/Bitwarden/">You need to use Password Manager right NOW!!</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Install-Docker-And-Manage-Permission/">Installing Docker and Setting Permission</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Installing-Arch-Linux-Hard-Way/">Installing Arch Linux Hard Way</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Vulnhub-Kioptrix-P-2/">Vulnhub Kioptrix Walkthrough Part 2</a>
         </li>
       
     </ul>

@@ -454,7 +454,8 @@
             if (!firstElement) return;
 
             const content = firstElement.innerHTML;
-            const match = content.match(/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/i);
+            // Allow leading whitespace/newlines
+            const match = content.match(/^\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/i);
 
             if (match) {
                 const type = match[1].toUpperCase();
@@ -462,8 +463,8 @@
 
                 if (className) {
                     blockquote.classList.add(className);
-                    // Remove the [!TYPE] text
-                    firstElement.innerHTML = content.replace(/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*<br>?/i, "").replace(/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*/i, "");
+                    // Remove the [!TYPE] text, handling whitespace and optional <br>
+                    firstElement.innerHTML = content.replace(/^\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*(<br\s*\/?>)?/i, "");
                 }
             }
         });

@@ -45,7 +45,7 @@
 <meta property="twitter:title" content="Installing Docker and Setting Permission" />
 <meta name="twitter:site" content="@ghimireaacs" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-07-25T06:40:57+10:00","datePublished":"2025-07-06T00:11:31+10:00","description":"Installing Docker and Setting Permission","headline":"Installing Docker and Setting Permission","image":"https://ashishghimire.com/assets/img/headers/dockerInstall.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/"},"url":"https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-11-22T16:31:24+11:00","datePublished":"2025-07-06T00:11:31+10:00","description":"Installing Docker and Setting Permission","headline":"Installing Docker and Setting Permission","image":"https://ashishghimire.com/assets/img/headers/dockerInstall.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/"},"url":"https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -268,6 +268,136 @@
   <!-- Netlify Identity Widget -->
 <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
+<style>
+    /* Custom Code Block Styling */
+    /* Inline code styling */
+    :not(pre)>code {
+        background-color: rgba(110, 118, 129, 0.4);
+        /* Subtle transparent dark */
+        color: #e6edf3;
+        /* High contrast text */
+        padding: 0.2em 0.4em;
+        border-radius: 6px;
+        font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+        font-size: 85%;
+        border: 1px solid rgba(240, 246, 252, 0.1);
+        /* Subtle border */
+        cursor: pointer;
+        /* Indicate clickable */
+        transition: background-color 0.2s ease;
+
+        /* Fix for broken wrapping */
+        display: inline-block;
+        white-space: nowrap;
+        max-width: 100%;
+        overflow-x: auto;
+        vertical-align: middle;
+        /* Better alignment for chips */
+        margin: 0 0.1em;
+        /* Breathing room */
+    }
+
+    :not(pre)>code:hover {
+        background-color: rgba(110, 118, 129, 0.6);
+        border-color: rgba(240, 246, 252, 0.3);
+    }
+
+    /* Block code styling */
+    div.highlight {
+        background-color: #161b22;
+        /* Deep GitHub dark dim */
+        color: #e6edf3;
+        border-radius: 12px;
+        /* Softer corners */
+        padding: 1.25rem;
+        /* Restore 'good gaps' */
+        margin: 24px 0;
+        /* More breathing room outside */
+        overflow-x: auto;
+        overflow-y: hidden;
+        /* Keep artifacts away */
+        border: 1px solid #30363d;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        /* Nice depth */
+    }
+
+    /* Reset all inner elements to prevent double styling or gaps */
+    div.highlight pre,
+    div.highlight code,
+    div.highlight table,
+    div.highlight tr,
+    div.highlight td {
+        background-color: transparent !important;
+        border: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        color: inherit !important;
+    }
+
+    /* Ensure table structure is correct */
+    div.highlight table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    /* Scrollbar styling */
+    div.highlight::-webkit-scrollbar {
+        height: 10px;
+        /* Slightly larger touch target */
+        width: 10px;
+    }
+
+    div.highlight::-webkit-scrollbar-thumb {
+        background-color: #30363d;
+        border-radius: 5px;
+        border: 2px solid #161b22;
+        /* Padding effect */
+    }
+
+    div.highlight::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Find all inline code elements
+        var inlineCodes = document.querySelectorAll(":not(pre) > code");
+
+        inlineCodes.forEach(function (code) {
+            code.setAttribute("title", "Click to copy");
+
+            code.addEventListener("click", function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                var text = code.innerText;
+
+                navigator.clipboard.writeText(text).then(function () {
+                    // Visual feedback
+                    var originalBg = code.style.backgroundColor;
+                    var originalBorder = code.style.borderColor;
+                    var originalColor = code.style.color;
+
+                    // Green flash
+                    code.style.backgroundColor = "rgba(46, 160, 67, 0.5)";
+                    code.style.borderColor = "rgba(46, 160, 67, 1)";
+                    code.style.color = "#ffffff";
+                    code.style.transition = "none"; // Instant change
+
+                    setTimeout(function () {
+                        code.style.transition = "background-color 0.5s ease, color 0.5s ease";
+                        code.style.backgroundColor = ""; // Revert to CSS
+                        code.style.borderColor = "";
+                        code.style.color = "";
+                    }, 600);
+                }).catch(function (err) {
+                    console.error("Failed to copy text: ", err);
+                });
+            });
+        });
+    });
+</script>
 </head>
 
 
@@ -716,13 +846,13 @@
 
 <time
   
-  data-ts="1753389657"
+  data-ts="1763789484"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
   
 >
-  Jul 25, 2025
+  Nov 22, 2025
 </time>
 
         </span>
@@ -774,7 +904,7 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="120 words"
+  title="130 words"
 >
   <em>1 min</em> read</span>
 
@@ -791,17 +921,29 @@
   <li>
     <p>Setup docker’s apt repo</p>
 
-    <pre><code class="language-Bash"> sudo apt-get update
- sudo apt-get install ca-certificates curl
- sudo install -m 0755 -d /etc/apt/keyrings
- sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
- sudo chmod a+r /etc/apt/keyrings/docker.asc
- echo \
- "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
- $(. /etc/os-release &amp;&amp; echo "$VERSION_CODENAME") stable" | \
- sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
- sudo apt-get update
-</code></pre>
+    <div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre> <span class="nb">sudo </span>apt-get update
+ <span class="nb">sudo </span>apt-get <span class="nb">install </span>ca-certificates curl
+ <span class="nb">sudo install</span> <span class="nt">-m</span> 0755 <span class="nt">-d</span> /etc/apt/keyrings
+ <span class="nb">sudo </span>curl <span class="nt">-fsSL</span> https://download.docker.com/linux/ubuntu/gpg <span class="nt">-o</span> /etc/apt/keyrings/docker.asc
+ <span class="nb">sudo chmod </span>a+r /etc/apt/keyrings/docker.asc
+ <span class="nb">echo</span> <span class="se">\</span>
+ <span class="s2">"deb [arch=</span><span class="si">$(</span>dpkg <span class="nt">--print-architecture</span><span class="si">)</span><span class="s2"> signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu </span><span class="se">\</span><span class="s2">
+ </span><span class="si">$(</span><span class="nb">.</span> /etc/os-release <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$VERSION_CODENAME</span><span class="s2">"</span><span class="si">)</span><span class="s2"> stable"</span> | <span class="se">\</span>
+ <span class="nb">sudo tee</span> /etc/apt/sources.list.d/docker.list <span class="o">&gt;</span> /dev/null
+ <span class="nb">sudo </span>apt-get update
+</pre></td></tr></tbody></table></code></div>    </div>
   </li>
   <li>
     <p>Install Latest Docker and its dependencies</p>
@@ -828,7 +970,6 @@
 <blockquote>
   <p>⚠️ This will ensure you will not need to run “sudo” everytime you run docker and also fixes most Permission error.</p>
 </blockquote>
-
 
   </div>
 
@@ -979,7 +1120,7 @@
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Setting-Up-Active-Directory/">Setting Up Active Directory</a>
+          <a href="/posts/Install-Docker-And-Manage-Permission/">Installing Docker and Setting Permission</a>
         </li>
       
         
@@ -987,6 +1128,13 @@
         
         <li class="text-truncate lh-lg">
           <a href="/posts/How-I-Utilize-Github-For-SSH/">How I Utilize Github to Store and Download My Public SSH Keys</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Setting-Up-Active-Directory/">Setting Up Active Directory</a>
         </li>
       
         
@@ -1001,13 +1149,6 @@
         
         <li class="text-truncate lh-lg">
           <a href="/posts/Bitwarden/">You need to use Password Manager right NOW!!</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/Dns/">Let’s Block Our Ads For Free and Also Keep Our Children safe</a>
         </li>
       
     </ul>

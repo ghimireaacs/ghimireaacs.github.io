@@ -45,7 +45,7 @@
 <meta property="twitter:title" content="Vulnhub Kioptrix Walkthrough Part 2" />
 <meta name="twitter:site" content="@ghimireaacs" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-11-22T16:57:44+11:00","datePublished":"2022-12-22T23:11:31+11:00","description":"Vulnhub Kioptrix Walkthrough Part 2","headline":"Vulnhub Kioptrix Walkthrough Part 2","image":"https://ashishghimire.com/assets/img/headers/tcmsec.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/Vulnhub-Kioptrix-P-2/"},"url":"https://ashishghimire.com/posts/Vulnhub-Kioptrix-P-2/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-11-22T17:07:06+11:00","datePublished":"2022-12-22T23:11:31+11:00","description":"Vulnhub Kioptrix Walkthrough Part 2","headline":"Vulnhub Kioptrix Walkthrough Part 2","image":"https://ashishghimire.com/assets/img/headers/tcmsec.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/Vulnhub-Kioptrix-P-2/"},"url":"https://ashishghimire.com/posts/Vulnhub-Kioptrix-P-2/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -445,35 +445,6 @@
                 e.stopPropagation();
                 copyToClipboard(code.innerText, code);
             });
-        });
-
-        // 2. GFM Alerts (Mapped to Theme Classes)
-        const alerts = {
-            "NOTE": "prompt-info",
-            "TIP": "prompt-tip",
-            "IMPORTANT": "prompt-danger",
-            "WARNING": "prompt-warning",
-            "CAUTION": "prompt-danger"
-        };
-
-        document.querySelectorAll("blockquote").forEach(blockquote => {
-            const firstElement = blockquote.firstElementChild;
-            if (!firstElement) return;
-
-            const content = firstElement.innerHTML;
-            // Allow leading whitespace/newlines
-            const match = content.match(/^\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/i);
-
-            if (match) {
-                const type = match[1].toUpperCase();
-                const className = alerts[type];
-
-                if (className) {
-                    blockquote.classList.add(className);
-                    // Remove the [!TYPE] text, handling whitespace and optional <br>
-                    firstElement.innerHTML = content.replace(/^\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*(<br\s*\/?>)?/i, "");
-                }
-            }
         });
     });
 </script>
@@ -1516,7 +1487,7 @@
 
 <time
   
-  data-ts="1763791064"
+  data-ts="1763791626"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -1574,7 +1545,7 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="480 words"
+  title="479 words"
 >
   <em>2 min</em> read</span>
 
@@ -1690,9 +1661,8 @@ Default Password: TwoCows2
   <li>Lets note that</li>
 </ul>
 
-<blockquote>
-  <p>[!NOTE]
-Check through files and sources for possible Passwords and Leaks</p>
+<blockquote class="prompt-info">
+  <p>Check through files and sources for possible Passwords and Leaks</p>
 </blockquote>
 
 <h3 id="metasploit"><span class="me-2">METASPLOIT</span><a href="#metasploit" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>

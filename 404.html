@@ -441,35 +441,6 @@
                 copyToClipboard(code.innerText, code);
             });
         });
-
-        // 2. GFM Alerts (Mapped to Theme Classes)
-        const alerts = {
-            "NOTE": "prompt-info",
-            "TIP": "prompt-tip",
-            "IMPORTANT": "prompt-danger",
-            "WARNING": "prompt-warning",
-            "CAUTION": "prompt-danger"
-        };
-
-        document.querySelectorAll("blockquote").forEach(blockquote => {
-            const firstElement = blockquote.firstElementChild;
-            if (!firstElement) return;
-
-            const content = firstElement.innerHTML;
-            // Allow leading whitespace/newlines
-            const match = content.match(/^\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/i);
-
-            if (match) {
-                const type = match[1].toUpperCase();
-                const className = alerts[type];
-
-                if (className) {
-                    blockquote.classList.add(className);
-                    // Remove the [!TYPE] text, handling whitespace and optional <br>
-                    firstElement.innerHTML = content.replace(/^\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*(<br\s*\/?>)?/i, "");
-                }
-            }
-        });
     });
 </script>
 </head>

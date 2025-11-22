@@ -45,7 +45,7 @@
 <meta property="twitter:title" content="You need to use Password Manager right NOW!!" />
 <meta name="twitter:site" content="@ghimireaacs" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-11-22T16:57:44+11:00","datePublished":"2023-02-23T22:34:31+11:00","description":"With data breaches everywhere, internet security is a major concern. Even if you do not want to go through any hassle, here are the minimum steps that will put you from easy targets to hard.","headline":"You need to use Password Manager right NOW!!","image":"https://ashishghimire.com/assets/img/headers/bitwarden.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/Bitwarden/"},"url":"https://ashishghimire.com/posts/Bitwarden/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-11-22T17:07:06+11:00","datePublished":"2023-02-23T22:34:31+11:00","description":"With data breaches everywhere, internet security is a major concern. Even if you do not want to go through any hassle, here are the minimum steps that will put you from easy targets to hard.","headline":"You need to use Password Manager right NOW!!","image":"https://ashishghimire.com/assets/img/headers/bitwarden.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/Bitwarden/"},"url":"https://ashishghimire.com/posts/Bitwarden/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -445,35 +445,6 @@
                 e.stopPropagation();
                 copyToClipboard(code.innerText, code);
             });
-        });
-
-        // 2. GFM Alerts (Mapped to Theme Classes)
-        const alerts = {
-            "NOTE": "prompt-info",
-            "TIP": "prompt-tip",
-            "IMPORTANT": "prompt-danger",
-            "WARNING": "prompt-warning",
-            "CAUTION": "prompt-danger"
-        };
-
-        document.querySelectorAll("blockquote").forEach(blockquote => {
-            const firstElement = blockquote.firstElementChild;
-            if (!firstElement) return;
-
-            const content = firstElement.innerHTML;
-            // Allow leading whitespace/newlines
-            const match = content.match(/^\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/i);
-
-            if (match) {
-                const type = match[1].toUpperCase();
-                const className = alerts[type];
-
-                if (className) {
-                    blockquote.classList.add(className);
-                    // Remove the [!TYPE] text, handling whitespace and optional <br>
-                    firstElement.innerHTML = content.replace(/^\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*(<br\s*\/?>)?/i, "");
-                }
-            }
         });
     });
 </script>
@@ -1052,7 +1023,7 @@
 
 <time
   
-  data-ts="1763791064"
+  data-ts="1763791626"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -1110,7 +1081,7 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="640 words"
+  title="639 words"
 >
   <em>3 min</em> read</span>
 
@@ -1134,9 +1105,8 @@ Alright, let’s get into it.</p>
 <p>Through the years, with so many breaches, we have collected a huge database of passwords around the world. Real world passwords used in real life. So there we have it <mark>A big book of passwords</mark>. Oh also these breaches do have email/username tied to them. There’s a good chance you’d find yourself with your password next to it.</p>
 
 <p>Here, let’s go to a site that tells us if we’ve ever been breached. Go to <a href="https://haveibeenpwned.com">haveibeenpwned.com</a>, type your email and see what it says. You can even write your password and see if it’s been ever breached. Site is secure.</p>
-<blockquote>
-  <p>[!TIP]
-Trust but verify.</p>
+<blockquote class="prompt-tip">
+  <p>Trust but verify.</p>
 </blockquote>
 
 <p><a href="/assets/img/posts/haveibeenpwned.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/haveibeenpwned.webp" alt="haveibeenpwned" loading="lazy"></a></p>

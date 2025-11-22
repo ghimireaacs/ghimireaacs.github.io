@@ -45,7 +45,7 @@
 <meta property="twitter:title" content="Installing Arch Linux Hard Way" />
 <meta name="twitter:site" content="@ghimireaacs" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-11-22T16:57:44+11:00","datePublished":"2025-07-06T00:11:31+10:00","description":"Installing Arch Linux Hard Way","headline":"Installing Arch Linux Hard Way","image":"https://ashishghimire.com/assets/img/headers/ArchInstall.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way/"},"url":"https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-11-22T17:07:06+11:00","datePublished":"2025-07-06T00:11:31+10:00","description":"Installing Arch Linux Hard Way","headline":"Installing Arch Linux Hard Way","image":"https://ashishghimire.com/assets/img/headers/ArchInstall.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way/"},"url":"https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -445,35 +445,6 @@
                 e.stopPropagation();
                 copyToClipboard(code.innerText, code);
             });
-        });
-
-        // 2. GFM Alerts (Mapped to Theme Classes)
-        const alerts = {
-            "NOTE": "prompt-info",
-            "TIP": "prompt-tip",
-            "IMPORTANT": "prompt-danger",
-            "WARNING": "prompt-warning",
-            "CAUTION": "prompt-danger"
-        };
-
-        document.querySelectorAll("blockquote").forEach(blockquote => {
-            const firstElement = blockquote.firstElementChild;
-            if (!firstElement) return;
-
-            const content = firstElement.innerHTML;
-            // Allow leading whitespace/newlines
-            const match = content.match(/^\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/i);
-
-            if (match) {
-                const type = match[1].toUpperCase();
-                const className = alerts[type];
-
-                if (className) {
-                    blockquote.classList.add(className);
-                    // Remove the [!TYPE] text, handling whitespace and optional <br>
-                    firstElement.innerHTML = content.replace(/^\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*(<br\s*\/?>)?/i, "");
-                }
-            }
         });
     });
 </script>
@@ -1330,7 +1301,7 @@
 
 <time
   
-  data-ts="1763791064"
+  data-ts="1763791626"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -1388,7 +1359,7 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="1095 words"
+  title="1090 words"
 >
   <em>6 min</em> read</span>
 
@@ -1600,9 +1571,8 @@ Make this regardless of your RAM Size</p>
     <p>‘y’ to confirm if it asks</p>
   </li>
   <li><code class="language-plaintext highlighter-rouge">mkfs.ext4 /dev/sdc4</code>
-    <blockquote>
-      <p>[!tip]
-Hint: press up arrow and change sdc3 to sdc4</p>
+    <blockquote class="prompt-tip">
+      <p>Hint: press up arrow and change sdc3 to sdc4</p>
     </blockquote>
   </li>
 </ul>
@@ -1732,9 +1702,8 @@ Hint: press up arrow and change sdc3 to sdc4</p>
 
 <p><code class="language-plaintext highlighter-rouge">echo archish &gt; /etc/hostname</code></p>
 
-<blockquote>
-  <p>[!TIP]
-instead of ‘archish’ use whatever name you want</p>
+<blockquote class="prompt-tip">
+  <p>instead of ‘archish’ use whatever name you want</p>
 </blockquote>
 
 <h3 id="if-you-have-ssd"><span class="me-2">IF YOU HAVE SSD</span><a href="#if-you-have-ssd" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
@@ -1760,17 +1729,15 @@ instead of ‘archish’ use whatever name you want</p>
   </li>
 </ul>
 
-<blockquote>
-  <p>[!IMPORTANT]
-Type password enter, it wont show it but its writing</p>
+<blockquote class="prompt-danger">
+  <p>Type password enter, it wont show it but its writing</p>
 </blockquote>
 
 <h3 id="add-user"><span class="me-2">Add User</span><a href="#add-user" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 <p><code class="language-plaintext highlighter-rouge">useradd -m -g users -G wheel,storage,power -s /bin/bash ghost</code></p>
 
-<blockquote>
-  <p>[!IMPORTANT]
-instead of ghost write your own username</p>
+<blockquote class="prompt-danger">
+  <p>instead of ghost write your own username</p>
 </blockquote>
 
 <ul>
@@ -1970,9 +1937,8 @@ initrd /initramfs-linux.img
 
 <p>REBOOT</p>
 
-<blockquote>
-  <p>[!TIP]
-This is straight method to install arch linux “hard way”. If you get any error or prefer different way, consult <a href="https://wiki.archlinux.org/title/Installation_guide">Arch Wiki Installation Guide</a>.</p>
+<blockquote class="prompt-tip">
+  <p>This is straight method to install arch linux “hard way”. If you get any error or prefer different way, consult <a href="https://wiki.archlinux.org/title/Installation_guide">Arch Wiki Installation Guide</a>.</p>
 </blockquote>
 
   </div>

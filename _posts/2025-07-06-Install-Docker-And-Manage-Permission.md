@@ -13,7 +13,7 @@ image: /assets/img/headers/dockerInstall.webp
 
 1. Setup docker's apt repo
 
-    ```Bash
+    ```bash
     sudo apt-get update
     sudo apt-get install ca-certificates curl
     sudo install -m 0755 -d /etc/apt/keyrings
@@ -47,5 +47,3 @@ image: /assets/img/headers/dockerInstall.webp
 
 
 > ⚠️ This will ensure you will not need to run "sudo" everytime you run docker and also fixes most Permission error.
-
-

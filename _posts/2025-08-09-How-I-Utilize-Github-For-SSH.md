@@ -42,7 +42,7 @@ Now you will have 2 files. Private key: `id_ed25519` and Public key with `.pub` 
 
 Make sure you have correct permission set for your keys when you download or paste it in a file. You do not need to worry about permission on the files created by the command however if you choose to backup or copy it in another file you should set the following permission.
 
-```BASH
+```bash
 chmod 700 ~/.ssh
 chmod 600 ~/.ssh/id_25519
 chmod 644 ~/.ssh/id_25519.pub

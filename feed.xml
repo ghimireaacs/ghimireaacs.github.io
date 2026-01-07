@@ -4,7 +4,7 @@
   <id>https://ashishghimire.com/</id>
   <title>Prashant Ghimire</title>
   <subtitle>A personal blog of Prashant Ghimire, a junior pentester and home lab enthusiast. It covers topics on IT, cybersecurity, and personal projects.</subtitle>
-  <updated>2025-11-22T17:07:23+11:00</updated>
+  <updated>2026-01-07T21:59:50+11:00</updated>
   <author>
     <name>Prashant G</name>
     <uri>https://ashishghimire.com/</uri>
@@ -13,10 +13,46 @@
   <link rel="alternate" type="text/html" hreflang="en"
     href="https://ashishghimire.com/"/>
   <generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator>
-  <rights> © 2025 Prashant G </rights>
+  <rights> © 2026 Prashant G </rights>
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>SSH + Zsh Prompt Duplication, Broken Nano, and the One-Line Fix</title>
+    <link href="https://ashishghimire.com/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/" rel="alternate" type="text/html" title="SSH + Zsh Prompt Duplication, Broken Nano, and the One-Line Fix" />
+    <published>2026-01-07T09:02:00+11:00</published>
+  
+    <updated>2026-01-07T09:02:00+11:00</updated>
+  
+    <id>https://ashishghimire.com/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/</id>
+    <content src="https://ashishghimire.com/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/" />
+    <author>
+      <name>Prashant G</name>
+    </author>
+
+  
+    
+    <category term="Linux" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      Background
+So with latest windows Updates its so hard to stay now, almost like they want you out. So i decided to use Linux as main gig again. Now i use Linux on my Laptops and Servers, it’s even as secondary boot in my main workstation. But i play invasive games like Valorant, FIFA and GTA Online (Now Borked in Linux) with my friends, i have to run Windows. 
+Now this story will continue somewh...
+    </summary>
+  
+
+  </entry>
 
   
   <entry>
@@ -206,67 +242,6 @@ ARCH
  sudo chmod a+r /etc/apt/keyrings/docker.asc
  echo \
  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https:...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>Setting Up Active Directory</title>
-    <link href="https://ashishghimire.com/posts/Setting-Up-Active-Directory/" rel="alternate" type="text/html" title="Setting Up Active Directory" />
-    <published>2025-07-05T10:00:00+10:00</published>
-  
-    <updated>2025-08-11T18:02:30+10:00</updated>
-  
-    <id>https://ashishghimire.com/posts/Setting-Up-Active-Directory/</id>
-    <content src="https://ashishghimire.com/posts/Setting-Up-Active-Directory/" />
-    <author>
-      <name>Prashant G</name>
-    </author>
-
-  
-    
-    <category term="Active Directory" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      
-  ‼️This is a setup for Penetration Testing in Local Network and never meant for production.
-
-
-At first Download ISOs
-
-  Windows Server Eval 2022
-  Windows 10 Enterprise
-
-
-Setup Domain Controller
-
-
-  NEW VM
-  Typical
-  Server ISO
-  Split
-  Make sure its 60 GB
-  Finish
-  Edit
-  Add 8GB RAM
-  Remove Floppy Drive (Recommended)
-
-
-Install
-
-  Next &amp;gt; Install Now
-  Standard Evaluation Desktop Exper...
     </summary>
   
 

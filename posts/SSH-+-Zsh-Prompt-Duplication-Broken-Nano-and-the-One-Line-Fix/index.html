@@ -30,26 +30,26 @@
 
   <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v4.4.1" />
-<meta property="og:title" content="You need to use Password Manager right NOW!!" />
+<meta property="og:title" content="SSH + Zsh Prompt Duplication, Broken Nano, and the One-Line Fix" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="With data breaches everywhere, internet security is a major concern. Even if you do not want to go through any hassle, here are the minimum steps that will put you from easy targets to hard." />
-<meta property="og:description" content="With data breaches everywhere, internet security is a major concern. Even if you do not want to go through any hassle, here are the minimum steps that will put you from easy targets to hard." />
-<link rel="canonical" href="https://ashishghimire.com/posts/Bitwarden/" />
-<meta property="og:url" content="https://ashishghimire.com/posts/Bitwarden/" />
+<meta name="description" content="While migrating to a Linux workstation with a modern terminal (Ghostty), Zsh, Oh My Zsh, and Powerlevel10k, I encountered a severe and confusing issue." />
+<meta property="og:description" content="While migrating to a Linux workstation with a modern terminal (Ghostty), Zsh, Oh My Zsh, and Powerlevel10k, I encountered a severe and confusing issue." />
+<link rel="canonical" href="https://ashishghimire.com/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/" />
+<meta property="og:url" content="https://ashishghimire.com/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/" />
 <meta property="og:site_name" content="Prashant Ghimire" />
-<meta property="og:image" content="https://ashishghimire.com/assets/img/headers/bitwarden.webp" />
+<meta property="og:image" content="https://ashishghimire.com/assets/img/headers/p10kbug.webp" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2023-02-23T22:34:31+11:00" />
+<meta property="article:published_time" content="2026-01-07T09:02:00+11:00" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta property="twitter:image" content="https://ashishghimire.com/assets/img/headers/bitwarden.webp" />
-<meta property="twitter:title" content="You need to use Password Manager right NOW!!" />
+<meta property="twitter:image" content="https://ashishghimire.com/assets/img/headers/p10kbug.webp" />
+<meta property="twitter:title" content="SSH + Zsh Prompt Duplication, Broken Nano, and the One-Line Fix" />
 <meta name="twitter:site" content="@ghimireaacs" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-11-22T17:07:06+11:00","datePublished":"2023-02-23T22:34:31+11:00","description":"With data breaches everywhere, internet security is a major concern. Even if you do not want to go through any hassle, here are the minimum steps that will put you from easy targets to hard.","headline":"You need to use Password Manager right NOW!!","image":"https://ashishghimire.com/assets/img/headers/bitwarden.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/Bitwarden/"},"url":"https://ashishghimire.com/posts/Bitwarden/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-01-07T09:02:00+11:00","datePublished":"2026-01-07T09:02:00+11:00","description":"While migrating to a Linux workstation with a modern terminal (Ghostty), Zsh, Oh My Zsh, and Powerlevel10k, I encountered a severe and confusing issue.","headline":"SSH + Zsh Prompt Duplication, Broken Nano, and the One-Line Fix","image":"https://ashishghimire.com/assets/img/headers/p10kbug.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/"},"url":"https://ashishghimire.com/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
-  <title>You need to use Password Manager right NOW!! | Prashant Ghimire
+  <title>SSH + Zsh Prompt Duplication, Broken Nano, and the One-Line Fix | Prashant Ghimire
   </title>
 
   <!--
@@ -649,7 +649,7 @@
         
           
             
-              <span>You need to use Password Manager right NOW!!</span>
+              <span>SSH + Zsh Prompt Duplication, Broken Nano, and the One-Line Fix</span>
             
 
           
@@ -874,6 +874,69 @@
     <!-- combine -->
     
   
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
 
   
 
@@ -921,6 +984,50 @@
 
       
     
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
 
     
   
@@ -936,6 +1043,28 @@
       
         
         
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
       
 
       
@@ -982,7 +1111,7 @@
 
 <article class="px-1">
   <header>
-    <h1 data-toc-skip>You need to use Password Manager right NOW!!</h1>
+    <h1 data-toc-skip>SSH + Zsh Prompt Duplication, Broken Nano, and the One-Line Fix</h1>
 
     <div class="post-meta text-muted">
       <!-- published date -->
@@ -998,41 +1127,18 @@
 
 <time
   
-  data-ts="1677152071"
+  data-ts="1767736920"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
   
 >
-  Feb 23, 2023
+  Jan  7, 2026
 </time>
 
       </span>
 
       <!-- lastmod date -->
-      
-        <span>
-          Updated
-          <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1763791626"
-  data-df="ll"
-  
-    data-bs-toggle="tooltip" data-bs-placement="bottom"
-  
->
-  Nov 22, 2025
-</time>
-
-        </span>
       
 
       
@@ -1043,7 +1149,7 @@
         
 
         <div class="mt-3 mb-3">
-          <a href="/assets/img/headers/bitwarden.webp" class="popup img-link preview-img shimmer"><img src="/assets/img/headers/bitwarden.webp"  alt="Preview Image" width="1200" height="630"  loading="lazy"></a></div>
+          <a href="/assets/img/headers/p10kbug.webp" class="popup img-link preview-img shimmer"><img src="/assets/img/headers/p10kbug.webp"  alt="Preview Image" width="1200" height="630"  loading="lazy"></a></div>
       
 
       <div class="d-flex justify-content-between">
@@ -1081,9 +1187,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="639 words"
+  title="781 words"
 >
-  <em>3 min</em> read</span>
+  <em>4 min</em> read</span>
 
       </div>
       <!-- .d-flex -->
@@ -1092,69 +1198,189 @@
   </header>
 
   <div class="content">
-    <p>Let’s see how many account do you have in the internet? Facebook, Gmail, Instagram, Twitter, <mark>Bank Account</mark>. Ah yeah Bank Account. Do you use same password for everything or atleast multiple accounts and never even changed that 2010 password you created and its everywhere. That my friend is a Red Flag.</p>
+    <h2 id="background"><span class="me-2">Background</span><a href="#background" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<p>So with latest windows Updates its so hard to stay now, almost like they want you out. So i decided to use Linux as main gig again. Now i use Linux on my Laptops and Servers, it’s even as secondary boot in my main workstation. But i play invasive games like Valorant, FIFA and GTA Online (Now Borked in Linux) with my friends, i have to run Windows. 
+Now this story will continue somewhere else.
+So recently i have decided to build a real, usable, stable Linux system for my main workstation.</p>
 
-<p>Look, I am aware, Internet Security seems like a bi66g deal to manage. But let me tell you a secret. <em>You dot have to be the most secure person, just don’t be the easiest target</em>. That’s all it is. You don’t want to be victim of some kid who watched a 10 minute Youtube video. Be wise, we’ll worry about smart later.
-And who is wiser than the one who don’t only protect his past but also his future, right? RIGHT?
-Alright, let’s get into it.</p>
+<h2 id="configuration"><span class="me-2">Configuration</span><a href="#configuration" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<h2 id="make-your-password-complicated"><span class="me-2">Make your Password Complicated</span><a href="#make-your-password-complicated" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<p>Here is what i have decided to go with, for my system.</p>
 
-<p>Think of a book that has every word in English language, does it even exist? Everything? EVERYTHING? Well, it does, its called &gt;! Dictionary. A normal dictionary with 600,000 words would be 250MB. If you look for a big wordlists in google today you can download almost 45 GB of it. Point is, its not just dictionary terms that are vulnerable today but mixtures of letters, numbers and symbols too. I mean you don’t want to put ‘<em>Passw0rd</em> or <em>Pa$$w0rd</em>’ as your password, the hackers are smart enough to keep those terms in the wordlists.</p>
+<h3 id="main-rig"><span class="me-2">Main Rig</span><a href="#main-rig" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 
-<p>Through the years, with so many breaches, we have collected a huge database of passwords around the world. Real world passwords used in real life. So there we have it <mark>A big book of passwords</mark>. Oh also these breaches do have email/username tied to them. There’s a good chance you’d find yourself with your password next to it.</p>
+<div class="table-wrapper"><table>
+  <thead>
+    <tr>
+      <th>MAIN RIG</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Distro</td>
+      <td>Arch Linux</td>
+    </tr>
+    <tr>
+      <td>Desktop Env.</td>
+      <td>KDE Plasma</td>
+    </tr>
+    <tr>
+      <td>Shell</td>
+      <td>ZSH</td>
+    </tr>
+    <tr>
+      <td>Terminal</td>
+      <td>Ghostty</td>
+    </tr>
+  </tbody>
+</table></div>
 
-<p>Here, let’s go to a site that tells us if we’ve ever been breached. Go to <a href="https://haveibeenpwned.com">haveibeenpwned.com</a>, type your email and see what it says. You can even write your password and see if it’s been ever breached. Site is secure.</p>
+<p>Even though i have pretty beefy rig i wanted it to be less bloat, so i chose <code class="language-plaintext highlighter-rouge">ghostty</code> from get go and removed <code class="language-plaintext highlighter-rouge">konsole</code>. Also set one application per purpose. I mean i even cut down terminal, who could go cheaper than that? I also have a <code class="language-plaintext highlighter-rouge">bootstrapped</code> dotfiles, which was repurposed from Workstation to Server dotfiles at <code class="language-plaintext highlighter-rouge">https://github.com/ghimireaacs/serverdotfiles</code>. So all my servers are configured using this. Hence all of them have:</p>
+
+<h3 id="servers"><span class="me-2">Servers</span><a href="#servers" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<div class="table-wrapper"><table>
+  <thead>
+    <tr>
+      <th>SERVERS</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Distro</td>
+      <td>Ubuntu</td>
+    </tr>
+    <tr>
+      <td>Desktop Env.</td>
+      <td>NONE</td>
+    </tr>
+    <tr>
+      <td>Shell</td>
+      <td>ZSH</td>
+    </tr>
+    <tr>
+      <td>Terminal</td>
+      <td>SSH client-owned</td>
+    </tr>
+  </tbody>
+</table></div>
+
+<h3 id="dotfiles"><span class="me-2">DOTFILES</span><a href="#dotfiles" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<div class="table-wrapper"><table>
+  <thead>
+    <tr>
+      <th>DOTFILES Components</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Oh My Zsh</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Powerelvel10k</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Custom Aliases</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Custom Exports</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Custom .zshrc</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table></div>
+
+<hr />
+
+<p>I also recently updated them so i could have same aliases and system running everywhere so its seamless, however i also wanted my servers and workstation to look and behave slightly different, because each have their own need. So i updated the files again, and bootstrapped with my workstation.
+Now it does auto finds distro and installs needed packages accordingly, also has multiple identifiers for workstation and server so it behaves a certain way. I thought this will be the problem but they were fine.
+I installed in my main rig, Voila, worked like a charm. I reconfigured this, adjusted with necessary changes, modified prompts and <code class="language-plaintext highlighter-rouge">git push</code>.</p>
+
+<p><a href="/assets/img/posts/20260107182116.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/20260107182116.webp" alt="" loading="lazy"></a></p>
+
+<h2 id="problem"><span class="me-2">Problem</span><a href="#problem" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
 <blockquote class="prompt-tip">
-  <p>Trust but verify.</p>
+  <p><strong>Question:</strong> So what broke?</p>
 </blockquote>
 
-<p><a href="/assets/img/posts/haveibeenpwned.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/haveibeenpwned.webp" alt="haveibeenpwned" loading="lazy"></a></p>
+<p>At first i got this multiple prompts which looked weird on its own, which i thought was a minor bug. Then i tried to clear screen with <code class="language-plaintext highlighter-rouge">ctrl + l</code> and it failed. Then i started to type something, well i got double of same things, and it was broken.</p>
 
-<p>Look at That. I am safe, are you?
-Now next Step!</p>
+<p><a href="/assets/img/posts/20260107182648.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/20260107182648.webp" alt="" loading="lazy"></a></p>
 
-<p>We have established we are not going to use weak password. Now what?
-Now we create strong passwords or pass phrases or pass-novels. You got the point. Make a word or sentence no one will guess, for each site and remember it.</p>
+<h3 id="troubleshooting"><span class="me-2">Troubleshooting</span><a href="#troubleshooting" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 
-<h2 id="password-manager"><span class="me-2">Password Manager</span><a href="#password-manager" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<p>Now after this i tried a bunch of different things i don’t remember in order but most obvious were:</p>
 
-<p>A password manager is something that saves your Password. Your device whether Apple, Android or your PC browser, already comes with password mananger. Remember when you go to a site and the id and passwords are already there? and everytime you use username and password in new site, there’s that annoying popup asking you to save your password. Yeah, that’s password manager.
-Even google and apple saves your passwords.</p>
+<ol>
+  <li>Changing shell from <code class="language-plaintext highlighter-rouge">zsh</code> to <code class="language-plaintext highlighter-rouge">bash</code>
+  So I was already on remote, i switched to bash, it fixed some problem like the prompts weren’t weird  anymore, however <code class="language-plaintext highlighter-rouge">ctrl + l</code> didn’t behave like it should. It did’t clear console but did got to new line, which turns out to be terminal capability issue. I did find a 🗝️ clue here, but i treated it as another sort of problem. I also tried changing local <code class="language-plaintext highlighter-rouge">zsh</code> to <code class="language-plaintext highlighter-rouge">bash</code>and then ssh to remote, problem persisted.</li>
+  <li>Changing Terminal from <code class="language-plaintext highlighter-rouge">ghostty</code> to <code class="language-plaintext highlighter-rouge">kitty</code>
+ Even after switching to a completely different terminal <code class="language-plaintext highlighter-rouge">kitty</code>, well you guessed it, same problem.</li>
+  <li>Changing OS
+ Now NO! I did not nuke my system again, i booted back to my Windows, ssh from there, guess what? No error! This made me sure there was something wrong with my <code class="language-plaintext highlighter-rouge">ZSH</code> or <code class="language-plaintext highlighter-rouge">ghostty</code> config or my Entire <code class="language-plaintext highlighter-rouge">dotfiles</code>, well mostly <code class="language-plaintext highlighter-rouge">.zshrc</code>.</li>
+  <li>Cleared <code class="language-plaintext highlighter-rouge">ZSH CACHE</code> before launching ssh.</li>
+  <li>Tried <code class="language-plaintext highlighter-rouge">zsh -f</code>, <code class="language-plaintext highlighter-rouge">zsh -T</code> none of them worked.</li>
+  <li>Tried changing SERVER Config
+ So remember when i said i got a clue? I tried <code class="language-plaintext highlighter-rouge">nano ~/.zshrc</code> to make changes on server side, there now i had that again.
+ <code class="language-plaintext highlighter-rouge">Error opening terminal: xterm-ghostty.</code>
+ There, there’s the solution.</li>
+</ol>
 
-<h3 id="native-or-default"><span class="me-2">Native or Default</span><a href="#native-or-default" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<blockquote class="prompt-warning">
+  <p><strong>BUG:</strong> Error opening terminal: xterm-ghostty.</p>
+</blockquote>
 
-<p>For google, go to <a href="https://passwords.google.com">passwords.google.com</a>. Sign in and there are your passwords saved in google.
-For browsers like chrome, Edge, Safari, go to Settings&gt;Profile&gt;Passwords.
-These comes with default so its easy for you to have multiple passwords.</p>
+<h2 id="root-cause"><span class="me-2">Root Cause</span><a href="#root-cause" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>Turns out when we SSH, the client exports the <code class="language-plaintext highlighter-rouge">TERM</code> environment variable to the server.
+Since we have <code class="language-plaintext highlighter-rouge">TERM=xterm-ghostty</code> in our local machine, it sent exactly that. Now my server received this and used this, since the server did not have a matching <code class="language-plaintext highlighter-rouge">terminfo</code> entry for <code class="language-plaintext highlighter-rouge">xterm-ghostty</code>, this caused terminal capability misinterpretation.</p>
+
+<h2 id="solution"><span class="me-2">Solution</span><a href="#solution" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>Now i use <code class="language-plaintext highlighter-rouge">config</code> file for my ssh, this helps me simplify my hostnames, have different private keys tied to different machines and its portable, so far. Until i needed to add this one more configuration:</p>
+
+<div class="language-ssh highlighter-rouge"><div class="code-header">
+        <span data-label-text="SSH"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>
+<span class="k">Host</span> *
+    <span class="k">SetEnv</span> TERM=xterm-256color
+
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>This configuration helps me have a consistent TERM across all my hosts.</p>
 
 <hr />
 
-<p><i class="fab fa-apple"> Apple | </i> Settings &gt; Passwords</p>
+<p>There that’s the solution.</p>
 
-<p><i class="fab fa-android"> Android | </i> Settings &gt; General Management &gt; Passwords and Autofill.</p>
-
-<p><i class="fab fa-edge"> Microsoft Edge | </i> Settings &gt;Profile &gt; Passwords.</p>
-
-<p><i class="fab fa-firefox"> Firefox | </i> Settings &gt; Privacy &amp; Security &gt; Logins and Passwords &gt; Saved Logins.</p>
-
-<hr />
-
-<h3 id="third-party-softwares"><span class="me-2">Third Party Softwares</span><a href="#third-party-softwares" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-
-<p>Among third party softwares there are Some Paid, others free. <a href="https://nordpass.com/">NordPass</a>, <a href="https://www.lesspass.com/">LesPass</a>, <a href="https://keepassxc.org/">KeePassXC</a>, and one of the Popular <a href="https://bitwarden.com">Bitwarden</a>.</p>
-
-<p>These Password Managers do not only save but also helps you to create passwords for you. But do not forget your Master Password and generate a strong one that you cna remember, One complex password should’t be tough to remember, have a faith.</p>
-
-<h1 id="wrap-up">Wrap Up</h1>
+<h2 id="tldr"><span class="me-2">TL;DR</span><a href="#tldr" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
 <ul>
-  <li>Do Not use same passwords Multiple Times</li>
-  <li>Use Complex Passwords</li>
-  <li>Generate Passwords more than 12 letters.</li>
-  <li>Use Password Managers to Save or help you create Passwords</li>
-  <li>Create a strong Master Password and Remember it.</li>
+  <li>I wanted a pretty, functional prompt across my workspace and servers.</li>
+  <li>I used ZSH, OMZ and  <code class="language-plaintext highlighter-rouge">ghostty</code> terminal to achieve this.</li>
+  <li>This introduced a <code class="language-plaintext highlighter-rouge">TERM</code> mismatch across SSH sessions.</li>
+  <li>Setting a consistent <code class="language-plaintext highlighter-rouge">TERM</code> in <code class="language-plaintext highlighter-rouge">config</code> file solved it.</li>
 </ul>
+
+<blockquote class="prompt-tip">
+  <p><strong>Tip:</strong> Set <code class="language-plaintext highlighter-rouge">TERM</code> in your SSH config to avoid terminal capability issues.</p>
+</blockquote>
+
 
   </div>
 
@@ -1164,7 +1390,7 @@ These comes with default so its easy for you to have multiple passwords.</p>
       <div class="post-meta mb-3">
         <i class="far fa-folder-open fa-fw me-1"></i>
         
-          <a href="/categories/cybersecurity/">CyberSecurity</a>
+          <a href="/categories/linux/">Linux</a>
       </div>
     
 
@@ -1174,19 +1400,19 @@ These comes with default so its easy for you to have multiple passwords.</p>
         <i class="fa fa-tags fa-fw me-1"></i>
         
           <a
-            href="/tags/security/"
+            href="/tags/ssh/"
             class="post-tag no-text-decoration"
-          >security</a>
+          >ssh</a>
         
           <a
-            href="/tags/password/"
+            href="/tags/zsh/"
             class="post-tag no-text-decoration"
-          >password</a>
+          >zsh</a>
         
           <a
-            href="/tags/guide/"
+            href="/tags/homelab/"
             class="post-tag no-text-decoration"
-          >guide</a>
+          >homelab</a>
         
       </div>
     
@@ -1222,28 +1448,28 @@ These comes with default so its easy for you to have multiple passwords.</p>
 
       
 
-      <a href="https://twitter.com/intent/tweet?text=You%20need%20to%20use%20Password%20Manager%20right%20NOW!!%20-%20Prashant%20Ghimire&url=https%3A%2F%2Fashishghimire.com%2Fposts%2FBitwarden%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
+      <a href="https://twitter.com/intent/tweet?text=SSH%20+%20Zsh%20Prompt%20Duplication,%20Broken%20Nano,%20and%20the%20One-Line%20Fix%20-%20Prashant%20Ghimire&url=https%3A%2F%2Fashishghimire.com%2Fposts%2FSSH-%2B-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
         <i class="fa-fw fa-brands fa-square-x-twitter"></i>
       </a>
     
 
       
 
-      <a href="https://www.facebook.com/sharer/sharer.php?title=You%20need%20to%20use%20Password%20Manager%20right%20NOW!!%20-%20Prashant%20Ghimire&u=https%3A%2F%2Fashishghimire.com%2Fposts%2FBitwarden%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
+      <a href="https://www.facebook.com/sharer/sharer.php?title=SSH%20+%20Zsh%20Prompt%20Duplication,%20Broken%20Nano,%20and%20the%20One-Line%20Fix%20-%20Prashant%20Ghimire&u=https%3A%2F%2Fashishghimire.com%2Fposts%2FSSH-%2B-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
         <i class="fa-fw fab fa-facebook-square"></i>
       </a>
     
 
       
 
-      <a href="https://t.me/share/url?url=https%3A%2F%2Fashishghimire.com%2Fposts%2FBitwarden%2F&text=You%20need%20to%20use%20Password%20Manager%20right%20NOW!!%20-%20Prashant%20Ghimire" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
+      <a href="https://t.me/share/url?url=https%3A%2F%2Fashishghimire.com%2Fposts%2FSSH-%2B-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix%2F&text=SSH%20+%20Zsh%20Prompt%20Duplication,%20Broken%20Nano,%20and%20the%20One-Line%20Fix%20-%20Prashant%20Ghimire" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
         <i class="fa-fw fab fa-telegram"></i>
       </a>
     
 
       
 
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fashishghimire.com%2Fposts%2FBitwarden%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Linkedin" aria-label="Linkedin">
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fashishghimire.com%2Fposts%2FSSH-%2B-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Linkedin" aria-label="Linkedin">
         <i class="fa-fw fab fa-linkedin"></i>
       </a>
     
@@ -1251,8 +1477,8 @@ These comes with default so its easy for you to have multiple passwords.</p>
         <button class="btn text-start" data-bs-toggle="tooltip" data-bs-placement="top" title="Mastodon" aria-label="Mastodon">
           <share-to-mastodon
             class="share-mastodon"
-            message="You%20need%20to%20use%20Password%20Manager%20right%20NOW!!%20-%20Prashant%20Ghimire"
-            url="https%3A%2F%2Fashishghimire.com%2Fposts%2FBitwarden%2F"customInstanceList="[{&quot;label&quot;:&quot;mastodon.social&quot;,&quot;link&quot;:&quot;https://mastodon.social/&quot;},{&quot;label&quot;:&quot;mastodon.online&quot;,&quot;link&quot;:&quot;https://mastodon.online/&quot;},{&quot;label&quot;:&quot;fosstodon.org&quot;,&quot;link&quot;:&quot;https://fosstodon.org/&quot;},{&quot;label&quot;:&quot;photog.social&quot;,&quot;link&quot;:&quot;https://photog.social/&quot;}]"
+            message="SSH%20+%20Zsh%20Prompt%20Duplication,%20Broken%20Nano,%20and%20the%20One-Line%20Fix%20-%20Prashant%20Ghimire"
+            url="https%3A%2F%2Fashishghimire.com%2Fposts%2FSSH-%2B-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix%2F"customInstanceList="[{&quot;label&quot;:&quot;mastodon.social&quot;,&quot;link&quot;:&quot;https://mastodon.social/&quot;},{&quot;label&quot;:&quot;mastodon.online&quot;,&quot;link&quot;:&quot;https://mastodon.online/&quot;},{&quot;label&quot;:&quot;fosstodon.org&quot;,&quot;link&quot;:&quot;https://fosstodon.org/&quot;},{&quot;label&quot;:&quot;photog.social&quot;,&quot;link&quot;:&quot;https://photog.social/&quot;}]"
           >
             <i class="fa-fw fa-brands fa-mastodon"></i>
           </share-to-mastodon>
@@ -2707,6 +2933,18 @@ These comes with default so its easy for you to have multiple passwords.</p>
 
   
 
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
 
 
 
@@ -2722,7 +2960,7 @@ These comes with default so its easy for you to have multiple passwords.</p>
     <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
       
         <article class="col">
-          <a href="/posts/Vulnhub-Kioptrix-P-1/" class="post-preview card h-100">
+          <a href="/posts/How-I-Utilize-Github-For-SSH/" class="post-preview card h-100">
             <div class="card-body">
               <!--
   Date format snippet
@@ -2734,14 +2972,14 @@ These comes with default so its easy for you to have multiple passwords.</p>
 
 <time
   
-  data-ts="1671365491"
+  data-ts="1754670720"
   data-df="ll"
   
 >
-  Dec 18, 2022
+  Aug  9, 2025
 </time>
 
-              <h4 class="pt-0 my-2">Vulnhub Kioptrix Walkthrough Part 1</h4>
+              <h4 class="pt-0 my-2">How I Utilize Github to Store and Download My Public SSH Keys</h4>
               <div class="text-muted">
                 <p>
                   
@@ -2750,17 +2988,7 @@ These comes with default so its easy for you to have multiple passwords.</p>
 
 
 
-                  
-
-Default username: John
-Default Password: TwoCows2
-
-Tips: Save your all Scans in text/image for future use
-
-Lets find our IP
-
-  Start Virtual Machine
-  ip a in your main OS terminal, this will giv...
+                  The first thing I do after I install a fresh new VM is SSH into that machine and use it locally. Now i will not rant about SSH and its uses and why you need it or why it’s better than web console. ...
                 </p>
               </div>
             </div>
@@ -2768,7 +2996,7 @@ Lets find our IP
         </article>
       
         <article class="col">
-          <a href="/posts/Vulnhub-Kioptrix-P-2/" class="post-preview card h-100">
+          <a href="/posts/Install-Docker-And-Manage-Permission/" class="post-preview card h-100">
             <div class="card-body">
               <!--
   Date format snippet
@@ -2780,14 +3008,14 @@ Lets find our IP
 
 <time
   
-  data-ts="1671711091"
+  data-ts="1751724691"
   data-df="ll"
   
 >
-  Dec 22, 2022
+  Jul  6, 2025
 </time>
 
-              <h4 class="pt-0 my-2">Vulnhub Kioptrix Walkthrough Part 2</h4>
+              <h4 class="pt-0 my-2">Installing Docker and Setting Permission</h4>
               <div class="text-muted">
                 <p>
                   
@@ -2796,27 +3024,16 @@ Lets find our IP
 
 
 
-                  
-
-Default username: John
-Default Password: TwoCows2
+                  Installing Docker
 
 
-NIKTO
+  
+    Setup docker’s apt repo
 
-
-  Web Vulneribility Scanner
-
-
-nikto -host url
-
-nikto -h target ip
-
-
-
-  Findings
-    
-      Outdated Applications - Google common exploi...
+     sudo apt-get update
+ sudo apt-get install ca-certificates curl
+ sudo install -m 0755 -d /etc/apt/keyrings
+ sudo curl -fsSL https://download....
                 </p>
               </div>
             </div>
@@ -2824,7 +3041,7 @@ nikto -h target ip
         </article>
       
         <article class="col">
-          <a href="/posts/Setting-Up-Active-Directory/" class="post-preview card h-100">
+          <a href="/posts/Install-Proxmox-And-Post-Installation/" class="post-preview card h-100">
             <div class="card-body">
               <!--
   Date format snippet
@@ -2836,14 +3053,14 @@ nikto -h target ip
 
 <time
   
-  data-ts="1751673600"
+  data-ts="1753277520"
   data-df="ll"
   
 >
-  Jul  5, 2025
+  Jul 23, 2025
 </time>
 
-              <h4 class="pt-0 my-2">Setting Up Active Directory</h4>
+              <h4 class="pt-0 my-2">Installing Proxmox and Post Installation</h4>
               <div class="text-muted">
                 <p>
                   
@@ -2852,18 +3069,7 @@ nikto -h target ip
 
 
 
-                  
-  ‼️This is a setup for Penetration Testing in Local Network and never meant for production.
-
-
-At first Download ISOs
-
-  Windows Server Eval 2022
-  Windows 10 Enterprise
-
-
-Setup Domain Controller
-...
+                  Its 2025 most of us have a spare piece of Desktop or Laptop lying around, which seems like is not worth much. But using Proxmox that piece of old tech can make your life easier without a lot of tro...
                 </p>
               </div>
             </div>
@@ -2885,22 +3091,18 @@ Setup Domain Controller
 
   
     <a
-      href="/posts/Installing-AppImage-Softwares-In-Linux/"
+      href="/posts/How-I-Utilize-Github-For-SSH/"
       class="btn btn-outline-primary"
       aria-label="Older"
     >
-      <p>Install AppImage Softwares in Linux</p>
+      <p>How I Utilize Github to Store and Download My Public SSH Keys</p>
     </a>
   
 
   
-    <a
-      href="/posts/Dns/"
-      class="btn btn-outline-primary"
-      aria-label="Newer"
-    >
-      <p>Let’s Block Our Ads For Free and Also Keep Our Children safe</p>
-    </a>
+    <div class="btn btn-outline-primary disabled" aria-label="Newer">
+      <p>-</p>
+    </div>
   
 </nav>
 

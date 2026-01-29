@@ -112,7 +112,7 @@ This configuration helps me have a consistent TERM across all my hosts.
 
 ---
 
-There that's the solution.
+That's the solution.
 
 ## TL;DR
 

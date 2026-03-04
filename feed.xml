@@ -2,18 +2,18 @@
 
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://ashishghimire.com/</id>
-  <title>Prashant Ghimire</title>
-  <subtitle>A personal blog of Prashant Ghimire, a junior pentester and home lab enthusiast. It covers topics on IT, cybersecurity, and personal projects.</subtitle>
-  <updated>2026-01-30T01:55:54+11:00</updated>
+  <title>Ashish Ghimire</title>
+  <subtitle>A personal blog of Ashish Ghimire, a junior pentester and home lab enthusiast. It covers topics on IT, cybersecurity, and personal projects.</subtitle>
+  <updated>2026-03-04T12:28:00+11:00</updated>
   <author>
-    <name>Prashant G</name>
+    <name>Ashish Ghimire</name>
     <uri>https://ashishghimire.com/</uri>
   </author>
   <link rel="self" type="application/atom+xml" href="https://ashishghimire.com/feed.xml"/>
   <link rel="alternate" type="text/html" hreflang="en"
     href="https://ashishghimire.com/"/>
   <generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator>
-  <rights> © 2026 Prashant G </rights>
+  <rights> © 2026 Ashish Ghimire </rights>
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
@@ -29,7 +29,7 @@
     <id>https://ashishghimire.com/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/</id>
     <content src="https://ashishghimire.com/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/" />
     <author>
-      <name>Prashant G</name>
+      <name>Ashish Ghimire</name>
     </author>
 
   
@@ -65,7 +65,7 @@ Now this story will continue somewh...
     <id>https://ashishghimire.com/posts/How-I-Utilize-Github-For-SSH/</id>
     <content src="https://ashishghimire.com/posts/How-I-Utilize-Github-For-SSH/" />
     <author>
-      <name>Prashant G</name>
+      <name>Ashish Ghimire</name>
     </author>
 
   
@@ -110,7 +110,7 @@ Although SSH is very secure protocol in on itself, it is not totally immun...
     <id>https://ashishghimire.com/posts/Install-Proxmox-And-Post-Installation/</id>
     <content src="https://ashishghimire.com/posts/Install-Proxmox-And-Post-Installation/" />
     <author>
-      <name>Prashant G</name>
+      <name>Ashish Ghimire</name>
     </author>
 
   
@@ -146,7 +146,7 @@ We will be Making a Bootable USB, Installing Proxmox...
     <id>https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way/</id>
     <content src="https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way/" />
     <author>
-      <name>Prashant G</name>
+      <name>Ashish Ghimire</name>
     </author>
 
   
@@ -212,7 +212,7 @@ ARCH
     <id>https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/</id>
     <content src="https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/" />
     <author>
-      <name>Prashant G</name>
+      <name>Ashish Ghimire</name>
     </author>
 
   

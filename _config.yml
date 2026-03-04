@@ -21,12 +21,12 @@ timezone: Australia/Sydney
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Prashant Ghimire # the main title
+title: Ashish Ghimire # the main title
 
 tagline: IT | Junior Pentester | HomeLab | Full Nerd  # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
-    A personal blog of Prashant Ghimire, a junior pentester and home lab enthusiast.
+    A personal blog of Ashish Ghimire, a junior pentester and home lab enthusiast.
     It covers topics on IT, cybersecurity, and personal projects.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
@@ -49,7 +49,7 @@ discord:
 social:
     # Change to your full name.
     # It will be displayed as the default author of the posts and the copyright owner in the Footer
-    name: Prashant G
+    name: Ashish Ghimire
     # email: example@doamin.com             # change to your email address
     links:
         # The first element serves as the copyright owner's link

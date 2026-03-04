@@ -57,3 +57,6 @@ package-lock.json
 # Misc
 assets/js/dist
 Gemfile.lock
+
+# Claude Code
+CLAUDE.md

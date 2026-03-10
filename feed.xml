@@ -4,7 +4,7 @@
   <id>https://ashishghimire.com/</id>
   <title>Ashish Ghimire</title>
   <subtitle>A personal blog of Ashish Ghimire, a junior pentester and home lab enthusiast. It covers topics on IT, cybersecurity, and personal projects.</subtitle>
-  <updated>2026-03-04T12:49:02+11:00</updated>
+  <updated>2026-03-11T05:16:24+11:00</updated>
   <author>
     <name>Ashish Ghimire</name>
     <uri>https://ashishghimire.com/</uri>
@@ -17,6 +17,48 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>Broken Docker DNS Due to Pi-hole</title>
+    <link href="https://ashishghimire.com/posts/Broken-Docker-DNS-Due-to-PiHole/" rel="alternate" type="text/html" title="Broken Docker DNS Due to Pi-hole" />
+    <published>2026-03-11T00:00:00+11:00</published>
+  
+    <updated>2026-03-11T00:00:00+11:00</updated>
+  
+    <id>https://ashishghimire.com/posts/Broken-Docker-DNS-Due-to-PiHole/</id>
+    <content src="https://ashishghimire.com/posts/Broken-Docker-DNS-Due-to-PiHole/" />
+    <author>
+      <name>Ashish Ghimire</name>
+    </author>
+
+  
+    
+    <category term="Homelab" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      New container, can’t resolve DNS. Classic. Except this time I’d already set the DNS in daemon.json, restarted Docker, checked iptables — everything looked right. Ping worked. DNS didn’t. Spent way too long on this one.
+
+Here’s what actually happened.
+
+Symptoms
+
+
+  New Docker containers can’t resolve DNS
+  nslookup google.com inside container returns connection refused or no servers could be rea...
+    </summary>
+  
+
+  </entry>
 
   
   <entry>
@@ -196,52 +238,6 @@ ARCH
 
     
    ...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>Installing Docker and Setting Permission</title>
-    <link href="https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/" rel="alternate" type="text/html" title="Installing Docker and Setting Permission" />
-    <published>2025-07-06T00:11:31+10:00</published>
-  
-    <updated>2025-11-22T17:07:06+11:00</updated>
-  
-    <id>https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/</id>
-    <content src="https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/" />
-    <author>
-      <name>Ashish Ghimire</name>
-    </author>
-
-  
-    
-    <category term="Walkthrough" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      Installing Docker
-
-
-  
-    Setup docker’s apt repo
-
-     sudo apt-get update
- sudo apt-get install ca-certificates curl
- sudo install -m 0755 -d /etc/apt/keyrings
- sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
- sudo chmod a+r /etc/apt/keyrings/docker.asc
- echo \
- "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https:...
     </summary>
   
 

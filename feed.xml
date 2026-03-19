@@ -4,7 +4,7 @@
   <id>https://ashishghimire.com/</id>
   <title>Ashish Ghimire</title>
   <subtitle>A personal blog of Ashish Ghimire, a junior pentester and home lab enthusiast. It covers topics on IT, cybersecurity, and personal projects.</subtitle>
-  <updated>2026-03-11T05:16:24+11:00</updated>
+  <updated>2026-03-20T02:56:19+11:00</updated>
   <author>
     <name>Ashish Ghimire</name>
     <uri>https://ashishghimire.com/</uri>
@@ -17,6 +17,46 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>Syncthing Three-Way Sync Across VLANs</title>
+    <link href="https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/" rel="alternate" type="text/html" title="Syncthing Three-Way Sync Across VLANs" />
+    <published>2026-03-20T00:00:00+11:00</published>
+  
+    <updated>2026-03-20T00:00:00+11:00</updated>
+  
+    <id>https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/</id>
+    <content src="https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/" />
+    <author>
+      <name>Ashish Ghimire</name>
+    </author>
+
+  
+    
+    <category term="Homelab" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      Wanted Syncthing running across three devices: a server on the utility VM, my Windows PC, and my Pixel. Files sync everywhere, no cloud, no Dropbox. Simple enough in theory.
+
+My network runs five VLANs on OPNsense. Servers on VLAN 10, PC on VLAN 50, phones on VLAN 20. This caused every problem.
+
+The Setup
+
+Syncthing server running in Docker on the utility VM (10.10.10.114) on VLAN 10. Windows P...
+    </summary>
+  
+
+  </entry>
 
   
   <entry>
@@ -172,72 +212,6 @@ Although SSH is very secure protocol in on itself, it is not totally immun...
       Its 2025 most of us have a spare piece of Desktop or Laptop lying around, which seems like is not worth much. But using Proxmox that piece of old tech can make your life easier without a lot of trouble. You will not need a brand new unique system to run a server. Any PC should be fine after 2010, check specs for PCs that are older than 2010.
 
 We will be Making a Bootable USB, Installing Proxmox...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>Installing Arch Linux Hard Way</title>
-    <link href="https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way/" rel="alternate" type="text/html" title="Installing Arch Linux Hard Way" />
-    <published>2025-07-06T00:11:31+10:00</published>
-  
-    <updated>2025-11-22T17:07:06+11:00</updated>
-  
-    <id>https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way/</id>
-    <content src="https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way/" />
-    <author>
-      <name>Ashish Ghimire</name>
-    </author>
-
-  
-    
-    <category term="Walkthrough" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      Before Installation
-
-
-  Backup your data
-  Download Balena Etcher &amp;amp; ISO of ARCH Linux
-  Burn ISO to a USB
-  Restart
-
-
-Boot
-
-
-  Press DEL and load to BIOS mode
-  Change Boot Priorities to USB
-  Reboot
-
-
-ARCH
-
-
-  
-    Load ‘Arch Linux Install Medium’
-  
-  
-    Connect Your Arch to internet
-
-    iwctl --passphrase "$WIFIPASSWORD" station wlan0 connect $WIFINAME
-  
-  
-    ping 8.8.8.8
-
-    
-   ...
     </summary>
   
 

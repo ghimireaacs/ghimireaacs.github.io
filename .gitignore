@@ -21,6 +21,7 @@ vendor
 yarn*
 .bundle
 !.travis.yml
+Thumbs.db
 
 # hidden files
 .*

@@ -32,8 +32,8 @@
 <meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="Syncthing Three-Way Sync Across VLANs" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="Set up Syncthing across three devices on different VLANs. Local discovery breaks, direct connections fail silently. Here’s what actually fixed it." />
-<meta property="og:description" content="Set up Syncthing across three devices on different VLANs. Local discovery breaks, direct connections fail silently. Here’s what actually fixed it." />
+<meta name="description" content="VLANs broke my Syncthing setup. Global discovery off, relay off, and Syncthing had no idea where my devices were. Here is how I fixed it." />
+<meta property="og:description" content="VLANs broke my Syncthing setup. Global discovery off, relay off, and Syncthing had no idea where my devices were. Here is how I fixed it." />
 <link rel="canonical" href="https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/" />
 <meta property="og:url" content="https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/" />
 <meta property="og:site_name" content="Ashish Ghimire" />
@@ -45,7 +45,7 @@
 <meta property="twitter:title" content="Syncthing Three-Way Sync Across VLANs" />
 <meta name="twitter:site" content="@ghimireaacs" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-03-20T00:00:00+11:00","datePublished":"2026-03-20T00:00:00+11:00","description":"Set up Syncthing across three devices on different VLANs. Local discovery breaks, direct connections fail silently. Here’s what actually fixed it.","headline":"Syncthing Three-Way Sync Across VLANs","image":"https://ashishghimire.com/assets/img/headers/syncthingVlan.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/"},"url":"https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-03-20T21:13:37+11:00","datePublished":"2026-03-20T00:00:00+11:00","description":"VLANs broke my Syncthing setup. Global discovery off, relay off, and Syncthing had no idea where my devices were. Here is how I fixed it.","headline":"Syncthing Three-Way Sync Across VLANs","image":"https://ashishghimire.com/assets/img/headers/syncthingVlan.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/"},"url":"https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -1221,6 +1221,17 @@
 
       
     
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
 
     
   
@@ -1279,6 +1290,29 @@
 
       <!-- lastmod date -->
       
+        <span>
+          Updated
+          <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1774001617"
+  data-df="ll"
+  
+    data-bs-toggle="tooltip" data-bs-placement="bottom"
+  
+>
+  Mar 20, 2026
+</time>
+
+        </span>
+      
 
       
         
@@ -1326,9 +1360,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="510 words"
+  title="899 words"
 >
-  <em>2 min</em> read</span>
+  <em>4 min</em> read</span>
 
       </div>
       <!-- .d-flex -->
@@ -1337,23 +1371,39 @@
   </header>
 
   <div class="content">
-    <p>Wanted Syncthing running across three devices: a server on the utility VM, my Windows PC, and my Pixel. Files sync everywhere, no cloud, no Dropbox. Simple enough in theory.</p>
+    <p>I use Syncthing to sync my Obsidian vault. Server on the utility VM, Windows PC, and my Pixel. The server acts as the middle point so my phone and PC do not need to be online at the same time to stay in sync. It has worked great. A minute or two for changes to sync across, which is totally fine for notes.</p>
 
-<p>My network runs five VLANs on OPNsense. Servers on VLAN 10, PC on VLAN 50, phones on VLAN 20. This caused every problem.</p>
+<p>Then I upgraded my network and introduced VLANs. That broke everything.</p>
 
-<h2 id="the-setup"><span class="me-2">The Setup</span><a href="#the-setup" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<h2 id="why-i-turned-off-global-discovery-and-relay"><span class="me-2">Why I Turned Off Global Discovery and Relay</span><a href="#why-i-turned-off-global-discovery-and-relay" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>Syncthing server running in Docker on the utility VM (<code class="language-plaintext highlighter-rouge">10.10.10.114</code>) on VLAN 10. Windows PC on VLAN 50. Pixel on VLAN 20. Global discovery and relay turned off so sync traffic stays on the LAN.</p>
+<p>When you first set up Syncthing it uses global discovery and relay by default. Discovery lets devices find each other through Syncthing’s infrastructure. Relay is a fallback when direct connections fail, it routes your traffic through Syncthing’s relay servers.</p>
 
-<p>The goal was hub-and-spoke plus direct: everything syncs to the server, but phone and PC also sync directly when both are on the LAN.</p>
+<p>Now I had two reasons to turn both off.</p>
+
+<p>First, I started monitoring my DNS traffic and noticed how noisy Syncthing was. Constant calls out to discovery servers, relay servers, checking in. Since I host everything locally and I have Twingate installed for remote access, there was no reason for any of that. I want sync traffic to stay on my LAN, not bounce through someone else’s infrastructure.</p>
+
+<p>Second, I had just set up VLANs so I already knew my network was about to get more restrictive. Better to get off the global infrastructure now and do it properly.</p>
+
+<p>So I turned off global discovery and relay. Clean, local, exactly how I wanted it.</p>
+
+<p>That is when things broke.</p>
+
+<h2 id="what-vlans-actually-did"><span class="me-2">What VLANs Actually Did</span><a href="#what-vlans-actually-did" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>Servers sit on VLAN 10. PC on VLAN 50. Phone on VLAN 20. Three different network segments with firewall rules controlling what can talk to what.</p>
+
+<p>Without global discovery, Syncthing needs to know exactly where to find each device. It used to use UDP multicast on port 21027 for local discovery. Multicast does not cross VLAN boundaries. So with global discovery off and local discovery also useless across VLANs, every device just sat there. Last seen: never.</p>
+
+<p>There is also mDNS involved in local discovery. mDNS is link-local only, it does not cross VLANs on its own. To make it work across segments you need a multicast proxy bridging the VLANs, and I did not want to set that up without fully understanding what it would expose. A proxy like that could let devices on one VLAN discover services on another, which might be more visibility than I want between segments. Pinning addresses manually is simpler and I know exactly what it does.</p>
+
+<p>The already running service that had been working for months was now completely broken.</p>
 
 <p><a href="/assets/img/posts/syncthingTwoDevices.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/syncthingTwoDevices.webp" alt="" loading="lazy"></a></p>
 
-<h2 id="problem-1-nothing-connects"><span class="me-2">Problem 1: Nothing Connects</span><a href="#problem-1-nothing-connects" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<h2 id="fix-1-pin-addresses-manually"><span class="me-2">Fix 1: Pin Addresses Manually</span><a href="#fix-1-pin-addresses-manually" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>With global discovery and relay disabled, Syncthing needs to know exactly where to reach each device. Local discovery uses UDP multicast on port 21027 which does not cross VLAN boundaries. So every device just sat there with “Last seen: never.”</p>
-
-<p>The fix is to stop relying on discovery and pin addresses manually. The rule is simple: stationary hosts get pinned, mobile devices get <code class="language-plaintext highlighter-rouge">dynamic</code>.</p>
+<p>If Syncthing cannot discover devices on its own, you tell it where they are. Simple rule: stationary hosts get a pinned address, mobile devices get <code class="language-plaintext highlighter-rouge">dynamic</code> because their IP changes.</p>
 
 <div class="table-wrapper"><table>
   <thead>
@@ -1364,29 +1414,31 @@
   </thead>
   <tbody>
     <tr>
-      <td>Server (as seen from any client)</td>
+      <td>Server (from any client)</td>
       <td><code class="language-plaintext highlighter-rouge">tcp://10.10.10.114:22000</code></td>
     </tr>
     <tr>
-      <td>Windows (as seen from Pixel)</td>
+      <td>Windows PC (from Pixel)</td>
       <td><code class="language-plaintext highlighter-rouge">tcp://10.10.50.100:22000</code></td>
     </tr>
     <tr>
-      <td>Phone (as seen from anyone)</td>
+      <td>Phone (from anyone)</td>
       <td><code class="language-plaintext highlighter-rouge">dynamic</code></td>
     </tr>
   </tbody>
 </table></div>
 
-<p>The phone’s IP changes across networks so you can’t pin it. Let the phone always dial out.</p>
+<p>The phone’s IP changes across different networks so you cannot pin it. Let the phone always dial out and the other devices will accept the connection.</p>
 
-<p>One thing that tripped me up: Syncthing has a “device defaults” setting under Actions &gt; Settings. Changing the address there only applies to new devices you add going forward, it does <strong>not</strong> update existing devices. You have to go into each existing device and change the address individually.</p>
+<p>One thing that tripped me up here. Syncthing has a “device defaults” setting under Actions then Settings. I changed the address there assuming it would update existing devices. It does not. It only applies to new devices added after you change it. Had to go into each existing device individually and update the address.</p>
 
 <p><a href="/assets/img/posts/pixelSyncthing.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/pixelSyncthing.webp" alt="" loading="lazy"></a></p>
 
-<h2 id="problem-2-phone-and-pc-would-not-talk"><span class="me-2">Problem 2: Phone and PC Would Not Talk</span><a href="#problem-2-phone-and-pc-would-not-talk" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<h2 id="fix-2-firewall-rules-in-opnsense"><span class="me-2">Fix 2: Firewall Rules in OPNsense</span><a href="#fix-2-firewall-rules-in-opnsense" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>VLAN 20 (Personal) had no path to VLAN 50 (PC) in my firewall rules. Adding the OPNsense rule was straightforward but it had to go <strong>above</strong> the existing block rule for that VLAN pair. First match wins in OPNsense. My Syncthing pass rule was sitting below a block rule and never getting evaluated.</p>
+<p>Even after pinning addresses, the phone and PC would not connect directly to each other. VLAN 20 where the phone lives had no rule allowing it to reach VLAN 50 where the PC is. Needed to add one.</p>
+
+<p>Adding the rule was easy. The order was what got me. OPNsense processes rules top to bottom and stops at the first match. I added the Syncthing pass rule but it ended up below an existing block rule for that VLAN pair. The pass rule was never being evaluated.</p>
 
 <p>Correct order on the PERSONAL interface:</p>
 
@@ -1403,29 +1455,34 @@ Pass   PERSONAL net   TENANTS net     any
 Pass   PERSONAL net   IOT net         any
 Pass   PERSONAL net   PC net          TCP/UDP  22000   &lt;- Syncthing exception
 Block  PERSONAL net   PC net          any              &lt;- everything else blocked
-Pass   PERSONAL net   *               any              &lt;- internet catch-all
+Pass   PERSONAL net   *               any              &lt;- internet
 </pre></td></tr></tbody></table></code></div></div>
+
+<p>Pass rule for Syncthing port above the catch-all block. Move it up, direct connections started working.</p>
 
 <p><a href="/assets/img/posts/firewallRule.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/firewallRule.webp" alt="" loading="lazy"></a></p>
 
 <h2 id="pairing-devices"><span class="me-2">Pairing Devices</span><a href="#pairing-devices" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>Do not manually type device IDs. When an unknown device tries to connect the UI shows a banner notification: “Device X wants to connect, Add?” Click that, both sides approve each other and you are done. Typing IDs manually is error prone and slower.</p>
+<p>Do not type device IDs manually. When an unknown device tries to connect Syncthing shows a banner asking if you want to add it. Click that, approve on both sides and done. Typing those long IDs is slow and error prone.</p>
 
-<h2 id="end-state"><span class="me-2">End State</span><a href="#end-state" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<h2 id="how-it-looks-now"><span class="me-2">How It Looks Now</span><a href="#how-it-looks-now" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>Three-way sync working. Server and Windows, server and Pixel are the main sync paths. Pixel and Windows direct also works when both are on the LAN. All connections show direct LAN IPs, no relay.</p>
+<p>Three-way sync working again. Server and PC, server and phone as the main sync paths. Phone and PC also connect directly when both are on the LAN. All connections show direct LAN IPs, no relay, no DNS noise.</p>
+
+<p>Obsidian vault syncing as it should be, now fully local.</p>
 
 <p><a href="/assets/img/posts/diagramSyncthing.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/diagramSyncthing.webp" alt="" loading="lazy"></a></p>
 
 <p><a href="/assets/img/posts/syncthingDevices.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/syncthingDevices.webp" alt="" loading="lazy"></a></p>
 
-<h2 id="takeaways"><span class="me-2">Takeaways</span><a href="#takeaways" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<h2 id="the-short-version"><span class="me-2">The Short Version</span><a href="#the-short-version" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
 <ul>
-  <li>Local discovery (UDP multicast) does not cross VLANs, pin addresses instead</li>
-  <li>“Device defaults” in Syncthing does not update existing devices, change each one manually</li>
-  <li>Firewall rule order matters, pass rule must sit above any block rule for the same destination</li>
+  <li>Turning off global discovery means Syncthing cannot find devices on its own. Pin addresses for stationary hosts, use <code class="language-plaintext highlighter-rouge">dynamic</code> for mobile.</li>
+  <li>“Device defaults” does not update existing devices. Change each one manually.</li>
+  <li>mDNS is link-local only and does not cross VLANs without a multicast proxy. A proxy bridges discovery across segments which may expose more than you want. Pinning addresses manually is simpler and more predictable.</li>
+  <li>OPNsense rule order matters. Pass rule must sit above any block rule for the same destination.</li>
 </ul>
 
   </div>

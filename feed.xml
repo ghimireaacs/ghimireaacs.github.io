@@ -4,7 +4,7 @@
   <id>https://ashishghimire.com/</id>
   <title>Ashish Ghimire</title>
   <subtitle>A personal blog of Ashish Ghimire, a junior pentester and home lab enthusiast. It covers topics on IT, cybersecurity, and personal projects.</subtitle>
-  <updated>2026-03-20T02:56:19+11:00</updated>
+  <updated>2026-03-20T21:14:00+11:00</updated>
   <author>
     <name>Ashish Ghimire</name>
     <uri>https://ashishghimire.com/</uri>
@@ -24,7 +24,7 @@
     <link href="https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/" rel="alternate" type="text/html" title="Syncthing Three-Way Sync Across VLANs" />
     <published>2026-03-20T00:00:00+11:00</published>
   
-    <updated>2026-03-20T00:00:00+11:00</updated>
+    <updated>2026-03-20T21:13:37+11:00</updated>
   
     <id>https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/</id>
     <content src="https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/" />
@@ -46,13 +46,11 @@
 
 
 
-      Wanted Syncthing running across three devices: a server on the utility VM, my Windows PC, and my Pixel. Files sync everywhere, no cloud, no Dropbox. Simple enough in theory.
+      I use Syncthing to sync my Obsidian vault. Server on the utility VM, Windows PC, and my Pixel. The server acts as the middle point so my phone and PC do not need to be online at the same time to stay in sync. It has worked great. A minute or two for changes to sync across, which is totally fine for notes.
 
-My network runs five VLANs on OPNsense. Servers on VLAN 10, PC on VLAN 50, phones on VLAN 20. This caused every problem.
+Then I upgraded my network and introduced VLANs. That broke everything.
 
-The Setup
-
-Syncthing server running in Docker on the utility VM (10.10.10.114) on VLAN 10. Windows P...
+Why I Turned Off...
     </summary>
   
 

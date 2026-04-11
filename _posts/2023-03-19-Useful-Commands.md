@@ -9,8 +9,11 @@ image: /assets/img/headers/linuxCommands.webp
 ---
 
 
-Common Linux Commands for Hacking.
+When you land on a Linux machine during a CTF or a pentest, the first thing you do is figure out where you are and what you have. These are the commands I reach for during the enumeration phase. The goal is to understand the system, find the users, map the network, and look for anything that can be leveraged.
 
+I keep this as a reference for myself. You will use different commands depending on the box and the situation, but these cover most of the basics.
+
+## System Enumeration
 
 Command | Description | Example
 ---------|----------|---------
@@ -31,9 +34,9 @@ Command | Description | Example
 
 ---
 
-
 ## Find Command
 
+`find` is one of the most useful commands for privilege escalation. You use it to hunt for files with specific permissions, SUID bits set, or files owned by root. Those are often your path to escalating privileges on a box.
 
 Command | Description
 --------|------------
@@ -41,4 +44,12 @@ Command | Description
 `find /home -name notes` | Finds the filename in home directory.
 `find / -type d -name config` | Find the directory named config under "/"
 `find / -type f -perm 0777` | Find files with the 777 permission (Read, Write and Execute)
-`find / -perm a=x` | ''''
+`find / -perm a=x` | Find all executable files
+`find / -perm -u=s -type f` | Find files with SUID bit set. These run as the file owner, not the caller. If root owns a SUID binary you can often abuse it.
+`find / -writable -type d` | Find world-writable directories. Useful for dropping files.
+
+## What To Do With This
+
+Enumeration is about building a picture. You are not looking for one thing. You run these commands and look at the output together. What users exist? What services are running? What ports are open? Is there anything misconfigured?
+
+The more you do it the faster you get at spotting what does not belong.

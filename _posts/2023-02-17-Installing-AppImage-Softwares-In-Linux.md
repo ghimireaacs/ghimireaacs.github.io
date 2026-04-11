@@ -8,7 +8,9 @@ description: "AppImage is a portable software format for Linux. Learn how to dow
 image: /assets/img/headers/appimg.webp
 ---
 
-AppImage is a software Distribution format for Linux. It is getting popular these days for the following reasons.
+I had a piece of software that was only available as an AppImage. No snap package, no apt repo, just the AppImage file. I had no idea what to do with it at first. Turns out it is straightforward once you know the process.
+
+AppImage is a software distribution format for Linux. It is getting popular these days for the following reasons.
 
 ---
 
@@ -23,45 +25,42 @@ AppImage is a software Distribution format for Linux. It is getting popular thes
 
 ## How To Integrate on System
 
-1. Download the appImage file
-2. Download icon for your app
-3. Copy Both files it on folder /home/user/folder/
-4. Right click on the appImage file,
-5. click Permission
-6. Check ‘Allow executing file as program’
-    or 
-    
-    `chmod +x ~/folder/minecraft.AppImage`
-7. Create a text File
+By default you can just double click an AppImage and it runs. But that means it does not show up in your application launcher, there is no icon in the taskbar, and it does not feel like a real installed application. The desktop entry file fixes that.
 
+1. Download the AppImage file
+2. Download an icon for your app (PNG works fine)
+3. Copy both files to a folder like `/home/user/Apps/AppName/`
+4. Make the AppImage executable. Right click the file, go to Properties, Permissions, check "Allow executing file as program". Or just run:
 
+    `chmod +x ~/Apps/AppName/appname.AppImage`
+
+5. Create a `.desktop` file. This is what tells your system how to show the app in the launcher.
 
    ```
     [Desktop Entry]
     Type=Application
     Name=Minecraft
     Comment=Minecraft
-    Icon=/home/user/folder/Minecraft/icon.png
-    Exec=/home/user/folder/Minecraft/minecraft
+    Icon=/home/user/Apps/Minecraft/icon.png
+    Exec=/home/user/Apps/Minecraft/minecraft.AppImage
     Terminal=false
-    Categories=Minecraft;game
+    Categories=Game;
     ```
 
-> Here, Icon is place of your icon and Exec is location of your application. We are using Minecraft as example here. Replace these with your folder and file names.
+> `Icon` is the full path to your icon file. `Exec` is the full path to your AppImage. Replace the Minecraft references with your actual app name and paths.
 {: .prompt-tip }
 
-8. Save file in `.local/share/applications/appName.desktop`
-9. Save as .desktop format.
-10. Log Out or Restart System.
+6. Save the file to `.local/share/applications/appname.desktop`
+7. Log out or restart your session.
 
 ---
 
-And now you can run your appImage as usual application without problem.
+Now the app shows up in your application launcher like any other installed software. You can pin it, search for it, done.
 
 ## Uninstall
 
-Simply Delete those 2 files. Voila.
+Delete the AppImage file and the `.desktop` file. That's it. Nothing else was installed on your system.
 
----
+## AppImage vs Flatpak
 
-Despite Being One of the User Friendly Format, Flatpaks are considered better due to its security and Can be updated later.
+AppImage is portable and simple but it does not sandbox the application. Flatpak is considered more secure because it runs apps in a sandbox and handles updates through a proper store. If both options exist for an app I would go with Flatpak. But if AppImage is the only option, now you know how to use it properly.

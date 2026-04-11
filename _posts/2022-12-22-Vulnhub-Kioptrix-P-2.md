@@ -7,7 +7,9 @@ tags: [vulnhub, kioptrix, guide, walkthrough, TCM-SEC, nikto, dirbuster, burpsui
 description: "Vulnhub Kioptrix Level 2 walkthrough covering web app enumeration with Nikto, directory brute-forcing with Dirbuster, and exploitation techniques using Burpsuite."
 image: /assets/img/headers/tcmsec.webp
 ---
-![tcmsec](/assets/img/headers/tcmsec.webp)
+Continuing from [Kioptrix Part 1](/posts/Vulnhub-Kioptrix-P-1/) where we did network discovery and port scanning. Now we go deeper into the web application running on the target. The main tools here are Nikto, Dirbuster, and Burpsuite. Each does a different job and together they give you a full picture of what the web application is exposing.
+
+The goal this time is to enumerate web services, find directories and files we should not have access to, and look for exploitable vulnerabilities in the versions we find.
 
 ```bash
 Default username: John
@@ -159,3 +161,16 @@ client max protocol = SMB3
 - It prompts for password
 - Lets exit
 	- We are not going to exploit yet.
+
+## What We Found
+
+By the end of this phase you should have:
+
+- A list of web directories and files from Dirbuster
+- Known vulnerable software versions from Nikto (Apache, mod_ssl, OpenSSL)
+- SMB shares on the target with the Samba version confirmed via Metasploit
+- SSH access confirmed with legacy key algorithm negotiation
+
+The version numbers are the important thing. Kioptrix is intentionally running old software. Search those versions in Searchsploit or Exploit-DB and you will find public exploits ready to go.
+
+The mod_ssl version Nikto flagged is vulnerable to a remote buffer overflow. That is the main exploitation path on this machine.

@@ -8,13 +8,17 @@ description: "Step-by-step walkthrough of Vulnhub Kioptrix Level 1. Covers netwo
 image: /assets/img/headers/tcmsec.webp
 ---
 
-![tcmsec](/assets/img/headers/tcmsec.webp)
+This is part of the TCM Security Practical Ethical Hacking course. Kioptrix is a classic beginner-friendly vulnerable machine available on Vulnhub. The idea is to compromise the machine and understand what you are doing at each step, not just copy paste commands. This was one of my first full walkthroughs.
+
+The setup is simple. Download the Kioptrix VM from Vulnhub, run it in VMware or VirtualBox on a host-only or NAT network with your Kali machine. Your job is to find it on the network and get in.
 
 ```
 Default username: John
 Default Password: TwoCows2
 ```
-*Tips: Save your all Scans in text/image for future use*
+
+> Save your scan results as text files or screenshots as you go. You will want to refer back to them later.
+{: .prompt-tip }
 
 ### Lets find our IP
 - Start Virtual Machine
@@ -59,7 +63,15 @@ Now go to terminal
 ---
 
 ### Here we found
-- Target IP, Mac Address
-- OPEN TCP Ports
-- OS, application uses, and Versions
-- Some more useful info.
+- Target IP and Mac Address
+- Open TCP ports
+- OS, running applications, and their versions
+- Enough information to start looking for exploits
+
+## What This Tells Us
+
+After enumeration you should have a list of services and their versions. The next step is looking up those versions for known vulnerabilities. Tools like Searchsploit, or just a Google search with the service name and version, will give you a list of exploits to try.
+
+Kioptrix Level 1 is vulnerable to a well-known mod_ssl exploit. If you have got this far you have everything you need to find it.
+
+Continue to [Kioptrix Walkthrough Part 2](/posts/Vulnhub-Kioptrix-P-2/) for web application enumeration with Nikto, Dirbuster, and Burpsuite.

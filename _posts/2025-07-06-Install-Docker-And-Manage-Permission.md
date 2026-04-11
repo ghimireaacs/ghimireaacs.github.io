@@ -9,6 +9,12 @@ image: /assets/img/headers/dockerInstall.webp
 ---
 
 
+Every server I set up eventually needs Docker. There are a few ways to install it. Snap is one option but I avoid it because it adds a lot of overhead and snap packages have caused me issues before. There is also the convenience script that pipes a shell script directly into bash from the internet, which I am not comfortable running on production machines.
+
+The right way is the official apt repository method from Docker's own documentation. It takes a couple of extra steps but you get the latest stable version from a verified source and full control over updates.
+
+The permissions step at the end is important and most guides skip explaining why. By default Docker runs as root. Every `docker` command requires `sudo`. That gets tedious and causes permission errors when containers try to write files to bind mounts. Adding your user to the `docker` group means you run everything without sudo. Just make sure you trust who else is in that group since docker group access is effectively root access on the host.
+
 ## Installing Docker
 
 1. Setup docker's apt repo

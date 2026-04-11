@@ -1,4 +1,53 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ashishghimire.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ashishghimire.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-04-11T17:40:08+10:00</updated><id>https://ashishghimire.com/feed.xml</id><title type="html">Ashish Ghimire</title><subtitle>Ashish Ghimire&apos;s blog on homelab, cybersecurity, self-hosting, and IT. Walkthroughs, writeups, and hands-on guides for Linux, Docker, Proxmox, networking, and more.</subtitle><entry><title type="html">Syncthing Three-Way Sync Across VLANs</title><link href="https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/" rel="alternate" type="text/html" title="Syncthing Three-Way Sync Across VLANs" /><published>2026-03-20T00:00:00+11:00</published><updated>2026-04-11T17:39:25+10:00</updated><id>https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs</id><content type="html" xml:base="https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/"><![CDATA[<p>I use Syncthing to sync my Obsidian vault. Server on the utility VM, Windows PC, and my Pixel. The server acts as the middle point so my phone and PC do not need to be online at the same time to stay in sync. It has worked great. A minute or two for changes to sync across, which is totally fine for notes.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ashishghimire.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ashishghimire.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-04-11T22:10:37+10:00</updated><id>https://ashishghimire.com/feed.xml</id><title type="html">Ashish Ghimire</title><subtitle>Ashish Ghimire&apos;s blog on homelab, cybersecurity, self-hosting, and IT. Walkthroughs, writeups, and hands-on guides for Linux, Docker, Proxmox, networking, and more.</subtitle><entry><title type="html">I Finally Know If Anyone Reads This Blog</title><link href="https://ashishghimire.com/posts/blog-analytics-umami/" rel="alternate" type="text/html" title="I Finally Know If Anyone Reads This Blog" /><published>2026-03-21T00:00:00+11:00</published><updated>2026-03-21T00:00:00+11:00</updated><id>https://ashishghimire.com/posts/blog-analytics-umami</id><content type="html" xml:base="https://ashishghimire.com/posts/blog-analytics-umami/"><![CDATA[<p>For a while I had Google Analytics on this blog. The ID is still in my <code class="language-plaintext highlighter-rouge">_config.yml</code>. But here is the thing. I self-host almost everything. My photos, my notes, my automation, my media. And then I turn around and send every visitor’s data to Google so I can see a number go up. That felt wrong.</p>
+
+<p>I also applied for Google Ads a few months back and got rejected. Not enough content yet. So I am building up posts and will try again later. But in the meantime I still want to know if people are actually reading, which posts get traffic, where they come from. Without handing that data to Google.</p>
+
+<h2 id="why-umami">Why Umami</h2>
+
+<p>Umami is self-hosted analytics. You run it yourself, data stays with you, no cookies, no GDPR banner needed. Lightweight script that loads fast. Dashboard shows you page views, visitors, referrers, countries, devices. Everything you actually care about.</p>
+
+<p>The alternative I considered was Plausible. Same idea but paid unless you self-host it. Umami is free either way and the self-hosted version is the full thing, not a limited free tier.</p>
+
+<h2 id="where-to-run-it">Where to Run It</h2>
+
+<p>Here is the problem with running analytics on the homelab. The tracking script loads in your visitors’ browsers. When someone in Germany reads a post, their browser calls out to wherever you are hosting Umami to send the page view. If Umami is sitting on a VM under my desk, their browser cannot reach it.</p>
+
+<p>I have a Cloudflare Tunnel running on the homelab which I use to expose n8n publicly for webhook reasons. I could have added Umami to that. But I already have an Oracle Cloud VM running WikiJS and Nginx Proxy Manager. It is already public, already has SSL sorted, already has NPM ready to proxy new services. Deploying Umami there was five minutes of work.</p>
+
+<h2 id="the-ssl-problem">The SSL Problem</h2>
+
+<p>I ran into one issue. My DNS records for <code class="language-plaintext highlighter-rouge">ashishghimire.com</code> are behind Cloudflare proxy. When NPM tries to get a Let’s Encrypt certificate it does the HTTP challenge. Cloudflare intercepts that and the request never reaches my Oracle VM. Certificate request fails.</p>
+
+<p>The fix is a Cloudflare Origin Certificate. You generate it in the Cloudflare dashboard, it is valid for 15 years, covers all subdomains with a wildcard. Install it in NPM as a custom certificate, set Cloudflare SSL mode to Full (Strict), done. No more renewal headaches either.</p>
+
+<p><img src="/assets/img/posts/umamiDashboard.webp" alt="Umami dashboard showing page views and visitor overview" /></p>
+
+<h2 id="deploying-umami">Deploying Umami</h2>
+
+<p>Separate compose file on the Oracle VM, Umami joins the existing <code class="language-plaintext highlighter-rouge">wiki-net</code> Docker network so NPM can reach it, its own Postgres on an internal network. Then add a proxy host in NPM pointing <code class="language-plaintext highlighter-rouge">umami.ashishghimire.com</code> to port 3000. Add the DNS record in Cloudflare.</p>
+
+<p>First login is <code class="language-plaintext highlighter-rouge">admin</code> / <code class="language-plaintext highlighter-rouge">umami</code>. Change that immediately.</p>
+
+<p>Add your site in Settings, copy the tracking script, and drop it into your Jekyll <code class="language-plaintext highlighter-rouge">_includes/head.html</code>. One file, one script tag. Chirpy picks it up and injects it into every page.</p>
+
+<h2 id="what-i-can-see-now">What I Can See Now</h2>
+
+<p>Real visitors, page by page. Which posts get traffic, which get nothing. Where people come from: direct, search, social. What country. Desktop or mobile.</p>
+
+<p>Google Analytics was still running alongside this for a bit. After a week I am turning it off. I do not need two analytics systems and I definitely do not need the one that sends data to Google.</p>
+
+<p>Give it a week and see what the numbers look like. If posts are getting read, great. If not, at least now I know for sure instead of guessing.</p>
+
+<p><img src="/assets/img/posts/umamiStats.webp" alt="Umami page-level stats showing referrers, countries, and devices" /></p>
+
+<h2 id="the-short-version">The Short Version</h2>
+
+<ul>
+  <li>Google Analytics collects your readers’ data and sends it to Google. Umami keeps it with you.</li>
+  <li>If you self-host, Umami needs to be publicly reachable — either a cloud VM or a Cloudflare Tunnel.</li>
+  <li>Cloudflare-proxied domains break Let’s Encrypt HTTP challenge. Use a Cloudflare Origin Certificate instead.</li>
+  <li>Jekyll: one <code class="language-plaintext highlighter-rouge">_includes/head.html</code> file with the script tag is all you need.</li>
+</ul>]]></content><author><name></name></author><category term="Homelab" /><category term="umami" /><category term="analytics" /><category term="selfhosted" /><category term="cloudflare" /><category term="jekyll" /><category term="oracle" /><summary type="html"><![CDATA[Google Analytics felt wrong. I self-host everything else so why am I sending my readers' data to Google? Here is how I set up Umami on my Oracle VM.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ashishghimire.com/assets/img/headers/umamiAnalytics.webp" /><media:content medium="image" url="https://ashishghimire.com/assets/img/headers/umamiAnalytics.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Syncthing Three-Way Sync Across VLANs</title><link href="https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/" rel="alternate" type="text/html" title="Syncthing Three-Way Sync Across VLANs" /><published>2026-03-20T00:00:00+11:00</published><updated>2026-04-11T17:39:25+10:00</updated><id>https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs</id><content type="html" xml:base="https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/"><![CDATA[<p>I use Syncthing to sync my Obsidian vault. Server on the utility VM, Windows PC, and my Pixel. The server acts as the middle point so my phone and PC do not need to be online at the same time to stay in sync. It has worked great. A minute or two for changes to sync across, which is totally fine for notes.</p>
 
 <p>Then I upgraded my network and introduced VLANs. That broke everything.</p>
 
@@ -644,7 +693,13 @@ Copy this command, change it to the <code class="language-plaintext highlighter-
 
 <p>Now for further we will be installing VMs. Once Proxmox is up, a common next step is getting Docker running — see <a href="/posts/Install-Docker-And-Manage-Permission/">Installing Docker and Setting Permission</a>.</p>
 
-<p>Welcome to HomeLab.</p>]]></content><author><name></name></author><category term="Homelab" /><category term="proxmox" /><category term="linux" /><category term="homelab" /><category term="virtualization" /><category term="selfhosted" /><category term="hypervisor" /><summary type="html"><![CDATA[How to install Proxmox VE on an old PC and run essential post-installation configuration using the Proxmox community helper scripts. Turn spare hardware into a home server.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ashishghimire.com/assets/img/headers/proxmox.webp" /><media:content medium="image" url="https://ashishghimire.com/assets/img/headers/proxmox.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Installing Docker and Setting Permission</title><link href="https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/" rel="alternate" type="text/html" title="Installing Docker and Setting Permission" /><published>2025-07-06T00:11:31+10:00</published><updated>2026-04-11T17:39:25+10:00</updated><id>https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission</id><content type="html" xml:base="https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/"><![CDATA[<h2 id="installing-docker">Installing Docker</h2>
+<p>Welcome to HomeLab.</p>]]></content><author><name></name></author><category term="Homelab" /><category term="proxmox" /><category term="linux" /><category term="homelab" /><category term="virtualization" /><category term="selfhosted" /><category term="hypervisor" /><summary type="html"><![CDATA[How to install Proxmox VE on an old PC and run essential post-installation configuration using the Proxmox community helper scripts. Turn spare hardware into a home server.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ashishghimire.com/assets/img/headers/proxmox.webp" /><media:content medium="image" url="https://ashishghimire.com/assets/img/headers/proxmox.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Installing Docker and Setting Permission</title><link href="https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/" rel="alternate" type="text/html" title="Installing Docker and Setting Permission" /><published>2025-07-06T00:11:31+10:00</published><updated>2026-04-11T22:10:17+10:00</updated><id>https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission</id><content type="html" xml:base="https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/"><![CDATA[<p>Every server I set up eventually needs Docker. There are a few ways to install it. Snap is one option but I avoid it because it adds a lot of overhead and snap packages have caused me issues before. There is also the convenience script that pipes a shell script directly into bash from the internet, which I am not comfortable running on production machines.</p>
+
+<p>The right way is the official apt repository method from Docker’s own documentation. It takes a couple of extra steps but you get the latest stable version from a verified source and full control over updates.</p>
+
+<p>The permissions step at the end is important and most guides skip explaining why. By default Docker runs as root. Every <code class="language-plaintext highlighter-rouge">docker</code> command requires <code class="language-plaintext highlighter-rouge">sudo</code>. That gets tedious and causes permission errors when containers try to write files to bind mounts. Adding your user to the <code class="language-plaintext highlighter-rouge">docker</code> group means you run everything without sudo. Just make sure you trust who else is in that group since docker group access is effectively root access on the host.</p>
+
+<h2 id="installing-docker">Installing Docker</h2>
 
 <ol>
   <li>
@@ -1696,121 +1751,4 @@ Done!</p>
   <li>Install winget</li>
   <li>Install, Update and Uninstall from CLI</li>
   <li>Upgrade Everything available with one line</li>
-</ul>]]></content><author><name></name></author><category term="Windows" /><category term="windows" /><category term="winget" /><category term="windows-11" /><category term="package-manager" /><category term="cli" /><category term="powershell" /><summary type="html"><![CDATA[Winget is the Windows package manager. Install, update, and list all your software from the command line — like apt on Linux but for Windows 10 and 11.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ashishghimire.com/assets/img/headers/winget.webp" /><media:content medium="image" url="https://ashishghimire.com/assets/img/headers/winget.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Useful Linux Commands for Hacking</title><link href="https://ashishghimire.com/posts/Useful-Commands/" rel="alternate" type="text/html" title="Useful Linux Commands for Hacking" /><published>2023-03-19T22:34:31+11:00</published><updated>2026-04-11T17:39:25+10:00</updated><id>https://ashishghimire.com/posts/Useful-Commands</id><content type="html" xml:base="https://ashishghimire.com/posts/Useful-Commands/"><![CDATA[<p>Common Linux Commands for Hacking.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Command</th>
-      <th>Description</th>
-      <th>Example</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>hostname</td>
-      <td>Displays the hostname of the machine</td>
-      <td><code class="language-plaintext highlighter-rouge">hostname</code></td>
-    </tr>
-    <tr>
-      <td>uname -a</td>
-      <td>Displays Sys information, may help to find kernel vulneribilities</td>
-      <td><code class="language-plaintext highlighter-rouge">uname -a</code></td>
-    </tr>
-    <tr>
-      <td>/proc/version</td>
-      <td>Information about processess, helps to find kernel and compiler info</td>
-      <td><code class="language-plaintext highlighter-rouge">/proc/version</code></td>
-    </tr>
-    <tr>
-      <td>/etc/issue</td>
-      <td>Gives info about OS, but can be changed, makes it easy to understand system</td>
-      <td>/etc/issue</td>
-    </tr>
-    <tr>
-      <td>ps</td>
-      <td>Displays running processes in a linux system, Displays the following: &lt;ul&gt; &lt;li&gt;PID : The Process ID&lt;/li&gt; &lt;li&gt;TTY: Terminal type used by user&lt;/li&gt; &lt;li&gt;Time: Amount of CPU  used by the process &lt;/li&gt; &lt;li&gt;CMD: The Comman or Executable running.&lt;/li&gt;&lt;/ul&gt;</td>
-      <td>&lt;ul&gt; &lt;li&gt;<code class="language-plaintext highlighter-rouge">ps -A</code> : View all running processes&lt;/li&gt;&lt;li&gt; <code class="language-plaintext highlighter-rouge">ps axjf</code>: view processes tree&lt;/li&gt; &lt;li&gt;<code class="language-plaintext highlighter-rouge">ps aux</code>: Displays processes for all users.&lt;/li&gt;&lt;/ul&gt;</td>
-    </tr>
-    <tr>
-      <td>env</td>
-      <td>Displays environmental variables, like PATH which may contain info about compiler or scripting language (eg. PYTHON) which could be leveraged for Privilege escalation</td>
-      <td><code class="language-plaintext highlighter-rouge">env</code></td>
-    </tr>
-    <tr>
-      <td>sudo -l</td>
-      <td>Used to display all commands that can be used by current users as sudo</td>
-      <td>sudo -l</td>
-    </tr>
-    <tr>
-      <td>ls</td>
-      <td>Lists all the files and folders</td>
-      <td>&lt;ul&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge">ls</code>&lt;/li&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge">ls -la</code> : Displays items including Hidden Files and Folders&lt;/li&gt;&lt;/ul&gt;</td>
-    </tr>
-    <tr>
-      <td>id</td>
-      <td>General overview of user’s privilege level and group memberships</td>
-      <td><code class="language-plaintext highlighter-rouge">id</code></td>
-    </tr>
-    <tr>
-      <td>/etc/passwd</td>
-      <td>Can be an easy way to discover users on the system</td>
-      <td><code class="language-plaintext highlighter-rouge">cat /etc/passwd</code> or <code class="language-plaintext highlighter-rouge">cat /etc/passwd \| cut -d ":" -f 1</code></td>
-    </tr>
-    <tr>
-      <td>history</td>
-      <td>Displays all the commands used before</td>
-      <td><code class="language-plaintext highlighter-rouge">history</code></td>
-    </tr>
-    <tr>
-      <td>ifconfig</td>
-      <td>Info about the network interfaces of the system</td>
-      <td><code class="language-plaintext highlighter-rouge">ifconfig</code></td>
-    </tr>
-    <tr>
-      <td>ip route</td>
-      <td>Verifies ifconfig info</td>
-      <td><code class="language-plaintext highlighter-rouge">ip route</code></td>
-    </tr>
-    <tr>
-      <td>netstat</td>
-      <td>Gather info on existing connections</td>
-      <td>&lt;ul&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge">netstat -a</code> : Shows all listening ports and established connections&lt;/li&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge">netstat -at</code> or <code class="language-plaintext highlighter-rouge">netstat -au</code>: lists TCP/UDP protocols respectively&lt;/li&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge">netstat -l</code> : Lists ports on Listening mode. These ports are open and ready to accept incoming connections.&lt;/li&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge">netstat -lt</code> : Same as netstat -l but displays TCP connections only&lt;/li&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge">netstat -s</code> : list network usage statistics by protocol This can also be used with the -t or -u options to limit the output to a specific protocol. &lt;/li&gt; &lt;li&gt;<code class="language-plaintext highlighter-rouge">netstat -tp</code> : Lists connections with service name and PID info.&lt;/li&gt;&lt;li&gt; <code class="language-plaintext highlighter-rouge">netstat -ltp</code> : to list listening ports&lt;/li&gt; &lt;li&gt;<code class="language-plaintext highlighter-rouge">netstat -i</code> : shows interface stats&lt;/li&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge">netstat -ano</code> : &lt;ol&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge">-a</code>: Display all sockets&lt;/li&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge">-n</code> : Do not resolve names&lt;/li&gt; &lt;li&gt;<code class="language-plaintext highlighter-rouge">-o</code> : Display Timers&lt;/li&gt;&lt;/ol&gt;&lt;/li&gt;&lt;/ul&gt;</td>
-    </tr>
-  </tbody>
-</table>
-
-<hr />
-
-<h2 id="find-command">Find Command</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>Command</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">find . -name notes</code></td>
-      <td>Finds the file named “Notes”</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">find /home -name notes</code></td>
-      <td>Finds the filename in home directory.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">find / -type d -name config</code></td>
-      <td>Find the directory named config under “/”</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">find / -type f -perm 0777</code></td>
-      <td>Find files with the 777 permission (Read, Write and Execute)</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">find / -perm a=x</code></td>
-      <td>’’’’</td>
-    </tr>
-  </tbody>
-</table>]]></content><author><name></name></author><category term="Hacking" /><category term="commands" /><category term="Hacking" /><category term="Privilege-Escalation" /><summary type="html"><![CDATA[A quick-reference sheet of common Linux commands used in penetration testing and CTFs — enumeration, privilege escalation, file transfers, and more.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ashishghimire.com/assets/img/headers/linuxCommands.webp" /><media:content medium="image" url="https://ashishghimire.com/assets/img/headers/linuxCommands.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+</ul>]]></content><author><name></name></author><category term="Windows" /><category term="windows" /><category term="winget" /><category term="windows-11" /><category term="package-manager" /><category term="cli" /><category term="powershell" /><summary type="html"><![CDATA[Winget is the Windows package manager. Install, update, and list all your software from the command line — like apt on Linux but for Windows 10 and 11.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ashishghimire.com/assets/img/headers/winget.webp" /><media:content medium="image" url="https://ashishghimire.com/assets/img/headers/winget.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

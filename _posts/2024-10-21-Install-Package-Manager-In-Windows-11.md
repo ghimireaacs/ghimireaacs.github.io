@@ -3,8 +3,8 @@ layout: post
 title: "Update All Apps with One Line Of Code in Windows"
 date: 2024-10-21 05:19:38 +1100
 category: Windows
-tags: [Windows, Winget, Software, Install]
-description: "Winget is CLI tool that Installs, Updates and List All softwares on your windows machine, similar to apt-get, brew, pacman, nix, etc"
+tags: [windows, winget, windows-11, package-manager, cli, powershell]
+description: "Winget is the Windows package manager. Install, update, and list all your software from the command line — like apt on Linux but for Windows 10 and 11."
 image: /assets/img/headers/winget.webp
 ---
 

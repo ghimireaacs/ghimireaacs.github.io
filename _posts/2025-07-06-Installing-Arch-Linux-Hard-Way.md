@@ -2,9 +2,9 @@
 layout: post
 title: "Installing Arch Linux Hard Way"
 date: 2025-07-06 01:11:31 +1100
-category: Walkthrough
-tags: [arch, archinstall, install, Linux]
-description: "Installing Arch Linux Hard Way"
+category: Linux
+tags: [arch, linux, install, bootloader, kde, plasma, partitioning]
+description: "A step-by-step guide to installing Arch Linux manually — from disk partitioning and mounting to bootloader setup — without using the archinstall script."
 image: /assets/img/headers/ArchInstall.webp
 ---
 

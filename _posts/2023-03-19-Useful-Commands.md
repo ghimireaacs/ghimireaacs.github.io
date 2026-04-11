@@ -4,7 +4,7 @@ title: "Useful Linux Commands for Hacking"
 date: 2023-03-19 22:34:31 +1100
 category: Hacking
 tags: [commands, Hacking, Privilege-Escalation]
-description: "Common Linux Commands for Hacking."
+description: "A quick-reference sheet of common Linux commands used in penetration testing and CTFs — enumeration, privilege escalation, file transfers, and more."
 image: /assets/img/headers/linuxCommands.webp
 ---
 
@@ -32,7 +32,7 @@ Command | Description | Example
 ---
 
 
-# Find Command
+## Find Command
 
 
 Command | Description

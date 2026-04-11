@@ -36,7 +36,7 @@ There is also mDNS involved in local discovery. mDNS is link-local only, it does
 
 The already running service that had been working for months was now completely broken.
 
-![](assets/img/posts/syncthingTwoDevices.webp)
+![Syncthing showing two devices with last seen: never after VLAN split](assets/img/posts/syncthingTwoDevices.webp)
 
 ## Fix 1: Pin Addresses Manually
 
@@ -52,7 +52,7 @@ The phone's IP changes across different networks so you cannot pin it. Let the p
 
 One thing that tripped me up here. Syncthing has a "device defaults" setting under Actions then Settings. I changed the address there assuming it would update existing devices. It does not. It only applies to new devices added after you change it. Had to go into each existing device individually and update the address.
 
-![](assets/img/posts/pixelSyncthing.webp)
+![Syncthing device settings on Pixel showing manually pinned address](assets/img/posts/pixelSyncthing.webp)
 
 ## Fix 2: Firewall Rules in OPNsense
 
@@ -73,7 +73,7 @@ Pass   PERSONAL net   *               any              <- internet
 
 Pass rule for Syncthing port above the catch-all block. Move it up, direct connections started working.
 
-![](assets/img/posts/firewallRule.webp)
+![OPNsense firewall rules showing Syncthing pass rule above the block rule](assets/img/posts/firewallRule.webp)
 
 ## Pairing Devices
 
@@ -85,9 +85,9 @@ Three-way sync working again. Server and PC, server and phone as the main sync p
 
 Obsidian vault syncing as it should be, now fully local.
 
-![](assets/img/posts/diagramSyncthing.webp)
+![Diagram of three-way Syncthing sync across VLANs 10, 20, and 50](assets/img/posts/diagramSyncthing.webp)
 
-![](assets/img/posts/syncthingDevices.webp)
+![Syncthing device list showing all connections as direct LAN with no relay](assets/img/posts/syncthingDevices.webp)
 
 ## The Short Version
 

@@ -3,8 +3,8 @@ layout: post
 title: "SSH + Zsh Prompt Duplication, Broken Nano, and the One-Line Fix"
 date: 2026-01-07 09:02:00 +1100
 category: Linux
-tags: [ssh, zsh, homelab]
-description: "While migrating to a Linux workstation with a modern terminal (Ghostty), Zsh, Oh My Zsh, and Powerlevel10k, I encountered a severe and confusing issue."
+tags: [ssh, zsh, linux, ghostty, powerlevel10k, oh-my-zsh, terminal, homelab]
+description: "Zsh prompt duplicating and nano rendering broken when SSH-ing from Ghostty into a remote server. Root cause was a terminal type mismatch. Fixed with one environment variable."
 image: /assets/img/headers/p10kbug.webp
 ---
 ## Background
@@ -53,7 +53,7 @@ Now it does auto finds distro and installs needed packages accordingly, also has
 I installed in my main rig, Voila, worked like a charm. I reconfigured this, adjusted with necessary changes, modified prompts and `git push`.
 
 
-![](assets/img/posts/20260107182116.webp)
+![Ghostty terminal with Zsh, Oh My Zsh and Powerlevel10k working on the main rig before the issue appeared](assets/img/posts/20260107182116.webp)
 
 
 
@@ -66,7 +66,7 @@ I installed in my main rig, Voila, worked like a charm. I reconfigured this, adj
 At first i got this multiple prompts which looked weird on its own, which i thought was a minor bug. Then i tried to clear screen with `ctrl + l` and it failed. Then i started to type something, well i got double of same things, and it was broken.
 
 
-![](assets/img/posts/20260107182648.webp)
+![Broken Zsh prompt showing duplicated lines and garbled output when SSH-ing from Ghostty](assets/img/posts/20260107182648.webp)
 
 
 

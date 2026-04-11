@@ -23,16 +23,16 @@ timezone: Australia/Sydney
 
 title: Ashish Ghimire # the main title
 
-tagline: IT | Junior Pentester | HomeLab | Full Nerd  # it will display as the sub-title
+tagline: IT | Cybersecurity | HomeLab | Self-Hosting  # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
-    A personal blog of Ashish Ghimire, a junior pentester and home lab enthusiast.
-    It covers topics on IT, cybersecurity, and personal projects.
+    Ashish Ghimire's blog on homelab, cybersecurity, self-hosting, and IT.
+    Walkthroughs, writeups, and hands-on guides for Linux, Docker, Proxmox, networking, and more.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: 'https://ashishghimire.com'
-plugin:
-    - jekyll-site-map
+plugins:
+    - jekyll-sitemap
     - jekyll-feed
 
 github:
@@ -53,9 +53,7 @@ social:
     # email: example@doamin.com             # change to your email address
     links:
         # The first element serves as the copyright owner's link
-        - https://ashishghimire.com # change to your twitter homepage
-        - https://tryhackme.com/p/ghostaacs # change to your github homepage
-        # Uncomment below to add more social links
+        - https://ashishghimire.com
         - https://tryhackme.com/p/ghostaacs
         - https://linktr.ee/aacsghimire
 

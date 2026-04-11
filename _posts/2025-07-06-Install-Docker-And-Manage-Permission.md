@@ -2,14 +2,14 @@
 layout: post
 title: "Installing Docker and Setting Permission"
 date: 2025-07-06 01:11:31 +1100
-category: Walkthrough
-tags: [docker, homelab]
-description: "Installing Docker and Setting Permission"
+category: Homelab
+tags: [docker, linux, ubuntu, containers, homelab, permissions]
+description: "How to install Docker on Linux using the official apt repository and configure user group permissions so you can run containers without sudo."
 image: /assets/img/headers/dockerInstall.webp
 ---
 
 
-# Installing Docker
+## Installing Docker
 
 1. Setup docker's apt repo
 
@@ -48,3 +48,5 @@ image: /assets/img/headers/dockerInstall.webp
 
 > This will ensure you will not need to run "sudo" everytime you run docker and also fixes most Permission error.
 {: .prompt-warning }
+
+If you run into DNS issues inside containers after this setup, see [Broken Docker DNS Due to Pi-hole](/posts/Broken-Docker-DNS-Due-to-PiHole/) — a common gotcha on systems that have previously run Pi-hole.

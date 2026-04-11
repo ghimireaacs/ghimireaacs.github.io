@@ -3,8 +3,8 @@ layout: post
 title: "How I Utilize Github to Store and Download My Public SSH Keys"
 date: 2025-08-09 03:32:00 +1100
 category: Homelab
-tags: [ssh, homelab]
-description: "Store your SSH Public keys on Github, Import them and Run them without a lot of configuration at the start."
+tags: [ssh, linux, github, homelab, security, keygen, ed25519]
+description: "Store your SSH public keys on GitHub and provision any new Linux server with one command using ssh-import-id-gh. No manual key copying needed."
 image: /assets/img/headers/githubssh.webp
 ---
 
@@ -23,7 +23,7 @@ Although SSH is very secure protocol in on itself, it is not totally immune to B
 
 For our intense and purpose, Public Keys are stored in Remote Server and Private Keys are stored in Our Private Machine.
 
-![](assets/img/posts/8898976de2367d86c92f90b095b64c16.webp)
+![Diagram showing public key stored on remote server and private key on local machine](assets/img/posts/8898976de2367d86c92f90b095b64c16.webp)
 
 ## Generating Key Pair
 
@@ -31,9 +31,9 @@ Now before we move on to server setup, let's create a key pair.
 
 1. Open your CLI
 2. `ssh-keygen -t ed25519 -C "username@email.com"`
-   ![](assets/img/posts/0bbec1ea9a1d9bef9e78ecf8166e8980.webp)
+   ![Terminal showing ssh-keygen -t ed25519 command output](assets/img/posts/0bbec1ea9a1d9bef9e78ecf8166e8980.webp)
 3. Set a Passphrase. (This is not SSH password it's extra layer of security to use you private key.)
-   ![](assets/img/posts/5b5ef986d2597846f46e73e547763d8a.webp)
+   ![Terminal prompting to enter a passphrase for the SSH key](assets/img/posts/5b5ef986d2597846f46e73e547763d8a.webp)
    > 💡 I choose default name so i do not have to provide '-i keyfile' during login. But if you have multiple private key for different purpose you can name them accordingly.
 
 Now you will have 2 files. Private key: `id_ed25519` and Public key with `.pub` extension: `id_ed25519.pub`, in your ~/.ssh directory.
@@ -52,7 +52,7 @@ chmod 644 ~/.ssh/id_25519.pub
 
 ### Private Keys
 
-This should always be on your local machine and nowhere else but you can use Password manager like Bitwarden for backup.
+This should always be on your local machine and nowhere else but you can use a password manager like [Bitwarden](/posts/Bitwarden/) for backup.
 
 ### Public Keys
 
@@ -60,14 +60,14 @@ Now this is the best part, you can store this anywhere but i would recommend it 
 
 1. Go to Github Settings
 
-   ![](assets/img/posts/ebde93544f57e002c486e5b57e611c2c.webp)
+   ![GitHub profile settings navigation menu](assets/img/posts/ebde93544f57e002c486e5b57e611c2c.webp)
 2. On Access Tab choose `SSH and GPG Keys`
 
-   ![](assets/img/posts/9c6fe9e312380988b65b7521a0a2aff3.webp)
+   ![GitHub Access settings showing SSH and GPG Keys section](assets/img/posts/9c6fe9e312380988b65b7521a0a2aff3.webp)
 
 3. Click on New SSH Key
 
-   ![](assets/img/posts/62e39e14921f61e435decc112e9c2a96.webp)
+   ![GitHub New SSH Key button highlighted](assets/img/posts/62e39e14921f61e435decc112e9c2a96.webp)
 
 4. Set a Title, Key Type: `Authentication Key`
 
@@ -75,13 +75,13 @@ Now this is the best part, you can store this anywhere but i would recommend it 
 
 6. Add SSH Key
 
-   ![](assets/img/posts/069032f2bce598e18d1e8885fd000002.webp)
+   ![GitHub Add SSH Key form with title and key fields filled in](assets/img/posts/069032f2bce598e18d1e8885fd000002.webp)
 
 7. Fill up your 2FA and Submit.
 
 Now you will see List of public Keys in your account.
 We will leave this for now and retrieve them from our CLI/shell.
-![](assets/img/posts/4b7ea49059630d1ed0c79f2c148753d0.webp)
+![GitHub showing list of saved public SSH keys in the account](assets/img/posts/4b7ea49059630d1ed0c79f2c148753d0.webp)
 
 ## Accessing The Public Key
 

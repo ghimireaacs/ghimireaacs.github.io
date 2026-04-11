@@ -4,7 +4,7 @@ title: "Vulnhub Kioptrix Walkthrough Part 2"
 date: 2022-12-22 23:11:31 +1100
 category: Walkthrough
 tags: [vulnhub, kioptrix, guide, walkthrough, TCM-SEC, nikto, dirbuster, burpsuite]
-description: "Vulnhub Kioptrix Walkthrough Part 2"
+description: "Vulnhub Kioptrix Level 2 walkthrough covering web app enumeration with Nikto, directory brute-forcing with Dirbuster, and exploitation techniques using Burpsuite."
 image: /assets/img/headers/tcmsec.webp
 ---
 ![tcmsec](/assets/img/headers/tcmsec.webp)

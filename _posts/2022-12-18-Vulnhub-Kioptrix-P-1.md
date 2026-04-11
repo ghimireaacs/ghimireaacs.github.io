@@ -4,7 +4,7 @@ title: "Vulnhub Kioptrix Walkthrough Part 1"
 date: 2022-12-18 23:11:31 +1100
 category: Walkthrough
 tags: [vulnhub, kioptrix, guide, walkthrough, TCM-SEC, net-discover, arp-scan]
-description: "Vulnhub Kioptrix Walkthrough Part 1"
+description: "Step-by-step walkthrough of Vulnhub Kioptrix Level 1. Covers network discovery with net-discover and arp-scan, service enumeration, and exploitation. TCM Security training series."
 image: /assets/img/headers/tcmsec.webp
 ---
 

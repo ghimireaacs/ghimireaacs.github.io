@@ -3,7 +3,7 @@ layout: post
 title: "You need to use Password Manager right NOW!!"
 date: 2023-02-23 22:34:31 +1100
 category: CyberSecurity
-tags: [security, password, guide]
+tags: [security, password, bitwarden, password-manager, cybersecurity]
 description: "With data breaches everywhere, internet security is a major concern. Even if you do not want to go through any hassle, here are the minimum steps that will put you from easy targets to hard."
 image: /assets/img/headers/bitwarden.webp
 ---
@@ -61,7 +61,7 @@ Among third party softwares there are Some Paid, others free. [NordPass](https:/
 
 These Password Managers do not only save but also helps you to create passwords for you. But do not forget your Master Password and generate a strong one that you cna remember, One complex password should't be tough to remember, have a faith.
 
-# Wrap Up
+## Wrap Up
 
 - Do Not use same passwords Multiple Times
 - Use Complex Passwords

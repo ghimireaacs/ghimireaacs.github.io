@@ -3,8 +3,8 @@ layout: post
 title: "Setting Up Active Directory"
 date: 2025-07-05 00:00:00 +0000
 category: Active Directory
-tags: [Active-Directory, guide, walkthrough, TCM-SEC, AD]
-description: "Setting Up Active Directory PNPT Method"
+tags: [Active-Directory, windows-server, pentesting, TCM-SEC, PNPT, cybersecurity, AD]
+description: "How to build a local Active Directory lab for penetration testing practice using the PNPT methodology by TCM Security. Includes Windows Server 2022 and Windows 10 setup."
 image: /assets/img/headers/activeDirectory.webp
 ---
 
@@ -131,25 +131,25 @@ Setup 2 OS at same Time
 2. Tools > AD Users and Computers
 3. Manage User Groups
 	1. MARVEL.local ( Domain Controller) > *Right Click* >New > OU
-		![](assets/img/posts/8374186a9e4ec287b84309cfc18497bb.webp)
+		![AD Users and Computers: right-clicking MARVEL.local to create a new Organizational Unit](assets/img/posts/8374186a9e4ec287b84309cfc18497bb.webp)
 	2. Move Everything Except `Admin` and `Guest` to New `Groups` > YES
-		![](assets/img/posts/c6a3724ed01b57185a98dd924933dfee.webp)
-		![](assets/img/posts/6d9f03394d84b36cc78c1f13001a55b0.webp)
+		![Moving default users and groups into the new Groups OU](assets/img/posts/c6a3724ed01b57185a98dd924933dfee.webp)
+		![Groups OU created with all objects moved in](assets/img/posts/6d9f03394d84b36cc78c1f13001a55b0.webp)
 4.  Create Another `Administrator`
 	1. Copy current `Administrator`
-		![](assets/img/posts/48cfc8b6b9784b5a80c08a1d7f80fbf7.webp)
-		![](assets/img/posts/e9aeeb72e351d1d5bb9d8f87c58cc1d4.webp)
+		![Copy Administrator dialog to create a new admin account](assets/img/posts/48cfc8b6b9784b5a80c08a1d7f80fbf7.webp)
+		![New domain administrator account created in AD](assets/img/posts/e9aeeb72e351d1d5bb9d8f87c58cc1d4.webp)
 5. Create a *Service* account
 	1. Name: SQL Service Password: MYpassword123# (Weak pw with complexity and character count for lab purpose)
-		![](assets/img/posts/36bda5b872772704529408c93afc73c8.webp)
-		![](assets/img/posts/bed32ca05225fd7f71d9893c7ef25376.webp)
+		![Creating SQL Service account in AD Users and Computers](assets/img/posts/36bda5b872772704529408c93afc73c8.webp)
+		![SQL Service account created with weak lab password](assets/img/posts/bed32ca05225fd7f71d9893c7ef25376.webp)
 6. Create Two New Users
 	1. *Right Click* > New > User
-		![](assets/img/posts/4074da60a0098b793bd9ff010fc771a0.webp)
-		![](assets/img/posts/affb69b9b77b19b873aa9c92bef9ea79.webp)
-		![](assets/img/posts/36cde6d2ca44f4ab89063f4f19bac706.webp)
+		![New User dialog in AD Users and Computers](assets/img/posts/4074da60a0098b793bd9ff010fc771a0.webp)
+		![User details form with name and login username filled in](assets/img/posts/affb69b9b77b19b873aa9c92bef9ea79.webp)
+		![Password configuration for new domain user](assets/img/posts/36cde6d2ca44f4ab89063f4f19bac706.webp)
 	2. For Second User *copy* recently created user and change Names
-		![](assets/img/posts/db44e1a5879b2613a61de42216c8713a.webp)
+		![Second domain user created by copying the first user](assets/img/posts/db44e1a5879b2613a61de42216c8713a.webp)
 
 ##### File Sharing To Exploit Later
 1. Server Manager
@@ -189,7 +189,7 @@ Setup 2 OS at same Time
 	3. Gateway: 192.168.135.2
 6. Ok 
 
-# Join Machine To Domains
+## Join Machine To Domains
 
 1. Login to Client Machines
 2. Make IP Addresses Static
@@ -199,20 +199,20 @@ Setup 2 OS at same Time
 
 1. Start Menu
 2. Access Work or School
-	![](assets/img/posts/0f0554514a2d6d14c380eea35d3aefab.webp)
+	![Windows Access Work or School settings page](assets/img/posts/0f0554514a2d6d14c380eea35d3aefab.webp)
 3. Connect
-	![](assets/img/posts/557449303d8f76c26704e2563df0586b.webp)
+	![Connect to work or school account dialog](assets/img/posts/557449303d8f76c26704e2563df0586b.webp)
 4. Join this device to a local Active Directory Domain
-	![](assets/img/posts/dc9bc20b351c66266191488ddcc564e4.webp)
+	![Option to join device to a local Active Directory domain](assets/img/posts/dc9bc20b351c66266191488ddcc564e4.webp)
 5. Set it as `MARVEL.local`
 6. Enter your Domain Controller Username and Password and ENTER
 7. We can Add as Administrator
-	![](assets/img/posts/0ad743d75d6aad97ca3a179b8195c07f.webp)
+	![Adding the joining account as Administrator during domain join](assets/img/posts/0ad743d75d6aad97ca3a179b8195c07f.webp)
 8. Restart Now
 9. Verify If you Joined Domain
 	1. Server Manager > Tools > AD Users and Computers
 	2. Computers > You will see both your Devices
-		![](assets/img/posts/cb5cbaefd24d15044d0e5d6d5034c564.webp)
+		![AD Users and Computers Computers container showing both client machines joined to MARVEL.local](assets/img/posts/cb5cbaefd24d15044d0e5d6d5034c564.webp)
 		
 10. Open CLient Login with MARVEL\administrator
 
@@ -221,11 +221,11 @@ Setup 2 OS at same Time
 #### Enable Local Admin
 1. Start > Users > Edit Local Users and Groups
 2. Users > Administrator > Enable
-	![](assets/img/posts/d9988e2da8a765e2b33376b90ce52dd3.webp)
+	![Local Users and Groups showing Administrator account enabled](assets/img/posts/d9988e2da8a765e2b33376b90ce52dd3.webp)
 3. Set Password (Password1!)
-	![](assets/img/posts/0d4a2e1b9dd67792e98abe81483cdf88.webp)
+	![Set password dialog for local Administrator account](assets/img/posts/0d4a2e1b9dd67792e98abe81483cdf88.webp)
 4. Uncheck Account is Disabled > Apply > OK
-	![](assets/img/posts/b62c2c1fb9902b30c1ed9de432abdea8.webp)
+	![Unchecking Account is disabled on local Administrator properties](assets/img/posts/b62c2c1fb9902b30c1ed9de432abdea8.webp)
 
 
 #### Add Other Administrators
@@ -233,14 +233,14 @@ Setup 2 OS at same Time
 1.  Start > Users > Edit Local Users and Groups
 2. Groups > Administrators > Add > Search `fcastle` > Check Names > OK
 
-	![](assets/img/posts/8cad1948d4c9dc5fdb2d34bf3652fbef.webp)
+	![Adding fcastle user to local Administrators group on client machine](assets/img/posts/8cad1948d4c9dc5fdb2d34bf3652fbef.webp)
 	
 #### Logout and Check Local Account
 1. Other Users
 2.  .\peterparker | Password1
 3. Map Network Drive > Z:
 4. Folder > `\\HYDRA-DC\hackme` | Connect using Different Credentials
-	![](assets/img/posts/e454745e8310d56c791b5d560a7f3caf.webp)
+	![Mapping network drive to hackme share on HYDRA-DC using domain credentials](assets/img/posts/e454745e8310d56c791b5d560a7f3caf.webp)
 5. Use Credentials
 	username: `administrator`
 	password: `Pa$$w0rd!`
@@ -275,4 +275,4 @@ IP > 192.168.135.137
 TO sign IN
 
 
-![](assets/img/posts/071a957c87ed50e278296d12bb05a502.webp)
+![Windows login screen showing domain sign-in for MARVEL.local](assets/img/posts/071a957c87ed50e278296d12bb05a502.webp)

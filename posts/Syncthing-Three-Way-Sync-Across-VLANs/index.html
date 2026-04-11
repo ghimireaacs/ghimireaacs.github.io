@@ -45,7 +45,7 @@
 <meta property="twitter:title" content="Syncthing Three-Way Sync Across VLANs" />
 <meta name="twitter:site" content="@ghimireaacs" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-03-20T21:13:37+11:00","datePublished":"2026-03-20T00:00:00+11:00","description":"VLANs broke my Syncthing setup. Global discovery off, relay off, and Syncthing had no idea where my devices were. Here is how I fixed it.","headline":"Syncthing Three-Way Sync Across VLANs","image":"https://ashishghimire.com/assets/img/headers/syncthingVlan.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/"},"url":"https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-04-11T17:39:25+10:00","datePublished":"2026-03-20T00:00:00+11:00","description":"VLANs broke my Syncthing setup. Global discovery off, relay off, and Syncthing had no idea where my devices were. Here is how I fixed it.","headline":"Syncthing Three-Way Sync Across VLANs","image":"https://ashishghimire.com/assets/img/headers/syncthingVlan.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/"},"url":"https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -280,7 +280,7 @@
     <h1 class="site-title">
       <a href="/">Ashish Ghimire</a>
     </h1>
-    <p class="site-subtitle fst-italic mb-0">IT | Junior Pentester | HomeLab | Full Nerd</p>
+    <p class="site-subtitle fst-italic mb-0">IT | Cybersecurity | HomeLab | Self-Hosting</p>
   </header>
   <!-- .profile-wrapper -->
 
@@ -331,6 +331,16 @@
             
 
             <span>ABOUT</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/privacy-policy/" class="nav-link">
+            <i class="fa-fw fas fa-shield-halved"></i>
+            
+
+            <span>PRIVACY POLICY</span>
           </a>
         </li>
         <!-- .nav-item -->
@@ -393,6 +403,29 @@
           
         >
           <i class="fa-brands fa-x-twitter"></i>
+        </a>
+      
+    
+      
+
+      
+        <a
+          href="https://github.com/ghimireaacs"
+          aria-label="github-custom"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fab fa-github"></i>
         </a>
       
     
@@ -1117,13 +1150,13 @@
 
 <time
   
-  data-ts="1774001617"
+  data-ts="1775893165"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
   
 >
-  Mar 20, 2026
+  Apr 11, 2026
 </time>
 
         </span>
@@ -1214,7 +1247,7 @@
 
 <p>The already running service that had been working for months was now completely broken.</p>
 
-<p><a href="/assets/img/posts/syncthingTwoDevices.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/syncthingTwoDevices.webp" alt="" loading="lazy"></a></p>
+<p><a href="/assets/img/posts/syncthingTwoDevices.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/syncthingTwoDevices.webp" alt="Syncthing showing two devices with last seen: never after VLAN split" loading="lazy"></a></p>
 
 <h2 id="fix-1-pin-addresses-manually"><span class="me-2">Fix 1: Pin Addresses Manually</span><a href="#fix-1-pin-addresses-manually" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
@@ -1247,7 +1280,7 @@
 
 <p>One thing that tripped me up here. Syncthing has a “device defaults” setting under Actions then Settings. I changed the address there assuming it would update existing devices. It does not. It only applies to new devices added after you change it. Had to go into each existing device individually and update the address.</p>
 
-<p><a href="/assets/img/posts/pixelSyncthing.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/pixelSyncthing.webp" alt="" loading="lazy"></a></p>
+<p><a href="/assets/img/posts/pixelSyncthing.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/pixelSyncthing.webp" alt="Syncthing device settings on Pixel showing manually pinned address" loading="lazy"></a></p>
 
 <h2 id="fix-2-firewall-rules-in-opnsense"><span class="me-2">Fix 2: Firewall Rules in OPNsense</span><a href="#fix-2-firewall-rules-in-opnsense" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
@@ -1275,7 +1308,7 @@ Pass   PERSONAL net   *               any              &lt;- internet
 
 <p>Pass rule for Syncthing port above the catch-all block. Move it up, direct connections started working.</p>
 
-<p><a href="/assets/img/posts/firewallRule.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/firewallRule.webp" alt="" loading="lazy"></a></p>
+<p><a href="/assets/img/posts/firewallRule.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/firewallRule.webp" alt="OPNsense firewall rules showing Syncthing pass rule above the block rule" loading="lazy"></a></p>
 
 <h2 id="pairing-devices"><span class="me-2">Pairing Devices</span><a href="#pairing-devices" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
@@ -1287,9 +1320,9 @@ Pass   PERSONAL net   *               any              &lt;- internet
 
 <p>Obsidian vault syncing as it should be, now fully local.</p>
 
-<p><a href="/assets/img/posts/diagramSyncthing.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/diagramSyncthing.webp" alt="" loading="lazy"></a></p>
+<p><a href="/assets/img/posts/diagramSyncthing.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/diagramSyncthing.webp" alt="Diagram of three-way Syncthing sync across VLANs 10, 20, and 50" loading="lazy"></a></p>
 
-<p><a href="/assets/img/posts/syncthingDevices.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/syncthingDevices.webp" alt="" loading="lazy"></a></p>
+<p><a href="/assets/img/posts/syncthingDevices.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/syncthingDevices.webp" alt="Syncthing device list showing all connections as direct LAN with no relay" loading="lazy"></a></p>
 
 <h2 id="the-short-version"><span class="me-2">The Short Version</span><a href="#the-short-version" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
@@ -1469,28 +1502,21 @@ Pass   PERSONAL net   *               any              &lt;- internet
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Syncthing-Three-Way-Sync-Across-VLANs/">Syncthing Three-Way Sync Across VLANs</a>
+          <a href="/posts/Useful-Commands/">Useful Linux Commands for Hacking</a>
         </li>
       
         
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Broken-Docker-DNS-Due-to-PiHole/">Broken Docker DNS Due to Pi-hole</a>
+          <a href="/posts/Install-Package-Manager-In-Windows-11/">Update All Apps with One Line Of Code in Windows</a>
         </li>
       
         
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/">SSH + Zsh Prompt Duplication, Broken Nano, and the One-Line Fix</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/Dns/">Let’s Block Our Ads For Free and Also Keep Our Children safe</a>
+          <a href="/posts/Setting-Up-Active-Directory/">Setting Up Active Directory</a>
         </li>
       
         
@@ -1498,6 +1524,13 @@ Pass   PERSONAL net   *               any              &lt;- internet
         
         <li class="text-truncate lh-lg">
           <a href="/posts/Install-Docker-And-Manage-Permission/">Installing Docker and Setting Permission</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Installing-Arch-Linux-Hard-Way/">Installing Arch Linux Hard Way</a>
         </li>
       
     </ul>
@@ -1591,10 +1624,6 @@ Pass   PERSONAL net   *               any              &lt;- internet
     
     
     
-      
-        
-        
-
   
     
     
@@ -1615,72 +1644,6 @@ Pass   PERSONAL net   *               any              &lt;- internet
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
   
     
     
@@ -1750,78 +1713,6 @@ Pass   PERSONAL net   *               any              &lt;- internet
         
         
 
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
   
     
     
@@ -2006,6 +1897,115 @@ Pass   PERSONAL net   *               any              &lt;- internet
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
     
   
@@ -2063,6 +2063,402 @@ Pass   PERSONAL net   *               any              &lt;- internet
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
   
     
     
@@ -2214,6 +2610,25 @@ Pass   PERSONAL net   *               any              &lt;- internet
     
     
     
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -2308,15 +2723,7 @@ Pass   PERSONAL net   *               any              &lt;- internet
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -2334,85 +2741,6 @@ Pass   PERSONAL net   *               any              &lt;- internet
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -2451,17 +2779,6 @@ Pass   PERSONAL net   *               any              &lt;- internet
     
     
     
-      
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
   
     
     
@@ -2481,97 +2798,6 @@ Pass   PERSONAL net   *               any              &lt;- internet
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -2652,6 +2878,25 @@ Pass   PERSONAL net   *               any              &lt;- internet
     
     
     
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -2689,7 +2934,30 @@ Pass   PERSONAL net   *               any              &lt;- internet
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -2708,7 +2976,60 @@ Pass   PERSONAL net   *               any              &lt;- internet
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -2776,7 +3097,7 @@ Pass   PERSONAL net   *               any              &lt;- internet
     <div class="d-flex flex-wrap mt-3 mb-1 me-3">
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/guide/">guide</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/linux/">linux</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/homelab/">homelab</a>
@@ -2785,25 +3106,25 @@ Pass   PERSONAL net   *               any              &lt;- internet
         <a class="post-tag btn btn-outline-primary" href="/tags/docker/">docker</a>
       
         
+        <a class="post-tag btn btn-outline-primary" href="/tags/networking/">networking</a>
+      
+        
         <a class="post-tag btn btn-outline-primary" href="/tags/tcm-sec/">TCM-SEC</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/walkthrough/">walkthrough</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/cybersecurity/">cybersecurity</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/install/">Install</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/dns/">dns</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/guide/">guide</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/kioptrix/">kioptrix</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/linux/">Linux</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/networking/">networking</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/software/">Software</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/security/">security</a>
       
     </div>
   </section>
@@ -2895,6 +3216,30 @@ Pass   PERSONAL net   *               any              &lt;- internet
 
   
 
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
 
 
 
@@ -2946,6 +3291,44 @@ Pass   PERSONAL net   *               any              &lt;- internet
         </article>
       
         <article class="col">
+          <a href="/posts/Dns/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1677938400"
+  data-df="ll"
+  
+>
+  Mar  5, 2023
+</time>
+
+              <h4 class="pt-0 my-2">Let’s Block Our Ads For Free and Also Keep Our Children safe</h4>
+              <div class="text-muted">
+                <p>
+                  
+
+
+
+
+
+                  Let’s Block ads, those annoying little popups, with NextDNS. Before, we start that, let’s understand the concept of DNS.
+
+DNS according to Cloudflare is a Phonebook of Internet. It translates your ...
+                </p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
           <a href="/posts/Install-Docker-And-Manage-Permission/" class="post-preview card h-100">
             <div class="card-body">
               <!--
@@ -2984,42 +3367,6 @@ Pass   PERSONAL net   *               any              &lt;- internet
  sudo apt-get install ca-certificates curl
  sudo install -m 0755 -d /etc/apt/keyrings
  sudo curl -fsSL https://download....
-                </p>
-              </div>
-            </div>
-          </a>
-        </article>
-      
-        <article class="col">
-          <a href="/posts/How-I-Utilize-Github-For-SSH/" class="post-preview card h-100">
-            <div class="card-body">
-              <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1754670720"
-  data-df="ll"
-  
->
-  Aug  9, 2025
-</time>
-
-              <h4 class="pt-0 my-2">How I Utilize Github to Store and Download My Public SSH Keys</h4>
-              <div class="text-muted">
-                <p>
-                  
-
-
-
-
-
-                  The first thing I do after I install a fresh new VM is SSH into that machine and use it locally. Now i will not rant about SSH and its uses and why you need it or why it’s better than web console. ...
                 </p>
               </div>
             </div>
@@ -3254,10 +3601,6 @@ Pass   PERSONAL net   *               any              &lt;- internet
     
     
     
-      
-        
-        
-
   
     
     
@@ -3278,72 +3621,6 @@ Pass   PERSONAL net   *               any              &lt;- internet
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
   
     
     
@@ -3413,78 +3690,6 @@ Pass   PERSONAL net   *               any              &lt;- internet
         
         
 
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
   
     
     
@@ -3669,6 +3874,115 @@ Pass   PERSONAL net   *               any              &lt;- internet
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
     
   
@@ -3726,6 +4040,402 @@ Pass   PERSONAL net   *               any              &lt;- internet
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
   
     
     
@@ -3877,6 +4587,25 @@ Pass   PERSONAL net   *               any              &lt;- internet
     
     
     
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -3971,15 +4700,7 @@ Pass   PERSONAL net   *               any              &lt;- internet
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -3997,85 +4718,6 @@ Pass   PERSONAL net   *               any              &lt;- internet
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -4114,17 +4756,6 @@ Pass   PERSONAL net   *               any              &lt;- internet
     
     
     
-      
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
   
     
     
@@ -4144,97 +4775,6 @@ Pass   PERSONAL net   *               any              &lt;- internet
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -4315,6 +4855,25 @@ Pass   PERSONAL net   *               any              &lt;- internet
     
     
     
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -4352,7 +4911,30 @@ Pass   PERSONAL net   *               any              &lt;- internet
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -4371,7 +4953,60 @@ Pass   PERSONAL net   *               any              &lt;- internet
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -4439,7 +5074,7 @@ Pass   PERSONAL net   *               any              &lt;- internet
     <div class="d-flex flex-wrap mt-3 mb-1 me-3">
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/guide/">guide</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/linux/">linux</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/homelab/">homelab</a>
@@ -4448,25 +5083,25 @@ Pass   PERSONAL net   *               any              &lt;- internet
         <a class="post-tag btn btn-outline-primary" href="/tags/docker/">docker</a>
       
         
+        <a class="post-tag btn btn-outline-primary" href="/tags/networking/">networking</a>
+      
+        
         <a class="post-tag btn btn-outline-primary" href="/tags/tcm-sec/">TCM-SEC</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/walkthrough/">walkthrough</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/cybersecurity/">cybersecurity</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/install/">Install</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/dns/">dns</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/guide/">guide</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/kioptrix/">kioptrix</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/linux/">Linux</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/networking/">networking</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/software/">Software</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/security/">security</a>
       
     </div>
   </section>

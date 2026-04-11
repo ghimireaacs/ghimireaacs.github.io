@@ -32,8 +32,8 @@
 <meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="Setting Up Active Directory" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="Setting Up Active Directory PNPT Method" />
-<meta property="og:description" content="Setting Up Active Directory PNPT Method" />
+<meta name="description" content="How to build a local Active Directory lab for penetration testing practice using the PNPT methodology by TCM Security. Includes Windows Server 2022 and Windows 10 setup." />
+<meta property="og:description" content="How to build a local Active Directory lab for penetration testing practice using the PNPT methodology by TCM Security. Includes Windows Server 2022 and Windows 10 setup." />
 <link rel="canonical" href="https://ashishghimire.com/posts/Setting-Up-Active-Directory/" />
 <meta property="og:url" content="https://ashishghimire.com/posts/Setting-Up-Active-Directory/" />
 <meta property="og:site_name" content="Ashish Ghimire" />
@@ -45,7 +45,7 @@
 <meta property="twitter:title" content="Setting Up Active Directory" />
 <meta name="twitter:site" content="@ghimireaacs" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-08-11T18:02:30+10:00","datePublished":"2025-07-05T10:00:00+10:00","description":"Setting Up Active Directory PNPT Method","headline":"Setting Up Active Directory","image":"https://ashishghimire.com/assets/img/headers/activeDirectory.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/Setting-Up-Active-Directory/"},"url":"https://ashishghimire.com/posts/Setting-Up-Active-Directory/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-04-11T17:39:25+10:00","datePublished":"2025-07-05T10:00:00+10:00","description":"How to build a local Active Directory lab for penetration testing practice using the PNPT methodology by TCM Security. Includes Windows Server 2022 and Windows 10 setup.","headline":"Setting Up Active Directory","image":"https://ashishghimire.com/assets/img/headers/activeDirectory.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/Setting-Up-Active-Directory/"},"url":"https://ashishghimire.com/posts/Setting-Up-Active-Directory/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -280,7 +280,7 @@
     <h1 class="site-title">
       <a href="/">Ashish Ghimire</a>
     </h1>
-    <p class="site-subtitle fst-italic mb-0">IT | Junior Pentester | HomeLab | Full Nerd</p>
+    <p class="site-subtitle fst-italic mb-0">IT | Cybersecurity | HomeLab | Self-Hosting</p>
   </header>
   <!-- .profile-wrapper -->
 
@@ -331,6 +331,16 @@
             
 
             <span>ABOUT</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/privacy-policy/" class="nav-link">
+            <i class="fa-fw fas fa-shield-halved"></i>
+            
+
+            <span>PRIVACY POLICY</span>
           </a>
         </li>
         <!-- .nav-item -->
@@ -393,6 +403,29 @@
           
         >
           <i class="fa-brands fa-x-twitter"></i>
+        </a>
+      
+    
+      
+
+      
+        <a
+          href="https://github.com/ghimireaacs"
+          aria-label="github-custom"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fab fa-github"></i>
         </a>
       
     
@@ -2107,6 +2140,17 @@
 
       
     
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
 
     
   
@@ -2372,13 +2416,13 @@
 
 <time
   
-  data-ts="1754899350"
+  data-ts="1775893165"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
   
 >
-  Aug 11, 2025
+  Apr 11, 2026
 </time>
 
         </span>
@@ -2595,34 +2639,34 @@ administrator:<code class="language-plaintext highlighter-rouge">P@$$w0rd!</code
   <li>Manage User Groups
     <ol>
       <li>MARVEL.local ( Domain Controller) &gt; <em>Right Click</em> &gt;New &gt; OU
- <a href="/assets/img/posts/8374186a9e4ec287b84309cfc18497bb.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/8374186a9e4ec287b84309cfc18497bb.webp" alt="" loading="lazy"></a></li>
+ <a href="/assets/img/posts/8374186a9e4ec287b84309cfc18497bb.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/8374186a9e4ec287b84309cfc18497bb.webp" alt="AD Users and Computers: right-clicking MARVEL.local to create a new Organizational Unit" loading="lazy"></a></li>
       <li>Move Everything Except <code class="language-plaintext highlighter-rouge">Admin</code> and <code class="language-plaintext highlighter-rouge">Guest</code> to New <code class="language-plaintext highlighter-rouge">Groups</code> &gt; YES
- <a href="/assets/img/posts/c6a3724ed01b57185a98dd924933dfee.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/c6a3724ed01b57185a98dd924933dfee.webp" alt="" loading="lazy"></a>
- <a href="/assets/img/posts/6d9f03394d84b36cc78c1f13001a55b0.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/6d9f03394d84b36cc78c1f13001a55b0.webp" alt="" loading="lazy"></a></li>
+ <a href="/assets/img/posts/c6a3724ed01b57185a98dd924933dfee.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/c6a3724ed01b57185a98dd924933dfee.webp" alt="Moving default users and groups into the new Groups OU" loading="lazy"></a>
+ <a href="/assets/img/posts/6d9f03394d84b36cc78c1f13001a55b0.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/6d9f03394d84b36cc78c1f13001a55b0.webp" alt="Groups OU created with all objects moved in" loading="lazy"></a></li>
     </ol>
   </li>
   <li>Create Another <code class="language-plaintext highlighter-rouge">Administrator</code>
     <ol>
       <li>Copy current <code class="language-plaintext highlighter-rouge">Administrator</code>
- <a href="/assets/img/posts/48cfc8b6b9784b5a80c08a1d7f80fbf7.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/48cfc8b6b9784b5a80c08a1d7f80fbf7.webp" alt="" loading="lazy"></a>
- <a href="/assets/img/posts/e9aeeb72e351d1d5bb9d8f87c58cc1d4.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/e9aeeb72e351d1d5bb9d8f87c58cc1d4.webp" alt="" loading="lazy"></a></li>
+ <a href="/assets/img/posts/48cfc8b6b9784b5a80c08a1d7f80fbf7.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/48cfc8b6b9784b5a80c08a1d7f80fbf7.webp" alt="Copy Administrator dialog to create a new admin account" loading="lazy"></a>
+ <a href="/assets/img/posts/e9aeeb72e351d1d5bb9d8f87c58cc1d4.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/e9aeeb72e351d1d5bb9d8f87c58cc1d4.webp" alt="New domain administrator account created in AD" loading="lazy"></a></li>
     </ol>
   </li>
   <li>Create a <em>Service</em> account
     <ol>
       <li>Name: SQL Service Password: MYpassword123# (Weak pw with complexity and character count for lab purpose)
- <a href="/assets/img/posts/36bda5b872772704529408c93afc73c8.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/36bda5b872772704529408c93afc73c8.webp" alt="" loading="lazy"></a>
- <a href="/assets/img/posts/bed32ca05225fd7f71d9893c7ef25376.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/bed32ca05225fd7f71d9893c7ef25376.webp" alt="" loading="lazy"></a></li>
+ <a href="/assets/img/posts/36bda5b872772704529408c93afc73c8.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/36bda5b872772704529408c93afc73c8.webp" alt="Creating SQL Service account in AD Users and Computers" loading="lazy"></a>
+ <a href="/assets/img/posts/bed32ca05225fd7f71d9893c7ef25376.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/bed32ca05225fd7f71d9893c7ef25376.webp" alt="SQL Service account created with weak lab password" loading="lazy"></a></li>
     </ol>
   </li>
   <li>Create Two New Users
     <ol>
       <li><em>Right Click</em> &gt; New &gt; User
- <a href="/assets/img/posts/4074da60a0098b793bd9ff010fc771a0.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/4074da60a0098b793bd9ff010fc771a0.webp" alt="" loading="lazy"></a>
- <a href="/assets/img/posts/affb69b9b77b19b873aa9c92bef9ea79.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/affb69b9b77b19b873aa9c92bef9ea79.webp" alt="" loading="lazy"></a>
- <a href="/assets/img/posts/36cde6d2ca44f4ab89063f4f19bac706.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/36cde6d2ca44f4ab89063f4f19bac706.webp" alt="" loading="lazy"></a></li>
+ <a href="/assets/img/posts/4074da60a0098b793bd9ff010fc771a0.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/4074da60a0098b793bd9ff010fc771a0.webp" alt="New User dialog in AD Users and Computers" loading="lazy"></a>
+ <a href="/assets/img/posts/affb69b9b77b19b873aa9c92bef9ea79.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/affb69b9b77b19b873aa9c92bef9ea79.webp" alt="User details form with name and login username filled in" loading="lazy"></a>
+ <a href="/assets/img/posts/36cde6d2ca44f4ab89063f4f19bac706.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/36cde6d2ca44f4ab89063f4f19bac706.webp" alt="Password configuration for new domain user" loading="lazy"></a></li>
       <li>For Second User <em>copy</em> recently created user and change Names
- <a href="/assets/img/posts/db44e1a5879b2613a61de42216c8713a.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/db44e1a5879b2613a61de42216c8713a.webp" alt="" loading="lazy"></a></li>
+ <a href="/assets/img/posts/db44e1a5879b2613a61de42216c8713a.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/db44e1a5879b2613a61de42216c8713a.webp" alt="Second domain user created by copying the first user" loading="lazy"></a></li>
     </ol>
   </li>
 </ol>
@@ -2679,7 +2723,7 @@ administrator:<code class="language-plaintext highlighter-rouge">P@$$w0rd!</code
   <li>Ok</li>
 </ol>
 
-<h1 id="join-machine-to-domains">Join Machine To Domains</h1>
+<h2 id="join-machine-to-domains"><span class="me-2">Join Machine To Domains</span><a href="#join-machine-to-domains" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
 <ol>
   <li>Login to Client Machines</li>
@@ -2695,21 +2739,21 @@ administrator:<code class="language-plaintext highlighter-rouge">P@$$w0rd!</code
 <ol>
   <li>Start Menu</li>
   <li>Access Work or School
- <a href="/assets/img/posts/0f0554514a2d6d14c380eea35d3aefab.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/0f0554514a2d6d14c380eea35d3aefab.webp" alt="" loading="lazy"></a></li>
+ <a href="/assets/img/posts/0f0554514a2d6d14c380eea35d3aefab.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/0f0554514a2d6d14c380eea35d3aefab.webp" alt="Windows Access Work or School settings page" loading="lazy"></a></li>
   <li>Connect
- <a href="/assets/img/posts/557449303d8f76c26704e2563df0586b.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/557449303d8f76c26704e2563df0586b.webp" alt="" loading="lazy"></a></li>
+ <a href="/assets/img/posts/557449303d8f76c26704e2563df0586b.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/557449303d8f76c26704e2563df0586b.webp" alt="Connect to work or school account dialog" loading="lazy"></a></li>
   <li>Join this device to a local Active Directory Domain
- <a href="/assets/img/posts/dc9bc20b351c66266191488ddcc564e4.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/dc9bc20b351c66266191488ddcc564e4.webp" alt="" loading="lazy"></a></li>
+ <a href="/assets/img/posts/dc9bc20b351c66266191488ddcc564e4.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/dc9bc20b351c66266191488ddcc564e4.webp" alt="Option to join device to a local Active Directory domain" loading="lazy"></a></li>
   <li>Set it as <code class="language-plaintext highlighter-rouge">MARVEL.local</code></li>
   <li>Enter your Domain Controller Username and Password and ENTER</li>
   <li>We can Add as Administrator
- <a href="/assets/img/posts/0ad743d75d6aad97ca3a179b8195c07f.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/0ad743d75d6aad97ca3a179b8195c07f.webp" alt="" loading="lazy"></a></li>
+ <a href="/assets/img/posts/0ad743d75d6aad97ca3a179b8195c07f.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/0ad743d75d6aad97ca3a179b8195c07f.webp" alt="Adding the joining account as Administrator during domain join" loading="lazy"></a></li>
   <li>Restart Now</li>
   <li>Verify If you Joined Domain
     <ol>
       <li>Server Manager &gt; Tools &gt; AD Users and Computers</li>
       <li>Computers &gt; You will see both your Devices
- <a href="/assets/img/posts/cb5cbaefd24d15044d0e5d6d5034c564.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/cb5cbaefd24d15044d0e5d6d5034c564.webp" alt="" loading="lazy"></a></li>
+ <a href="/assets/img/posts/cb5cbaefd24d15044d0e5d6d5034c564.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/cb5cbaefd24d15044d0e5d6d5034c564.webp" alt="AD Users and Computers Computers container showing both client machines joined to MARVEL.local" loading="lazy"></a></li>
     </ol>
   </li>
   <li>Open CLient Login with MARVEL\administrator</li>
@@ -2721,11 +2765,11 @@ administrator:<code class="language-plaintext highlighter-rouge">P@$$w0rd!</code
 <ol>
   <li>Start &gt; Users &gt; Edit Local Users and Groups</li>
   <li>Users &gt; Administrator &gt; Enable
- <a href="/assets/img/posts/d9988e2da8a765e2b33376b90ce52dd3.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/d9988e2da8a765e2b33376b90ce52dd3.webp" alt="" loading="lazy"></a></li>
+ <a href="/assets/img/posts/d9988e2da8a765e2b33376b90ce52dd3.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/d9988e2da8a765e2b33376b90ce52dd3.webp" alt="Local Users and Groups showing Administrator account enabled" loading="lazy"></a></li>
   <li>Set Password (Password1!)
- <a href="/assets/img/posts/0d4a2e1b9dd67792e98abe81483cdf88.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/0d4a2e1b9dd67792e98abe81483cdf88.webp" alt="" loading="lazy"></a></li>
+ <a href="/assets/img/posts/0d4a2e1b9dd67792e98abe81483cdf88.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/0d4a2e1b9dd67792e98abe81483cdf88.webp" alt="Set password dialog for local Administrator account" loading="lazy"></a></li>
   <li>Uncheck Account is Disabled &gt; Apply &gt; OK
- <a href="/assets/img/posts/b62c2c1fb9902b30c1ed9de432abdea8.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/b62c2c1fb9902b30c1ed9de432abdea8.webp" alt="" loading="lazy"></a></li>
+ <a href="/assets/img/posts/b62c2c1fb9902b30c1ed9de432abdea8.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/b62c2c1fb9902b30c1ed9de432abdea8.webp" alt="Unchecking Account is disabled on local Administrator properties" loading="lazy"></a></li>
 </ol>
 
 <h4 id="add-other-administrators"><span class="me-2">Add Other Administrators</span><a href="#add-other-administrators" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
@@ -2735,7 +2779,7 @@ administrator:<code class="language-plaintext highlighter-rouge">P@$$w0rd!</code
   <li>
     <p>Groups &gt; Administrators &gt; Add &gt; Search <code class="language-plaintext highlighter-rouge">fcastle</code> &gt; Check Names &gt; OK</p>
 
-    <p><a href="/assets/img/posts/8cad1948d4c9dc5fdb2d34bf3652fbef.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/8cad1948d4c9dc5fdb2d34bf3652fbef.webp" alt="" loading="lazy"></a></p>
+    <p><a href="/assets/img/posts/8cad1948d4c9dc5fdb2d34bf3652fbef.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/8cad1948d4c9dc5fdb2d34bf3652fbef.webp" alt="Adding fcastle user to local Administrators group on client machine" loading="lazy"></a></p>
   </li>
 </ol>
 
@@ -2754,7 +2798,7 @@ administrator:<code class="language-plaintext highlighter-rouge">P@$$w0rd!</code
   </li>
   <li>Map Network Drive &gt; Z:</li>
   <li>Folder &gt; <code class="language-plaintext highlighter-rouge">\\HYDRA-DC\hackme</code> | Connect using Different Credentials
- <a href="/assets/img/posts/e454745e8310d56c791b5d560a7f3caf.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/e454745e8310d56c791b5d560a7f3caf.webp" alt="" loading="lazy"></a></li>
+ <a href="/assets/img/posts/e454745e8310d56c791b5d560a7f3caf.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/e454745e8310d56c791b5d560a7f3caf.webp" alt="Mapping network drive to hackme share on HYDRA-DC using domain credentials" loading="lazy"></a></li>
   <li>Use Credentials
  username: <code class="language-plaintext highlighter-rouge">administrator</code>
  password: <code class="language-plaintext highlighter-rouge">Pa$$w0rd!</code></li>
@@ -2788,7 +2832,7 @@ IP &gt; 192.168.135.137</p>
 
 <p>TO sign IN</p>
 
-<p><a href="/assets/img/posts/071a957c87ed50e278296d12bb05a502.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/071a957c87ed50e278296d12bb05a502.webp" alt="" loading="lazy"></a></p>
+<p><a href="/assets/img/posts/071a957c87ed50e278296d12bb05a502.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/071a957c87ed50e278296d12bb05a502.webp" alt="Windows login screen showing domain sign-in for MARVEL.local" loading="lazy"></a></p>
 
   </div>
 
@@ -2813,19 +2857,29 @@ IP &gt; 192.168.135.137</p>
           >Active-Directory</a>
         
           <a
-            href="/tags/guide/"
+            href="/tags/windows-server/"
             class="post-tag no-text-decoration"
-          >guide</a>
+          >windows-server</a>
         
           <a
-            href="/tags/walkthrough/"
+            href="/tags/pentesting/"
             class="post-tag no-text-decoration"
-          >walkthrough</a>
+          >pentesting</a>
         
           <a
             href="/tags/tcm-sec/"
             class="post-tag no-text-decoration"
           >TCM-SEC</a>
+        
+          <a
+            href="/tags/pnpt/"
+            class="post-tag no-text-decoration"
+          >PNPT</a>
+        
+          <a
+            href="/tags/cybersecurity/"
+            class="post-tag no-text-decoration"
+          >cybersecurity</a>
         
           <a
             href="/tags/ad/"
@@ -2954,28 +3008,21 @@ IP &gt; 192.168.135.137</p>
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Syncthing-Three-Way-Sync-Across-VLANs/">Syncthing Three-Way Sync Across VLANs</a>
+          <a href="/posts/Useful-Commands/">Useful Linux Commands for Hacking</a>
         </li>
       
         
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Broken-Docker-DNS-Due-to-PiHole/">Broken Docker DNS Due to Pi-hole</a>
+          <a href="/posts/Install-Package-Manager-In-Windows-11/">Update All Apps with One Line Of Code in Windows</a>
         </li>
       
         
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/">SSH + Zsh Prompt Duplication, Broken Nano, and the One-Line Fix</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/Dns/">Let’s Block Our Ads For Free and Also Keep Our Children safe</a>
+          <a href="/posts/Setting-Up-Active-Directory/">Setting Up Active Directory</a>
         </li>
       
         
@@ -2983,6 +3030,13 @@ IP &gt; 192.168.135.137</p>
         
         <li class="text-truncate lh-lg">
           <a href="/posts/Install-Docker-And-Manage-Permission/">Installing Docker and Setting Permission</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Installing-Arch-Linux-Hard-Way/">Installing Arch Linux Hard Way</a>
         </li>
       
     </ul>
@@ -3076,10 +3130,6 @@ IP &gt; 192.168.135.137</p>
     
     
     
-      
-        
-        
-
   
     
     
@@ -3100,72 +3150,6 @@ IP &gt; 192.168.135.137</p>
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
   
     
     
@@ -3235,78 +3219,6 @@ IP &gt; 192.168.135.137</p>
         
         
 
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
   
     
     
@@ -3491,6 +3403,115 @@ IP &gt; 192.168.135.137</p>
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
     
   
@@ -3548,6 +3569,402 @@ IP &gt; 192.168.135.137</p>
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
   
     
     
@@ -3699,6 +4116,25 @@ IP &gt; 192.168.135.137</p>
     
     
     
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -3793,15 +4229,7 @@ IP &gt; 192.168.135.137</p>
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -3819,85 +4247,6 @@ IP &gt; 192.168.135.137</p>
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -3936,17 +4285,6 @@ IP &gt; 192.168.135.137</p>
     
     
     
-      
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
   
     
     
@@ -3966,97 +4304,6 @@ IP &gt; 192.168.135.137</p>
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -4137,6 +4384,25 @@ IP &gt; 192.168.135.137</p>
     
     
     
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -4174,7 +4440,30 @@ IP &gt; 192.168.135.137</p>
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -4193,7 +4482,60 @@ IP &gt; 192.168.135.137</p>
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -4261,7 +4603,7 @@ IP &gt; 192.168.135.137</p>
     <div class="d-flex flex-wrap mt-3 mb-1 me-3">
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/guide/">guide</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/linux/">linux</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/homelab/">homelab</a>
@@ -4270,25 +4612,25 @@ IP &gt; 192.168.135.137</p>
         <a class="post-tag btn btn-outline-primary" href="/tags/docker/">docker</a>
       
         
+        <a class="post-tag btn btn-outline-primary" href="/tags/networking/">networking</a>
+      
+        
         <a class="post-tag btn btn-outline-primary" href="/tags/tcm-sec/">TCM-SEC</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/walkthrough/">walkthrough</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/cybersecurity/">cybersecurity</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/install/">Install</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/dns/">dns</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/guide/">guide</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/kioptrix/">kioptrix</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/linux/">Linux</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/networking/">networking</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/software/">Software</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/security/">security</a>
       
     </div>
   </section>
@@ -4395,6 +4737,42 @@ IP &gt; 192.168.135.137</p>
     <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
       
         <article class="col">
+          <a href="/posts/Bitwarden/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1677152071"
+  data-df="ll"
+  
+>
+  Feb 23, 2023
+</time>
+
+              <h4 class="pt-0 my-2">You need to use Password Manager right NOW!!</h4>
+              <div class="text-muted">
+                <p>
+                  
+
+
+
+
+
+                  Let’s see how many account do you have in the internet? Facebook, Gmail, Instagram, Twitter, Bank Account. Ah yeah Bank Account. Do you use same password for everything or atleast multiple accounts...
+                </p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
           <a href="/posts/Vulnhub-Kioptrix-P-1/" class="post-preview card h-100">
             <div class="card-body">
               <!--
@@ -4490,42 +4868,6 @@ nikto -h target ip
   Findings
     
       Outdated Applications - Google common exploi...
-                </p>
-              </div>
-            </div>
-          </a>
-        </article>
-      
-        <article class="col">
-          <a href="/posts/Bitwarden/" class="post-preview card h-100">
-            <div class="card-body">
-              <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1677152071"
-  data-df="ll"
-  
->
-  Feb 23, 2023
-</time>
-
-              <h4 class="pt-0 my-2">You need to use Password Manager right NOW!!</h4>
-              <div class="text-muted">
-                <p>
-                  
-
-
-
-
-
-                  Let’s see how many account do you have in the internet? Facebook, Gmail, Instagram, Twitter, Bank Account. Ah yeah Bank Account. Do you use same password for everything or atleast multiple accounts...
                 </p>
               </div>
             </div>
@@ -4764,10 +5106,6 @@ nikto -h target ip
     
     
     
-      
-        
-        
-
   
     
     
@@ -4788,72 +5126,6 @@ nikto -h target ip
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
   
     
     
@@ -4923,78 +5195,6 @@ nikto -h target ip
         
         
 
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
   
     
     
@@ -5179,6 +5379,115 @@ nikto -h target ip
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
     
   
@@ -5236,6 +5545,402 @@ nikto -h target ip
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
   
     
     
@@ -5387,6 +6092,25 @@ nikto -h target ip
     
     
     
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -5481,15 +6205,7 @@ nikto -h target ip
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -5507,85 +6223,6 @@ nikto -h target ip
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -5624,17 +6261,6 @@ nikto -h target ip
     
     
     
-      
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
   
     
     
@@ -5654,97 +6280,6 @@ nikto -h target ip
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -5825,6 +6360,25 @@ nikto -h target ip
     
     
     
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -5862,7 +6416,30 @@ nikto -h target ip
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -5881,7 +6458,60 @@ nikto -h target ip
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -5949,7 +6579,7 @@ nikto -h target ip
     <div class="d-flex flex-wrap mt-3 mb-1 me-3">
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/guide/">guide</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/linux/">linux</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/homelab/">homelab</a>
@@ -5958,25 +6588,25 @@ nikto -h target ip
         <a class="post-tag btn btn-outline-primary" href="/tags/docker/">docker</a>
       
         
+        <a class="post-tag btn btn-outline-primary" href="/tags/networking/">networking</a>
+      
+        
         <a class="post-tag btn btn-outline-primary" href="/tags/tcm-sec/">TCM-SEC</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/walkthrough/">walkthrough</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/cybersecurity/">cybersecurity</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/install/">Install</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/dns/">dns</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/guide/">guide</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/kioptrix/">kioptrix</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/linux/">Linux</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/networking/">networking</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/software/">Software</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/security/">security</a>
       
     </div>
   </section>

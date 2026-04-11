@@ -32,8 +32,8 @@
 <meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="Installing Docker and Setting Permission" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="Installing Docker and Setting Permission" />
-<meta property="og:description" content="Installing Docker and Setting Permission" />
+<meta name="description" content="How to install Docker on Linux using the official apt repository and configure user group permissions so you can run containers without sudo." />
+<meta property="og:description" content="How to install Docker on Linux using the official apt repository and configure user group permissions so you can run containers without sudo." />
 <link rel="canonical" href="https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/" />
 <meta property="og:url" content="https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/" />
 <meta property="og:site_name" content="Ashish Ghimire" />
@@ -45,7 +45,7 @@
 <meta property="twitter:title" content="Installing Docker and Setting Permission" />
 <meta name="twitter:site" content="@ghimireaacs" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-11-22T17:07:06+11:00","datePublished":"2025-07-06T00:11:31+10:00","description":"Installing Docker and Setting Permission","headline":"Installing Docker and Setting Permission","image":"https://ashishghimire.com/assets/img/headers/dockerInstall.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/"},"url":"https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-04-11T17:39:25+10:00","datePublished":"2025-07-06T00:11:31+10:00","description":"How to install Docker on Linux using the official apt repository and configure user group permissions so you can run containers without sudo.","headline":"Installing Docker and Setting Permission","image":"https://ashishghimire.com/assets/img/headers/dockerInstall.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/"},"url":"https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -280,7 +280,7 @@
     <h1 class="site-title">
       <a href="/">Ashish Ghimire</a>
     </h1>
-    <p class="site-subtitle fst-italic mb-0">IT | Junior Pentester | HomeLab | Full Nerd</p>
+    <p class="site-subtitle fst-italic mb-0">IT | Cybersecurity | HomeLab | Self-Hosting</p>
   </header>
   <!-- .profile-wrapper -->
 
@@ -331,6 +331,16 @@
             
 
             <span>ABOUT</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/privacy-policy/" class="nav-link">
+            <i class="fa-fw fas fa-shield-halved"></i>
+            
+
+            <span>PRIVACY POLICY</span>
           </a>
         </li>
         <!-- .nav-item -->
@@ -393,6 +403,29 @@
           
         >
           <i class="fa-brands fa-x-twitter"></i>
+        </a>
+      
+    
+      
+
+      
+        <a
+          href="https://github.com/ghimireaacs"
+          aria-label="github-custom"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fab fa-github"></i>
         </a>
       
     
@@ -648,6 +681,27 @@
   
 
   
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+
+    
+  
 
   
   
@@ -715,13 +769,13 @@
 
 <time
   
-  data-ts="1763791626"
+  data-ts="1775893165"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
   
 >
-  Nov 22, 2025
+  Apr 11, 2026
 </time>
 
         </span>
@@ -773,7 +827,7 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="129 words"
+  title="158 words"
 >
   <em>1 min</em> read</span>
 
@@ -784,7 +838,7 @@
   </header>
 
   <div class="content">
-    <h1 id="installing-docker">Installing Docker</h1>
+    <h2 id="installing-docker"><span class="me-2">Installing Docker</span><a href="#installing-docker" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
 <ol>
   <li>
@@ -840,6 +894,8 @@
   <p>This will ensure you will not need to run “sudo” everytime you run docker and also fixes most Permission error.</p>
 </blockquote>
 
+<p>If you run into DNS issues inside containers after this setup, see <a href="/posts/Broken-Docker-DNS-Due-to-PiHole/">Broken Docker DNS Due to Pi-hole</a> — a common gotcha on systems that have previously run Pi-hole.</p>
+
   </div>
 
   <div class="post-tail-wrapper text-muted">
@@ -848,7 +904,7 @@
       <div class="post-meta mb-3">
         <i class="far fa-folder-open fa-fw me-1"></i>
         
-          <a href="/categories/walkthrough/">Walkthrough</a>
+          <a href="/categories/homelab/">Homelab</a>
       </div>
     
 
@@ -863,9 +919,29 @@
           >docker</a>
         
           <a
+            href="/tags/linux/"
+            class="post-tag no-text-decoration"
+          >linux</a>
+        
+          <a
+            href="/tags/ubuntu/"
+            class="post-tag no-text-decoration"
+          >ubuntu</a>
+        
+          <a
+            href="/tags/containers/"
+            class="post-tag no-text-decoration"
+          >containers</a>
+        
+          <a
             href="/tags/homelab/"
             class="post-tag no-text-decoration"
           >homelab</a>
+        
+          <a
+            href="/tags/permissions/"
+            class="post-tag no-text-decoration"
+          >permissions</a>
         
       </div>
     
@@ -989,28 +1065,21 @@
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Syncthing-Three-Way-Sync-Across-VLANs/">Syncthing Three-Way Sync Across VLANs</a>
+          <a href="/posts/Useful-Commands/">Useful Linux Commands for Hacking</a>
         </li>
       
         
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Broken-Docker-DNS-Due-to-PiHole/">Broken Docker DNS Due to Pi-hole</a>
+          <a href="/posts/Install-Package-Manager-In-Windows-11/">Update All Apps with One Line Of Code in Windows</a>
         </li>
       
         
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/">SSH + Zsh Prompt Duplication, Broken Nano, and the One-Line Fix</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/Dns/">Let’s Block Our Ads For Free and Also Keep Our Children safe</a>
+          <a href="/posts/Setting-Up-Active-Directory/">Setting Up Active Directory</a>
         </li>
       
         
@@ -1018,6 +1087,13 @@
         
         <li class="text-truncate lh-lg">
           <a href="/posts/Install-Docker-And-Manage-Permission/">Installing Docker and Setting Permission</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Installing-Arch-Linux-Hard-Way/">Installing Arch Linux Hard Way</a>
         </li>
       
     </ul>
@@ -1111,10 +1187,6 @@
     
     
     
-      
-        
-        
-
   
     
     
@@ -1135,72 +1207,6 @@
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
   
     
     
@@ -1270,78 +1276,6 @@
         
         
 
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
   
     
     
@@ -1526,6 +1460,115 @@
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
     
   
@@ -1583,6 +1626,402 @@
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
   
     
     
@@ -1734,6 +2173,25 @@
     
     
     
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -1828,15 +2286,7 @@
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -1854,85 +2304,6 @@
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -1971,17 +2342,6 @@
     
     
     
-      
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
   
     
     
@@ -2001,97 +2361,6 @@
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -2172,6 +2441,25 @@
     
     
     
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -2209,7 +2497,30 @@
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -2228,7 +2539,60 @@
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -2296,7 +2660,7 @@
     <div class="d-flex flex-wrap mt-3 mb-1 me-3">
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/guide/">guide</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/linux/">linux</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/homelab/">homelab</a>
@@ -2305,25 +2669,25 @@
         <a class="post-tag btn btn-outline-primary" href="/tags/docker/">docker</a>
       
         
+        <a class="post-tag btn btn-outline-primary" href="/tags/networking/">networking</a>
+      
+        
         <a class="post-tag btn btn-outline-primary" href="/tags/tcm-sec/">TCM-SEC</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/walkthrough/">walkthrough</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/cybersecurity/">cybersecurity</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/install/">Install</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/dns/">dns</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/guide/">guide</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/kioptrix/">kioptrix</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/linux/">Linux</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/networking/">networking</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/software/">Software</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/security/">security</a>
       
     </div>
   </section>
@@ -2336,6 +2700,11 @@
               
 
 
+
+  <section id="toc-wrapper" class="ps-0 pe-4">
+    <h2 class="panel-heading ps-3 pt-2 mb-2">Contents</h2>
+    <nav id="toc"></nav>
+  </section>
 
 
             
@@ -2397,55 +2766,31 @@
   
 
   
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
     
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
   
 
   
@@ -2485,42 +2830,6 @@
     <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
       
         <article class="col">
-          <a href="/posts/How-I-Utilize-Github-For-SSH/" class="post-preview card h-100">
-            <div class="card-body">
-              <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1754670720"
-  data-df="ll"
-  
->
-  Aug  9, 2025
-</time>
-
-              <h4 class="pt-0 my-2">How I Utilize Github to Store and Download My Public SSH Keys</h4>
-              <div class="text-muted">
-                <p>
-                  
-
-
-
-
-
-                  The first thing I do after I install a fresh new VM is SSH into that machine and use it locally. Now i will not rant about SSH and its uses and why you need it or why it’s better than web console. ...
-                </p>
-              </div>
-            </div>
-          </a>
-        </article>
-      
-        <article class="col">
           <a href="/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/" class="post-preview card h-100">
             <div class="card-body">
               <!--
@@ -2558,7 +2867,7 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
         </article>
       
         <article class="col">
-          <a href="/posts/Broken-Docker-DNS-Due-to-PiHole/" class="post-preview card h-100">
+          <a href="/posts/Install-Proxmox-And-Post-Installation/" class="post-preview card h-100">
             <div class="card-body">
               <!--
   Date format snippet
@@ -2570,14 +2879,14 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
 
 <time
   
-  data-ts="1773147600"
+  data-ts="1753277520"
   data-df="ll"
   
 >
-  Mar 11, 2026
+  Jul 23, 2025
 </time>
 
-              <h4 class="pt-0 my-2">Broken Docker DNS Due to Pi-hole</h4>
+              <h4 class="pt-0 my-2">Installing Proxmox and Post Installation</h4>
               <div class="text-muted">
                 <p>
                   
@@ -2586,7 +2895,43 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
 
 
 
-                  New container, can’t resolve DNS. Classic. Except this time I’d already set the DNS in daemon.json, restarted Docker, checked iptables — everything looked right. Ping worked. DNS didn’t. Spent way ...
+                  Its 2025 most of us have a spare piece of Desktop or Laptop lying around, which seems like is not worth much. But using Proxmox that piece of old tech can make your life easier without a lot of tro...
+                </p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
+          <a href="/posts/How-I-Utilize-Github-For-SSH/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1754670720"
+  data-df="ll"
+  
+>
+  Aug  9, 2025
+</time>
+
+              <h4 class="pt-0 my-2">How I Utilize Github to Store and Download My Public SSH Keys</h4>
+              <div class="text-muted">
+                <p>
+                  
+
+
+
+
+
+                  The first thing I do after I install a fresh new VM is SSH into that machine and use it locally. Now i will not rant about SSH and its uses and why you need it or why it’s better than web console. ...
                 </p>
               </div>
             </div>
@@ -2825,10 +3170,6 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
     
     
     
-      
-        
-        
-
   
     
     
@@ -2849,72 +3190,6 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
   
     
     
@@ -2984,78 +3259,6 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
         
         
 
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
   
     
     
@@ -3240,6 +3443,115 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
     
   
@@ -3297,6 +3609,402 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
   
     
     
@@ -3448,6 +4156,25 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
     
     
     
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -3542,15 +4269,7 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -3568,85 +4287,6 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -3685,17 +4325,6 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
     
     
     
-      
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
   
     
     
@@ -3715,97 +4344,6 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -3886,6 +4424,25 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
     
     
     
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -3923,7 +4480,30 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -3942,7 +4522,60 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -4010,7 +4643,7 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
     <div class="d-flex flex-wrap mt-3 mb-1 me-3">
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/guide/">guide</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/linux/">linux</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/homelab/">homelab</a>
@@ -4019,25 +4652,25 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
         <a class="post-tag btn btn-outline-primary" href="/tags/docker/">docker</a>
       
         
+        <a class="post-tag btn btn-outline-primary" href="/tags/networking/">networking</a>
+      
+        
         <a class="post-tag btn btn-outline-primary" href="/tags/tcm-sec/">TCM-SEC</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/walkthrough/">walkthrough</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/cybersecurity/">cybersecurity</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/install/">Install</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/dns/">dns</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/guide/">guide</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/kioptrix/">kioptrix</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/linux/">Linux</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/networking/">networking</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/software/">Software</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/security/">security</a>
       
     </div>
   </section>
@@ -4165,9 +4798,16 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
 
   
 
+  
+    
+
+    
+
+  
 
 
-  <script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.7.1/dist/jquery.min.js,npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js,npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/magnific-popup@1.1.0/dist/jquery.magnific-popup.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.10/dayjs.min.js,npm/dayjs@1.11.10/locale/en.min.js,npm/dayjs@1.11.10/plugin/relativeTime.min.js,npm/dayjs@1.11.10/plugin/localizedFormat.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.7.1/dist/jquery.min.js,npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js,npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/magnific-popup@1.1.0/dist/jquery.magnific-popup.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.10/dayjs.min.js,npm/dayjs@1.11.10/locale/en.min.js,npm/dayjs@1.11.10/plugin/relativeTime.min.js,npm/dayjs@1.11.10/plugin/localizedFormat.min.js,npm/tocbot@4.25.0/dist/tocbot.min.js"></script>
 
 
 

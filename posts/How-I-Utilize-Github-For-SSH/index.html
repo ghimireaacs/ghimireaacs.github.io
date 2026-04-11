@@ -32,8 +32,8 @@
 <meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="How I Utilize Github to Store and Download My Public SSH Keys" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="Store your SSH Public keys on Github, Import them and Run them without a lot of configuration at the start." />
-<meta property="og:description" content="Store your SSH Public keys on Github, Import them and Run them without a lot of configuration at the start." />
+<meta name="description" content="Store your SSH public keys on GitHub and provision any new Linux server with one command using ssh-import-id-gh. No manual key copying needed." />
+<meta property="og:description" content="Store your SSH public keys on GitHub and provision any new Linux server with one command using ssh-import-id-gh. No manual key copying needed." />
 <link rel="canonical" href="https://ashishghimire.com/posts/How-I-Utilize-Github-For-SSH/" />
 <meta property="og:url" content="https://ashishghimire.com/posts/How-I-Utilize-Github-For-SSH/" />
 <meta property="og:site_name" content="Ashish Ghimire" />
@@ -45,7 +45,7 @@
 <meta property="twitter:title" content="How I Utilize Github to Store and Download My Public SSH Keys" />
 <meta name="twitter:site" content="@ghimireaacs" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-11-22T17:07:06+11:00","datePublished":"2025-08-09T02:32:00+10:00","description":"Store your SSH Public keys on Github, Import them and Run them without a lot of configuration at the start.","headline":"How I Utilize Github to Store and Download My Public SSH Keys","image":"https://ashishghimire.com/assets/img/headers/githubssh.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/How-I-Utilize-Github-For-SSH/"},"url":"https://ashishghimire.com/posts/How-I-Utilize-Github-For-SSH/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-04-11T17:39:25+10:00","datePublished":"2025-08-09T02:32:00+10:00","description":"Store your SSH public keys on GitHub and provision any new Linux server with one command using ssh-import-id-gh. No manual key copying needed.","headline":"How I Utilize Github to Store and Download My Public SSH Keys","image":"https://ashishghimire.com/assets/img/headers/githubssh.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/How-I-Utilize-Github-For-SSH/"},"url":"https://ashishghimire.com/posts/How-I-Utilize-Github-For-SSH/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -280,7 +280,7 @@
     <h1 class="site-title">
       <a href="/">Ashish Ghimire</a>
     </h1>
-    <p class="site-subtitle fst-italic mb-0">IT | Junior Pentester | HomeLab | Full Nerd</p>
+    <p class="site-subtitle fst-italic mb-0">IT | Cybersecurity | HomeLab | Self-Hosting</p>
   </header>
   <!-- .profile-wrapper -->
 
@@ -331,6 +331,16 @@
             
 
             <span>ABOUT</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/privacy-policy/" class="nav-link">
+            <i class="fa-fw fas fa-shield-halved"></i>
+            
+
+            <span>PRIVACY POLICY</span>
           </a>
         </li>
         <!-- .nav-item -->
@@ -393,6 +403,29 @@
           
         >
           <i class="fa-brands fa-x-twitter"></i>
+        </a>
+      
+    
+      
+
+      
+        <a
+          href="https://github.com/ghimireaacs"
+          aria-label="github-custom"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fab fa-github"></i>
         </a>
       
     
@@ -1338,13 +1371,13 @@
 
 <time
   
-  data-ts="1763791626"
+  data-ts="1775893165"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
   
 >
-  Nov 22, 2025
+  Apr 11, 2026
 </time>
 
         </span>
@@ -1396,7 +1429,7 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="658 words"
+  title="659 words"
 >
   <em>3 min</em> read</span>
 
@@ -1424,7 +1457,7 @@
 
 <p>For our intense and purpose, Public Keys are stored in Remote Server and Private Keys are stored in Our Private Machine.</p>
 
-<p><a href="/assets/img/posts/8898976de2367d86c92f90b095b64c16.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/8898976de2367d86c92f90b095b64c16.webp" alt="" loading="lazy"></a></p>
+<p><a href="/assets/img/posts/8898976de2367d86c92f90b095b64c16.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/8898976de2367d86c92f90b095b64c16.webp" alt="Diagram showing public key stored on remote server and private key on local machine" loading="lazy"></a></p>
 
 <h2 id="generating-key-pair"><span class="me-2">Generating Key Pair</span><a href="#generating-key-pair" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
@@ -1433,9 +1466,9 @@
 <ol>
   <li>Open your CLI</li>
   <li><code class="language-plaintext highlighter-rouge">ssh-keygen -t ed25519 -C "username@email.com"</code>
-<a href="/assets/img/posts/0bbec1ea9a1d9bef9e78ecf8166e8980.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/0bbec1ea9a1d9bef9e78ecf8166e8980.webp" alt="" loading="lazy"></a></li>
+<a href="/assets/img/posts/0bbec1ea9a1d9bef9e78ecf8166e8980.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/0bbec1ea9a1d9bef9e78ecf8166e8980.webp" alt="Terminal showing ssh-keygen -t ed25519 command output" loading="lazy"></a></li>
   <li>Set a Passphrase. (This is not SSH password it’s extra layer of security to use you private key.)
-<a href="/assets/img/posts/5b5ef986d2597846f46e73e547763d8a.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/5b5ef986d2597846f46e73e547763d8a.webp" alt="" loading="lazy"></a>
+<a href="/assets/img/posts/5b5ef986d2597846f46e73e547763d8a.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/5b5ef986d2597846f46e73e547763d8a.webp" alt="Terminal prompting to enter a passphrase for the SSH key" loading="lazy"></a>
     <blockquote>
       <p>💡 I choose default name so i do not have to provide ‘-i keyfile’ during login. But if you have multiple private key for different purpose you can name them accordingly.</p>
     </blockquote>
@@ -1462,7 +1495,7 @@
 
 <h3 id="private-keys"><span class="me-2">Private Keys</span><a href="#private-keys" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 
-<p>This should always be on your local machine and nowhere else but you can use Password manager like Bitwarden for backup.</p>
+<p>This should always be on your local machine and nowhere else but you can use a password manager like <a href="/posts/Bitwarden/">Bitwarden</a> for backup.</p>
 
 <h3 id="public-keys"><span class="me-2">Public Keys</span><a href="#public-keys" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 
@@ -1472,17 +1505,17 @@
   <li>
     <p>Go to Github Settings</p>
 
-    <p><a href="/assets/img/posts/ebde93544f57e002c486e5b57e611c2c.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/ebde93544f57e002c486e5b57e611c2c.webp" alt="" loading="lazy"></a></p>
+    <p><a href="/assets/img/posts/ebde93544f57e002c486e5b57e611c2c.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/ebde93544f57e002c486e5b57e611c2c.webp" alt="GitHub profile settings navigation menu" loading="lazy"></a></p>
   </li>
   <li>
     <p>On Access Tab choose <code class="language-plaintext highlighter-rouge">SSH and GPG Keys</code></p>
 
-    <p><a href="/assets/img/posts/9c6fe9e312380988b65b7521a0a2aff3.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/9c6fe9e312380988b65b7521a0a2aff3.webp" alt="" loading="lazy"></a></p>
+    <p><a href="/assets/img/posts/9c6fe9e312380988b65b7521a0a2aff3.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/9c6fe9e312380988b65b7521a0a2aff3.webp" alt="GitHub Access settings showing SSH and GPG Keys section" loading="lazy"></a></p>
   </li>
   <li>
     <p>Click on New SSH Key</p>
 
-    <p><a href="/assets/img/posts/62e39e14921f61e435decc112e9c2a96.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/62e39e14921f61e435decc112e9c2a96.webp" alt="" loading="lazy"></a></p>
+    <p><a href="/assets/img/posts/62e39e14921f61e435decc112e9c2a96.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/62e39e14921f61e435decc112e9c2a96.webp" alt="GitHub New SSH Key button highlighted" loading="lazy"></a></p>
   </li>
   <li>
     <p>Set a Title, Key Type: <code class="language-plaintext highlighter-rouge">Authentication Key</code></p>
@@ -1493,7 +1526,7 @@
   <li>
     <p>Add SSH Key</p>
 
-    <p><a href="/assets/img/posts/069032f2bce598e18d1e8885fd000002.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/069032f2bce598e18d1e8885fd000002.webp" alt="" loading="lazy"></a></p>
+    <p><a href="/assets/img/posts/069032f2bce598e18d1e8885fd000002.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/069032f2bce598e18d1e8885fd000002.webp" alt="GitHub Add SSH Key form with title and key fields filled in" loading="lazy"></a></p>
   </li>
   <li>
     <p>Fill up your 2FA and Submit.</p>
@@ -1502,7 +1535,7 @@
 
 <p>Now you will see List of public Keys in your account.
 We will leave this for now and retrieve them from our CLI/shell.
-<a href="/assets/img/posts/4b7ea49059630d1ed0c79f2c148753d0.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/4b7ea49059630d1ed0c79f2c148753d0.webp" alt="" loading="lazy"></a></p>
+<a href="/assets/img/posts/4b7ea49059630d1ed0c79f2c148753d0.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/4b7ea49059630d1ed0c79f2c148753d0.webp" alt="GitHub showing list of saved public SSH keys in the account" loading="lazy"></a></p>
 
 <h2 id="accessing-the-public-key"><span class="me-2">Accessing The Public Key</span><a href="#accessing-the-public-key" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
@@ -1565,9 +1598,34 @@ Copy this command, change it to the <code class="language-plaintext highlighter-
           >ssh</a>
         
           <a
+            href="/tags/linux/"
+            class="post-tag no-text-decoration"
+          >linux</a>
+        
+          <a
+            href="/tags/github/"
+            class="post-tag no-text-decoration"
+          >github</a>
+        
+          <a
             href="/tags/homelab/"
             class="post-tag no-text-decoration"
           >homelab</a>
+        
+          <a
+            href="/tags/security/"
+            class="post-tag no-text-decoration"
+          >security</a>
+        
+          <a
+            href="/tags/keygen/"
+            class="post-tag no-text-decoration"
+          >keygen</a>
+        
+          <a
+            href="/tags/ed25519/"
+            class="post-tag no-text-decoration"
+          >ed25519</a>
         
       </div>
     
@@ -1691,28 +1749,21 @@ Copy this command, change it to the <code class="language-plaintext highlighter-
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Syncthing-Three-Way-Sync-Across-VLANs/">Syncthing Three-Way Sync Across VLANs</a>
+          <a href="/posts/Useful-Commands/">Useful Linux Commands for Hacking</a>
         </li>
       
         
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Broken-Docker-DNS-Due-to-PiHole/">Broken Docker DNS Due to Pi-hole</a>
+          <a href="/posts/Install-Package-Manager-In-Windows-11/">Update All Apps with One Line Of Code in Windows</a>
         </li>
       
         
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/">SSH + Zsh Prompt Duplication, Broken Nano, and the One-Line Fix</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/Dns/">Let’s Block Our Ads For Free and Also Keep Our Children safe</a>
+          <a href="/posts/Setting-Up-Active-Directory/">Setting Up Active Directory</a>
         </li>
       
         
@@ -1720,6 +1771,13 @@ Copy this command, change it to the <code class="language-plaintext highlighter-
         
         <li class="text-truncate lh-lg">
           <a href="/posts/Install-Docker-And-Manage-Permission/">Installing Docker and Setting Permission</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Installing-Arch-Linux-Hard-Way/">Installing Arch Linux Hard Way</a>
         </li>
       
     </ul>
@@ -1813,10 +1871,6 @@ Copy this command, change it to the <code class="language-plaintext highlighter-
     
     
     
-      
-        
-        
-
   
     
     
@@ -1837,72 +1891,6 @@ Copy this command, change it to the <code class="language-plaintext highlighter-
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
   
     
     
@@ -1972,78 +1960,6 @@ Copy this command, change it to the <code class="language-plaintext highlighter-
         
         
 
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
   
     
     
@@ -2228,6 +2144,115 @@ Copy this command, change it to the <code class="language-plaintext highlighter-
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
     
   
@@ -2285,6 +2310,402 @@ Copy this command, change it to the <code class="language-plaintext highlighter-
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
   
     
     
@@ -2436,6 +2857,25 @@ Copy this command, change it to the <code class="language-plaintext highlighter-
     
     
     
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -2530,15 +2970,7 @@ Copy this command, change it to the <code class="language-plaintext highlighter-
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -2556,85 +2988,6 @@ Copy this command, change it to the <code class="language-plaintext highlighter-
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -2673,17 +3026,6 @@ Copy this command, change it to the <code class="language-plaintext highlighter-
     
     
     
-      
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
   
     
     
@@ -2703,97 +3045,6 @@ Copy this command, change it to the <code class="language-plaintext highlighter-
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -2874,6 +3125,25 @@ Copy this command, change it to the <code class="language-plaintext highlighter-
     
     
     
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -2911,7 +3181,30 @@ Copy this command, change it to the <code class="language-plaintext highlighter-
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -2930,7 +3223,60 @@ Copy this command, change it to the <code class="language-plaintext highlighter-
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -2998,7 +3344,7 @@ Copy this command, change it to the <code class="language-plaintext highlighter-
     <div class="d-flex flex-wrap mt-3 mb-1 me-3">
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/guide/">guide</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/linux/">linux</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/homelab/">homelab</a>
@@ -3007,25 +3353,25 @@ Copy this command, change it to the <code class="language-plaintext highlighter-
         <a class="post-tag btn btn-outline-primary" href="/tags/docker/">docker</a>
       
         
+        <a class="post-tag btn btn-outline-primary" href="/tags/networking/">networking</a>
+      
+        
         <a class="post-tag btn btn-outline-primary" href="/tags/tcm-sec/">TCM-SEC</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/walkthrough/">walkthrough</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/cybersecurity/">cybersecurity</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/install/">Install</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/dns/">dns</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/guide/">guide</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/kioptrix/">kioptrix</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/linux/">Linux</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/networking/">networking</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/software/">Software</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/security/">security</a>
       
     </div>
   </section>
@@ -3105,6 +3451,30 @@ Copy this command, change it to the <code class="language-plaintext highlighter-
 
   
     
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
   
 
   
@@ -3505,10 +3875,6 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
     
     
     
-      
-        
-        
-
   
     
     
@@ -3529,72 +3895,6 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
   
     
     
@@ -3664,78 +3964,6 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
         
         
 
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
   
     
     
@@ -3920,6 +4148,115 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
     
   
@@ -3977,6 +4314,402 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
   
     
     
@@ -4128,6 +4861,25 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
     
     
     
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -4222,15 +4974,7 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
     
     
     
-  
-    
-    
-    
-    
-  
-    
-    
-    
+      
     
   
     
@@ -4248,85 +4992,6 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -4365,17 +5030,6 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
     
     
     
-      
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
   
     
     
@@ -4395,97 +5049,6 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -4566,6 +5129,25 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
     
     
     
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -4603,7 +5185,30 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -4622,7 +5227,60 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
     
     
     
-      
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
     
   
     
@@ -4690,7 +5348,7 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
     <div class="d-flex flex-wrap mt-3 mb-1 me-3">
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/guide/">guide</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/linux/">linux</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/homelab/">homelab</a>
@@ -4699,25 +5357,25 @@ So with latest windows Updates its so hard to stay now, almost like they want yo
         <a class="post-tag btn btn-outline-primary" href="/tags/docker/">docker</a>
       
         
+        <a class="post-tag btn btn-outline-primary" href="/tags/networking/">networking</a>
+      
+        
         <a class="post-tag btn btn-outline-primary" href="/tags/tcm-sec/">TCM-SEC</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/walkthrough/">walkthrough</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/cybersecurity/">cybersecurity</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/install/">Install</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/dns/">dns</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/guide/">guide</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/kioptrix/">kioptrix</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/linux/">Linux</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/networking/">networking</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/software/">Software</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/security/">security</a>
       
     </div>
   </section>

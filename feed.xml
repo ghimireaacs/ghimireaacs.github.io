@@ -1,220 +1,1816 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ashishghimire.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ashishghimire.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-04-11T17:40:08+10:00</updated><id>https://ashishghimire.com/feed.xml</id><title type="html">Ashish Ghimire</title><subtitle>Ashish Ghimire&apos;s blog on homelab, cybersecurity, self-hosting, and IT. Walkthroughs, writeups, and hands-on guides for Linux, Docker, Proxmox, networking, and more.</subtitle><entry><title type="html">Syncthing Three-Way Sync Across VLANs</title><link href="https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/" rel="alternate" type="text/html" title="Syncthing Three-Way Sync Across VLANs" /><published>2026-03-20T00:00:00+11:00</published><updated>2026-04-11T17:39:25+10:00</updated><id>https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs</id><content type="html" xml:base="https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/"><![CDATA[<p>I use Syncthing to sync my Obsidian vault. Server on the utility VM, Windows PC, and my Pixel. The server acts as the middle point so my phone and PC do not need to be online at the same time to stay in sync. It has worked great. A minute or two for changes to sync across, which is totally fine for notes.</p>
 
+<p>Then I upgraded my network and introduced VLANs. That broke everything.</p>
 
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <id>https://ashishghimire.com/</id>
-  <title>Ashish Ghimire</title>
-  <subtitle>A personal blog of Ashish Ghimire, a junior pentester and home lab enthusiast. It covers topics on IT, cybersecurity, and personal projects.</subtitle>
-  <updated>2026-03-21T01:57:38+11:00</updated>
-  <author>
-    <name>Ashish Ghimire</name>
-    <uri>https://ashishghimire.com/</uri>
-  </author>
-  <link rel="self" type="application/atom+xml" href="https://ashishghimire.com/feed.xml"/>
-  <link rel="alternate" type="text/html" hreflang="en"
-    href="https://ashishghimire.com/"/>
-  <generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator>
-  <rights> © 2026 Ashish Ghimire </rights>
-  <icon>/assets/img/favicons/favicon.ico</icon>
-  <logo>/assets/img/favicons/favicon-96x96.png</logo>
-
-
-  
-  <entry>
-    <title>Syncthing Three-Way Sync Across VLANs</title>
-    <link href="https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/" rel="alternate" type="text/html" title="Syncthing Three-Way Sync Across VLANs" />
-    <published>2026-03-20T00:00:00+11:00</published>
-  
-    <updated>2026-03-20T21:13:37+11:00</updated>
-  
-    <id>https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/</id>
-    <content src="https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/" />
-    <author>
-      <name>Ashish Ghimire</name>
-    </author>
+<h2 id="why-i-turned-off-global-discovery-and-relay">Why I Turned Off Global Discovery and Relay</h2>
 
-  
-    
-    <category term="Homelab" />
-    
-  
+<p>When you first set up Syncthing it uses global discovery and relay by default. Discovery lets devices find each other through Syncthing’s infrastructure. Relay is a fallback when direct connections fail, it routes your traffic through Syncthing’s relay servers.</p>
 
-  
-    <summary>
-      
+<p>Now I had two reasons to turn both off.</p>
 
+<p>First, I started monitoring my DNS traffic and noticed how noisy Syncthing was. Constant calls out to discovery servers, relay servers, checking in. Since I host everything locally and I have Twingate installed for remote access, there was no reason for any of that. I want sync traffic to stay on my LAN, not bounce through someone else’s infrastructure.</p>
 
+<p>Second, I had just set up VLANs so I already knew my network was about to get more restrictive. Better to get off the global infrastructure now and do it properly.</p>
 
+<p>So I turned off global discovery and relay. Clean, local, exactly how I wanted it.</p>
 
+<p>That is when things broke.</p>
 
-      I use Syncthing to sync my Obsidian vault. Server on the utility VM, Windows PC, and my Pixel. The server acts as the middle point so my phone and PC do not need to be online at the same time to stay in sync. It has worked great. A minute or two for changes to sync across, which is totally fine for notes.
-
-Then I upgraded my network and introduced VLANs. That broke everything.
+<h2 id="what-vlans-actually-did">What VLANs Actually Did</h2>
 
-Why I Turned Off...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>Broken Docker DNS Due to Pi-hole</title>
-    <link href="https://ashishghimire.com/posts/Broken-Docker-DNS-Due-to-PiHole/" rel="alternate" type="text/html" title="Broken Docker DNS Due to Pi-hole" />
-    <published>2026-03-11T00:00:00+11:00</published>
-  
-    <updated>2026-03-11T00:00:00+11:00</updated>
-  
-    <id>https://ashishghimire.com/posts/Broken-Docker-DNS-Due-to-PiHole/</id>
-    <content src="https://ashishghimire.com/posts/Broken-Docker-DNS-Due-to-PiHole/" />
-    <author>
-      <name>Ashish Ghimire</name>
-    </author>
+<p>Servers sit on VLAN 10. PC on VLAN 50. Phone on VLAN 20. Three different network segments with firewall rules controlling what can talk to what.</p>
 
-  
-    
-    <category term="Homelab" />
-    
-  
+<p>Without global discovery, Syncthing needs to know exactly where to find each device. It used to use UDP multicast on port 21027 for local discovery. Multicast does not cross VLAN boundaries. So with global discovery off and local discovery also useless across VLANs, every device just sat there. Last seen: never.</p>
 
-  
-    <summary>
-      
+<p>There is also mDNS involved in local discovery. mDNS is link-local only, it does not cross VLANs on its own. To make it work across segments you need a multicast proxy bridging the VLANs, and I did not want to set that up without fully understanding what it would expose. A proxy like that could let devices on one VLAN discover services on another, which might be more visibility than I want between segments. Pinning addresses manually is simpler and I know exactly what it does.</p>
 
+<p>The already running service that had been working for months was now completely broken.</p>
 
+<p><img src="assets/img/posts/syncthingTwoDevices.webp" alt="Syncthing showing two devices with last seen: never after VLAN split" /></p>
 
+<h2 id="fix-1-pin-addresses-manually">Fix 1: Pin Addresses Manually</h2>
 
+<p>If Syncthing cannot discover devices on its own, you tell it where they are. Simple rule: stationary hosts get a pinned address, mobile devices get <code class="language-plaintext highlighter-rouge">dynamic</code> because their IP changes.</p>
 
-      New container, can’t resolve DNS. Classic. Except this time I’d already set the DNS in daemon.json, restarted Docker, checked iptables — everything looked right. Ping worked. DNS didn’t. Spent way too long on this one.
+<table>
+  <thead>
+    <tr>
+      <th>Device entry</th>
+      <th>Address</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Server (from any client)</td>
+      <td><code class="language-plaintext highlighter-rouge">tcp://10.10.10.114:22000</code></td>
+    </tr>
+    <tr>
+      <td>Windows PC (from Pixel)</td>
+      <td><code class="language-plaintext highlighter-rouge">tcp://10.10.50.100:22000</code></td>
+    </tr>
+    <tr>
+      <td>Phone (from anyone)</td>
+      <td><code class="language-plaintext highlighter-rouge">dynamic</code></td>
+    </tr>
+  </tbody>
+</table>
 
-Here’s what actually happened.
+<p>The phone’s IP changes across different networks so you cannot pin it. Let the phone always dial out and the other devices will accept the connection.</p>
 
-Symptoms
+<p>One thing that tripped me up here. Syncthing has a “device defaults” setting under Actions then Settings. I changed the address there assuming it would update existing devices. It does not. It only applies to new devices added after you change it. Had to go into each existing device individually and update the address.</p>
 
+<p><img src="assets/img/posts/pixelSyncthing.webp" alt="Syncthing device settings on Pixel showing manually pinned address" /></p>
 
-  New Docker containers can’t resolve DNS
-  nslookup google.com inside container returns connection refused or no servers could be rea...
-    </summary>
-  
+<h2 id="fix-2-firewall-rules-in-opnsense">Fix 2: Firewall Rules in OPNsense</h2>
 
-  </entry>
+<p>Even after pinning addresses, the phone and PC would not connect directly to each other. VLAN 20 where the phone lives had no rule allowing it to reach VLAN 50 where the PC is. Needed to add one.</p>
 
-  
-  <entry>
-    <title>SSH + Zsh Prompt Duplication, Broken Nano, and the One-Line Fix</title>
-    <link href="https://ashishghimire.com/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/" rel="alternate" type="text/html" title="SSH + Zsh Prompt Duplication, Broken Nano, and the One-Line Fix" />
-    <published>2026-01-07T09:02:00+11:00</published>
-  
-    <updated>2026-01-30T01:55:30+11:00</updated>
-  
-    <id>https://ashishghimire.com/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/</id>
-    <content src="https://ashishghimire.com/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/" />
-    <author>
-      <name>Ashish Ghimire</name>
-    </author>
+<p>Adding the rule was easy. The order was what got me. OPNsense processes rules top to bottom and stops at the first match. I added the Syncthing pass rule but it ended up below an existing block rule for that VLAN pair. The pass rule was never being evaluated.</p>
 
-  
-    
-    <category term="Linux" />
-    
-  
+<p>Correct order on the PERSONAL interface:</p>
 
-  
-    <summary>
-      
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre>Pass   PERSONAL net   SERVERS net     any
+Pass   PERSONAL net   TENANTS net     any
+Pass   PERSONAL net   IOT net         any
+Pass   PERSONAL net   PC net          TCP/UDP  22000   &lt;- Syncthing exception
+Block  PERSONAL net   PC net          any              &lt;- everything else blocked
+Pass   PERSONAL net   *               any              &lt;- internet
+</pre></td></tr></tbody></table></code></pre></div></div>
 
+<p>Pass rule for Syncthing port above the catch-all block. Move it up, direct connections started working.</p>
 
+<p><img src="assets/img/posts/firewallRule.webp" alt="OPNsense firewall rules showing Syncthing pass rule above the block rule" /></p>
 
+<h2 id="pairing-devices">Pairing Devices</h2>
 
+<p>Do not type device IDs manually. When an unknown device tries to connect Syncthing shows a banner asking if you want to add it. Click that, approve on both sides and done. Typing those long IDs is slow and error prone.</p>
 
-      Background
-So with latest windows Updates its so hard to stay now, almost like they want you out. So i decided to use Linux as main gig again. Now i use Linux on my Laptops and Servers, it’s even as secondary boot in my main workstation. But i play invasive games like Valorant, FIFA and GTA Online (Now Borked in Linux) with my friends, i have to run Windows. 
-Now this story will continue somewh...
-    </summary>
-  
+<h2 id="how-it-looks-now">How It Looks Now</h2>
 
-  </entry>
+<p>Three-way sync working again. Server and PC, server and phone as the main sync paths. Phone and PC also connect directly when both are on the LAN. All connections show direct LAN IPs, no relay, no DNS noise.</p>
 
-  
-  <entry>
-    <title>How I Utilize Github to Store and Download My Public SSH Keys</title>
-    <link href="https://ashishghimire.com/posts/How-I-Utilize-Github-For-SSH/" rel="alternate" type="text/html" title="How I Utilize Github to Store and Download My Public SSH Keys" />
-    <published>2025-08-09T02:32:00+10:00</published>
-  
-    <updated>2025-11-22T17:07:06+11:00</updated>
-  
-    <id>https://ashishghimire.com/posts/How-I-Utilize-Github-For-SSH/</id>
-    <content src="https://ashishghimire.com/posts/How-I-Utilize-Github-For-SSH/" />
-    <author>
-      <name>Ashish Ghimire</name>
-    </author>
+<p>Obsidian vault syncing as it should be, now fully local.</p>
 
-  
-    
-    <category term="Homelab" />
-    
-  
+<p><img src="assets/img/posts/diagramSyncthing.webp" alt="Diagram of three-way Syncthing sync across VLANs 10, 20, and 50" /></p>
 
-  
-    <summary>
-      
+<p><img src="assets/img/posts/syncthingDevices.webp" alt="Syncthing device list showing all connections as direct LAN with no relay" /></p>
 
+<h2 id="the-short-version">The Short Version</h2>
 
+<ul>
+  <li>Turning off global discovery means Syncthing cannot find devices on its own. Pin addresses for stationary hosts, use <code class="language-plaintext highlighter-rouge">dynamic</code> for mobile.</li>
+  <li>“Device defaults” does not update existing devices. Change each one manually.</li>
+  <li>mDNS is link-local only and does not cross VLANs without a multicast proxy. A proxy bridges discovery across segments which may expose more than you want. Pinning addresses manually is simpler and more predictable.</li>
+  <li>OPNsense rule order matters. Pass rule must sit above any block rule for the same destination.</li>
+</ul>]]></content><author><name></name></author><category term="Homelab" /><category term="syncthing" /><category term="vlan" /><category term="networking" /><category term="opnsense" /><category term="docker" /><category term="selfhosted" /><summary type="html"><![CDATA[VLANs broke my Syncthing setup. Global discovery off, relay off, and Syncthing had no idea where my devices were. Here is how I fixed it.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ashishghimire.com/assets/img/headers/syncthingVlan.webp" /><media:content medium="image" url="https://ashishghimire.com/assets/img/headers/syncthingVlan.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Broken Docker DNS Due to Pi-hole</title><link href="https://ashishghimire.com/posts/Broken-Docker-DNS-Due-to-PiHole/" rel="alternate" type="text/html" title="Broken Docker DNS Due to Pi-hole" /><published>2026-03-11T00:00:00+11:00</published><updated>2026-03-11T00:00:00+11:00</updated><id>https://ashishghimire.com/posts/Broken-Docker-DNS-Due-to-PiHole</id><content type="html" xml:base="https://ashishghimire.com/posts/Broken-Docker-DNS-Due-to-PiHole/"><![CDATA[<p>New container, can’t resolve DNS. Classic. Except this time I’d already set the DNS in <code class="language-plaintext highlighter-rouge">daemon.json</code>, restarted Docker, checked iptables — everything looked right. Ping worked. DNS didn’t. Spent way too long on this one.</p>
 
+<p>Here’s what actually happened.</p>
 
+<h2 id="symptoms">Symptoms</h2>
 
-      The first thing I do after I install a fresh new VM is SSH into that machine and use it locally. Now i will not rant about SSH and its uses and why you need it or why it’s better than web console. So, let’s get to the point.
+<ul>
+  <li>New Docker containers can’t resolve DNS</li>
+  <li><code class="language-plaintext highlighter-rouge">nslookup google.com</code> inside container returns <code class="language-plaintext highlighter-rouge">connection refused</code> or <code class="language-plaintext highlighter-rouge">no servers could be reached</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ping 1.1.1.1</code> from inside the same container works fine</li>
+  <li>Existing containers on manually created networks work</li>
+  <li><code class="language-plaintext highlighter-rouge">docker run --rm --network host busybox nslookup google.com</code> resolves fine</li>
+</ul>
 
-Logging In
+<h2 id="everything-i-checked-that-wasnt-the-problem">Everything I Checked That Wasn’t The Problem</h2>
 
-There are two ways we can login to server:
-
-
-  Key Pair Method
-  Username/Password
-
-
-Although SSH is very secure protocol in on itself, it is not totally immun...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>Installing Proxmox and Post Installation</title>
-    <link href="https://ashishghimire.com/posts/Install-Proxmox-And-Post-Installation/" rel="alternate" type="text/html" title="Installing Proxmox and Post Installation" />
-    <published>2025-07-23T23:32:00+10:00</published>
-  
-    <updated>2025-11-22T17:07:06+11:00</updated>
-  
-    <id>https://ashishghimire.com/posts/Install-Proxmox-And-Post-Installation/</id>
-    <content src="https://ashishghimire.com/posts/Install-Proxmox-And-Post-Installation/" />
-    <author>
-      <name>Ashish Ghimire</name>
-    </author>
-
-  
-    
-    <category term="Walkthrough" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      Its 2025 most of us have a spare piece of Desktop or Laptop lying around, which seems like is not worth much. But using Proxmox that piece of old tech can make your life easier without a lot of trouble. You will not need a brand new unique system to run a server. Any PC should be fine after 2010, check specs for PCs that are older than 2010.
-
-We will be Making a Bootable USB, Installing Proxmox...
-    </summary>
-  
-
-  </entry>
-
-</feed>
-
-
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">daemon.json</code> — DNS correctly set, config validated with <code class="language-plaintext highlighter-rouge">dockerd --validate</code></li>
+  <li>systemd override — bare <code class="language-plaintext highlighter-rouge">dockerd</code> was running and reading <code class="language-plaintext highlighter-rouge">daemon.json</code> correctly</li>
+  <li>iptables FORWARD chain — DOCKER-FORWARD had all the right ACCEPT rules</li>
+  <li>MASQUERADE rules — all bridge subnets were covered in POSTROUTING</li>
+  <li>Bogon blocking on OPNsense — not enabled</li>
+  <li>Removed TCP port 2375 exposure — good cleanup but didn’t fix DNS</li>
+  <li><code class="language-plaintext highlighter-rouge">/run/docker.sock</code> was a <strong>directory</strong> instead of a socket file — fixed it, DNS still broken</li>
+</ul>
+
+<h2 id="the-actual-root-cause">The Actual Root Cause</h2>
+
+<p>Pi-hole’s nftables rules were redirecting all DNS traffic to port 55, even though Pi-hole hadn’t been running for a while.</p>
+
+<p>When Pi-hole runs as a Docker container it injects rules into the nftables <code class="language-plaintext highlighter-rouge">ip nat PREROUTING</code> chain to intercept DNS:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>udp dport 53 redirect to :55
+tcp dport 53 redirect to :55
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>These rules <strong>do not get cleaned up</strong> when you stop or remove the container. So with nothing listening on port 55 anymore, every DNS query from every container was getting an ICMP port unreachable back — which shows up as “connection refused” in nslookup.</p>
+
+<p>The reason ping worked but DNS didn’t is straightforward: ICMP doesn’t touch port 53, so MASQUERADE and routing worked fine. DNS specifically hits the redirect rule and dies there.</p>
+
+<p>You can spot it instantly:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>nft list ruleset | <span class="nb">grep</span> <span class="nt">-E</span> <span class="s2">"53|redirect"</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="fix">Fix</h2>
+
+<p>Find the rule handles and delete them:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="c"># See the handles</span>
+<span class="nb">sudo </span>nft <span class="nt">-a</span> list chain ip nat PREROUTING | <span class="nb">grep</span> <span class="s2">"redirect to"</span>
+
+<span class="c"># Delete by handle number</span>
+<span class="nb">sudo </span>nft delete rule ip nat PREROUTING handle &lt;handle_number&gt;
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Or do it in one shot:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>nft delete rule ip nat PREROUTING handle <span class="si">$(</span><span class="nb">sudo </span>nft <span class="nt">-a</span> list chain ip nat PREROUTING | <span class="nb">grep</span> <span class="s2">"redirect to :55"</span> | <span class="nb">grep </span>udp | <span class="nb">awk</span> <span class="s1">'{print $NF}'</span><span class="si">)</span>
+<span class="nb">sudo </span>nft delete rule ip nat PREROUTING handle <span class="si">$(</span><span class="nb">sudo </span>nft <span class="nt">-a</span> list chain ip nat PREROUTING | <span class="nb">grep</span> <span class="s2">"redirect to :55"</span> | <span class="nb">grep </span>tcp | <span class="nb">awk</span> <span class="s1">'{print $NF}'</span><span class="si">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Verify:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>docker run <span class="nt">--rm</span> busybox nslookup google.com
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="bonus-the-docker-socket-was-a-directory">Bonus: The Docker Socket Was a Directory</h2>
+
+<p>While debugging I also found <code class="language-plaintext highlighter-rouge">/run/docker.sock</code> was a directory instead of a socket file, which is why <code class="language-plaintext highlighter-rouge">docker</code> commands weren’t connecting. Likely caused by a failed Docker startup writing to the path before the socket was created.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>systemctl stop docker docker.socket
+<span class="nb">sudo rm</span> <span class="nt">-rf</span> /run/docker.sock
+<span class="nb">sudo </span>systemctl start docker.socket
+<span class="nb">sudo </span>systemctl start docker
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="takeaways">Takeaways</h2>
+
+<ul>
+  <li>If Docker DNS fails but ping works, check nftables before anything else</li>
+  <li>Pi-hole does not clean up its nftables rules on removal — you have to do it manually</li>
+  <li><code class="language-plaintext highlighter-rouge">docker run --rm --network host busybox nslookup google.com</code> is a fast way to confirm whether the issue is bridge networking or something deeper</li>
+</ul>]]></content><author><name></name></author><category term="Homelab" /><category term="docker" /><category term="dns" /><category term="pihole" /><category term="networking" /><category term="debugging" /><summary type="html"><![CDATA[Docker containers couldn't resolve DNS despite correct daemon.json config. The real culprit was Pi-hole's leftover nftables rules redirecting all DNS traffic to a closed port.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ashishghimire.com/assets/img/headers/dockerBrokenDNS.webp" /><media:content medium="image" url="https://ashishghimire.com/assets/img/headers/dockerBrokenDNS.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">SSH + Zsh Prompt Duplication, Broken Nano, and the One-Line Fix</title><link href="https://ashishghimire.com/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/" rel="alternate" type="text/html" title="SSH + Zsh Prompt Duplication, Broken Nano, and the One-Line Fix" /><published>2026-01-07T09:02:00+11:00</published><updated>2026-01-07T09:02:00+11:00</updated><id>https://ashishghimire.com/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix</id><content type="html" xml:base="https://ashishghimire.com/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/"><![CDATA[<h2 id="background">Background</h2>
+<p>So with latest windows Updates its so hard to stay now, almost like they want you out. So i decided to use Linux as main gig again. Now i use Linux on my Laptops and Servers, it’s even as secondary boot in my main workstation. But i play invasive games like Valorant, FIFA and GTA Online (Now Borked in Linux) with my friends, i have to run Windows. 
+Now this story will continue somewhere else.
+So recently i have decided to build a real, usable, stable Linux system for my main workstation.</p>
+
+<h2 id="configuration">Configuration</h2>
+
+<p>Here is what i have decided to go with, for my system.</p>
+
+<h3 id="main-rig">Main Rig</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>MAIN RIG</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Distro</td>
+      <td>Arch Linux</td>
+    </tr>
+    <tr>
+      <td>Desktop Env.</td>
+      <td>KDE Plasma</td>
+    </tr>
+    <tr>
+      <td>Shell</td>
+      <td>ZSH</td>
+    </tr>
+    <tr>
+      <td>Terminal</td>
+      <td>Ghostty</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Even though i have pretty beefy rig i wanted it to be less bloat, so i chose <code class="language-plaintext highlighter-rouge">ghostty</code> from get go and removed <code class="language-plaintext highlighter-rouge">konsole</code>. Also set one application per purpose. I mean i even cut down terminal, who could go cheaper than that? I also have a <code class="language-plaintext highlighter-rouge">bootstrapped</code> dotfiles, which was repurposed from Workstation to Server dotfiles at <code class="language-plaintext highlighter-rouge">https://github.com/ghimireaacs/serverdotfiles</code>. So all my servers are configured using this. Hence all of them have:</p>
+
+<h3 id="servers">Servers</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>SERVERS</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Distro</td>
+      <td>Ubuntu</td>
+    </tr>
+    <tr>
+      <td>Desktop Env.</td>
+      <td>NONE</td>
+    </tr>
+    <tr>
+      <td>Shell</td>
+      <td>ZSH</td>
+    </tr>
+    <tr>
+      <td>Terminal</td>
+      <td>SSH client-owned</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="dotfiles">DOTFILES</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>DOTFILES Components</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Oh My Zsh</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Powerelvel10k</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Custom Aliases</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Custom Exports</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Custom .zshrc</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<p>I also recently updated them so i could have same aliases and system running everywhere so its seamless, however i also wanted my servers and workstation to look and behave slightly different, because each have their own need. So i updated the files again, and bootstrapped with my workstation.
+Now it does auto finds distro and installs needed packages accordingly, also has multiple identifiers for workstation and server so it behaves a certain way. I thought this will be the problem but they were fine.
+I installed in my main rig, Voila, worked like a charm. I reconfigured this, adjusted with necessary changes, modified prompts and <code class="language-plaintext highlighter-rouge">git push</code>.</p>
+
+<p><img src="assets/img/posts/20260107182116.webp" alt="Ghostty terminal with Zsh, Oh My Zsh and Powerlevel10k working on the main rig before the issue appeared" /></p>
+
+<h2 id="problem">Problem</h2>
+
+<blockquote class="prompt-tip">
+  <p><strong>Question:</strong> So what broke?</p>
+</blockquote>
+
+<p>At first i got this multiple prompts which looked weird on its own, which i thought was a minor bug. Then i tried to clear screen with <code class="language-plaintext highlighter-rouge">ctrl + l</code> and it failed. Then i started to type something, well i got double of same things, and it was broken.</p>
+
+<p><img src="assets/img/posts/20260107182648.webp" alt="Broken Zsh prompt showing duplicated lines and garbled output when SSH-ing from Ghostty" /></p>
+
+<h3 id="troubleshooting">Troubleshooting</h3>
+
+<p>Now after this i tried a bunch of different things i don’t remember in order but most obvious were:</p>
+
+<ol>
+  <li>Changing shell from <code class="language-plaintext highlighter-rouge">zsh</code> to <code class="language-plaintext highlighter-rouge">bash</code>
+  So I was already on remote, i switched to bash, it fixed some problem like the prompts weren’t weird  anymore, however <code class="language-plaintext highlighter-rouge">ctrl + l</code> didn’t behave like it should. It did’t clear console but did got to new line, which turns out to be terminal capability issue. I did find a 🗝️ clue here, but i treated it as another sort of problem. I also tried changing local <code class="language-plaintext highlighter-rouge">zsh</code> to <code class="language-plaintext highlighter-rouge">bash</code>and then ssh to remote, problem persisted.</li>
+  <li>Changing Terminal from <code class="language-plaintext highlighter-rouge">ghostty</code> to <code class="language-plaintext highlighter-rouge">kitty</code>
+ Even after switching to a completely different terminal <code class="language-plaintext highlighter-rouge">kitty</code>, well you guessed it, same problem.</li>
+  <li>Changing OS
+ Now NO! I did not nuke my system again, i booted back to my Windows, ssh from there, guess what? No error! This made me sure there was something wrong with my <code class="language-plaintext highlighter-rouge">ZSH</code> or <code class="language-plaintext highlighter-rouge">ghostty</code> config or my Entire <code class="language-plaintext highlighter-rouge">dotfiles</code>, well mostly <code class="language-plaintext highlighter-rouge">.zshrc</code>.</li>
+  <li>Cleared <code class="language-plaintext highlighter-rouge">ZSH CACHE</code> before launching ssh.</li>
+  <li>Tried <code class="language-plaintext highlighter-rouge">zsh -f</code>, <code class="language-plaintext highlighter-rouge">zsh -T</code> none of them worked.</li>
+  <li>Tried changing SERVER Config
+ So remember when i said i got a clue? I tried <code class="language-plaintext highlighter-rouge">nano ~/.zshrc</code> to make changes on server side, there now i had that again.
+ <code class="language-plaintext highlighter-rouge">Error opening terminal: xterm-ghostty.</code>
+ There, there’s the solution.</li>
+</ol>
+
+<blockquote class="prompt-warning">
+  <p><strong>BUG:</strong> Error opening terminal: xterm-ghostty.</p>
+</blockquote>
+
+<h2 id="root-cause">Root Cause</h2>
+
+<p>Turns out when we SSH, the client exports the <code class="language-plaintext highlighter-rouge">TERM</code> environment variable to the server.
+Since we have <code class="language-plaintext highlighter-rouge">TERM=xterm-ghostty</code> in our local machine, it sent exactly that. Now my server received this and used this, since the server did not have a matching <code class="language-plaintext highlighter-rouge">terminfo</code> entry for <code class="language-plaintext highlighter-rouge">xterm-ghostty</code>, this caused terminal capability misinterpretation.</p>
+
+<h2 id="solution">Solution</h2>
+
+<p>Now i use <code class="language-plaintext highlighter-rouge">config</code> file for my ssh, this helps me simplify my hostnames, have different private keys tied to different machines and its portable, so far. Until i needed to add this one more configuration:</p>
+
+<div class="language-ssh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>
+<span class="k">Host</span> *
+    <span class="k">SetEnv</span> TERM=xterm-256color
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>This configuration helps me have a consistent TERM across all my hosts.</p>
+
+<hr />
+
+<p>That’s the solution.</p>
+
+<h2 id="tldr">TL;DR</h2>
+
+<ul>
+  <li>I wanted a pretty, functional prompt across my workspace and servers.</li>
+  <li>I used ZSH, OMZ and  <code class="language-plaintext highlighter-rouge">ghostty</code> terminal to achieve this.</li>
+  <li>This introduced a <code class="language-plaintext highlighter-rouge">TERM</code> mismatch across SSH sessions.</li>
+  <li>Setting a consistent <code class="language-plaintext highlighter-rouge">TERM</code> in <code class="language-plaintext highlighter-rouge">config</code> file solved it.</li>
+</ul>
+
+<blockquote class="prompt-tip">
+  <p><strong>Tip:</strong> Set <code class="language-plaintext highlighter-rouge">TERM</code> in your SSH config to avoid terminal capability issues.</p>
+</blockquote>]]></content><author><name></name></author><category term="Linux" /><category term="ssh" /><category term="zsh" /><category term="linux" /><category term="ghostty" /><category term="powerlevel10k" /><category term="oh-my-zsh" /><category term="terminal" /><category term="homelab" /><summary type="html"><![CDATA[Zsh prompt duplicating and nano rendering broken when SSH-ing from Ghostty into a remote server. Root cause was a terminal type mismatch. Fixed with one environment variable.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ashishghimire.com/assets/img/headers/p10kbug.webp" /><media:content medium="image" url="https://ashishghimire.com/assets/img/headers/p10kbug.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">How I Utilize Github to Store and Download My Public SSH Keys</title><link href="https://ashishghimire.com/posts/How-I-Utilize-Github-For-SSH/" rel="alternate" type="text/html" title="How I Utilize Github to Store and Download My Public SSH Keys" /><published>2025-08-09T02:32:00+10:00</published><updated>2026-04-11T17:39:25+10:00</updated><id>https://ashishghimire.com/posts/How-I-Utilize-Github-For-SSH</id><content type="html" xml:base="https://ashishghimire.com/posts/How-I-Utilize-Github-For-SSH/"><![CDATA[<p>The first thing I do after I install a fresh new VM is SSH into that machine and use it locally. Now i will not rant about SSH and its uses and why you need it or why it’s better than web console. So, let’s get to the point.</p>
+
+<h2 id="logging-in">Logging In</h2>
+
+<p>There are two ways we can login to server:</p>
+
+<ol>
+  <li>Key Pair Method</li>
+  <li>Username/Password</li>
+</ol>
+
+<p>Although SSH is very secure protocol in on itself, it is not totally immune to Bruteforce attack and other Human Errors that could lead to some error. By allowing users to login with <mark style="background: #FF5582A6;">Username and Password</mark>, we leave the machine vulnerable to such attacks. And that’s here <mark style="background: #BBFABBA6;">KeyPair Method</mark> comes.</p>
+
+<p><mark style="background: #BBFABBA6;">KeyPair Method</mark>: In this method we will have a Public Key and Private Key. Each of the keys are a long random complex characters As their name suggest one can be Public and another should be kept very securely.</p>
+
+<p>For our intense and purpose, Public Keys are stored in Remote Server and Private Keys are stored in Our Private Machine.</p>
+
+<p><img src="assets/img/posts/8898976de2367d86c92f90b095b64c16.webp" alt="Diagram showing public key stored on remote server and private key on local machine" /></p>
+
+<h2 id="generating-key-pair">Generating Key Pair</h2>
+
+<p>Now before we move on to server setup, let’s create a key pair.</p>
+
+<ol>
+  <li>Open your CLI</li>
+  <li><code class="language-plaintext highlighter-rouge">ssh-keygen -t ed25519 -C "username@email.com"</code>
+<img src="assets/img/posts/0bbec1ea9a1d9bef9e78ecf8166e8980.webp" alt="Terminal showing ssh-keygen -t ed25519 command output" /></li>
+  <li>Set a Passphrase. (This is not SSH password it’s extra layer of security to use you private key.)
+<img src="assets/img/posts/5b5ef986d2597846f46e73e547763d8a.webp" alt="Terminal prompting to enter a passphrase for the SSH key" />
+    <blockquote>
+      <p>💡 I choose default name so i do not have to provide ‘-i keyfile’ during login. But if you have multiple private key for different purpose you can name them accordingly.</p>
+    </blockquote>
+  </li>
+</ol>
+
+<p>Now you will have 2 files. Private key: <code class="language-plaintext highlighter-rouge">id_ed25519</code> and Public key with <code class="language-plaintext highlighter-rouge">.pub</code> extension: <code class="language-plaintext highlighter-rouge">id_ed25519.pub</code>, in your ~/.ssh directory.</p>
+
+<h3 id="permissions">Permissions</h3>
+
+<p>Make sure you have correct permission set for your keys when you download or paste it in a file. You do not need to worry about permission on the files created by the command however if you choose to backup or copy it in another file you should set the following permission.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="nb">chmod </span>700 ~/.ssh
+<span class="nb">chmod </span>600 ~/.ssh/id_25519
+<span class="nb">chmod </span>644 ~/.ssh/id_25519.pub
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="storing-the-keys">Storing The Keys</h2>
+
+<h3 id="private-keys">Private Keys</h3>
+
+<p>This should always be on your local machine and nowhere else but you can use a password manager like <a href="/posts/Bitwarden/">Bitwarden</a> for backup.</p>
+
+<h3 id="public-keys">Public Keys</h3>
+
+<p>Now this is the best part, you can store this anywhere but i would recommend it to store in Github or Launchpad. For me, I use Github a lot so i choose Github.</p>
+
+<ol>
+  <li>
+    <p>Go to Github Settings</p>
+
+    <p><img src="assets/img/posts/ebde93544f57e002c486e5b57e611c2c.webp" alt="GitHub profile settings navigation menu" /></p>
+  </li>
+  <li>
+    <p>On Access Tab choose <code class="language-plaintext highlighter-rouge">SSH and GPG Keys</code></p>
+
+    <p><img src="assets/img/posts/9c6fe9e312380988b65b7521a0a2aff3.webp" alt="GitHub Access settings showing SSH and GPG Keys section" /></p>
+  </li>
+  <li>
+    <p>Click on New SSH Key</p>
+
+    <p><img src="assets/img/posts/62e39e14921f61e435decc112e9c2a96.webp" alt="GitHub New SSH Key button highlighted" /></p>
+  </li>
+  <li>
+    <p>Set a Title, Key Type: <code class="language-plaintext highlighter-rouge">Authentication Key</code></p>
+  </li>
+  <li>
+    <p>Key: Now paste contents of <code class="language-plaintext highlighter-rouge">id_25519.pub</code> ‼️ Check its <code class="language-plaintext highlighter-rouge">.pub</code>.</p>
+  </li>
+  <li>
+    <p>Add SSH Key</p>
+
+    <p><img src="assets/img/posts/069032f2bce598e18d1e8885fd000002.webp" alt="GitHub Add SSH Key form with title and key fields filled in" /></p>
+  </li>
+  <li>
+    <p>Fill up your 2FA and Submit.</p>
+  </li>
+</ol>
+
+<p>Now you will see List of public Keys in your account.
+We will leave this for now and retrieve them from our CLI/shell.
+<img src="assets/img/posts/4b7ea49059630d1ed0c79f2c148753d0.webp" alt="GitHub showing list of saved public SSH keys in the account" /></p>
+
+<h2 id="accessing-the-public-key">Accessing The Public Key</h2>
+
+<p>Now just like almost everything in life there are multiple ways we can do this.</p>
+
+<ol>
+  <li>Manual Method</li>
+  <li>Automatic Method</li>
+</ol>
+
+<h3 id="manual-method">Manual Method</h3>
+
+<p>This is the method where we simply copy and paste our public key into a file.</p>
+
+<ol>
+  <li>Copy the content of <code class="language-plaintext highlighter-rouge">id_25519.pub</code></li>
+  <li>Paste it in <code class="language-plaintext highlighter-rouge">~/.ssh/authorized_keys</code> and save it.</li>
+  <li>Check Permission of the <code class="language-plaintext highlighter-rouge">authorized_keys</code> or just change it from command
+<code class="language-plaintext highlighter-rouge">chmod 644 ~/.ssh/id_25519.pub</code>.</li>
+  <li>Done.</li>
+</ol>
+
+<p>Now this method is not much of a task on itself if you want to do once or not store public key in some Publicly accessible repo itself. But there is better way we can do it and integrates perfectly and seamlessly with any workflow.</p>
+
+<h3 id="automatic-method">Automatic Method</h3>
+
+<p>Given you have to go through setup process but just like any automation once you set it. All you need is One command line. And it will retrieve your Public SSH key and make your machine accessible by you.</p>
+
+<p><code class="language-plaintext highlighter-rouge">ssh-import-id-gh github-username</code></p>
+
+<p>That’s it that’s all you need.
+Copy this command, change it to the <code class="language-plaintext highlighter-rouge">github-username</code> you saved your public key to and done.</p>
+
+<p>Now you can access your Machine.</p>
+
+<blockquote class="prompt-tip">
+  <p>If your private key is compromised in anyway remove this newly added line from <code class="language-plaintext highlighter-rouge">authorized_keys</code>.</p>
+</blockquote>]]></content><author><name></name></author><category term="Homelab" /><category term="ssh" /><category term="linux" /><category term="github" /><category term="homelab" /><category term="security" /><category term="keygen" /><category term="ed25519" /><summary type="html"><![CDATA[Store your SSH public keys on GitHub and provision any new Linux server with one command using ssh-import-id-gh. No manual key copying needed.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ashishghimire.com/assets/img/headers/githubssh.webp" /><media:content medium="image" url="https://ashishghimire.com/assets/img/headers/githubssh.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Installing Proxmox and Post Installation</title><link href="https://ashishghimire.com/posts/Install-Proxmox-And-Post-Installation/" rel="alternate" type="text/html" title="Installing Proxmox and Post Installation" /><published>2025-07-23T23:32:00+10:00</published><updated>2026-04-11T17:39:25+10:00</updated><id>https://ashishghimire.com/posts/Install-Proxmox-And-Post-Installation</id><content type="html" xml:base="https://ashishghimire.com/posts/Install-Proxmox-And-Post-Installation/"><![CDATA[<p>Its 2025 most of us have a spare piece of Desktop or Laptop lying around, which seems like is not worth much. But using Proxmox that piece of old tech can make your life easier without a lot of trouble. You will not need a brand new unique system to run a server. Any PC should be fine after 2010, check specs for PCs that are older than 2010.</p>
+
+<p>We will be Making a Bootable USB, Installing Proxmox and Setting up Post Installation process.</p>
+<h2 id="prerequisite">Prerequisite</h2>
+
+<h3 id="hardware">Hardware</h3>
+<ul>
+  <li>USB Stick</li>
+  <li>A Computer / Laptop to make USB Bootable</li>
+  <li>Another Computer as Server</li>
+  <li>WI-FI or A Lan Cable to connect Server to Router
+    <h3 id="software">Software</h3>
+  </li>
+  <li>Balena Etcher
+    <h3 id="network">Network</h3>
+  </li>
+  <li>IP Gateway (Router IP) Address and Subnet, Usually 192.168.x.x/24
+    <h2 id="pre-installation">Pre-Installation</h2>
+  </li>
+</ul>
+
+<p>Before Installing Proxmox we have to make a bootable USB drive. And our system ready to boot from USB.</p>
+<h3 id="prepare-usb">Prepare USB</h3>
+
+<ol>
+  <li>Download Proxmox VE from <a href="https://www.proxmox.com/en/downloads">Official Proxmox Site</a></li>
+  <li>Download Balena Etcher from <a href="https://etcher.balena.io/#download-etcher">Balena Etcher Official Site</a></li>
+  <li>
+    <p>Flash Downloaded ISO file to USB
+ <img src="assets/img/posts/32f9acc76a1be3de7e31a35a982a72ed.webp" alt="Balena Etcher - select image step" /><img src="assets/img/posts/495f48066f7746da167a1cc311ee3751.webp" alt="Balena Etcher - select target USB drive" /><img src="assets/img/posts/7f265173d015846a32ed68043a6b3f45.webp" alt="Balena Etcher - flashing in progress" /><img src="assets/img/posts/432cdecf0490211bfdc00f40b3197769.webp" alt="Balena Etcher - flash complete" /></p>
+
+    <blockquote>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>⚠️ Make sure you select right device
+</pre></td></tr></tbody></table></code></pre></div>      </div>
+    </blockquote>
+  </li>
+  <li>Select Yes on Windows Prompt.</li>
+  <li>Let it Flash.</li>
+  <li>Done</li>
+</ol>
+
+<h3 id="bios-settings">BIOS Settings</h3>
+
+<ol>
+  <li>Connect your USB</li>
+  <li>Start/Restart this machine.</li>
+  <li>During Boot, open BIOS/UEFI settings using <code class="language-plaintext highlighter-rouge">F8</code> or <code class="language-plaintext highlighter-rouge">DEL</code> key.</li>
+  <li>Now look for Boot Order. Look for Boot option on top.</li>
+  <li>Select your USB as boot device.</li>
+  <li>Now this will boot to Proxmox Installation.</li>
+</ol>
+
+<blockquote class="prompt-tip">
+  <p>Boot Configuration GUI varies with motherboard manufacturer. Please look for your specific Motherboard Bios settings in the internet.</p>
+</blockquote>
+
+<h2 id="installation">Installation</h2>
+
+<p>During installation you will be prompted with the steps below. Here I have highlighted the selection with <mark style="background: #BBFABBA6;">Green</mark> and things to consider on <mark style="background: #D2B3FFA6;">Purple</mark></p>
+
+<ol>
+  <li>Select Install Proxmox  VE (Graphical)
+ <img src="assets/img/posts/4a47a0db6e60853dedfcfdf08a5ca249.webp" alt="Proxmox installer boot screen with Install Proxmox VE Graphical option selected" /></li>
+  <li>Read The EULA and Agree (Mandatory for Installation)
+ <img src="assets/img/posts/fb5c81ed3a220004b71069645f112867.webp" alt="Proxmox EULA license agreement screen" /></li>
+  <li>Make sure you select the correct Disk here, one way to see correct disk is Size of the disk. But if you have only one disk you can go next as it will be default.
+ <img src="assets/img/posts/10fb15c77258a991b0028080a64fb42d.webp" alt="Proxmox target disk selection screen" /></li>
+  <li>Make sure you select your correct Location and Time Zone here.
+ <img src="assets/img/posts/09dd8c2662b96ce14928333f055c5580.webp" alt="Proxmox location and timezone configuration screen" /></li>
+  <li>Write your desired password, Make sure you remember it and it complies with the policy highlighted in purple.
+ <img src="assets/img/posts/8266e4bfeda1bd42d8f9794eb4ea0a13.webp" alt="Proxmox password and email setup screen" /></li>
+  <li>⚠️ Network is arguably most important section here because once its set up, we will be accessing Proxmox only through web.
+ <img src="assets/img/posts/f19c9085129709ee14d013be869df69b.webp" alt="Proxmox network configuration screen showing static IP, gateway, and DNS fields" />
+    <ol>
+      <li>IP Address (CIDR): This is where you allocate your static IP so it does not change in future and mess up with settings. Its borderline mandatory to have static IP. If you have Ethernet connected your Router will allocate an IP , change it. Personally i recommend changing last bits over 100 and leave subnet to 24.</li>
+      <li>Gateway : Router IP (Usually prefilled)</li>
+      <li>DNS Server: Router IP. I recommend router IP so if i change my DNS in my router its global for all devices in LAN. You can also opt to <code class="language-plaintext highlighter-rouge">1.1.1.1</code> for Cloudflare or <code class="language-plaintext highlighter-rouge">8.8.8.8</code> for Google’s DNS server.
+        <blockquote>
+          <p>💡 All of the Network settings can be changed later too. These settings make sure we have Initial Network Access.</p>
+        </blockquote>
+      </li>
+    </ol>
+  </li>
+  <li>Summary: Final summary of all our configuration before we proceed with Installation.
+ <img src="assets/img/posts/9eb9cd58b9ea5e04c890326b5c1f471f.webp" alt="Proxmox installation summary review screen before proceeding" /></li>
+  <li>After clicking Install it will take a couple of minutes to finish Installation and reboot Automatically.
+ <img src="assets/img/posts/602e8f042f463dc47ebfdf6a94ed5a6d.webp" alt="Proxmox installation progress bar" /></li>
+  <li>After Reboot Select First option i.e. “Proxmox VE GNU/Linux” and Enter.
+ <img src="assets/img/posts/7afbb1602613ec52b265d7a54ad27330.webp" alt="Proxmox VE GNU/Linux boot menu after installation" /></li>
+  <li>You will see Your IP and Port 8006 on the top. Yours will be different from mine. This is how we will access the web app and carry on from. Now you can remove monitor from proxmox server and move it to its designated area and will barely need to touch the hardware. Power and LAN is important and that’s all we need.
+<img src="assets/img/posts/586e508f161f26ce94633729ac56c602.webp" alt="Proxmox terminal showing web UI URL and port 8006 after first boot" /></li>
+</ol>
+
+<h2 id="first-access-and-post-installation">First Access and Post Installation</h2>
+
+<ol>
+  <li>Go to the given URL on your browser.</li>
+  <li>Since its self signed Certificate it will warn you. Accept the risk and continue.</li>
+  <li>Now for username <code class="language-plaintext highlighter-rouge">root</code> and <code class="language-plaintext highlighter-rouge">password</code> is what we set during installation.</li>
+  <li>Once we login we will be prompted A subscription message. Click OK.</li>
+</ol>
+
+<h3 id="post-installation-and-scripts">Post Installation and Scripts</h3>
+
+<p>Here comes the magic of Proxmox Community. Proxmox is an open source software with a huge community behind it. The project “Proxmox VE Helper-Scripts” was started by a user who went by name “<a href="https://github.com/tteck/">Tteck</a>” . He sadly passed away and the scripts are maintained by community in a <a href="https://github.com/community-scripts/ProxmoxVE">community github repo</a>  and can be accessed at https://community-scripts.github.io/ProxmoxVE/ .</p>
+
+<p>We will be using “<a href="https://community-scripts.github.io/ProxmoxVE/scripts?id=post-pve-install">Proxmox VE Post Install</a>” Script. This script will updates our proxmox, disables bunch of features which are redundant in our use case and also modifies repos. Apart from that it also disables “Subscription Nag” , that ok option every time you have to hit when you open it up.</p>
+
+<p>This is strongly recommended to run Immediately after Installation.</p>
+
+<ol>
+  <li>Below Datacenter Click on pve.
+<img src="assets/img/posts/c51eb0ec190e11157de0e0ee756c9353.webp" alt="Proxmox web UI showing pve node selected under Datacenter in the left sidebar" /></li>
+  <li>On top right you will see <code class="language-plaintext highlighter-rouge">shell</code>.
+ <img src="assets/img/posts/ae0590af5df5d22044ceda3914c21023.webp" alt="Proxmox web UI top-right area with Shell button highlighted" /></li>
+  <li>Clicking <code class="language-plaintext highlighter-rouge">shell</code> will open a web shell where you can run the script.
+ <img src="assets/img/posts/0a3854aabd6e78c94df808f5c890b0d8.webp" alt="Proxmox web shell terminal window open and ready for commands" /></li>
+  <li>Now either paste the script below or get it directly from “<a href="https://community-scripts.github.io/ProxmoxVE/scripts?id=post-pve-install">Helper Script Website</a>”
+ <img src="assets/img/posts/c8091a8d715fbb5703085555e24ea8e3.webp" alt="Post-install community script being pasted into Proxmox web shell" /></li>
+  <li>Now it is recommended to select Yes on all prompts.
+ <img src="assets/img/posts/5ce32cbb4a3d03d02d573efe6ef7ab3f.webp" alt="Post-install script prompts asking to select Yes for each option" /></li>
+  <li>It will reboot and your system is ready for VM.
+ <img src="assets/img/posts/ee9e1c5d50672f7367550cb8378b61c0.webp" alt="Post-install script complete, Proxmox rebooting and ready for VMs" /></li>
+</ol>
+
+<p>Now for further we will be installing VMs. Once Proxmox is up, a common next step is getting Docker running — see <a href="/posts/Install-Docker-And-Manage-Permission/">Installing Docker and Setting Permission</a>.</p>
+
+<p>Welcome to HomeLab.</p>]]></content><author><name></name></author><category term="Homelab" /><category term="proxmox" /><category term="linux" /><category term="homelab" /><category term="virtualization" /><category term="selfhosted" /><category term="hypervisor" /><summary type="html"><![CDATA[How to install Proxmox VE on an old PC and run essential post-installation configuration using the Proxmox community helper scripts. Turn spare hardware into a home server.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ashishghimire.com/assets/img/headers/proxmox.webp" /><media:content medium="image" url="https://ashishghimire.com/assets/img/headers/proxmox.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Installing Docker and Setting Permission</title><link href="https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/" rel="alternate" type="text/html" title="Installing Docker and Setting Permission" /><published>2025-07-06T00:11:31+10:00</published><updated>2026-04-11T17:39:25+10:00</updated><id>https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission</id><content type="html" xml:base="https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/"><![CDATA[<h2 id="installing-docker">Installing Docker</h2>
+
+<ol>
+  <li>
+    <p>Setup docker’s apt repo</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre> <span class="nb">sudo </span>apt-get update
+ <span class="nb">sudo </span>apt-get <span class="nb">install </span>ca-certificates curl
+ <span class="nb">sudo install</span> <span class="nt">-m</span> 0755 <span class="nt">-d</span> /etc/apt/keyrings
+ <span class="nb">sudo </span>curl <span class="nt">-fsSL</span> https://download.docker.com/linux/ubuntu/gpg <span class="nt">-o</span> /etc/apt/keyrings/docker.asc
+ <span class="nb">sudo chmod </span>a+r /etc/apt/keyrings/docker.asc
+ <span class="nb">echo</span> <span class="se">\</span>
+ <span class="s2">"deb [arch=</span><span class="si">$(</span>dpkg <span class="nt">--print-architecture</span><span class="si">)</span><span class="s2"> signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu </span><span class="se">\</span><span class="s2">
+ </span><span class="si">$(</span><span class="nb">.</span> /etc/os-release <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$VERSION_CODENAME</span><span class="s2">"</span><span class="si">)</span><span class="s2"> stable"</span> | <span class="se">\</span>
+ <span class="nb">sudo tee</span> /etc/apt/sources.list.d/docker.list <span class="o">&gt;</span> /dev/null
+ <span class="nb">sudo </span>apt-get update
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Install Latest Docker and its dependencies</p>
+
+    <p><code class="language-plaintext highlighter-rouge">sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</code></p>
+  </li>
+  <li>
+    <p>Create Docker group (Most likely already created)</p>
+
+    <p><code class="language-plaintext highlighter-rouge">sudo groupadd docker</code></p>
+  </li>
+  <li>
+    <p>Add user to the group</p>
+
+    <p><code class="language-plaintext highlighter-rouge">sudo usermod -aG docker $USER</code></p>
+  </li>
+  <li>
+    <p>Logout and Log Back in or restart or ..</p>
+
+    <p><code class="language-plaintext highlighter-rouge">newgrp docker</code></p>
+  </li>
+</ol>
+
+<blockquote class="prompt-warning">
+  <p>This will ensure you will not need to run “sudo” everytime you run docker and also fixes most Permission error.</p>
+</blockquote>
+
+<p>If you run into DNS issues inside containers after this setup, see <a href="/posts/Broken-Docker-DNS-Due-to-PiHole/">Broken Docker DNS Due to Pi-hole</a> — a common gotcha on systems that have previously run Pi-hole.</p>]]></content><author><name></name></author><category term="Homelab" /><category term="docker" /><category term="linux" /><category term="ubuntu" /><category term="containers" /><category term="homelab" /><category term="permissions" /><summary type="html"><![CDATA[How to install Docker on Linux using the official apt repository and configure user group permissions so you can run containers without sudo.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ashishghimire.com/assets/img/headers/dockerInstall.webp" /><media:content medium="image" url="https://ashishghimire.com/assets/img/headers/dockerInstall.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Installing Arch Linux Hard Way</title><link href="https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way/" rel="alternate" type="text/html" title="Installing Arch Linux Hard Way" /><published>2025-07-06T00:11:31+10:00</published><updated>2026-04-11T17:39:25+10:00</updated><id>https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way</id><content type="html" xml:base="https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way/"><![CDATA[<h2 id="before-installation">Before Installation</h2>
+
+<ul>
+  <li>Backup your data</li>
+  <li>Download <a href="https://etcher.balena.io/">Balena Etcher</a> &amp; <a href="https://archlinux.org/download/">ISO of ARCH Linux</a></li>
+  <li>Burn ISO to a USB</li>
+  <li>Restart</li>
+</ul>
+
+<h2 id="boot">Boot</h2>
+
+<ul>
+  <li>Press DEL and load to BIOS mode</li>
+  <li>Change Boot Priorities to USB</li>
+  <li>Reboot</li>
+</ul>
+
+<h2 id="arch">ARCH</h2>
+
+<ul>
+  <li>
+    <p>Load ‘Arch Linux Install Medium’</p>
+  </li>
+  <li>
+    <p>Connect Your Arch to internet</p>
+
+    <p><code class="language-plaintext highlighter-rouge">iwctl --passphrase "$WIFIPASSWORD" station wlan0 connect $WIFINAME</code></p>
+  </li>
+  <li>
+    <p>ping 8.8.8.8</p>
+
+    <ul>
+      <li>If you get bytes back you are connected</li>
+    </ul>
+  </li>
+  <li>
+    <p>Check if you are on UEFI mode</p>
+
+    <p><code class="language-plaintext highlighter-rouge">efivar -l</code></p>
+  </li>
+  <li>
+    <p>List your disks (Remember your diskname you want to install Arch to)</p>
+
+    <p><code class="language-plaintext highlighter-rouge">lsblk</code></p>
+  </li>
+</ul>
+
+<blockquote>
+  <p>for me its <em>sdc</em></p>
+</blockquote>
+
+<ul>
+  <li>
+    <p>Split up Partition and Prepare your Drive</p>
+
+    <p><code class="language-plaintext highlighter-rouge">gdisk /dev/sdc</code></p>
+  </li>
+</ul>
+
+<blockquote>
+  <p>CHOOSE YOUR DRIVE CAREFULLY</p>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>`x` for 'expert'
+`z` for 'Zap'
+"Y" to WIPE DISK
+"Y" again to Confirm
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="verify-partitions">Verify partitions</h3>
+
+<p><code class="language-plaintext highlighter-rouge">lsblk</code></p>
+
+<ul>
+  <li>notice there is no partition on your disk</li>
+</ul>
+
+<h3 id="partitioning">Partitioning</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>cgdisk /dev/sdc
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<ul>
+  <li>Press any key to continue</li>
+</ul>
+
+<blockquote>
+  <p>We are using cgdisk because its easier, relatively.</p>
+</blockquote>
+
+<ul>
+  <li>Separate ROOT and HOME Partition
+    <ul>
+      <li>
+        <p>Root Partition: Where all OS Files will be stored</p>
+      </li>
+      <li>
+        <p>Home Partition: Where all General Files will be Stored</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="boot-partition">BOOT Partition</h3>
+<ul>
+  <li>Use your keyboard and highlight “NEW” press “ENTER”</li>
+  <li>First Sector: (Default):  (leave Blank and press “ENTER”)</li>
+  <li>Size in Sectors: 1024MiB
+    <ul>
+      <li>1 GB for Boot Drive</li>
+    </ul>
+  </li>
+  <li>Hex Code for GUID: ‘EF00’</li>
+  <li>Name your Drive: ‘boot’</li>
+</ul>
+
+<h3 id="swap-memory">SWAP MEMORY</h3>
+
+<blockquote class="prompt-info">
+  <p>When you run out of RAM this memory is used.
+Make this regardless of your RAM Size</p>
+</blockquote>
+
+<ul>
+  <li>Highlight  and go to BIG size ‘free space’ (probably 3rd option)</li>
+  <li>“NEW” again</li>
+  <li>First Sector: (Default):  (leave Blank and press “ENTER”)</li>
+  <li>Size in Sectors: 16GiB
+    <ul>
+      <li>16 GB for SWAP Drive</li>
+    </ul>
+  </li>
+  <li>Hex Code for GUID: ‘8200’</li>
+  <li>Name your Drive: ‘swap’</li>
+</ul>
+
+<h3 id="root-partition">ROOT Partition</h3>
+<ul>
+  <li>Highlight  and go to BIG size ‘free space’ (probably last option)</li>
+  <li>“NEW” again</li>
+  <li>First Sector: (Default):  (leave Blank and press “ENTER”)</li>
+  <li>Size in Sectors: 40GiB
+    <ul>
+      <li>40 GB for Root Drive</li>
+    </ul>
+  </li>
+  <li>Hex Code for GUID: ‘8300’</li>
+  <li>Name your Drive: ‘root’</li>
+</ul>
+
+<h3 id="home-partition">Home Partition</h3>
+<ul>
+  <li>Highlight  and go to BIG size ‘free space’ (probably last option)</li>
+  <li>“NEW” again</li>
+  <li>First Sector: (Default):  (leave Blank and press “ENTER”)</li>
+  <li>Size in Sectors: (Default):  (leave Blank and press “ENTER”)</li>
+  <li>Hex Code for GUID: ‘8300’</li>
+  <li>Name your Drive: ‘home’</li>
+</ul>
+
+<h3 id="finishing-partitioning">FInishing Partitioning</h3>
+<ul>
+  <li>Use your arrows key to select “Write”</li>
+  <li>Confirm with “yes”</li>
+  <li>And arrows key to “Quit”</li>
+  <li><code class="language-plaintext highlighter-rouge">clear</code></li>
+</ul>
+
+<h3 id="formatting-drives">Formatting Drives</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">lsblk</code> to confirm drives again</li>
+  <li><code class="language-plaintext highlighter-rouge">mkfs.fat -F32 /dev/sdc1</code>
+    <blockquote>
+      <p>File Allocation Table</p>
+    </blockquote>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">mkswap /dev/sdc2</code>
+    <blockquote>
+      <p>To make swap format</p>
+    </blockquote>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">swapon /dev/sdc2</code></p>
+
+    <p>Enable Swap</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">mkfs.ext4 /dev/sdc3</code></p>
+
+    <p>‘y’ to confirm if it asks</p>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">mkfs.ext4 /dev/sdc4</code>
+    <blockquote class="prompt-tip">
+      <p>Hint: press up arrow and change sdc3 to sdc4</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h3 id="mounting-the-drives">Mounting the drives</h3>
+
+<p><code class="language-plaintext highlighter-rouge">mount /dev/sdc3 /mnt</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">mkdir /mnt/boot</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">mkdir /mnt/home</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">mount /dev/sdc1 /mnt/boot</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">mount /dev/sdc4 /mnt/home</code></p>
+
+<blockquote>
+  <p>Basically we are making folder and structuring it with proper drives and partitions we made earlier.</p>
+</blockquote>
+
+<h3 id="update-mirrorlist">Update Mirrorlist</h3>
+
+<p><code class="language-plaintext highlighter-rouge">cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup</code></p>
+
+<blockquote>
+  <p>We are just Backing up incase we mess something up.</p>
+</blockquote>
+
+<h3 id="rank-mirrors">Rank Mirrors</h3>
+
+<blockquote>
+  <p>This is to find Fastest mirror suitable to YOU.</p>
+</blockquote>
+
+<blockquote>
+  <p>If you find error install rankmirrors</p>
+</blockquote>
+
+<p><code class="language-plaintext highlighter-rouge">sudo pacman -Sy pacman-contrib</code></p>
+
+<p>Press Enter to confirm</p>
+
+<p><code class="language-plaintext highlighter-rouge">rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup &gt; /etc/pacman.d/mirrorlist</code></p>
+
+<blockquote>
+  <p>This will be working so system isn’t hang, Wait till it shows root@Archiso.</p>
+</blockquote>
+
+<blockquote>
+  <p>What it did was found best mirrors and copied it to your mirrorlist</p>
+</blockquote>
+
+<p><code class="language-plaintext highlighter-rouge">cat /etc/pacman.d/mirrorlist</code></p>
+
+<blockquote>
+  <p>shows what we did earlier, so yeah ranked mirrorlist</p>
+</blockquote>
+
+<h3 id="installing-now">INSTALLING NOW</h3>
+
+<p><code class="language-plaintext highlighter-rouge">pacstrap -K /mnt base linux linux-firmware base-devel</code></p>
+
+<blockquote>
+  <p>We are installing Base Linux.</p>
+</blockquote>
+
+<p><code class="language-plaintext highlighter-rouge">genfstab -U -p /mnt &gt;&gt; /mnt/etc/fstab</code></p>
+
+<blockquote>
+  <p>setup all the drives and structure so hard drive is recognized while booting</p>
+</blockquote>
+
+<h3 id="booting-into-installation">Booting into Installation</h3>
+
+<p><code class="language-plaintext highlighter-rouge">arch-chroot /mnt</code></p>
+
+<h3 id="install--nano-and-bash-completion">Install  ‘nano’ and ‘bash-completion’</h3>
+
+<p><code class="language-plaintext highlighter-rouge">sudo pacman -S nano bash-completion</code></p>
+
+<p>Enter to confirm</p>
+
+<h3 id="enable-locales">Enable Locales</h3>
+
+<p><code class="language-plaintext highlighter-rouge">nano /etc/locale.gen</code></p>
+
+<ul>
+  <li>Find your locale (for me its en_AU.UTF-8 UTF-8)</li>
+  <li>remove # from its front</li>
+  <li>hit ‘ctrl o’ and press enter to save</li>
+  <li>hit ‘ctrl x’ to close</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">locale-gen</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">echo LANG=en_AU.UTF-8 &gt; /etc/locale.conf</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">export LANG=en_AU.UTF-8</code></p>
+
+<h3 id="timezone">TimeZone</h3>
+
+<p><code class="language-plaintext highlighter-rouge">ls /usr/share/zoneinfo/</code></p>
+
+<blockquote>
+  <p>From here select your country and press tab</p>
+</blockquote>
+
+<blockquote>
+  <p>It will list your Timezone</p>
+</blockquote>
+
+<blockquote>
+  <p>write few characters of your TZ and press Tab</p>
+</blockquote>
+
+<p>Move to first part of your script and change, mine is Australia Sydney so i will be doing this:</p>
+
+<p><code class="language-plaintext highlighter-rouge">ln -s /usr/share/zoneinfo/Australia/Sydney &gt; /etc/localtime</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">hwclock --systohc --utc</code></p>
+
+<blockquote>
+  <p>We are syncing time with BIOS time so Your PC has right time every time you open it.</p>
+</blockquote>
+
+<h3 id="hostname">Hostname</h3>
+
+<p><code class="language-plaintext highlighter-rouge">echo archish &gt; /etc/hostname</code></p>
+
+<blockquote class="prompt-tip">
+  <p>instead of ‘archish’ use whatever name you want</p>
+</blockquote>
+
+<h3 id="if-you-have-ssd">IF YOU HAVE SSD</h3>
+
+<p><code class="language-plaintext highlighter-rouge">systemctl enable fstrim.timer</code></p>
+
+<ul>
+  <li>Enable 32 bits packages</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">nano /etc/pacman.conf</code></p>
+
+<p>Go all the way down to [multilib] and remove # from both line</p>
+
+<p><code class="language-plaintext highlighter-rouge">sudo pacman -Sy</code></p>
+
+<h3 id="set-user-and-passwords">SET USER AND PASSWORDS</h3>
+<ul>
+  <li>
+    <p>set root password</p>
+
+    <p><code class="language-plaintext highlighter-rouge">passwd</code></p>
+  </li>
+</ul>
+
+<blockquote class="prompt-danger">
+  <p>Type password enter, it wont show it but its writing</p>
+</blockquote>
+
+<h3 id="add-user">Add User</h3>
+<p><code class="language-plaintext highlighter-rouge">useradd -m -g users -G wheel,storage,power -s /bin/bash ghost</code></p>
+
+<blockquote class="prompt-danger">
+  <p>instead of ghost write your own username</p>
+</blockquote>
+
+<ul>
+  <li>give that user password</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">passwd ghost</code></p>
+
+<p>Type password and enter.</p>
+
+<h3 id="modify-sudo-file">Modify sudo file</h3>
+
+<p><code class="language-plaintext highlighter-rouge">EDITOR=nano visudo</code></p>
+
+<p>Opens sudo file</p>
+
+<p>Search for %wheel</p>
+
+<p>use ‘ctrl w’</p>
+
+<p>find ‘%wheel ALL=(ALL:ALL)ALL’</p>
+
+<p>Uncomment it (remove # from front)</p>
+
+<h3 id="bootloader">BootLoader</h3>
+
+<p><code class="language-plaintext highlighter-rouge">mount -t efivarfs efivarfs /sys/firmware/efi/efivars/</code></p>
+
+<ul>
+  <li>
+    <p>Install bootloader</p>
+
+    <p><code class="language-plaintext highlighter-rouge">bootctl install</code></p>
+  </li>
+  <li>
+    <p>Write entries for boot loader</p>
+
+    <p><code class="language-plaintext highlighter-rouge">nano /boot/loader/entries/arch.conf</code></p>
+  </li>
+</ul>
+
+<p>Write the 3 lines</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>title ARCH
+linux /vmlinuz-linux
+initrd /initramfs-linux.img
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p>save and exit (ctrl o and ctrl x)</p>
+</blockquote>
+
+<h3 id="point-to-your-harddrive">Point to your harddrive</h3>
+<p><code class="language-plaintext highlighter-rouge">echo "options root=PARTUUID=$(blkid -s PARTUUID -o value /dev/sdc3) rw" &gt;&gt; /boot/loader/entries/arch.conf</code></p>
+
+<blockquote>
+  <p>This hardcode your UID of partition to your bootloader</p>
+</blockquote>
+
+<p><code class="language-plaintext highlighter-rouge">ip link</code></p>
+
+<p>Know your network</p>
+
+<h3 id="enable-dhcpcd">enable ‘dhcpcd’</h3>
+
+<p><code class="language-plaintext highlighter-rouge">sudo pacman -S dhcpcd</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">sudo sydtemctl enable dhcpcd@wlan0.service</code></p>
+
+<h3 id="install-networkmanager">install NetworkManager</h3>
+
+<p><code class="language-plaintext highlighter-rouge">sudo pacman -S networkmanager</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">sudo systemctl enable NetworkManager.service</code></p>
+
+<h3 id="install-linux-headers">install linux headers</h3>
+
+<p><code class="language-plaintext highlighter-rouge">sudo pacman -S linux-headers</code></p>
+
+<hr />
+
+<h2 id="follow-only-if-you-have-gpu">Follow ONLY IF YOU HAVE GPU</h2>
+
+<h3 id="nvidia">NVIDIA</h3>
+
+<p><code class="language-plaintext highlighter-rouge">sudo pacman -S nvidia-dkms libglvnd nvidia-utils opencl-nvidia lib32-libglvnd lib32-nvidia-utils lib32-opencl-nvidia nvidia-settings</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">sudo nano /etc/mkinitcpio.conf</code></p>
+
+<ul>
+  <li>
+    <p>Inside MODULE=() add these in exact order, it should look like this</p>
+
+    <p><code class="language-plaintext highlighter-rouge">MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)</code></p>
+  </li>
+  <li>
+    <p>make sure they are loaded during boot time</p>
+
+    <p><code class="language-plaintext highlighter-rouge">sudo nano /boot/loader/entries/arch.conf</code></p>
+  </li>
+  <li>
+    <p>right after options line, after rw, in same line</p>
+
+    <p><code class="language-plaintext highlighter-rouge">nvidia-drm.modeset=1</code></p>
+  </li>
+  <li>
+    <p>Hook for pacman to update nvidia driver</p>
+
+    <p><code class="language-plaintext highlighter-rouge">sudo mkdir /etc/pacman.d/hooks</code></p>
+
+    <p><code class="language-plaintext highlighter-rouge">sudo nano /etc/pacman.d/hooks/nvidia.hook</code></p>
+
+    <p>Add</p>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre>  <span class="o">[</span>Trigger]
+  <span class="nv">Operation</span><span class="o">=</span>Install
+  <span class="nv">Operation</span><span class="o">=</span>Upgrade
+  <span class="nv">Operation</span><span class="o">=</span>Remove
+  <span class="nv">Type</span><span class="o">=</span>Package
+  <span class="nv">Target</span><span class="o">=</span>nvidia
+
+  <span class="o">[</span>Action]
+  <span class="nv">Depends</span><span class="o">=</span>mkinitcpio
+  <span class="nv">When</span><span class="o">=</span>PostTransaction
+  <span class="nv">Exec</span><span class="o">=</span>/usr/bin/mkinitcpio <span class="nt">-P</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="else-continue">Else, Continue…</h2>
+
+<p><code class="language-plaintext highlighter-rouge">exit</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">umount -R /mnt</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">reboot</code></p>
+
+<blockquote>
+  <p>You can plug out the USB</p>
+</blockquote>
+
+<p>When the system boots up, use your credentials to login.</p>
+
+<h3 id="internet">Internet</h3>
+<p>If you cannot connect to internet</p>
+
+<p><code class="language-plaintext highlighter-rouge">nmtui</code></p>
+
+<p>Activate a Connection and Connect</p>
+
+<h3 id="install-x11-for-kde">Install x11 for KDE</h3>
+
+<p><code class="language-plaintext highlighter-rouge">sudo pacman -S xorg-server xorg-apps xorg-xinit xorg-tvm xorg-xclock xterm</code></p>
+
+<ul>
+  <li>to test</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">startx</code></p>
+
+<p>if clocks shows up its installed, click any terminal u see and</p>
+
+<p><code class="language-plaintext highlighter-rouge">exit</code></p>
+
+<h2 id="install-plasma-or-any-desktop-environment-you-want">Install Plasma or Any Desktop Environment you want</h2>
+
+<p><code class="language-plaintext highlighter-rouge">sudo pacman -S plasma sddm</code></p>
+
+<ul>
+  <li>enter password</li>
+  <li>just keep entering Enter</li>
+  <li>
+    <p>Enable SDDM</p>
+
+    <p><code class="language-plaintext highlighter-rouge">sudo systemctl sddm.service</code></p>
+  </li>
+</ul>
+
+<p>REBOOT</p>
+
+<blockquote class="prompt-tip">
+  <p>This is straight method to install arch linux “hard way”. If you get any error or prefer different way, consult <a href="https://wiki.archlinux.org/title/Installation_guide">Arch Wiki Installation Guide</a>.</p>
+</blockquote>]]></content><author><name></name></author><category term="Linux" /><category term="arch" /><category term="linux" /><category term="install" /><category term="bootloader" /><category term="kde" /><category term="plasma" /><category term="partitioning" /><summary type="html"><![CDATA[A step-by-step guide to installing Arch Linux manually — from disk partitioning and mounting to bootloader setup — without using the archinstall script.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ashishghimire.com/assets/img/headers/ArchInstall.webp" /><media:content medium="image" url="https://ashishghimire.com/assets/img/headers/ArchInstall.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Setting Up Active Directory</title><link href="https://ashishghimire.com/posts/Setting-Up-Active-Directory/" rel="alternate" type="text/html" title="Setting Up Active Directory" /><published>2025-07-05T10:00:00+10:00</published><updated>2026-04-11T17:39:25+10:00</updated><id>https://ashishghimire.com/posts/Setting-Up-Active-Directory</id><content type="html" xml:base="https://ashishghimire.com/posts/Setting-Up-Active-Directory/"><![CDATA[<blockquote>
+  <p>‼️This is a setup for Penetration Testing in Local Network and never meant for production.</p>
+</blockquote>
+
+<p>At first Download ISOs</p>
+<ul>
+  <li><a href="https://www.microsoft.com/en-us/evalcenter/download-windows-server-2022">Windows Server Eval 2022</a></li>
+  <li><a href="https://www.microsoft.com/en-us/evalcenter/download-windows-10-enterprise">Windows 10 Enterprise</a></li>
+</ul>
+
+<h2 id="setup-domain-controller">Setup Domain Controller</h2>
+
+<ol>
+  <li>NEW VM</li>
+  <li>Typical</li>
+  <li>Server ISO</li>
+  <li>Split</li>
+  <li>Make sure its 60 GB</li>
+  <li>Finish</li>
+  <li>Edit</li>
+  <li>Add 8GB RAM</li>
+  <li>Remove Floppy Drive (Recommended)</li>
+</ol>
+
+<h3 id="install">Install</h3>
+<ol>
+  <li>Next &gt; Install Now</li>
+  <li>Standard Evaluation Desktop Experience</li>
+  <li>Custom Install</li>
+  <li>New &gt; Default &gt; Apply &gt; Ok</li>
+  <li>Next</li>
+  <li>Done</li>
+  <li>For This purpose set easy password <code class="language-plaintext highlighter-rouge">P@$$w0rd!</code></li>
+  <li>Login</li>
+  <li>Install VMWare Tools</li>
+  <li>VM &gt; Install VMWare tool</li>
+  <li>Open This PC &gt; Open ISO</li>
+  <li>Install</li>
+</ol>
+
+<h3 id="server-configuration-adds">SERVER CONFIGURATION (ADDS)</h3>
+<ol>
+  <li>Change Hostname
+    <ol>
+      <li>Start Menu &gt; Name &gt; Rename This PC</li>
+      <li>HYDRA-DC</li>
+      <li>Reboot.</li>
+    </ol>
+  </li>
+  <li>Make this a Domain Controller
+    <ol>
+      <li>Manage &gt; Add Roles and Feature
+        <ol>
+          <li>Role-based or Feature-based install &gt; Next</li>
+          <li>HYDRA-DC &gt; Next</li>
+          <li>Server Roles &gt; ✅Active Directory Domain Services (ADDS) &gt; Add Features &gt; Next</li>
+          <li>Next</li>
+          <li>Next</li>
+          <li>Restart Auto if required</li>
+          <li>Install</li>
+        </ol>
+      </li>
+      <li>Promote This Server to Domain Controller
+        <ol>
+          <li>Add a new forest</li>
+          <li>Root Domain: <code class="language-plaintext highlighter-rouge">marvel.local</code> &gt; Next</li>
+          <li>Functional Level: 2016</li>
+          <li>Same password for Admin Account &gt; Next &gt; Next</li>
+          <li>Loads netbios Automatically &gt; Next</li>
+          <li>Next to last &gt; Install</li>
+        </ol>
+      </li>
+      <li>Certificates Services
+        <ol>
+          <li>Manage</li>
+          <li>Add roles and Feature</li>
+          <li>Role Based Feature</li>
+          <li>Next to Features</li>
+          <li>Role Based Features</li>
+          <li>Active Directory Certificate Services (Used to verify ID in domain controller) (Allows us to use LDAP)</li>
+          <li>Add Features &gt; Next to AD CS Role Services</li>
+          <li>✅ Certificate Authority &gt; Next</li>
+          <li>✅ Restart if Needed</li>
+          <li>Install</li>
+        </ol>
+      </li>
+      <li>Configure Certificates Services
+        <ol>
+          <li>Flag &gt; Configure AD CS</li>
+          <li>✅ Certification AUthority &gt; Next</li>
+          <li>Private Key &gt; Create New pvt key</li>
+          <li>Default Next to Validity</li>
+          <li>99 years</li>
+          <li>Default &gt; Configure</li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+</ol>
+
+<h2 id="dc">DC</h2>
+
+<p>ip: 192.168.135.131
+administrator:<code class="language-plaintext highlighter-rouge">P@$$w0rd!</code></p>
+
+<h2 id="client-setup">CLIENT SETUP</h2>
+
+<p>Setup 2 OS at same Time</p>
+<ul>
+  <li>Download WIndows 10 Enterprise ISO</li>
+</ul>
+
+<h3 id="vm-setup">VM Setup</h3>
+<ol>
+  <li>Open VMWARE</li>
+  <li>Create new VM</li>
+  <li>select Downloaded ISO</li>
+  <li>Windows 10 Enterprise &gt; Next &gt; Yes (Without product key)</li>
+  <li>Name:  THE PUNISHER &gt; Next</li>
+  <li>SIZE 60 GB &gt; Finish</li>
+  <li>Customize &gt; Remove Floppy, Adjust RAM 8 GB Cpu 4 &gt; OK</li>
+  <li>Power On and Hit any key and move to second VM do same, different name</li>
+</ol>
+
+<h3 id="os-setup">OS SETUP</h3>
+
+<p>(SIMALTANEOUSLY)</p>
+<ol>
+  <li>Power On Both Machines</li>
+  <li>Press key to continue</li>
+  <li>Install Now &gt; Accept Terms &gt; Custom &gt; Next to install</li>
+  <li>RESTART</li>
+  <li>US &gt; YES &gt; US &gt; YES &gt; SKIP</li>
+  <li>Domain Join Instead</li>
+  <li>Punisher VM = <code class="language-plaintext highlighter-rouge">frankcastle</code> password= <code class="language-plaintext highlighter-rouge">Password1</code></li>
+  <li>Spiderman VM = <code class="language-plaintext highlighter-rouge">peterparker</code> password = `Password1</li>
+  <li>All Questions Answered BOB</li>
+  <li>Disable all tracking &gt; Not Now to Cortana</li>
+  <li>WAIT</li>
+  <li>INSTALL VMWARE TOOLS</li>
+  <li>Change Hostname &gt; THEPUNISHER &amp; SPIDERMAN</li>
+</ol>
+
+<h3 id="setting-up-users-groups-and-policies">SETTING UP USERS, GROUPS and POLICIES</h3>
+
+<h4 id="server">SERVER</h4>
+
+<h5 id="user-setup">USER Setup</h5>
+<ol>
+  <li>Server Manager</li>
+  <li>Tools &gt; AD Users and Computers</li>
+  <li>Manage User Groups
+    <ol>
+      <li>MARVEL.local ( Domain Controller) &gt; <em>Right Click</em> &gt;New &gt; OU
+ <img src="assets/img/posts/8374186a9e4ec287b84309cfc18497bb.webp" alt="AD Users and Computers: right-clicking MARVEL.local to create a new Organizational Unit" /></li>
+      <li>Move Everything Except <code class="language-plaintext highlighter-rouge">Admin</code> and <code class="language-plaintext highlighter-rouge">Guest</code> to New <code class="language-plaintext highlighter-rouge">Groups</code> &gt; YES
+ <img src="assets/img/posts/c6a3724ed01b57185a98dd924933dfee.webp" alt="Moving default users and groups into the new Groups OU" />
+ <img src="assets/img/posts/6d9f03394d84b36cc78c1f13001a55b0.webp" alt="Groups OU created with all objects moved in" /></li>
+    </ol>
+  </li>
+  <li>Create Another <code class="language-plaintext highlighter-rouge">Administrator</code>
+    <ol>
+      <li>Copy current <code class="language-plaintext highlighter-rouge">Administrator</code>
+ <img src="assets/img/posts/48cfc8b6b9784b5a80c08a1d7f80fbf7.webp" alt="Copy Administrator dialog to create a new admin account" />
+ <img src="assets/img/posts/e9aeeb72e351d1d5bb9d8f87c58cc1d4.webp" alt="New domain administrator account created in AD" /></li>
+    </ol>
+  </li>
+  <li>Create a <em>Service</em> account
+    <ol>
+      <li>Name: SQL Service Password: MYpassword123# (Weak pw with complexity and character count for lab purpose)
+ <img src="assets/img/posts/36bda5b872772704529408c93afc73c8.webp" alt="Creating SQL Service account in AD Users and Computers" />
+ <img src="assets/img/posts/bed32ca05225fd7f71d9893c7ef25376.webp" alt="SQL Service account created with weak lab password" /></li>
+    </ol>
+  </li>
+  <li>Create Two New Users
+    <ol>
+      <li><em>Right Click</em> &gt; New &gt; User
+ <img src="assets/img/posts/4074da60a0098b793bd9ff010fc771a0.webp" alt="New User dialog in AD Users and Computers" />
+ <img src="assets/img/posts/affb69b9b77b19b873aa9c92bef9ea79.webp" alt="User details form with name and login username filled in" />
+ <img src="assets/img/posts/36cde6d2ca44f4ab89063f4f19bac706.webp" alt="Password configuration for new domain user" /></li>
+      <li>For Second User <em>copy</em> recently created user and change Names
+ <img src="assets/img/posts/db44e1a5879b2613a61de42216c8713a.webp" alt="Second domain user created by copying the first user" /></li>
+    </ol>
+  </li>
+</ol>
+
+<h5 id="file-sharing-to-exploit-later">File Sharing To Exploit Later</h5>
+<ol>
+  <li>Server Manager</li>
+  <li>File Share and Storage</li>
+  <li>Shares &gt; Tasks &gt; New Shares</li>
+  <li>SMB Share Quick &gt; Next</li>
+  <li>C: is fine &gt; Next</li>
+  <li>Name: <code class="language-plaintext highlighter-rouge">hackme</code></li>
+  <li>✅Allow Caching &gt; Next</li>
+  <li>Permission &gt; Next</li>
+  <li>Create</li>
+</ol>
+
+<h5 id="setup-service-account-fully">SETUP Service Account Fully</h5>
+<ol>
+  <li>Open Command prompt as Admin</li>
+  <li><code class="language-plaintext highlighter-rouge">setspn -a HYDRA-DC/SQLService.MARVEL.local:60111 MARVEL\SQLService</code></li>
+  <li>Check with <code class="language-plaintext highlighter-rouge">setspn -T MARVEL.local -Q */*</code></li>
+</ol>
+
+<h5 id="setup-group-policy">Setup Group Policy</h5>
+<ol>
+  <li>Start Menu &gt; Group Policy Management</li>
+  <li>Forest &gt; Domains</li>
+  <li><em>Right Click</em> MARVEL.local &gt; Create a GPO in this domain and Link it here</li>
+  <li>Name: Disable Windows Defender &gt; Ok</li>
+  <li>Edit <em>Newly created Policy</em> i.e <code class="language-plaintext highlighter-rouge">Disable Windows Defender</code>
+    <ol>
+      <li>Computer Config &gt; Policies &gt; &gt; Admin Templates &gt; Windows Components &gt; Microsoft Defender Antivirus</li>
+      <li><em>Double Click</em> Turn Off Microsoft Defender Antivirus</li>
+      <li>Enabled &gt; Apply</li>
+    </ol>
+  </li>
+  <li><em>Right Click</em> &gt; Enforced</li>
+</ol>
+
+<h5 id="setup-static-ip-address">Setup Static IP Address</h5>
+<ol>
+  <li><em>Right Click</em> Network on Taskbar</li>
+  <li>Open Network Internet Settings</li>
+  <li>Change Adapter options</li>
+  <li>Ethernet0</li>
+  <li>Properties &gt; IPV4 &gt; Use Following (acquired form <code class="language-plaintext highlighter-rouge">ipconfig</code> )
+    <ol>
+      <li>IP: 192.168.135.137 (current ip from ipconfig)</li>
+      <li>Subnet Mask: 255.255.255.0</li>
+      <li>Gateway: 192.168.135.2</li>
+    </ol>
+  </li>
+  <li>Ok</li>
+</ol>
+
+<h2 id="join-machine-to-domains">Join Machine To Domains</h2>
+
+<ol>
+  <li>Login to Client Machines</li>
+  <li>Make IP Addresses Static
+    <ol>
+      <li>Change Preferred DNS server to Domain Controller’s IP i.e. 192.168.135.137</li>
+    </ol>
+  </li>
+</ol>
+
+<h2 id="make-client-devices-join-the-domain">Make Client devices Join the Domain</h2>
+
+<ol>
+  <li>Start Menu</li>
+  <li>Access Work or School
+ <img src="assets/img/posts/0f0554514a2d6d14c380eea35d3aefab.webp" alt="Windows Access Work or School settings page" /></li>
+  <li>Connect
+ <img src="assets/img/posts/557449303d8f76c26704e2563df0586b.webp" alt="Connect to work or school account dialog" /></li>
+  <li>Join this device to a local Active Directory Domain
+ <img src="assets/img/posts/dc9bc20b351c66266191488ddcc564e4.webp" alt="Option to join device to a local Active Directory domain" /></li>
+  <li>Set it as <code class="language-plaintext highlighter-rouge">MARVEL.local</code></li>
+  <li>Enter your Domain Controller Username and Password and ENTER</li>
+  <li>We can Add as Administrator
+ <img src="assets/img/posts/0ad743d75d6aad97ca3a179b8195c07f.webp" alt="Adding the joining account as Administrator during domain join" /></li>
+  <li>Restart Now</li>
+  <li>Verify If you Joined Domain
+    <ol>
+      <li>Server Manager &gt; Tools &gt; AD Users and Computers</li>
+      <li>Computers &gt; You will see both your Devices
+ <img src="assets/img/posts/cb5cbaefd24d15044d0e5d6d5034c564.webp" alt="AD Users and Computers Computers container showing both client machines joined to MARVEL.local" /></li>
+    </ol>
+  </li>
+  <li>Open CLient Login with MARVEL\administrator</li>
+</ol>
+
+<h3 id="modify-local-users-for-client-machines">Modify Local Users for Client Machines</h3>
+
+<h4 id="enable-local-admin">Enable Local Admin</h4>
+<ol>
+  <li>Start &gt; Users &gt; Edit Local Users and Groups</li>
+  <li>Users &gt; Administrator &gt; Enable
+ <img src="assets/img/posts/d9988e2da8a765e2b33376b90ce52dd3.webp" alt="Local Users and Groups showing Administrator account enabled" /></li>
+  <li>Set Password (Password1!)
+ <img src="assets/img/posts/0d4a2e1b9dd67792e98abe81483cdf88.webp" alt="Set password dialog for local Administrator account" /></li>
+  <li>Uncheck Account is Disabled &gt; Apply &gt; OK
+ <img src="assets/img/posts/b62c2c1fb9902b30c1ed9de432abdea8.webp" alt="Unchecking Account is disabled on local Administrator properties" /></li>
+</ol>
+
+<h4 id="add-other-administrators">Add Other Administrators</h4>
+
+<ol>
+  <li>Start &gt; Users &gt; Edit Local Users and Groups</li>
+  <li>
+    <p>Groups &gt; Administrators &gt; Add &gt; Search <code class="language-plaintext highlighter-rouge">fcastle</code> &gt; Check Names &gt; OK</p>
+
+    <p><img src="assets/img/posts/8cad1948d4c9dc5fdb2d34bf3652fbef.webp" alt="Adding fcastle user to local Administrators group on client machine" /></p>
+  </li>
+</ol>
+
+<h4 id="logout-and-check-local-account">Logout and Check Local Account</h4>
+<ol>
+  <li>Other Users</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>.\peterparker</td>
+          <td>Password1</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>Map Network Drive &gt; Z:</li>
+  <li>Folder &gt; <code class="language-plaintext highlighter-rouge">\\HYDRA-DC\hackme</code> | Connect using Different Credentials
+ <img src="assets/img/posts/e454745e8310d56c791b5d560a7f3caf.webp" alt="Mapping network drive to hackme share on HYDRA-DC using domain credentials" /></li>
+  <li>Use Credentials
+ username: <code class="language-plaintext highlighter-rouge">administrator</code>
+ password: <code class="language-plaintext highlighter-rouge">Pa$$w0rd!</code></li>
+</ol>
+
+<h2 id="spiderman">SPIDERMAN</h2>
+
+<p>ip: 192.168.135.134
+peterparker:Password1</p>
+
+<p>local:
+peterparker</p>
+
+<h2 id="thepunisher">THEPUNISHER</h2>
+
+<p>ip: 192.168.134.135
+frankcastle:Password1</p>
+
+<p>local
+frankcastle:Password123</p>
+
+<p>Admins
+tstark@MARVEL.local
+pw: Password12345!</p>
+
+<p>SQL Service
+Password is MYpassword123#</p>
+
+<p>Domain Controller
+IP &gt; 192.168.135.137</p>
+
+<p>TO sign IN</p>
+
+<p><img src="assets/img/posts/071a957c87ed50e278296d12bb05a502.webp" alt="Windows login screen showing domain sign-in for MARVEL.local" /></p>]]></content><author><name></name></author><category term="Active Directory" /><category term="Active-Directory" /><category term="windows-server" /><category term="pentesting" /><category term="TCM-SEC" /><category term="PNPT" /><category term="cybersecurity" /><category term="AD" /><summary type="html"><![CDATA[How to build a local Active Directory lab for penetration testing practice using the PNPT methodology by TCM Security. Includes Windows Server 2022 and Windows 10 setup.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ashishghimire.com/assets/img/headers/activeDirectory.webp" /><media:content medium="image" url="https://ashishghimire.com/assets/img/headers/activeDirectory.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Update All Apps with One Line Of Code in Windows</title><link href="https://ashishghimire.com/posts/Install-Package-Manager-In-Windows-11/" rel="alternate" type="text/html" title="Update All Apps with One Line Of Code in Windows" /><published>2024-10-21T05:19:38+11:00</published><updated>2026-04-11T17:39:25+10:00</updated><id>https://ashishghimire.com/posts/Install-Package-Manager-In-Windows-11</id><content type="html" xml:base="https://ashishghimire.com/posts/Install-Package-Manager-In-Windows-11/"><![CDATA[<p>Its a headache to update each softwares on Windows. Its tough to update something manually.
+We do not use Microsoft Store, Microsoft. Please Leave us alone. With said that, Microsoft
+store do have a very important application there though and we can use that to update any
+and everything, well most of it.
+<a href="https://apps.microsoft.com/store/detail/app-installer/9NBLGGH4NNS1">Winget</a></p>
+
+<h2 id="winget">Winget</h2>
+
+<p>Winget is an Open Source Windows Package Manager designed to run from Command Line Interface (Terminal). From one simple command you can Install your favorite package, uninstall non-necessary ones and Update, those needed to be updated. Also it lists all the package you have installed in your system, and export it. You can format your pc and install all those packages by importing them, or give it to your non tech savvy friends so they can install those cool softwares.</p>
+
+<h2 id="lets-dive-into-it">Let’s Dive into it</h2>
+
+<p>Winget comes pre installed in Windows 11(21H2 and later).
+To verify this
+Go to Terminal and execute following command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>`winget –version`
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>If it shows the version Skip the installation part, otherwise follow the installation.</p>
+
+<h2 id="install-winget">Install Winget:</h2>
+
+<p>Go To <a href="https://apps.microsoft.com/store/detail/app-installer/9NBLGGH4NNS1">Winget</a>.</p>
+
+<p>It will open Microsoft Store. Click on Get.
+Once Installed, restart your pc.</p>
+
+<h2 id="running-winget">Running Winget</h2>
+
+<p>Head straight to terminal and execute following command:</p>
+
+<ul>
+  <li>
+    <p>Winget Help</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>  winget --help
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Find Winget Packages</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>  winget find vscode
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>This will look for vscode in the Packages.
+‘Id’ is very useful here, you may want to copy it.(just select and right click)</p>
+
+<p>Lets install VScode.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>winget install Microsoft.VisualStudioCode` (right click for paste)
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>So installation is done.</p>
+
+<p>Lets see the list,</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>winget export -o C:\Path\to\exported.json
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Similary to import</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>winget import -i C:\Path\to\exported.json
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="upgrade">Upgrade</h2>
+
+<p>To upgrade all available packages:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>winget upgrade --all
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Follow the Prompts and….
+Done!</p>
+
+<h2 id="wrap-up">Wrap Up</h2>
+
+<ul>
+  <li>Install winget</li>
+  <li>Install, Update and Uninstall from CLI</li>
+  <li>Upgrade Everything available with one line</li>
+</ul>]]></content><author><name></name></author><category term="Windows" /><category term="windows" /><category term="winget" /><category term="windows-11" /><category term="package-manager" /><category term="cli" /><category term="powershell" /><summary type="html"><![CDATA[Winget is the Windows package manager. Install, update, and list all your software from the command line — like apt on Linux but for Windows 10 and 11.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ashishghimire.com/assets/img/headers/winget.webp" /><media:content medium="image" url="https://ashishghimire.com/assets/img/headers/winget.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Useful Linux Commands for Hacking</title><link href="https://ashishghimire.com/posts/Useful-Commands/" rel="alternate" type="text/html" title="Useful Linux Commands for Hacking" /><published>2023-03-19T22:34:31+11:00</published><updated>2026-04-11T17:39:25+10:00</updated><id>https://ashishghimire.com/posts/Useful-Commands</id><content type="html" xml:base="https://ashishghimire.com/posts/Useful-Commands/"><![CDATA[<p>Common Linux Commands for Hacking.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>hostname</td>
+      <td>Displays the hostname of the machine</td>
+      <td><code class="language-plaintext highlighter-rouge">hostname</code></td>
+    </tr>
+    <tr>
+      <td>uname -a</td>
+      <td>Displays Sys information, may help to find kernel vulneribilities</td>
+      <td><code class="language-plaintext highlighter-rouge">uname -a</code></td>
+    </tr>
+    <tr>
+      <td>/proc/version</td>
+      <td>Information about processess, helps to find kernel and compiler info</td>
+      <td><code class="language-plaintext highlighter-rouge">/proc/version</code></td>
+    </tr>
+    <tr>
+      <td>/etc/issue</td>
+      <td>Gives info about OS, but can be changed, makes it easy to understand system</td>
+      <td>/etc/issue</td>
+    </tr>
+    <tr>
+      <td>ps</td>
+      <td>Displays running processes in a linux system, Displays the following: &lt;ul&gt; &lt;li&gt;PID : The Process ID&lt;/li&gt; &lt;li&gt;TTY: Terminal type used by user&lt;/li&gt; &lt;li&gt;Time: Amount of CPU  used by the process &lt;/li&gt; &lt;li&gt;CMD: The Comman or Executable running.&lt;/li&gt;&lt;/ul&gt;</td>
+      <td>&lt;ul&gt; &lt;li&gt;<code class="language-plaintext highlighter-rouge">ps -A</code> : View all running processes&lt;/li&gt;&lt;li&gt; <code class="language-plaintext highlighter-rouge">ps axjf</code>: view processes tree&lt;/li&gt; &lt;li&gt;<code class="language-plaintext highlighter-rouge">ps aux</code>: Displays processes for all users.&lt;/li&gt;&lt;/ul&gt;</td>
+    </tr>
+    <tr>
+      <td>env</td>
+      <td>Displays environmental variables, like PATH which may contain info about compiler or scripting language (eg. PYTHON) which could be leveraged for Privilege escalation</td>
+      <td><code class="language-plaintext highlighter-rouge">env</code></td>
+    </tr>
+    <tr>
+      <td>sudo -l</td>
+      <td>Used to display all commands that can be used by current users as sudo</td>
+      <td>sudo -l</td>
+    </tr>
+    <tr>
+      <td>ls</td>
+      <td>Lists all the files and folders</td>
+      <td>&lt;ul&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge">ls</code>&lt;/li&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge">ls -la</code> : Displays items including Hidden Files and Folders&lt;/li&gt;&lt;/ul&gt;</td>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>General overview of user’s privilege level and group memberships</td>
+      <td><code class="language-plaintext highlighter-rouge">id</code></td>
+    </tr>
+    <tr>
+      <td>/etc/passwd</td>
+      <td>Can be an easy way to discover users on the system</td>
+      <td><code class="language-plaintext highlighter-rouge">cat /etc/passwd</code> or <code class="language-plaintext highlighter-rouge">cat /etc/passwd \| cut -d ":" -f 1</code></td>
+    </tr>
+    <tr>
+      <td>history</td>
+      <td>Displays all the commands used before</td>
+      <td><code class="language-plaintext highlighter-rouge">history</code></td>
+    </tr>
+    <tr>
+      <td>ifconfig</td>
+      <td>Info about the network interfaces of the system</td>
+      <td><code class="language-plaintext highlighter-rouge">ifconfig</code></td>
+    </tr>
+    <tr>
+      <td>ip route</td>
+      <td>Verifies ifconfig info</td>
+      <td><code class="language-plaintext highlighter-rouge">ip route</code></td>
+    </tr>
+    <tr>
+      <td>netstat</td>
+      <td>Gather info on existing connections</td>
+      <td>&lt;ul&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge">netstat -a</code> : Shows all listening ports and established connections&lt;/li&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge">netstat -at</code> or <code class="language-plaintext highlighter-rouge">netstat -au</code>: lists TCP/UDP protocols respectively&lt;/li&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge">netstat -l</code> : Lists ports on Listening mode. These ports are open and ready to accept incoming connections.&lt;/li&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge">netstat -lt</code> : Same as netstat -l but displays TCP connections only&lt;/li&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge">netstat -s</code> : list network usage statistics by protocol This can also be used with the -t or -u options to limit the output to a specific protocol. &lt;/li&gt; &lt;li&gt;<code class="language-plaintext highlighter-rouge">netstat -tp</code> : Lists connections with service name and PID info.&lt;/li&gt;&lt;li&gt; <code class="language-plaintext highlighter-rouge">netstat -ltp</code> : to list listening ports&lt;/li&gt; &lt;li&gt;<code class="language-plaintext highlighter-rouge">netstat -i</code> : shows interface stats&lt;/li&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge">netstat -ano</code> : &lt;ol&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge">-a</code>: Display all sockets&lt;/li&gt;&lt;li&gt;<code class="language-plaintext highlighter-rouge">-n</code> : Do not resolve names&lt;/li&gt; &lt;li&gt;<code class="language-plaintext highlighter-rouge">-o</code> : Display Timers&lt;/li&gt;&lt;/ol&gt;&lt;/li&gt;&lt;/ul&gt;</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="find-command">Find Command</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find . -name notes</code></td>
+      <td>Finds the file named “Notes”</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find /home -name notes</code></td>
+      <td>Finds the filename in home directory.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find / -type d -name config</code></td>
+      <td>Find the directory named config under “/”</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find / -type f -perm 0777</code></td>
+      <td>Find files with the 777 permission (Read, Write and Execute)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find / -perm a=x</code></td>
+      <td>’’’’</td>
+    </tr>
+  </tbody>
+</table>]]></content><author><name></name></author><category term="Hacking" /><category term="commands" /><category term="Hacking" /><category term="Privilege-Escalation" /><summary type="html"><![CDATA[A quick-reference sheet of common Linux commands used in penetration testing and CTFs — enumeration, privilege escalation, file transfers, and more.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ashishghimire.com/assets/img/headers/linuxCommands.webp" /><media:content medium="image" url="https://ashishghimire.com/assets/img/headers/linuxCommands.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

@@ -1,4 +1,201 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ashishghimire.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ashishghimire.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-04-11T22:10:37+10:00</updated><id>https://ashishghimire.com/feed.xml</id><title type="html">Ashish Ghimire</title><subtitle>Ashish Ghimire&apos;s blog on homelab, cybersecurity, self-hosting, and IT. Walkthroughs, writeups, and hands-on guides for Linux, Docker, Proxmox, networking, and more.</subtitle><entry><title type="html">I Finally Know If Anyone Reads This Blog</title><link href="https://ashishghimire.com/posts/blog-analytics-umami/" rel="alternate" type="text/html" title="I Finally Know If Anyone Reads This Blog" /><published>2026-03-21T00:00:00+11:00</published><updated>2026-03-21T00:00:00+11:00</updated><id>https://ashishghimire.com/posts/blog-analytics-umami</id><content type="html" xml:base="https://ashishghimire.com/posts/blog-analytics-umami/"><![CDATA[<p>For a while I had Google Analytics on this blog. The ID is still in my <code class="language-plaintext highlighter-rouge">_config.yml</code>. But here is the thing. I self-host almost everything. My photos, my notes, my automation, my media. And then I turn around and send every visitor’s data to Google so I can see a number go up. That felt wrong.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ashishghimire.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ashishghimire.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-04-12T17:38:50+10:00</updated><id>https://ashishghimire.com/feed.xml</id><title type="html">Ashish Ghimire</title><subtitle>Ashish Ghimire&apos;s blog on homelab, cybersecurity, self-hosting, and IT. Walkthroughs, writeups, and hands-on guides for Linux, Docker, Proxmox, networking, and more.</subtitle><entry><title type="html">My Electricity Bill Jumped From $300 to $800 in One Quarter. My Homelab Did It.</title><link href="https://ashishghimire.com/posts/homelab-electricity-bill-ram-fix/" rel="alternate" type="text/html" title="My Electricity Bill Jumped From $300 to $800 in One Quarter. My Homelab Did It." /><published>2026-04-11T23:00:00+10:00</published><updated>2026-04-11T23:00:00+10:00</updated><id>https://ashishghimire.com/posts/homelab-electricity-bill-ram-fix</id><content type="html" xml:base="https://ashishghimire.com/posts/homelab-electricity-bill-ram-fix/"><![CDATA[<p>My last electricity bill was $800 AUD for the quarter. Before the homelab got serious it was around $300. That is a $500 jump in three months and honestly, i did not see it coming.</p>
+
+<p>I knew running servers 24/7 costs something. What i did not realise was how much of that $500 was pure waste. Not useful waste. Just forgotten stuff sitting there drawing power.</p>
+
+<h2 id="what-changed-in-those-three-months">What Changed in Those Three Months</h2>
+
+<p>Let’s be honest about what i added.</p>
+
+<p>The biggest thing was the k3s cluster. I already had a GPU passthrough VM called ghostgpu running Ollama on a GTX 1660 Super for local AI. When i built out Kubernetes and started routing workloads through it, ghostgpu’s behaviour changed. Services like Immich ML for photo recognition, Paperless AI for document classification, karakeep’s AI bookmark categorisation, all of them started touching that GPU VM in ways they were not before. The GPU went from occasional inference to consistent workload. A GTX 1660 Super under load is not light on power.</p>
+
+<p>On top of that i added a second 8TB drive to TrueNAS to set up a mirror. Two spinning hard drives 24/7 instead of one. Seagate Exos drives are not heavy power consumers but they are not free either, especially during scrubs.</p>
+
+<p>Then there was everything i deployed on the cluster. I went a bit overboard. Sonarr, Radarr, Prowlarr, Readarr, Audiobookshelf, Kavita, the whole arr media stack. Authentik for SSO. Prometheus and Grafana for monitoring. Paperless for documents. karakeep for bookmarks. Most of it was genuinely useful at the time.</p>
+
+<p>Then life got busy. Got a Netflix subscription. Amazon Prime covers the rest. I stopped using the media stack. But i never stopped running it. All those pods sitting there in memory, nodes drawing power, doing nothing for me.</p>
+
+<p>That is the part that stings.</p>
+
+<h2 id="finding-the-waste-the-vms-first">Finding the Waste: The VMs First</h2>
+
+<p>First place i looked was Proxmox. I wanted to see what was actually running.</p>
+
+<p>Two VMs stood out immediately.</p>
+
+<p><code class="language-plaintext highlighter-rouge">security</code> was a VM i provisioned months ago to set up some security tools. Never got around to deploying anything. It was just on. 8 GB of RAM, CPU cores assigned, running nothing.</p>
+
+<p><code class="language-plaintext highlighter-rouge">ghostmedia</code> was my old media server VM from before the Kubernetes migration. I had moved everything to the cluster but never deleted this VM. Still running Docker containers, some of them duplicating what was already on the cluster. Also 8 GB of RAM.</p>
+
+<p>That is 16 GB sitting on two VMs doing nothing.</p>
+
+<p>Here is the thing about Proxmox memory ballooning most people miss. Ballooning lets the hypervisor reclaim RAM from a VM down to a minimum floor you set. If that floor is too high, the balloon cannot deflate. Those VMs had their minimum at 8 GB. The host could not take a single byte back.</p>
+
+<p>And idle VMs are worse than you think for CPU too. A powered-on VM needs housekeeping. The hypervisor schedules it. Those cores cannot reach deep sleep states. C-states are how a Ryzen drops power at idle. The 3600X can drop significantly when cores hit C6. Block that and the CPU sits at higher wattage around the clock, permanently.</p>
+
+<p>I deleted both VMs. Biggest single win.</p>
+
+<h2 id="finding-the-waste-the-kubernetes-cluster">Finding the Waste: The Kubernetes Cluster</h2>
+
+<p>With the VMs sorted i looked at the cluster. Ran <code class="language-plaintext highlighter-rouge">kubectl top pods -A --sort-by=memory</code> and sorted by memory usage.</p>
+
+<p><img src="assets/img/posts/kubectl-top-pods-before.webp" alt="kubectl top pods output sorted by memory showing paperless at 587MB, authentik server 515MB, authentik worker 404MB, prometheus 438MB, grafana 320MB and media stack pods all running before cleanup" /></p>
+
+<p>Some numbers i expected. Paperless at 587 MB, karakeep at 328 MB with its AI features, authentik nearly a gigabyte between two pods. Those made sense.</p>
+
+<p>What i did not expect: Grafana at 320 MB and Prometheus at 438 MB scraping ten machines every 15 seconds. Chrome, the headless browser karakeep uses for screenshots, sitting at 188 MB with zero limits set.</p>
+
+<p>And the media stack. 937 MB combined across Sonarr, Radarr, Prowlarr, Readarr, Audiobookshelf, Kavita and the rest. Full replicas. For services i had not meaningfully touched since life got busy.</p>
+
+<blockquote class="prompt-warning">
+  <p><strong>Warning:</strong> RAM allocated in Kubernetes is not free. It keeps the node’s memory bus active and keeps the CPU managing page tables and caches. Not the same as an idle process doing nothing.</p>
+</blockquote>
+
+<h2 id="fixing-it">Fixing It</h2>
+
+<p><strong>Media stack first.</strong> Scaled everything i was not using to zero:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>kubectl scale deployment sonarr radarr prowlarr readarr audiobookshelf kavita lazylibrarian <span class="nt">-n</span> media <span class="nt">--replicas</span><span class="o">=</span>0
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>937 MB gone immediately. Can spin back up when i actually need them.</p>
+
+<p><strong>Prometheus.</strong> Scraping ten hosts every 15 seconds is overkill for a homelab. Changed scrape interval to 60 seconds, added a storage retention size cap. Dropped from 438 MB to 242 MB.</p>
+
+<p><strong>Chrome.</strong> No limits, no flags, just running wide open. Added flags to cap the V8 JavaScript heap and cut everything unnecessary:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="na">args</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">--js-flags=--max-old-space-size=128</span>
+  <span class="pi">-</span> <span class="s">--disable-extensions</span>
+  <span class="pi">-</span> <span class="s">--disable-background-networking</span>
+  <span class="pi">-</span> <span class="s">--disable-sync</span>
+  <span class="pi">-</span> <span class="s">--disable-translate</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>188 MB down to 66 MB.</p>
+
+<p><strong>Authentik.</strong> Default worker and thread counts designed for production. Set <code class="language-plaintext highlighter-rouge">AUTHENTIK_WEB__WORKERS=1</code> and <code class="language-plaintext highlighter-rouge">AUTHENTIK_WORKER__THREADS=1</code> in the Helm values file. Server came down from 515 MB to 377 MB.</p>
+
+<p><strong>Tika.</strong> Apache Tika is what Paperless uses to parse PDFs and Office files. Java application. Java will eat all the heap you give it. Added a JVM cap:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="na">env</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">JAVA_TOOL_OPTIONS</span>
+    <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">-Xmx128m</span><span class="nv"> </span><span class="s">-Xms64m"</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Also found a YAML bug sitting quietly in the Paperless deployment. The <code class="language-plaintext highlighter-rouge">replicas</code>, <code class="language-plaintext highlighter-rouge">selector</code>, and <code class="language-plaintext highlighter-rouge">template</code> fields were under <code class="language-plaintext highlighter-rouge">metadata</code> instead of <code class="language-plaintext highlighter-rouge">spec</code>. Kubernetes was ignoring all three. Deployment was running on whatever defaults it fell back to. Hard to catch just by reading a long YAML file.</p>
+
+<h2 id="the-results">The Results</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Pod</th>
+      <th>Before</th>
+      <th>After</th>
+      <th>Saved</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Grafana</td>
+      <td>320 MB</td>
+      <td>100 MB</td>
+      <td>220 MB</td>
+    </tr>
+    <tr>
+      <td>Prometheus</td>
+      <td>438 MB</td>
+      <td>242 MB</td>
+      <td>196 MB</td>
+    </tr>
+    <tr>
+      <td>Authentik server</td>
+      <td>515 MB</td>
+      <td>377 MB</td>
+      <td>138 MB</td>
+    </tr>
+    <tr>
+      <td>Chrome</td>
+      <td>188 MB</td>
+      <td>66 MB</td>
+      <td>122 MB</td>
+    </tr>
+    <tr>
+      <td>Paperless</td>
+      <td>587 MB</td>
+      <td>525 MB</td>
+      <td>62 MB</td>
+    </tr>
+    <tr>
+      <td>Media stack</td>
+      <td>~937 MB</td>
+      <td>0 MB</td>
+      <td>937 MB</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>About 1.7 GB freed on the cluster, plus two Proxmox VMs and 16 GB of allocated RAM gone entirely.</p>
+
+<p>Homeserver CPU temps dropped noticeably too. It was hitting 94 degrees Celsius during what should have been normal operation. Not dangerous for a 3600X but absolutely not idle behaviour. After the cleanup it settled back down.</p>
+
+<p><img src="assets/img/posts/kubectl-top-pods-after.webp" alt="kubectl top pods output after cleanup showing paperless at 525MB, authentik server 377MB, prometheus 242MB, grafana 100MB and media stack scaled to zero" /></p>
+
+<p>Grafana made the impact very visible. This is CPU usage across all hosts over the cleanup session.</p>
+
+<p><img src="assets/img/posts/kubetwo-cpu-cleanup.webp" alt="Grafana CPU usage graph showing kubetwo dropping from 35 percent CPU to near zero after scaling down media stack and tuning Kubernetes pods, with a brief spike during authentik Helm upgrade" /></p>
+
+<p>That cyan line is kubetwo. Started the session at around 35% CPU just from the bloated pods and media stack. Drops sharply after the scale-down and tuning. Spike in the middle is authentik restarting during the Helm upgrade. Then nearly nothing. The other hosts, nextcloud, utility, kubeone, flatlined the whole time. kubetwo was carrying almost all of the unnecessary load.</p>
+
+<h2 id="about-the-local-ai-services">About the Local AI Services</h2>
+
+<p>I want to be honest about the AI stuff because it is a real part of the power draw and it is not going away.</p>
+
+<p>I run Ollama on the GPU VM for local language models. Immich uses ML for photo face recognition and smart search. Paperless AI classifies and tags documents. karakeep uses AI for bookmarks. All on my own hardware, on purpose.</p>
+
+<p>The GTX 1660 Super draws power whether it is inferring or not. When Ollama is running a model it spikes well past 100 watts. That is expected and fine.</p>
+
+<p>What i did not account for was Immich. My wife and i both moved off Apple Photos and Google Photos to self-host our entire library. Combined that is around 30,000 photos going back 15 years or more. When Immich ML runs its initial scan on a library that size, face recognition, object detection, smart search indexing across every single image, it does not finish in an afternoon. It runs for days. On the CPU. Constantly. That absolutely showed up in the power draw and i did not connect it to the bill until later.</p>
+
+<p>It is also not done. The library keeps growing as we migrate more. And Paperless AI has barely been touched yet. I have not even started moving documents from Nextcloud into Paperless properly. When that happens and Paperless starts processing years of old scanned documents, there will be another burst of CPU-heavy work.</p>
+
+<p>So there is a baseline cost and there are spikes. The Immich scan was a spike i did not plan for. More spikes are coming. That is fine, i would rather process everything locally than hand it to Google or Apple. But knowing when those spikes are coming is the difference between a surprise bill and a planned one.</p>
+
+<p>The local AI services are deliberate. The forgotten arr pods were not. That distinction matters.</p>
+
+<h2 id="this-is-not-just-a-homelab-problem">This Is Not Just a Homelab Problem</h2>
+
+<p>This same pattern happens everywhere. VMs get provisioned for a project, nobody deletes them when it ends. Kubernetes clusters run at 15% utilisation because nobody set resource requests properly. Monitoring deployed with configs written for hundreds of machines running on eight.</p>
+
+<p>Looking at actual consumption vs. what is allocated, finding what is running vs. what is actually being used, understanding which config options matter, that is real infrastructure work. The numbers are smaller here. The skill is the same.</p>
+
+<p>Honestly, doing it at home on an electricity bill is better practice than doing it on a cloud bill. Every wrong call shows up in your wallet at the end of the quarter.</p>
+
+<blockquote class="prompt-tip">
+  <p><strong>Tip:</strong> In Proxmox, set the balloon minimum RAM close to what the VM needs at idle, not the max you want under load. A minimum set too high means the hypervisor can never reclaim that memory.</p>
+</blockquote>
+
+<h2 id="the-short-version">The Short Version</h2>
+
+<ul>
+  <li>Bill went from $300 to $800 AUD in one quarter. k3s expansion, new TrueNAS drive, GPU VM workload change, and a media stack i stopped using but never scaled down all contributed.</li>
+  <li>Idle VMs in Proxmox keep CPU cores busy enough to block deep sleep states. Higher power floor around the clock.</li>
+  <li><code class="language-plaintext highlighter-rouge">kubectl top pods -A --sort-by=memory</code> shows what is actually running. Defaults are almost never right for a homelab.</li>
+  <li>Java applications eat heap. Cap them with <code class="language-plaintext highlighter-rouge">-Xmx</code> or they sit bloated forever.</li>
+  <li>Local AI on a GPU costs real power and that is fine if you are using it. Paying for that and also running forgotten pods on top is the part to fix.</li>
+</ul>
+
+<p>The $500 is not fully reversed overnight. But i know exactly where it was coming from and how to keep it from growing back.</p>]]></content><author><name></name></author><category term="Homelab" /><category term="proxmox" /><category term="kubernetes" /><category term="homelab" /><category term="electricity" /><category term="ram" /><category term="cost" /><category term="selfhosted" /><category term="ollama" /><category term="ai" /><summary type="html"><![CDATA[Three months of homelab expansion, adding k3s, new storage, local AI, and forgetting to clean up what I was no longer using added $500 to my electricity bill. Here is how I found it and fixed it.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ashishghimire.com/assets/img/headers/homelab-electricity-bill.webp" /><media:content medium="image" url="https://ashishghimire.com/assets/img/headers/homelab-electricity-bill.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">I Finally Know If Anyone Reads This Blog</title><link href="https://ashishghimire.com/posts/blog-analytics-umami/" rel="alternate" type="text/html" title="I Finally Know If Anyone Reads This Blog" /><published>2026-03-21T00:00:00+11:00</published><updated>2026-03-21T00:00:00+11:00</updated><id>https://ashishghimire.com/posts/blog-analytics-umami</id><content type="html" xml:base="https://ashishghimire.com/posts/blog-analytics-umami/"><![CDATA[<p>For a while I had Google Analytics on this blog. The ID is still in my <code class="language-plaintext highlighter-rouge">_config.yml</code>. But here is the thing. I self-host almost everything. My photos, my notes, my automation, my media. And then I turn around and send every visitor’s data to Google so I can see a number go up. That felt wrong.</p>
 
 <p>I also applied for Google Ads a few months back and got rejected. Not enough content yet. So I am building up posts and will try again later. But in the meantime I still want to know if people are actually reading, which posts get traffic, where they come from. Without handing that data to Google.</p>
 
@@ -1661,94 +1858,4 @@ IP &gt; 192.168.135.137</p>
 
 <p>TO sign IN</p>
 
-<p><img src="assets/img/posts/071a957c87ed50e278296d12bb05a502.webp" alt="Windows login screen showing domain sign-in for MARVEL.local" /></p>]]></content><author><name></name></author><category term="Active Directory" /><category term="Active-Directory" /><category term="windows-server" /><category term="pentesting" /><category term="TCM-SEC" /><category term="PNPT" /><category term="cybersecurity" /><category term="AD" /><summary type="html"><![CDATA[How to build a local Active Directory lab for penetration testing practice using the PNPT methodology by TCM Security. Includes Windows Server 2022 and Windows 10 setup.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ashishghimire.com/assets/img/headers/activeDirectory.webp" /><media:content medium="image" url="https://ashishghimire.com/assets/img/headers/activeDirectory.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Update All Apps with One Line Of Code in Windows</title><link href="https://ashishghimire.com/posts/Install-Package-Manager-In-Windows-11/" rel="alternate" type="text/html" title="Update All Apps with One Line Of Code in Windows" /><published>2024-10-21T05:19:38+11:00</published><updated>2026-04-11T17:39:25+10:00</updated><id>https://ashishghimire.com/posts/Install-Package-Manager-In-Windows-11</id><content type="html" xml:base="https://ashishghimire.com/posts/Install-Package-Manager-In-Windows-11/"><![CDATA[<p>Its a headache to update each softwares on Windows. Its tough to update something manually.
-We do not use Microsoft Store, Microsoft. Please Leave us alone. With said that, Microsoft
-store do have a very important application there though and we can use that to update any
-and everything, well most of it.
-<a href="https://apps.microsoft.com/store/detail/app-installer/9NBLGGH4NNS1">Winget</a></p>
-
-<h2 id="winget">Winget</h2>
-
-<p>Winget is an Open Source Windows Package Manager designed to run from Command Line Interface (Terminal). From one simple command you can Install your favorite package, uninstall non-necessary ones and Update, those needed to be updated. Also it lists all the package you have installed in your system, and export it. You can format your pc and install all those packages by importing them, or give it to your non tech savvy friends so they can install those cool softwares.</p>
-
-<h2 id="lets-dive-into-it">Let’s Dive into it</h2>
-
-<p>Winget comes pre installed in Windows 11(21H2 and later).
-To verify this
-Go to Terminal and execute following command:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>`winget –version`
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>If it shows the version Skip the installation part, otherwise follow the installation.</p>
-
-<h2 id="install-winget">Install Winget:</h2>
-
-<p>Go To <a href="https://apps.microsoft.com/store/detail/app-installer/9NBLGGH4NNS1">Winget</a>.</p>
-
-<p>It will open Microsoft Store. Click on Get.
-Once Installed, restart your pc.</p>
-
-<h2 id="running-winget">Running Winget</h2>
-
-<p>Head straight to terminal and execute following command:</p>
-
-<ul>
-  <li>
-    <p>Winget Help</p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>  winget --help
-</pre></td></tr></tbody></table></code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Find Winget Packages</p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>  winget find vscode
-</pre></td></tr></tbody></table></code></pre></div>    </div>
-  </li>
-</ul>
-
-<p>This will look for vscode in the Packages.
-‘Id’ is very useful here, you may want to copy it.(just select and right click)</p>
-
-<p>Lets install VScode.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>winget install Microsoft.VisualStudioCode` (right click for paste)
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>So installation is done.</p>
-
-<p>Lets see the list,</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>winget export -o C:\Path\to\exported.json
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>Similary to import</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>winget import -i C:\Path\to\exported.json
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<h2 id="upgrade">Upgrade</h2>
-
-<p>To upgrade all available packages:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>winget upgrade --all
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>Follow the Prompts and….
-Done!</p>
-
-<h2 id="wrap-up">Wrap Up</h2>
-
-<ul>
-  <li>Install winget</li>
-  <li>Install, Update and Uninstall from CLI</li>
-  <li>Upgrade Everything available with one line</li>
-</ul>]]></content><author><name></name></author><category term="Windows" /><category term="windows" /><category term="winget" /><category term="windows-11" /><category term="package-manager" /><category term="cli" /><category term="powershell" /><summary type="html"><![CDATA[Winget is the Windows package manager. Install, update, and list all your software from the command line — like apt on Linux but for Windows 10 and 11.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ashishghimire.com/assets/img/headers/winget.webp" /><media:content medium="image" url="https://ashishghimire.com/assets/img/headers/winget.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+<p><img src="assets/img/posts/071a957c87ed50e278296d12bb05a502.webp" alt="Windows login screen showing domain sign-in for MARVEL.local" /></p>]]></content><author><name></name></author><category term="Active Directory" /><category term="Active-Directory" /><category term="windows-server" /><category term="pentesting" /><category term="TCM-SEC" /><category term="PNPT" /><category term="cybersecurity" /><category term="AD" /><summary type="html"><![CDATA[How to build a local Active Directory lab for penetration testing practice using the PNPT methodology by TCM Security. Includes Windows Server 2022 and Windows 10 setup.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ashishghimire.com/assets/img/headers/activeDirectory.webp" /><media:content medium="image" url="https://ashishghimire.com/assets/img/headers/activeDirectory.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

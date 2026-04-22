@@ -1,4 +1,199 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ashishghimire.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ashishghimire.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-04-12T17:38:50+10:00</updated><id>https://ashishghimire.com/feed.xml</id><title type="html">Ashish Ghimire</title><subtitle>Ashish Ghimire&apos;s blog on homelab, cybersecurity, self-hosting, and IT. Walkthroughs, writeups, and hands-on guides for Linux, Docker, Proxmox, networking, and more.</subtitle><entry><title type="html">My Electricity Bill Jumped From $300 to $800 in One Quarter. My Homelab Did It.</title><link href="https://ashishghimire.com/posts/homelab-electricity-bill-ram-fix/" rel="alternate" type="text/html" title="My Electricity Bill Jumped From $300 to $800 in One Quarter. My Homelab Did It." /><published>2026-04-11T23:00:00+10:00</published><updated>2026-04-11T23:00:00+10:00</updated><id>https://ashishghimire.com/posts/homelab-electricity-bill-ram-fix</id><content type="html" xml:base="https://ashishghimire.com/posts/homelab-electricity-bill-ram-fix/"><![CDATA[<p>My last electricity bill was $800 AUD for the quarter. Before the homelab got serious it was around $300. That is a $500 jump in three months and honestly, i did not see it coming.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ashishghimire.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ashishghimire.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-04-22T21:14:40+10:00</updated><id>https://ashishghimire.com/feed.xml</id><title type="html">Ashish Ghimire</title><subtitle>Ashish Ghimire&apos;s blog on homelab, cybersecurity, self-hosting, and IT. Walkthroughs, writeups, and hands-on guides for Linux, Docker, Proxmox, networking, and more.</subtitle><entry><title type="html">OPNsense Logging to Grafana via Loki: Three Gotchas That Will Catch You</title><link href="https://ashishghimire.com/posts/opnsense-logging-loki-grafana/" rel="alternate" type="text/html" title="OPNsense Logging to Grafana via Loki: Three Gotchas That Will Catch You" /><published>2026-04-21T23:00:00+10:00</published><updated>2026-04-21T23:00:00+10:00</updated><id>https://ashishghimire.com/posts/opnsense-logging-loki-grafana</id><content type="html" xml:base="https://ashishghimire.com/posts/opnsense-logging-loki-grafana/"><![CDATA[<blockquote class="prompt-info">
+  <p>I run this entire stack on a k3s cluster at home. syslog-ng, Promtail, Loki, and Grafana are all deployed as Kubernetes workloads in the <code class="language-plaintext highlighter-rouge">infra</code> namespace. If you are running this on bare Docker or a single VM, some of the specifics will differ but the problems are the same.</p>
+</blockquote>
+
+<p>So I set up the whole logging pipeline. OPNsense sending syslog to syslog-ng, syslog-ng writing to a file, Promtail tailing that file and pushing to Loki, Grafana on the other end showing everything. Ticked it off the list. Done.</p>
+
+<p>Except nothing was working. Zero logs. I just never actually checked.</p>
+
+<p>When I finally went to look, I found three separate problems. None of them threw an error. None of them told me anything was wrong. The pipeline just sat there silently doing nothing.</p>
+
+<p>Here is what they are, so you do not have to find them yourself.</p>
+
+<h2 id="the-pipeline">The Pipeline</h2>
+
+<p>Before we get into what breaks, here is what we are building:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre>OPNsense
+  └─ UDP syslog → syslog-ng (LoadBalancer IP, port 1514)
+       └─ writes to file on PVC
+            └─ Promtail (tails file, parses filterlog)
+                 └─ pushes to Loki
+                      └─ Grafana queries Loki
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>syslog-ng sits in Kubernetes and receives raw syslog from OPNsense. Promtail tails the file syslog-ng writes. Loki stores it. Grafana shows it. Simple enough. Let’s see how it breaks.</p>
+
+<h2 id="gotcha-1-syslog-ng-needs-a-loadbalancer-not-clusterip">Gotcha 1: syslog-ng Needs a LoadBalancer, Not ClusterIP</h2>
+
+<p>OPNsense lives on your LAN. It is not inside Kubernetes. When it sends a UDP syslog packet somewhere, that IP needs to be actually reachable from your network.</p>
+
+<p><code class="language-plaintext highlighter-rouge">ClusterIP</code> is only reachable from inside the cluster. So if your syslog-ng Service is <code class="language-plaintext highlighter-rouge">ClusterIP</code>, every single packet OPNsense sends just disappears. No error on the OPNsense side. No dropped message anywhere. It looks like everything is configured correctly and nothing arrives.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Service</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">syslog-ng</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">infra</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">LoadBalancer</span>   <span class="c1"># not ClusterIP</span>
+  <span class="na">ports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">port</span><span class="pi">:</span> <span class="m">1514</span>
+      <span class="na">targetPort</span><span class="pi">:</span> <span class="m">1514</span>
+      <span class="na">protocol</span><span class="pi">:</span> <span class="s">UDP</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">syslog-ng</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>If you have MetalLB running, changing to <code class="language-plaintext highlighter-rouge">LoadBalancer</code> gives you a real IP on your LAN. That is the IP you put into OPNsense.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>kubectl get svc syslog-ng <span class="nt">-n</span> infra
+<span class="c"># look at the EXTERNAL-IP column</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Then in OPNsense go to System, Settings, Logging / Targets. Transport UDP, host set to that external IP, port 1514.</p>
+
+<blockquote class="prompt-tip">
+  <p><strong>Tip:</strong> If EXTERNAL-IP stays as <code class="language-plaintext highlighter-rouge">&lt;pending&gt;</code> forever, MetalLB either is not running or has no IP pool configured for that range.</p>
+</blockquote>
+
+<h2 id="gotcha-2-promtail-does-not-listen-for-syslog">Gotcha 2: Promtail Does Not Listen for Syslog</h2>
+
+<p>This one surprised me because it seems like it should work.</p>
+
+<p>I had syslog-ng configured to forward logs to Promtail over UDP. Seemed reasonable. syslog-ng forwards, Promtail receives. Nope.</p>
+
+<p>Promtail does not receive syslog. That is not what it does. Promtail tails files, reads new lines, pushes to Loki. It has no UDP listener, no syslog receiver. So this destination in syslog-ng was sending packets into nothing:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre>destination d_promtail {
+  syslog(
+    "promtail.infra.svc.cluster.local"
+    transport("udp")
+    port(1514)
+    flags(syslog-protocol)
+  );
+};
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>How it actually works is simpler. syslog-ng writes to a file on a PVC. Promtail mounts that same PVC and tails the file. That is the whole relationship.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>log {
+  source(s_opnsense);
+  destination(d_local);   # writes to /var/log/opnsense/opnsense.log
+};
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="na">scrape_configs</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">job_name</span><span class="pi">:</span> <span class="s">opnsense</span>
+    <span class="na">static_configs</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">targets</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">localhost</span><span class="pi">]</span>
+        <span class="na">labels</span><span class="pi">:</span>
+          <span class="na">job</span><span class="pi">:</span> <span class="s">opnsense</span>
+          <span class="na">__path__</span><span class="pi">:</span> <span class="s">/var/log/opnsense/*.log</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>syslog-ng writes, Promtail reads. If you also had a Traefik <code class="language-plaintext highlighter-rouge">IngressRouteUDP</code> pointing at Promtail port 514, remove that too. Same problem.</p>
+
+<h2 id="gotcha-3-opnsense-logs-are-csv-and-grafana-cannot-read-them-without-help">Gotcha 3: OPNsense Logs Are CSV and Grafana Cannot Read Them Without Help</h2>
+
+<p>After fixing the first two, logs started arriving in Loki. Progress. But when I tried to build a dashboard, I hit a wall.</p>
+
+<p>Every OPNsense firewall log line uses a format called filterlog. Each connection gets logged as a CSV string:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>5,,,1000000103,em0.10,match,block,in,4,0x0,,64,0,0,none,6,tcp,...
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Those fields contain everything you care about: which interface, whether the connection was blocked or passed, direction, protocol. But if you do not tell Promtail to parse them, Loki stores the whole thing as a blob of text. You cannot filter by protocol. You cannot ask for blocked inbound traffic only. You just get walls of unreadable CSV in your log panels.</p>
+
+<p>Field positions (0-indexed): 4 = interface, 6 = action, 7 = direction, 8 = IP version, 16 = protocol.</p>
+
+<p>Add a <code class="language-plaintext highlighter-rouge">pipeline_stages</code> block to your Promtail config to pull the useful bits out:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="na">pipeline_stages</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">regex</span><span class="pi">:</span>
+      <span class="na">expression</span><span class="pi">:</span> <span class="s1">'</span><span class="s">filterlog\[\d+\]:</span><span class="nv"> </span><span class="s">(?:[^,]*,){4}(?P&lt;iface&gt;[^,]+),(?:[^,]+),(?P&lt;action&gt;block|pass|reject),(?P&lt;dir&gt;in|out),(?P&lt;ipver&gt;4|6)(?:(?:,[^,]*){7},(?P&lt;proto&gt;[^,]+))?'</span>
+  <span class="pi">-</span> <span class="na">labels</span><span class="pi">:</span>
+      <span class="na">action</span><span class="pi">:</span>
+      <span class="na">dir</span><span class="pi">:</span>
+      <span class="na">iface</span><span class="pi">:</span>
+      <span class="na">proto</span><span class="pi">:</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>You get <code class="language-plaintext highlighter-rouge">action</code>, <code class="language-plaintext highlighter-rouge">dir</code>, <code class="language-plaintext highlighter-rouge">iface</code>, and <code class="language-plaintext highlighter-rouge">proto</code> as proper Loki labels. Lines that are not filterlog (system events, DHCP, config changes) just pass through as-is.</p>
+
+<blockquote class="prompt-tip">
+  <p><strong>Why not pull out source and destination IPs too?</strong> Every unique IP creates its own Loki stream. Your firewall sees thousands of unique IPs. Label them and your query performance tanks. Leave IPs in the raw log line and pull them out with LogQL when you actually need them.</p>
+</blockquote>
+
+<h2 id="building-the-dashboard">Building the Dashboard</h2>
+
+<p>Once you have real labels, Grafana queries are straightforward.</p>
+
+<p>Blocked vs passed over time: <code class="language-plaintext highlighter-rouge">sum by (action) (count_over_time({job="opnsense"}[$__interval]))</code>. Protocol split: <code class="language-plaintext highlighter-rouge">sum by (proto) (count_over_time({job="opnsense"}[$__range]))</code>. Same pattern with <code class="language-plaintext highlighter-rouge">iface</code> if you want to see which VLAN or interface the traffic is coming through.</p>
+
+<p>For a live feed of blocked connections only: <code class="language-plaintext highlighter-rouge">{job="opnsense", action="block"} |= "filterlog"</code>.</p>
+
+<p><img src="assets/img/posts/opnsenseDashboard.webp" alt="" /></p>
+
+<p>Chuck the dashboard in a ConfigMap and it loads automatically every time Grafana starts. Lives in git with the rest of your infrastructure. No importing JSON through the UI every time you redeploy.</p>
+
+<h2 id="the-short-version">The Short Version</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ClusterIP</code> is not reachable from outside Kubernetes. OPNsense is on your LAN. syslog-ng needs <code class="language-plaintext highlighter-rouge">LoadBalancer</code>.</li>
+  <li>Promtail tails files. It does not receive syslog over UDP. Do not forward syslog to it from syslog-ng.</li>
+  <li>OPNsense filterlog is CSV. Without a Promtail pipeline stage, everything in Loki is unreadable text you cannot filter.</li>
+  <li>Label action, direction, interface, protocol. Keep source and destination IPs out of labels or query performance suffers.</li>
+</ul>]]></content><author><name></name></author><category term="Homelab" /><category term="opnsense" /><category term="grafana" /><category term="loki" /><category term="promtail" /><category term="syslog-ng" /><category term="kubernetes" /><category term="selfhosted" /><category term="observability" /><category term="filterlog" /><summary type="html"><![CDATA[Getting OPNsense firewall logs into Grafana via syslog-ng, Promtail, and Loki sounds straightforward. Three silent failure points will stop it from working and give you no error to debug.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ashishghimire.com/assets/img/headers/opnsenseLogging.webp" /><media:content medium="image" url="https://ashishghimire.com/assets/img/headers/opnsenseLogging.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">My Electricity Bill Jumped From $300 to $800 in One Quarter. My Homelab Did It.</title><link href="https://ashishghimire.com/posts/homelab-electricity-bill-ram-fix/" rel="alternate" type="text/html" title="My Electricity Bill Jumped From $300 to $800 in One Quarter. My Homelab Did It." /><published>2026-04-11T23:00:00+10:00</published><updated>2026-04-11T23:00:00+10:00</updated><id>https://ashishghimire.com/posts/homelab-electricity-bill-ram-fix</id><content type="html" xml:base="https://ashishghimire.com/posts/homelab-electricity-bill-ram-fix/"><![CDATA[<p>My last electricity bill was $800 AUD for the quarter. Before the homelab got serious it was around $300. That is a $500 jump in three months and honestly, i did not see it coming.</p>
 
 <p>I knew running servers 24/7 costs something. What i did not realise was how much of that $500 was pure waste. Not useful waste. Just forgotten stuff sitting there drawing power.</p>
 
@@ -1511,351 +1706,4 @@ initrd /initramfs-linux.img
 
 <blockquote class="prompt-tip">
   <p>This is straight method to install arch linux “hard way”. If you get any error or prefer different way, consult <a href="https://wiki.archlinux.org/title/Installation_guide">Arch Wiki Installation Guide</a>.</p>
-</blockquote>]]></content><author><name></name></author><category term="Linux" /><category term="arch" /><category term="linux" /><category term="install" /><category term="bootloader" /><category term="kde" /><category term="plasma" /><category term="partitioning" /><summary type="html"><![CDATA[A step-by-step guide to installing Arch Linux manually — from disk partitioning and mounting to bootloader setup — without using the archinstall script.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ashishghimire.com/assets/img/headers/ArchInstall.webp" /><media:content medium="image" url="https://ashishghimire.com/assets/img/headers/ArchInstall.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Setting Up Active Directory</title><link href="https://ashishghimire.com/posts/Setting-Up-Active-Directory/" rel="alternate" type="text/html" title="Setting Up Active Directory" /><published>2025-07-05T10:00:00+10:00</published><updated>2026-04-11T17:39:25+10:00</updated><id>https://ashishghimire.com/posts/Setting-Up-Active-Directory</id><content type="html" xml:base="https://ashishghimire.com/posts/Setting-Up-Active-Directory/"><![CDATA[<blockquote>
-  <p>‼️This is a setup for Penetration Testing in Local Network and never meant for production.</p>
-</blockquote>
-
-<p>At first Download ISOs</p>
-<ul>
-  <li><a href="https://www.microsoft.com/en-us/evalcenter/download-windows-server-2022">Windows Server Eval 2022</a></li>
-  <li><a href="https://www.microsoft.com/en-us/evalcenter/download-windows-10-enterprise">Windows 10 Enterprise</a></li>
-</ul>
-
-<h2 id="setup-domain-controller">Setup Domain Controller</h2>
-
-<ol>
-  <li>NEW VM</li>
-  <li>Typical</li>
-  <li>Server ISO</li>
-  <li>Split</li>
-  <li>Make sure its 60 GB</li>
-  <li>Finish</li>
-  <li>Edit</li>
-  <li>Add 8GB RAM</li>
-  <li>Remove Floppy Drive (Recommended)</li>
-</ol>
-
-<h3 id="install">Install</h3>
-<ol>
-  <li>Next &gt; Install Now</li>
-  <li>Standard Evaluation Desktop Experience</li>
-  <li>Custom Install</li>
-  <li>New &gt; Default &gt; Apply &gt; Ok</li>
-  <li>Next</li>
-  <li>Done</li>
-  <li>For This purpose set easy password <code class="language-plaintext highlighter-rouge">P@$$w0rd!</code></li>
-  <li>Login</li>
-  <li>Install VMWare Tools</li>
-  <li>VM &gt; Install VMWare tool</li>
-  <li>Open This PC &gt; Open ISO</li>
-  <li>Install</li>
-</ol>
-
-<h3 id="server-configuration-adds">SERVER CONFIGURATION (ADDS)</h3>
-<ol>
-  <li>Change Hostname
-    <ol>
-      <li>Start Menu &gt; Name &gt; Rename This PC</li>
-      <li>HYDRA-DC</li>
-      <li>Reboot.</li>
-    </ol>
-  </li>
-  <li>Make this a Domain Controller
-    <ol>
-      <li>Manage &gt; Add Roles and Feature
-        <ol>
-          <li>Role-based or Feature-based install &gt; Next</li>
-          <li>HYDRA-DC &gt; Next</li>
-          <li>Server Roles &gt; ✅Active Directory Domain Services (ADDS) &gt; Add Features &gt; Next</li>
-          <li>Next</li>
-          <li>Next</li>
-          <li>Restart Auto if required</li>
-          <li>Install</li>
-        </ol>
-      </li>
-      <li>Promote This Server to Domain Controller
-        <ol>
-          <li>Add a new forest</li>
-          <li>Root Domain: <code class="language-plaintext highlighter-rouge">marvel.local</code> &gt; Next</li>
-          <li>Functional Level: 2016</li>
-          <li>Same password for Admin Account &gt; Next &gt; Next</li>
-          <li>Loads netbios Automatically &gt; Next</li>
-          <li>Next to last &gt; Install</li>
-        </ol>
-      </li>
-      <li>Certificates Services
-        <ol>
-          <li>Manage</li>
-          <li>Add roles and Feature</li>
-          <li>Role Based Feature</li>
-          <li>Next to Features</li>
-          <li>Role Based Features</li>
-          <li>Active Directory Certificate Services (Used to verify ID in domain controller) (Allows us to use LDAP)</li>
-          <li>Add Features &gt; Next to AD CS Role Services</li>
-          <li>✅ Certificate Authority &gt; Next</li>
-          <li>✅ Restart if Needed</li>
-          <li>Install</li>
-        </ol>
-      </li>
-      <li>Configure Certificates Services
-        <ol>
-          <li>Flag &gt; Configure AD CS</li>
-          <li>✅ Certification AUthority &gt; Next</li>
-          <li>Private Key &gt; Create New pvt key</li>
-          <li>Default Next to Validity</li>
-          <li>99 years</li>
-          <li>Default &gt; Configure</li>
-        </ol>
-      </li>
-    </ol>
-  </li>
-</ol>
-
-<h2 id="dc">DC</h2>
-
-<p>ip: 192.168.135.131
-administrator:<code class="language-plaintext highlighter-rouge">P@$$w0rd!</code></p>
-
-<h2 id="client-setup">CLIENT SETUP</h2>
-
-<p>Setup 2 OS at same Time</p>
-<ul>
-  <li>Download WIndows 10 Enterprise ISO</li>
-</ul>
-
-<h3 id="vm-setup">VM Setup</h3>
-<ol>
-  <li>Open VMWARE</li>
-  <li>Create new VM</li>
-  <li>select Downloaded ISO</li>
-  <li>Windows 10 Enterprise &gt; Next &gt; Yes (Without product key)</li>
-  <li>Name:  THE PUNISHER &gt; Next</li>
-  <li>SIZE 60 GB &gt; Finish</li>
-  <li>Customize &gt; Remove Floppy, Adjust RAM 8 GB Cpu 4 &gt; OK</li>
-  <li>Power On and Hit any key and move to second VM do same, different name</li>
-</ol>
-
-<h3 id="os-setup">OS SETUP</h3>
-
-<p>(SIMALTANEOUSLY)</p>
-<ol>
-  <li>Power On Both Machines</li>
-  <li>Press key to continue</li>
-  <li>Install Now &gt; Accept Terms &gt; Custom &gt; Next to install</li>
-  <li>RESTART</li>
-  <li>US &gt; YES &gt; US &gt; YES &gt; SKIP</li>
-  <li>Domain Join Instead</li>
-  <li>Punisher VM = <code class="language-plaintext highlighter-rouge">frankcastle</code> password= <code class="language-plaintext highlighter-rouge">Password1</code></li>
-  <li>Spiderman VM = <code class="language-plaintext highlighter-rouge">peterparker</code> password = `Password1</li>
-  <li>All Questions Answered BOB</li>
-  <li>Disable all tracking &gt; Not Now to Cortana</li>
-  <li>WAIT</li>
-  <li>INSTALL VMWARE TOOLS</li>
-  <li>Change Hostname &gt; THEPUNISHER &amp; SPIDERMAN</li>
-</ol>
-
-<h3 id="setting-up-users-groups-and-policies">SETTING UP USERS, GROUPS and POLICIES</h3>
-
-<h4 id="server">SERVER</h4>
-
-<h5 id="user-setup">USER Setup</h5>
-<ol>
-  <li>Server Manager</li>
-  <li>Tools &gt; AD Users and Computers</li>
-  <li>Manage User Groups
-    <ol>
-      <li>MARVEL.local ( Domain Controller) &gt; <em>Right Click</em> &gt;New &gt; OU
- <img src="assets/img/posts/8374186a9e4ec287b84309cfc18497bb.webp" alt="AD Users and Computers: right-clicking MARVEL.local to create a new Organizational Unit" /></li>
-      <li>Move Everything Except <code class="language-plaintext highlighter-rouge">Admin</code> and <code class="language-plaintext highlighter-rouge">Guest</code> to New <code class="language-plaintext highlighter-rouge">Groups</code> &gt; YES
- <img src="assets/img/posts/c6a3724ed01b57185a98dd924933dfee.webp" alt="Moving default users and groups into the new Groups OU" />
- <img src="assets/img/posts/6d9f03394d84b36cc78c1f13001a55b0.webp" alt="Groups OU created with all objects moved in" /></li>
-    </ol>
-  </li>
-  <li>Create Another <code class="language-plaintext highlighter-rouge">Administrator</code>
-    <ol>
-      <li>Copy current <code class="language-plaintext highlighter-rouge">Administrator</code>
- <img src="assets/img/posts/48cfc8b6b9784b5a80c08a1d7f80fbf7.webp" alt="Copy Administrator dialog to create a new admin account" />
- <img src="assets/img/posts/e9aeeb72e351d1d5bb9d8f87c58cc1d4.webp" alt="New domain administrator account created in AD" /></li>
-    </ol>
-  </li>
-  <li>Create a <em>Service</em> account
-    <ol>
-      <li>Name: SQL Service Password: MYpassword123# (Weak pw with complexity and character count for lab purpose)
- <img src="assets/img/posts/36bda5b872772704529408c93afc73c8.webp" alt="Creating SQL Service account in AD Users and Computers" />
- <img src="assets/img/posts/bed32ca05225fd7f71d9893c7ef25376.webp" alt="SQL Service account created with weak lab password" /></li>
-    </ol>
-  </li>
-  <li>Create Two New Users
-    <ol>
-      <li><em>Right Click</em> &gt; New &gt; User
- <img src="assets/img/posts/4074da60a0098b793bd9ff010fc771a0.webp" alt="New User dialog in AD Users and Computers" />
- <img src="assets/img/posts/affb69b9b77b19b873aa9c92bef9ea79.webp" alt="User details form with name and login username filled in" />
- <img src="assets/img/posts/36cde6d2ca44f4ab89063f4f19bac706.webp" alt="Password configuration for new domain user" /></li>
-      <li>For Second User <em>copy</em> recently created user and change Names
- <img src="assets/img/posts/db44e1a5879b2613a61de42216c8713a.webp" alt="Second domain user created by copying the first user" /></li>
-    </ol>
-  </li>
-</ol>
-
-<h5 id="file-sharing-to-exploit-later">File Sharing To Exploit Later</h5>
-<ol>
-  <li>Server Manager</li>
-  <li>File Share and Storage</li>
-  <li>Shares &gt; Tasks &gt; New Shares</li>
-  <li>SMB Share Quick &gt; Next</li>
-  <li>C: is fine &gt; Next</li>
-  <li>Name: <code class="language-plaintext highlighter-rouge">hackme</code></li>
-  <li>✅Allow Caching &gt; Next</li>
-  <li>Permission &gt; Next</li>
-  <li>Create</li>
-</ol>
-
-<h5 id="setup-service-account-fully">SETUP Service Account Fully</h5>
-<ol>
-  <li>Open Command prompt as Admin</li>
-  <li><code class="language-plaintext highlighter-rouge">setspn -a HYDRA-DC/SQLService.MARVEL.local:60111 MARVEL\SQLService</code></li>
-  <li>Check with <code class="language-plaintext highlighter-rouge">setspn -T MARVEL.local -Q */*</code></li>
-</ol>
-
-<h5 id="setup-group-policy">Setup Group Policy</h5>
-<ol>
-  <li>Start Menu &gt; Group Policy Management</li>
-  <li>Forest &gt; Domains</li>
-  <li><em>Right Click</em> MARVEL.local &gt; Create a GPO in this domain and Link it here</li>
-  <li>Name: Disable Windows Defender &gt; Ok</li>
-  <li>Edit <em>Newly created Policy</em> i.e <code class="language-plaintext highlighter-rouge">Disable Windows Defender</code>
-    <ol>
-      <li>Computer Config &gt; Policies &gt; &gt; Admin Templates &gt; Windows Components &gt; Microsoft Defender Antivirus</li>
-      <li><em>Double Click</em> Turn Off Microsoft Defender Antivirus</li>
-      <li>Enabled &gt; Apply</li>
-    </ol>
-  </li>
-  <li><em>Right Click</em> &gt; Enforced</li>
-</ol>
-
-<h5 id="setup-static-ip-address">Setup Static IP Address</h5>
-<ol>
-  <li><em>Right Click</em> Network on Taskbar</li>
-  <li>Open Network Internet Settings</li>
-  <li>Change Adapter options</li>
-  <li>Ethernet0</li>
-  <li>Properties &gt; IPV4 &gt; Use Following (acquired form <code class="language-plaintext highlighter-rouge">ipconfig</code> )
-    <ol>
-      <li>IP: 192.168.135.137 (current ip from ipconfig)</li>
-      <li>Subnet Mask: 255.255.255.0</li>
-      <li>Gateway: 192.168.135.2</li>
-    </ol>
-  </li>
-  <li>Ok</li>
-</ol>
-
-<h2 id="join-machine-to-domains">Join Machine To Domains</h2>
-
-<ol>
-  <li>Login to Client Machines</li>
-  <li>Make IP Addresses Static
-    <ol>
-      <li>Change Preferred DNS server to Domain Controller’s IP i.e. 192.168.135.137</li>
-    </ol>
-  </li>
-</ol>
-
-<h2 id="make-client-devices-join-the-domain">Make Client devices Join the Domain</h2>
-
-<ol>
-  <li>Start Menu</li>
-  <li>Access Work or School
- <img src="assets/img/posts/0f0554514a2d6d14c380eea35d3aefab.webp" alt="Windows Access Work or School settings page" /></li>
-  <li>Connect
- <img src="assets/img/posts/557449303d8f76c26704e2563df0586b.webp" alt="Connect to work or school account dialog" /></li>
-  <li>Join this device to a local Active Directory Domain
- <img src="assets/img/posts/dc9bc20b351c66266191488ddcc564e4.webp" alt="Option to join device to a local Active Directory domain" /></li>
-  <li>Set it as <code class="language-plaintext highlighter-rouge">MARVEL.local</code></li>
-  <li>Enter your Domain Controller Username and Password and ENTER</li>
-  <li>We can Add as Administrator
- <img src="assets/img/posts/0ad743d75d6aad97ca3a179b8195c07f.webp" alt="Adding the joining account as Administrator during domain join" /></li>
-  <li>Restart Now</li>
-  <li>Verify If you Joined Domain
-    <ol>
-      <li>Server Manager &gt; Tools &gt; AD Users and Computers</li>
-      <li>Computers &gt; You will see both your Devices
- <img src="assets/img/posts/cb5cbaefd24d15044d0e5d6d5034c564.webp" alt="AD Users and Computers Computers container showing both client machines joined to MARVEL.local" /></li>
-    </ol>
-  </li>
-  <li>Open CLient Login with MARVEL\administrator</li>
-</ol>
-
-<h3 id="modify-local-users-for-client-machines">Modify Local Users for Client Machines</h3>
-
-<h4 id="enable-local-admin">Enable Local Admin</h4>
-<ol>
-  <li>Start &gt; Users &gt; Edit Local Users and Groups</li>
-  <li>Users &gt; Administrator &gt; Enable
- <img src="assets/img/posts/d9988e2da8a765e2b33376b90ce52dd3.webp" alt="Local Users and Groups showing Administrator account enabled" /></li>
-  <li>Set Password (Password1!)
- <img src="assets/img/posts/0d4a2e1b9dd67792e98abe81483cdf88.webp" alt="Set password dialog for local Administrator account" /></li>
-  <li>Uncheck Account is Disabled &gt; Apply &gt; OK
- <img src="assets/img/posts/b62c2c1fb9902b30c1ed9de432abdea8.webp" alt="Unchecking Account is disabled on local Administrator properties" /></li>
-</ol>
-
-<h4 id="add-other-administrators">Add Other Administrators</h4>
-
-<ol>
-  <li>Start &gt; Users &gt; Edit Local Users and Groups</li>
-  <li>
-    <p>Groups &gt; Administrators &gt; Add &gt; Search <code class="language-plaintext highlighter-rouge">fcastle</code> &gt; Check Names &gt; OK</p>
-
-    <p><img src="assets/img/posts/8cad1948d4c9dc5fdb2d34bf3652fbef.webp" alt="Adding fcastle user to local Administrators group on client machine" /></p>
-  </li>
-</ol>
-
-<h4 id="logout-and-check-local-account">Logout and Check Local Account</h4>
-<ol>
-  <li>Other Users</li>
-  <li>
-    <table>
-      <tbody>
-        <tr>
-          <td>.\peterparker</td>
-          <td>Password1</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
-  <li>Map Network Drive &gt; Z:</li>
-  <li>Folder &gt; <code class="language-plaintext highlighter-rouge">\\HYDRA-DC\hackme</code> | Connect using Different Credentials
- <img src="assets/img/posts/e454745e8310d56c791b5d560a7f3caf.webp" alt="Mapping network drive to hackme share on HYDRA-DC using domain credentials" /></li>
-  <li>Use Credentials
- username: <code class="language-plaintext highlighter-rouge">administrator</code>
- password: <code class="language-plaintext highlighter-rouge">Pa$$w0rd!</code></li>
-</ol>
-
-<h2 id="spiderman">SPIDERMAN</h2>
-
-<p>ip: 192.168.135.134
-peterparker:Password1</p>
-
-<p>local:
-peterparker</p>
-
-<h2 id="thepunisher">THEPUNISHER</h2>
-
-<p>ip: 192.168.134.135
-frankcastle:Password1</p>
-
-<p>local
-frankcastle:Password123</p>
-
-<p>Admins
-tstark@MARVEL.local
-pw: Password12345!</p>
-
-<p>SQL Service
-Password is MYpassword123#</p>
-
-<p>Domain Controller
-IP &gt; 192.168.135.137</p>
-
-<p>TO sign IN</p>
-
-<p><img src="assets/img/posts/071a957c87ed50e278296d12bb05a502.webp" alt="Windows login screen showing domain sign-in for MARVEL.local" /></p>]]></content><author><name></name></author><category term="Active Directory" /><category term="Active-Directory" /><category term="windows-server" /><category term="pentesting" /><category term="TCM-SEC" /><category term="PNPT" /><category term="cybersecurity" /><category term="AD" /><summary type="html"><![CDATA[How to build a local Active Directory lab for penetration testing practice using the PNPT methodology by TCM Security. Includes Windows Server 2022 and Windows 10 setup.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ashishghimire.com/assets/img/headers/activeDirectory.webp" /><media:content medium="image" url="https://ashishghimire.com/assets/img/headers/activeDirectory.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+</blockquote>]]></content><author><name></name></author><category term="Linux" /><category term="arch" /><category term="linux" /><category term="install" /><category term="bootloader" /><category term="kde" /><category term="plasma" /><category term="partitioning" /><summary type="html"><![CDATA[A step-by-step guide to installing Arch Linux manually — from disk partitioning and mounting to bootloader setup — without using the archinstall script.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ashishghimire.com/assets/img/headers/ArchInstall.webp" /><media:content medium="image" url="https://ashishghimire.com/assets/img/headers/ArchInstall.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

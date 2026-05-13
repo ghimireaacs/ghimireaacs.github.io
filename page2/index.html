@@ -258,8 +258,44 @@
 
   
 
-  <script defer src="https://umami.ashishghimire.com/script.js" data-website-id="9947b17c-8737-4937-abe6-587ab248dfd4"></script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3498505696958660" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://umami.ashishghimire.com">
+<link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+<link rel="dns-prefetch" href="//www.googletagmanager.com">
+<link rel="dns-prefetch" href="//googleads.g.doubleclick.net">
+
+<script defer src="https://umami.ashishghimire.com/script.js" data-website-id="9947b17c-8737-4937-abe6-587ab248dfd4"></script>
+<script>
+  (function () {
+    var loaded = false;
+
+    function loadAds() {
+      if (loaded) {
+        return;
+      }
+
+      loaded = true;
+      var script = document.createElement('script');
+      script.async = true;
+      script.crossOrigin = 'anonymous';
+      script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3498505696958660';
+      document.head.appendChild(script);
+    }
+
+    function scheduleAds() {
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(loadAds, { timeout: 3500 });
+      } else {
+        window.setTimeout(loadAds, 2500);
+      }
+    }
+
+    if (document.readyState === 'complete') {
+      scheduleAds();
+    } else {
+      window.addEventListener('load', scheduleAds, { once: true });
+    }
+  })();
+</script>
 
 </head>
 
@@ -604,63 +640,6 @@
     
 
     
-      <!-- create the image wrapper -->
-      
-
-      
-      
-
-    
-
-    <!-- combine -->
-    
-  
-    
-
-    
-    
-
-    
-
-    
-    
-
-    
-    
-    
-
-    
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-      
-
-      
-    
-
-    <!-- take out classes -->
-    
-
-    
-    
-
-    
-
-    
-      
-    
-
-    <!-- lazy-load images -->
-    
 
     
       <!-- create the image wrapper -->
@@ -721,63 +700,6 @@
     <!-- lazy-load images -->
     
 
-    
-      <!-- create the image wrapper -->
-      
-
-      
-      
-
-    
-
-    <!-- combine -->
-    
-  
-    
-
-    
-    
-
-    
-
-    
-    
-
-    
-    
-    
-
-    
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-      
-
-      
-    
-
-    <!-- take out classes -->
-    
-
-    
-    
-
-    
-
-    
-      
-    
-
-    <!-- lazy-load images -->
     
 
     
@@ -840,63 +762,6 @@
     
 
     
-      <!-- create the image wrapper -->
-      
-
-      
-      
-
-    
-
-    <!-- combine -->
-    
-  
-    
-
-    
-    
-
-    
-
-    
-    
-
-    
-    
-    
-
-    
-      
-
-      
-      
-      
-
-      
-    
-      
-
-      
-      
-      
-
-      
-    
-
-    <!-- take out classes -->
-    
-
-    
-    
-
-    
-
-    
-      
-    
-
-    <!-- lazy-load images -->
-    
 
     
       <!-- create the image wrapper -->
@@ -958,6 +823,8 @@
     
 
     
+
+    
       <!-- create the image wrapper -->
       
 
@@ -1014,6 +881,191 @@
     
 
     <!-- lazy-load images -->
+    
+
+    
+
+    
+      <!-- create the image wrapper -->
+      
+
+      
+      
+
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+
+    
+      <!-- create the image wrapper -->
+      
+
+      
+      
+
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+
+    
+      <!-- create the image wrapper -->
+      
+
+      
+      
+
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
     
 
     
@@ -1110,7 +1162,7 @@
           
 
           <div class="col-md-5">
-            <div class="preview-img  shimmer"><img src="/assets/img/headers/activeDirectory.webp" alt="Preview Image"  loading="lazy"></div>
+            <div class="preview-img  shimmer"><img src="/assets/img/headers/activeDirectory.webp" alt="Preview Image"  loading="eager" fetchpriority="high" decoding="async"></div>
           </div>
 
           

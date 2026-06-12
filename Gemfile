@@ -2,9 +2,8 @@
 
 source "https://rubygems.org"
 
-gem "jekyll-theme-chirpy", "~> 6.0", ">= 6.0.1"
+gem "jekyll-theme-chirpy", "~> 7.5"
 gem "jekyll-sitemap"
-gem "jekyll-feed"
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
 # and associated library.

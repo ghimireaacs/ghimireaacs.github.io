@@ -88,16 +88,53 @@
     {% endfor %}
 
     <!-- take out classes -->
+    {% assign _wrapper_class = '' %}
+
     {% if _class %}
-      {% capture _old_class %}class="{{ _class }}"{% endcapture %}
-      {% assign _left = _left | remove: _old_class %}
+      {% assign _remain = _class %}
+      {% assign _class_array = _class | split: ' ' %}
+
+      {% for c in _class_array %}
+        {% assign _pick = false %}
+
+        {% case c %}
+          {% when 'preview-img', 'normal', 'left', 'right', 'light', 'dark' %}
+            {% assign _pick = true %}
+          {% else %}
+            {% if c contains '-' %}
+              {% assign start = c | split: '-' | first %}
+              {% if start == 'w' %}
+                {% assign _pick = true %}
+              {% endif %}
+            {% endif %}
+        {% endcase %}
+
+        {% if _pick %}
+          {% assign _remain = _remain | remove: c | strip %}
+          {% assign _wrapper_class = _wrapper_class | append: ' ' | append: c %}
+        {% endif %}
+      {% endfor %}
+
+      {% unless _wrapper_class == '' %}
+        {% capture _old_class %}class="{{ _class }}"{% endcapture %}
+        {% assign _left = _left | remove: _old_class %}
+        {% unless _remain == '' %}
+          {% capture _new_class %}class="{{ _remain }}"{% endcapture %}
+          {% assign _left = _left | append: _new_class %}
+        {% endunless %}
+      {% endunless %}
     {% endif %}
 
     {% assign _final_src = null %}
     {% assign _lazyload = true %}
 
+    {% if page.layout == 'home' and forloop.index == 2 %}
+      {% assign _lazyload = false %}
+      {% assign _left = _left | append: ' loading="eager" fetchpriority="high" decoding="async"' %}
+    {% endif %}
+
     {%- capture _img_url -%}
-      {% include img-url.html src=_src img_path=page.img_path %}
+      {% include media-url.html src=_src subpath=page.media_subpath %}
     {%- endcapture -%}
 
     {% assign _path_prefix = _img_url | remove: _src %}
@@ -110,7 +147,7 @@
 
     {% if _lqip %}
       {% assign _lazyload = false %}
-      {% assign _class = _class | append: ' blur' %}
+      {% assign _wrapper_class = _wrapper_class | append: ' blur' %}
 
       {% unless _lqip contains 'data:' %}
         {% assign _lqip_alt = 'lqip="' | append: _path_prefix %}
@@ -121,22 +158,17 @@
       {% assign _left = _left | replace: 'src=', 'data-src=' | replace: ' lqip=', ' data-lqip="true" src=' %}
 
     {% else %}
-      {% assign _class = _class | append: ' shimmer' %}
+      {% assign _wrapper_class = _wrapper_class | append: ' shimmer' %}
     {% endif %}
 
     <!-- lazy-load images -->
-    {% if page.layout == 'home' and forloop.index == 2 %}
-      {% assign _lazyload = false %}
-      {% assign _left = _left | append: ' loading="eager" fetchpriority="high" decoding="async"' %}
-    {% endif %}
-
     {% if _lazyload %}
       {% assign _left = _left | append: ' loading="lazy"' %}
     {% endif %}
 
     {% if page.layout == 'home' %}
       <!-- create the image wrapper -->
-      {% assign _wrapper_start = '<div class="preview-img ' | append: _class | append: '">' %}
+      {% assign _wrapper_start = '<div class="preview-img ' | append: _wrapper_class | append: '">' %}
 
       {% assign _img_content = _img_content | append: _wrapper_start %}
       {% assign _right = _right | prepend: '></div' %}
@@ -146,7 +178,7 @@
       {% assign _parent = _right | slice: 1, 4 %}
 
       {% if _parent == '</a>' %}
-        <!-- add class to exist <a> tag -->
+        <!-- add class to existing <a> tag -->
         {% assign _size = _img_content | size | minus: 1 %}
         {% capture _class %}
           class="img-link{% unless _lqip %} shimmer{% endunless %}"
@@ -158,8 +190,8 @@
         {% assign _wrapper_start = _final_src
           | default: _src
           | prepend: '<a href="'
-          | append: '" class="popup img-link '
-          | append: _class
+          | append: '" class="popup img-link'
+          | append: _wrapper_class
           | append: '">'
         %}
 

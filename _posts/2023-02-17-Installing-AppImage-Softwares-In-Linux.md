@@ -3,7 +3,7 @@ layout: post
 title: "Install AppImage Softwares in Linux"
 date: 2023-02-17 03:10:16 +1100
 category: Linux
-tags: [Linux, AppImage, Software, Install]
+tags: [linux, appimage, software, install]
 description: "AppImage is a portable software format for Linux. Learn how to download, make executable, and run AppImage applications on any Linux distro without a package manager."
 image: /assets/img/headers/appimg.webp
 ---

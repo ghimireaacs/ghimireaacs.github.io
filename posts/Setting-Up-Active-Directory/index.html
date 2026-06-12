@@ -19,7 +19,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7">
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e">
-  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta
     name="viewport"
@@ -28,29 +28,28 @@
 
   
 
-  <!-- Begin Jekyll SEO tag v2.8.0 -->
+  <!-- Begin Jekyll SEO tag v2.9.0 -->
 <meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="Setting Up Active Directory" />
 <meta property="og:locale" content="en" />
 <meta name="description" content="How to build a local Active Directory lab for penetration testing practice using the PNPT methodology by TCM Security. Includes Windows Server 2022 and Windows 10 setup." />
-<meta property="og:description" content="How to build a local Active Directory lab for penetration testing practice using the PNPT methodology by TCM Security. Includes Windows Server 2022 and Windows 10 setup." />
+<meta name="twitter:description" property="og:description" content="How to build a local Active Directory lab for penetration testing practice using the PNPT methodology by TCM Security. Includes Windows Server 2022 and Windows 10 setup." />
 <link rel="canonical" href="https://ashishghimire.com/posts/Setting-Up-Active-Directory/" />
 <meta property="og:url" content="https://ashishghimire.com/posts/Setting-Up-Active-Directory/" />
 <meta property="og:site_name" content="Ashish Ghimire" />
 <meta property="og:image" content="https://ashishghimire.com/assets/img/headers/activeDirectory.webp" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2025-07-05T10:00:00+10:00" />
+<meta property="article:modified_time" content="2026-04-11T17:39:25+10:00" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta property="twitter:image" content="https://ashishghimire.com/assets/img/headers/activeDirectory.webp" />
-<meta property="twitter:title" content="Setting Up Active Directory" />
-<meta name="twitter:site" content="@ghimireaacs" />
+<meta name="twitter:image" content="https://ashishghimire.com/assets/img/headers/activeDirectory.webp" />
+<meta name="twitter:title" content="Setting Up Active Directory" />
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-04-11T17:39:25+10:00","datePublished":"2025-07-05T10:00:00+10:00","description":"How to build a local Active Directory lab for penetration testing practice using the PNPT methodology by TCM Security. Includes Windows Server 2022 and Windows 10 setup.","headline":"Setting Up Active Directory","image":"https://ashishghimire.com/assets/img/headers/activeDirectory.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/Setting-Up-Active-Directory/"},"url":"https://ashishghimire.com/posts/Setting-Up-Active-Directory/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
-  <title>Setting Up Active Directory | Ashish Ghimire
-  </title>
+  <title>Setting Up Active Directory | Ashish Ghimire</title>
 
   <!--
   The Favicons for Web, Android, Microsoft, and iOS (iPhone and iPad) Apps
@@ -59,52 +58,54 @@
 
 
 
-<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png">
-
+<link rel="icon" type="image/png" href="/assets/img/favicons/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="/assets/img/favicons/favicon.svg">
 <link rel="shortcut icon" href="/assets/img/favicons/favicon.ico">
-<meta name="apple-mobile-web-app-title" content="Ashish Ghimire">
-<meta name="application-name" content="Ashish Ghimire">
-<meta name="msapplication-TileColor" content="#da532c">
-<meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml">
-<meta name="theme-color" content="#ffffff">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png">
 
 
+
+  <!-- Resource Hints -->
   
     
-      <link rel="preconnect" href="https://fonts.googleapis.com" >
-      <link rel="dns-prefetch" href="https://fonts.googleapis.com" >
+      
+        <link rel="preconnect" href="https://fonts.googleapis.com" >
+      
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" >
+      
     
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin>
+      
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com" >
+      
     
-      <link rel="preconnect" href="https://fonts.googleapis.com" >
-      <link rel="dns-prefetch" href="https://fonts.googleapis.com" >
+      
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" >
+      
+        <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" >
+      
     
-      <link rel="preconnect" href="https://cdn.jsdelivr.net" >
-      <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" >
-    
-      <link rel="preconnect" href="https://cdnjs.cloudflare.com" >
-      <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" >
-    
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro:wght@400;600;700;900&display=swap">
-  
-
-  <!-- GA -->
   
 
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+  
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
-
+  <!-- Theme style -->
   <link rel="stylesheet" href="/assets/css/jekyll-theme-chirpy.css">
 
+  <!-- Web Font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Source+Sans+Pro:wght@400;600;700;900&display=swap">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css">
+
+  <!-- 3rd-party Dependencies -->
+
   
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.25.0/dist/tocbot.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.36.4/dist/tocbot.min.css">
   
 
   
@@ -112,156 +113,128 @@
   
 
   
-    <!-- Manific Popup -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css">
+    <!-- Image Popup -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/css/glightbox.min.css">
   
 
-  <!-- JavaScript -->
+  <!-- Scripts -->
+
+  <script src="/assets/js/dist/theme.min.js"></script>
+
+  <!-- JS selector for site. -->
+
+<!-- commons -->
+
+
+
+<!-- layout specified -->
+
 
   
-    <!-- Switch the mode between dark and light. -->
 
-<script type="text/javascript">
-  class ModeToggle {
-    static get MODE_KEY() {
-      return 'mode';
-    }
-    static get MODE_ATTR() {
-      return 'data-mode';
-    }
-    static get DARK_MODE() {
-      return 'dark';
-    }
-    static get LIGHT_MODE() {
-      return 'light';
-    }
-    static get ID() {
-      return 'mode-toggle';
-    }
+  
+    <!-- image lazy-loading & popup & clipboard -->
+    
+  
 
-    constructor() {
-      if (this.hasMode) {
-        if (this.isDarkMode) {
-          if (!this.isSysDarkPrefer) {
-            this.setDark();
-          }
-        } else {
-          if (this.isSysDarkPrefer) {
-            this.setLight();
-          }
-        }
-      }
 
-      let self = this;
 
-      /* always follow the system prefers */
-      this.sysDarkPrefers.addEventListener('change', () => {
-        if (self.hasMode) {
-          if (self.isDarkMode) {
-            if (!self.isSysDarkPrefer) {
-              self.setDark();
-            }
-          } else {
-            if (self.isSysDarkPrefer) {
-              self.setLight();
-            }
-          }
 
-          self.clearMode();
-        }
 
-        self.notify();
-      });
-    } /* constructor() */
 
-    get sysDarkPrefers() {
-      return window.matchMedia('(prefers-color-scheme: dark)');
-    }
 
-    get isSysDarkPrefer() {
-      return this.sysDarkPrefers.matches;
-    }
 
-    get isDarkMode() {
-      return this.mode === ModeToggle.DARK_MODE;
-    }
 
-    get isLightMode() {
-      return this.mode === ModeToggle.LIGHT_MODE;
-    }
 
-    get hasMode() {
-      return this.mode != null;
-    }
 
-    get mode() {
-      return sessionStorage.getItem(ModeToggle.MODE_KEY);
-    }
 
-    /* get the current mode on screen */
-    get modeStatus() {
-      if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer)) {
-        return ModeToggle.DARK_MODE;
-      } else {
-        return ModeToggle.LIGHT_MODE;
-      }
-    }
 
-    setDark() {
-      document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE);
-      sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE);
-    }
 
-    setLight() {
-      document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE);
-      sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE);
-    }
 
-    clearMode() {
-      document.documentElement.removeAttribute(ModeToggle.MODE_ATTR);
-      sessionStorage.removeItem(ModeToggle.MODE_KEY);
-    }
+  
+    
 
-    /* Notify another plugins that the theme mode has changed */
-    notify() {
-      window.postMessage(
-        {
-          direction: ModeToggle.ID,
-          message: this.modeStatus
-        },
-        '*'
-      );
-    }
+    
 
-    flipMode() {
-      if (this.hasMode) {
-        if (this.isSysDarkPrefer) {
-          if (this.isLightMode) {
-            this.clearMode();
-          } else {
-            this.setLight();
-          }
-        } else {
-          if (this.isDarkMode) {
-            this.clearMode();
-          } else {
-            this.setDark();
-          }
-        }
-      } else {
-        if (this.isSysDarkPrefer) {
-          this.setLight();
-        } else {
-          this.setDark();
-        }
-      }
+  
 
-      this.notify();
-    } /* flipMode() */
-  } /* ModeToggle */
+  
+    
 
-  const modeToggle = new ModeToggle();
-</script>
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.20/dayjs.min.js,npm/dayjs@1.11.20/locale/en.js,npm/dayjs@1.11.20/plugin/relativeTime.js,npm/dayjs@1.11.20/plugin/localizedFormat.js,npm/tocbot@4.36.4/dist/tocbot.min.js"></script>
+
+
+
+
+
+
+
+<script defer src="/assets/js/dist/post.min.js"></script>
+
+
+
+<!-- Pageviews -->
+
+  
+
+  
+
+
 
   
 
@@ -270,7 +243,7 @@
 <link rel="dns-prefetch" href="//www.googletagmanager.com">
 <link rel="dns-prefetch" href="//googleads.g.doubleclick.net">
 
-<script defer src="https://umami.ashishghimire.com/script.js" data-website-id="9947b17c-8737-4937-abe6-587ab248dfd4"></script>
+<!-- umami script now loads natively via _config.yml analytics.umami -->
 <script>
   (function () {
     var loaded = false;
@@ -314,9 +287,7 @@
   <header class="profile-wrapper">
     <a href="/" id="avatar" class="rounded-circle"><img src="/assets/img/propic.webp" width="112" height="112" alt="avatar" onerror="this.style.display='none'"></a>
 
-    <h1 class="site-title">
-      <a href="/">Ashish Ghimire</a>
-    </h1>
+    <a class="site-title d-block" href="/">Ashish Ghimire</a>
     <p class="site-subtitle fst-italic mb-0">IT | Cybersecurity | HomeLab | Self-Hosting</p>
   </header>
   <!-- .profile-wrapper -->
@@ -387,7 +358,7 @@
 
   <div class="sidebar-bottom d-flex flex-wrap  align-items-center w-100">
     
-      <button type="button" class="mode-toggle btn" aria-label="Switch Mode">
+      <button type="button" class="btn btn-link nav-link" aria-label="Switch Mode" id="mode-toggle">
         <i class="fas fa-adjust"></i>
       </button>
 
@@ -397,6 +368,7 @@
     
 
     
+          
       
 
       
@@ -420,12 +392,13 @@
         </a>
       
     
+          
       
 
       
         <a
-          href="https://twitter.com/ghimireaacs"
-          aria-label="twitter"
+          href="https://www.youtube.com/@ashishghimire"
+          aria-label="youtube"
           
 
           
@@ -439,10 +412,11 @@
             rel="noopener noreferrer"
           
         >
-          <i class="fa-brands fa-x-twitter"></i>
+          <i class="fab fa-youtube"></i>
         </a>
       
     
+          
       
 
       
@@ -466,6 +440,7 @@
         </a>
       
     
+          
       
 
       
@@ -485,11 +460,12 @@
             rel="noopener noreferrer"
           
         >
-          <i class="fa-brands fa-centos"></i>
+          <i class="fa-solid fa-link"></i>
         </a>
       
     
-      
+          
+        
 
       
         <a
@@ -517,7 +493,7 @@
       <div class="container d-flex flex-column px-xxl-5">
         <!-- The Top Bar -->
 
-<header id="topbar-wrapper" aria-label="Top Bar">
+<header id="topbar-wrapper" class="flex-shrink-0" aria-label="Top Bar">
   <div
     id="topbar"
     class="d-flex align-items-center justify-content-between px-lg-3 h-100"
@@ -547,7 +523,7 @@
     </nav>
     <!-- endof #breadcrumb -->
 
-    <button type="button" id="sidebar-trigger" class="btn btn-link">
+    <button type="button" id="sidebar-trigger" class="btn btn-link" aria-label="Sidebar">
       <i class="fas fa-bars fa-fw"></i>
     </button>
 
@@ -555,11 +531,11 @@
       Post
     </div>
 
-    <button type="button" id="search-trigger" class="btn btn-link">
+    <button type="button" id="search-trigger" class="btn btn-link" aria-label="Search">
       <i class="fas fa-search fa-fw"></i>
     </button>
 
-    <search class="align-items-center ms-3 ms-lg-0">
+    <search id="search" class="align-items-center ms-3 ms-lg-0">
       <i class="fas fa-search fa-fw"></i>
       <input
         class="form-control"
@@ -673,6 +649,10 @@
     
 
     
+
+    
+    
+
     
 
     
@@ -682,8 +662,6 @@
     
 
     <!-- lazy-load images -->
-    
-
     
 
     
@@ -738,6 +716,10 @@
     
 
     
+
+    
+    
+
     
 
     
@@ -747,8 +729,6 @@
     
 
     <!-- lazy-load images -->
-    
-
     
 
     
@@ -803,6 +783,10 @@
     
 
     
+
+    
+    
+
     
 
     
@@ -812,8 +796,6 @@
     
 
     <!-- lazy-load images -->
-    
-
     
 
     
@@ -868,6 +850,10 @@
     
 
     
+
+    
+    
+
     
 
     
@@ -877,8 +863,6 @@
     
 
     <!-- lazy-load images -->
-    
-
     
 
     
@@ -933,6 +917,10 @@
     
 
     
+
+    
+    
+
     
 
     
@@ -942,8 +930,6 @@
     
 
     <!-- lazy-load images -->
-    
-
     
 
     
@@ -998,6 +984,10 @@
     
 
     
+
+    
+    
+
     
 
     
@@ -1007,8 +997,6 @@
     
 
     <!-- lazy-load images -->
-    
-
     
 
     
@@ -1063,6 +1051,10 @@
     
 
     
+
+    
+    
+
     
 
     
@@ -1072,8 +1064,6 @@
     
 
     <!-- lazy-load images -->
-    
-
     
 
     
@@ -1128,6 +1118,10 @@
     
 
     
+
+    
+    
+
     
 
     
@@ -1137,8 +1131,6 @@
     
 
     <!-- lazy-load images -->
-    
-
     
 
     
@@ -1193,6 +1185,10 @@
     
 
     
+
+    
+    
+
     
 
     
@@ -1202,8 +1198,6 @@
     
 
     <!-- lazy-load images -->
-    
-
     
 
     
@@ -1258,6 +1252,10 @@
     
 
     
+
+    
+    
+
     
 
     
@@ -1267,8 +1265,6 @@
     
 
     <!-- lazy-load images -->
-    
-
     
 
     
@@ -1323,6 +1319,10 @@
     
 
     
+
+    
+    
+
     
 
     
@@ -1332,8 +1332,6 @@
     
 
     <!-- lazy-load images -->
-    
-
     
 
     
@@ -1388,6 +1386,10 @@
     
 
     
+
+    
+    
+
     
 
     
@@ -1397,8 +1399,6 @@
     
 
     <!-- lazy-load images -->
-    
-
     
 
     
@@ -1453,6 +1453,10 @@
     
 
     
+
+    
+    
+
     
 
     
@@ -1462,8 +1466,6 @@
     
 
     <!-- lazy-load images -->
-    
-
     
 
     
@@ -1518,6 +1520,10 @@
     
 
     
+
+    
+    
+
     
 
     
@@ -1527,8 +1533,6 @@
     
 
     <!-- lazy-load images -->
-    
-
     
 
     
@@ -1583,6 +1587,10 @@
     
 
     
+
+    
+    
+
     
 
     
@@ -1592,8 +1600,6 @@
     
 
     <!-- lazy-load images -->
-    
-
     
 
     
@@ -1648,6 +1654,10 @@
     
 
     
+
+    
+    
+
     
 
     
@@ -1657,8 +1667,6 @@
     
 
     <!-- lazy-load images -->
-    
-
     
 
     
@@ -1713,6 +1721,10 @@
     
 
     
+
+    
+    
+
     
 
     
@@ -1722,8 +1734,6 @@
     
 
     <!-- lazy-load images -->
-    
-
     
 
     
@@ -1778,6 +1788,10 @@
     
 
     
+
+    
+    
+
     
 
     
@@ -1787,8 +1801,6 @@
     
 
     <!-- lazy-load images -->
-    
-
     
 
     
@@ -1843,6 +1855,10 @@
     
 
     
+
+    
+    
+
     
 
     
@@ -1852,8 +1868,6 @@
     
 
     <!-- lazy-load images -->
-    
-
     
 
     
@@ -1908,6 +1922,10 @@
     
 
     
+
+    
+    
+
     
 
     
@@ -1917,8 +1935,6 @@
     
 
     <!-- lazy-load images -->
-    
-
     
 
     
@@ -1973,6 +1989,10 @@
     
 
     
+
+    
+    
+
     
 
     
@@ -1982,8 +2002,6 @@
     
 
     <!-- lazy-load images -->
-    
-
     
 
     
@@ -2038,6 +2056,10 @@
     
 
     
+
+    
+    
+
     
 
     
@@ -2047,8 +2069,6 @@
     
 
     <!-- lazy-load images -->
-    
-
     
 
     
@@ -2103,6 +2123,10 @@
     
 
     
+
+    
+    
+
     
 
     
@@ -2112,8 +2136,6 @@
     
 
     <!-- lazy-load images -->
-    
-
     
 
     
@@ -2456,9 +2478,18 @@
 
 
 
-<article class="px-1">
+
+
+
+
+
+
+<article class="px-1" data-toc="true">
   <header>
     <h1 data-toc-skip>Setting Up Active Directory</h1>
+    
+      <p class="post-desc fw-light mb-4">How to build a local Active Directory lab for penetration testing practice using the PNPT methodology by TCM Security. Includes Windows Server 2022 and Windows 10 setup.</p>
+    
 
     <div class="post-meta text-muted">
       <!-- published date -->
@@ -2466,7 +2497,7 @@
         Posted
         <!--
   Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
+  See: ${JS_ROOT}/modules/components/locale-datetime.js
 -->
 
 
@@ -2491,7 +2522,7 @@
           Updated
           <!--
   Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
+  See: ${JS_ROOT}/modules/components/locale-datetime.js
 -->
 
 
@@ -2536,8 +2567,12 @@
           </em>
         </span>
 
-        <!-- read time -->
-        <!-- Calculate the post's reading time, and display the word count in tooltip -->
+        <div>
+          <!-- pageviews -->
+          
+
+          <!-- read time -->
+          <!-- Calculate the post's reading time, and display the word count in tooltip -->
 
 
 
@@ -2561,11 +2596,34 @@
 >
   <em>4 min</em> read</span>
 
+        </div>
       </div>
-      <!-- .d-flex -->
     </div>
-    <!-- .post-meta -->
   </header>
+
+  
+    <div id="toc-bar" class="d-flex align-items-center justify-content-between invisible">
+      <span class="label text-truncate">Setting Up Active Directory</span>
+      <button type="button" class="toc-trigger btn me-1">
+        <i class="fa-solid fa-list-ul fa-fw"></i>
+      </button>
+    </div>
+
+    <button id="toc-solo-trigger" type="button" class="toc-trigger btn btn-outline-secondary btn-sm">
+      <span class="label ps-2 pe-1">Contents</span>
+      <i class="fa-solid fa-angle-right fa-fw"></i>
+    </button>
+
+    <dialog id="toc-popup" class="p-0">
+      <div class="header d-flex flex-row align-items-center justify-content-between">
+        <div class="label text-truncate py-2 ms-4">Setting Up Active Directory</div>
+        <button id="toc-popup-close" type="button" class="btn mx-1 my-1 opacity-75">
+          <i class="fas fa-close"></i>
+        </button>
+      </div>
+      <div id="toc-popup-content" class="px-4 py-3 pb-4"></div>
+    </dialog>
+  
 
   <div class="content">
     <blockquote>
@@ -2722,34 +2780,34 @@ administrator:<code class="language-plaintext highlighter-rouge">P@$$w0rd!</code
   <li>Manage User Groups
     <ol>
       <li>MARVEL.local ( Domain Controller) &gt; <em>Right Click</em> &gt;New &gt; OU
- <a href="/assets/img/posts/8374186a9e4ec287b84309cfc18497bb.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/8374186a9e4ec287b84309cfc18497bb.webp" alt="AD Users and Computers: right-clicking MARVEL.local to create a new Organizational Unit" loading="lazy"></a></li>
+ <a href="/assets/img/posts/8374186a9e4ec287b84309cfc18497bb.webp" class="popup img-link shimmer"><img src="/assets/img/posts/8374186a9e4ec287b84309cfc18497bb.webp" alt="AD Users and Computers: right-clicking MARVEL.local to create a new Organizational Unit" loading="lazy"></a></li>
       <li>Move Everything Except <code class="language-plaintext highlighter-rouge">Admin</code> and <code class="language-plaintext highlighter-rouge">Guest</code> to New <code class="language-plaintext highlighter-rouge">Groups</code> &gt; YES
- <a href="/assets/img/posts/c6a3724ed01b57185a98dd924933dfee.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/c6a3724ed01b57185a98dd924933dfee.webp" alt="Moving default users and groups into the new Groups OU" loading="lazy"></a>
- <a href="/assets/img/posts/6d9f03394d84b36cc78c1f13001a55b0.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/6d9f03394d84b36cc78c1f13001a55b0.webp" alt="Groups OU created with all objects moved in" loading="lazy"></a></li>
+ <a href="/assets/img/posts/c6a3724ed01b57185a98dd924933dfee.webp" class="popup img-link shimmer"><img src="/assets/img/posts/c6a3724ed01b57185a98dd924933dfee.webp" alt="Moving default users and groups into the new Groups OU" loading="lazy"></a>
+ <a href="/assets/img/posts/6d9f03394d84b36cc78c1f13001a55b0.webp" class="popup img-link shimmer"><img src="/assets/img/posts/6d9f03394d84b36cc78c1f13001a55b0.webp" alt="Groups OU created with all objects moved in" loading="lazy"></a></li>
     </ol>
   </li>
   <li>Create Another <code class="language-plaintext highlighter-rouge">Administrator</code>
     <ol>
       <li>Copy current <code class="language-plaintext highlighter-rouge">Administrator</code>
- <a href="/assets/img/posts/48cfc8b6b9784b5a80c08a1d7f80fbf7.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/48cfc8b6b9784b5a80c08a1d7f80fbf7.webp" alt="Copy Administrator dialog to create a new admin account" loading="lazy"></a>
- <a href="/assets/img/posts/e9aeeb72e351d1d5bb9d8f87c58cc1d4.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/e9aeeb72e351d1d5bb9d8f87c58cc1d4.webp" alt="New domain administrator account created in AD" loading="lazy"></a></li>
+ <a href="/assets/img/posts/48cfc8b6b9784b5a80c08a1d7f80fbf7.webp" class="popup img-link shimmer"><img src="/assets/img/posts/48cfc8b6b9784b5a80c08a1d7f80fbf7.webp" alt="Copy Administrator dialog to create a new admin account" loading="lazy"></a>
+ <a href="/assets/img/posts/e9aeeb72e351d1d5bb9d8f87c58cc1d4.webp" class="popup img-link shimmer"><img src="/assets/img/posts/e9aeeb72e351d1d5bb9d8f87c58cc1d4.webp" alt="New domain administrator account created in AD" loading="lazy"></a></li>
     </ol>
   </li>
   <li>Create a <em>Service</em> account
     <ol>
       <li>Name: SQL Service Password: MYpassword123# (Weak pw with complexity and character count for lab purpose)
- <a href="/assets/img/posts/36bda5b872772704529408c93afc73c8.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/36bda5b872772704529408c93afc73c8.webp" alt="Creating SQL Service account in AD Users and Computers" loading="lazy"></a>
- <a href="/assets/img/posts/bed32ca05225fd7f71d9893c7ef25376.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/bed32ca05225fd7f71d9893c7ef25376.webp" alt="SQL Service account created with weak lab password" loading="lazy"></a></li>
+ <a href="/assets/img/posts/36bda5b872772704529408c93afc73c8.webp" class="popup img-link shimmer"><img src="/assets/img/posts/36bda5b872772704529408c93afc73c8.webp" alt="Creating SQL Service account in AD Users and Computers" loading="lazy"></a>
+ <a href="/assets/img/posts/bed32ca05225fd7f71d9893c7ef25376.webp" class="popup img-link shimmer"><img src="/assets/img/posts/bed32ca05225fd7f71d9893c7ef25376.webp" alt="SQL Service account created with weak lab password" loading="lazy"></a></li>
     </ol>
   </li>
   <li>Create Two New Users
     <ol>
       <li><em>Right Click</em> &gt; New &gt; User
- <a href="/assets/img/posts/4074da60a0098b793bd9ff010fc771a0.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/4074da60a0098b793bd9ff010fc771a0.webp" alt="New User dialog in AD Users and Computers" loading="lazy"></a>
- <a href="/assets/img/posts/affb69b9b77b19b873aa9c92bef9ea79.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/affb69b9b77b19b873aa9c92bef9ea79.webp" alt="User details form with name and login username filled in" loading="lazy"></a>
- <a href="/assets/img/posts/36cde6d2ca44f4ab89063f4f19bac706.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/36cde6d2ca44f4ab89063f4f19bac706.webp" alt="Password configuration for new domain user" loading="lazy"></a></li>
+ <a href="/assets/img/posts/4074da60a0098b793bd9ff010fc771a0.webp" class="popup img-link shimmer"><img src="/assets/img/posts/4074da60a0098b793bd9ff010fc771a0.webp" alt="New User dialog in AD Users and Computers" loading="lazy"></a>
+ <a href="/assets/img/posts/affb69b9b77b19b873aa9c92bef9ea79.webp" class="popup img-link shimmer"><img src="/assets/img/posts/affb69b9b77b19b873aa9c92bef9ea79.webp" alt="User details form with name and login username filled in" loading="lazy"></a>
+ <a href="/assets/img/posts/36cde6d2ca44f4ab89063f4f19bac706.webp" class="popup img-link shimmer"><img src="/assets/img/posts/36cde6d2ca44f4ab89063f4f19bac706.webp" alt="Password configuration for new domain user" loading="lazy"></a></li>
       <li>For Second User <em>copy</em> recently created user and change Names
- <a href="/assets/img/posts/db44e1a5879b2613a61de42216c8713a.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/db44e1a5879b2613a61de42216c8713a.webp" alt="Second domain user created by copying the first user" loading="lazy"></a></li>
+ <a href="/assets/img/posts/db44e1a5879b2613a61de42216c8713a.webp" class="popup img-link shimmer"><img src="/assets/img/posts/db44e1a5879b2613a61de42216c8713a.webp" alt="Second domain user created by copying the first user" loading="lazy"></a></li>
     </ol>
   </li>
 </ol>
@@ -2822,21 +2880,21 @@ administrator:<code class="language-plaintext highlighter-rouge">P@$$w0rd!</code
 <ol>
   <li>Start Menu</li>
   <li>Access Work or School
- <a href="/assets/img/posts/0f0554514a2d6d14c380eea35d3aefab.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/0f0554514a2d6d14c380eea35d3aefab.webp" alt="Windows Access Work or School settings page" loading="lazy"></a></li>
+ <a href="/assets/img/posts/0f0554514a2d6d14c380eea35d3aefab.webp" class="popup img-link shimmer"><img src="/assets/img/posts/0f0554514a2d6d14c380eea35d3aefab.webp" alt="Windows Access Work or School settings page" loading="lazy"></a></li>
   <li>Connect
- <a href="/assets/img/posts/557449303d8f76c26704e2563df0586b.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/557449303d8f76c26704e2563df0586b.webp" alt="Connect to work or school account dialog" loading="lazy"></a></li>
+ <a href="/assets/img/posts/557449303d8f76c26704e2563df0586b.webp" class="popup img-link shimmer"><img src="/assets/img/posts/557449303d8f76c26704e2563df0586b.webp" alt="Connect to work or school account dialog" loading="lazy"></a></li>
   <li>Join this device to a local Active Directory Domain
- <a href="/assets/img/posts/dc9bc20b351c66266191488ddcc564e4.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/dc9bc20b351c66266191488ddcc564e4.webp" alt="Option to join device to a local Active Directory domain" loading="lazy"></a></li>
+ <a href="/assets/img/posts/dc9bc20b351c66266191488ddcc564e4.webp" class="popup img-link shimmer"><img src="/assets/img/posts/dc9bc20b351c66266191488ddcc564e4.webp" alt="Option to join device to a local Active Directory domain" loading="lazy"></a></li>
   <li>Set it as <code class="language-plaintext highlighter-rouge">MARVEL.local</code></li>
   <li>Enter your Domain Controller Username and Password and ENTER</li>
   <li>We can Add as Administrator
- <a href="/assets/img/posts/0ad743d75d6aad97ca3a179b8195c07f.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/0ad743d75d6aad97ca3a179b8195c07f.webp" alt="Adding the joining account as Administrator during domain join" loading="lazy"></a></li>
+ <a href="/assets/img/posts/0ad743d75d6aad97ca3a179b8195c07f.webp" class="popup img-link shimmer"><img src="/assets/img/posts/0ad743d75d6aad97ca3a179b8195c07f.webp" alt="Adding the joining account as Administrator during domain join" loading="lazy"></a></li>
   <li>Restart Now</li>
   <li>Verify If you Joined Domain
     <ol>
       <li>Server Manager &gt; Tools &gt; AD Users and Computers</li>
       <li>Computers &gt; You will see both your Devices
- <a href="/assets/img/posts/cb5cbaefd24d15044d0e5d6d5034c564.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/cb5cbaefd24d15044d0e5d6d5034c564.webp" alt="AD Users and Computers Computers container showing both client machines joined to MARVEL.local" loading="lazy"></a></li>
+ <a href="/assets/img/posts/cb5cbaefd24d15044d0e5d6d5034c564.webp" class="popup img-link shimmer"><img src="/assets/img/posts/cb5cbaefd24d15044d0e5d6d5034c564.webp" alt="AD Users and Computers Computers container showing both client machines joined to MARVEL.local" loading="lazy"></a></li>
     </ol>
   </li>
   <li>Open CLient Login with MARVEL\administrator</li>
@@ -2848,11 +2906,11 @@ administrator:<code class="language-plaintext highlighter-rouge">P@$$w0rd!</code
 <ol>
   <li>Start &gt; Users &gt; Edit Local Users and Groups</li>
   <li>Users &gt; Administrator &gt; Enable
- <a href="/assets/img/posts/d9988e2da8a765e2b33376b90ce52dd3.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/d9988e2da8a765e2b33376b90ce52dd3.webp" alt="Local Users and Groups showing Administrator account enabled" loading="lazy"></a></li>
+ <a href="/assets/img/posts/d9988e2da8a765e2b33376b90ce52dd3.webp" class="popup img-link shimmer"><img src="/assets/img/posts/d9988e2da8a765e2b33376b90ce52dd3.webp" alt="Local Users and Groups showing Administrator account enabled" loading="lazy"></a></li>
   <li>Set Password (Password1!)
- <a href="/assets/img/posts/0d4a2e1b9dd67792e98abe81483cdf88.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/0d4a2e1b9dd67792e98abe81483cdf88.webp" alt="Set password dialog for local Administrator account" loading="lazy"></a></li>
+ <a href="/assets/img/posts/0d4a2e1b9dd67792e98abe81483cdf88.webp" class="popup img-link shimmer"><img src="/assets/img/posts/0d4a2e1b9dd67792e98abe81483cdf88.webp" alt="Set password dialog for local Administrator account" loading="lazy"></a></li>
   <li>Uncheck Account is Disabled &gt; Apply &gt; OK
- <a href="/assets/img/posts/b62c2c1fb9902b30c1ed9de432abdea8.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/b62c2c1fb9902b30c1ed9de432abdea8.webp" alt="Unchecking Account is disabled on local Administrator properties" loading="lazy"></a></li>
+ <a href="/assets/img/posts/b62c2c1fb9902b30c1ed9de432abdea8.webp" class="popup img-link shimmer"><img src="/assets/img/posts/b62c2c1fb9902b30c1ed9de432abdea8.webp" alt="Unchecking Account is disabled on local Administrator properties" loading="lazy"></a></li>
 </ol>
 
 <h4 id="add-other-administrators"><span class="me-2">Add Other Administrators</span><a href="#add-other-administrators" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
@@ -2862,7 +2920,7 @@ administrator:<code class="language-plaintext highlighter-rouge">P@$$w0rd!</code
   <li>
     <p>Groups &gt; Administrators &gt; Add &gt; Search <code class="language-plaintext highlighter-rouge">fcastle</code> &gt; Check Names &gt; OK</p>
 
-    <p><a href="/assets/img/posts/8cad1948d4c9dc5fdb2d34bf3652fbef.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/8cad1948d4c9dc5fdb2d34bf3652fbef.webp" alt="Adding fcastle user to local Administrators group on client machine" loading="lazy"></a></p>
+    <p><a href="/assets/img/posts/8cad1948d4c9dc5fdb2d34bf3652fbef.webp" class="popup img-link shimmer"><img src="/assets/img/posts/8cad1948d4c9dc5fdb2d34bf3652fbef.webp" alt="Adding fcastle user to local Administrators group on client machine" loading="lazy"></a></p>
   </li>
 </ol>
 
@@ -2881,7 +2939,7 @@ administrator:<code class="language-plaintext highlighter-rouge">P@$$w0rd!</code
   </li>
   <li>Map Network Drive &gt; Z:</li>
   <li>Folder &gt; <code class="language-plaintext highlighter-rouge">\\HYDRA-DC\hackme</code> | Connect using Different Credentials
- <a href="/assets/img/posts/e454745e8310d56c791b5d560a7f3caf.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/e454745e8310d56c791b5d560a7f3caf.webp" alt="Mapping network drive to hackme share on HYDRA-DC using domain credentials" loading="lazy"></a></li>
+ <a href="/assets/img/posts/e454745e8310d56c791b5d560a7f3caf.webp" class="popup img-link shimmer"><img src="/assets/img/posts/e454745e8310d56c791b5d560a7f3caf.webp" alt="Mapping network drive to hackme share on HYDRA-DC using domain credentials" loading="lazy"></a></li>
   <li>Use Credentials
  username: <code class="language-plaintext highlighter-rouge">administrator</code>
  password: <code class="language-plaintext highlighter-rouge">Pa$$w0rd!</code></li>
@@ -2915,7 +2973,7 @@ IP &gt; 192.168.135.137</p>
 
 <p>TO sign IN</p>
 
-<p><a href="/assets/img/posts/071a957c87ed50e278296d12bb05a502.webp" class="popup img-link  shimmer"><img src="/assets/img/posts/071a957c87ed50e278296d12bb05a502.webp" alt="Windows login screen showing domain sign-in for MARVEL.local" loading="lazy"></a></p>
+<p><a href="/assets/img/posts/071a957c87ed50e278296d12bb05a502.webp" class="popup img-link shimmer"><img src="/assets/img/posts/071a957c87ed50e278296d12bb05a502.webp" alt="Windows login screen showing domain sign-in for MARVEL.local" loading="lazy"></a></p>
 
   </div>
 
@@ -3066,7 +3124,7 @@ IP &gt; 192.168.135.137</p>
           </main>
 
           <!-- panel -->
-          <aside aria-label="Panel" id="panel-wrapper" class="col-xl-3 ps-2 mb-5 text-muted">
+          <aside aria-label="Panel" id="panel-wrapper" class="col-xl-3 ps-2 text-muted">
             <div class="access">
               <!-- Get 5 last posted/updated posts -->
 
@@ -3086,6 +3144,13 @@ IP &gt; 192.168.135.137</p>
   <section id="access-lastmod">
     <h2 class="panel-heading">Recently Updated</h2>
     <ul class="content list-unstyled ps-0 pb-1 ms-1 mt-2">
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Installing-AppImage-Softwares-In-Linux/">Install AppImage Softwares in Linux</a>
+        </li>
       
         
         
@@ -3113,13 +3178,6 @@ IP &gt; 192.168.135.137</p>
         
         <li class="text-truncate lh-lg">
           <a href="/posts/Vulnhub-Kioptrix-P-1/">Vulnhub Kioptrix Walkthrough Part 1</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/Vulnhub-Kioptrix-P-2/">Vulnhub Kioptrix Walkthrough Part 2</a>
         </li>
       
     </ul>
@@ -3293,172 +3351,6 @@ IP &gt; 192.168.135.137</p>
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
   
     
     
@@ -3507,205 +3399,6 @@ IP &gt; 192.168.135.137</p>
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -3961,122 +3654,242 @@ IP &gt; 192.168.135.137</p>
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
 
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
   
     
     
@@ -4393,6 +4206,207 @@ IP &gt; 192.168.135.137</p>
     
     
     
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
   
     
     
@@ -5052,31 +5066,6 @@ IP &gt; 192.168.135.137</p>
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -5109,10 +5098,10 @@ IP &gt; 192.168.135.137</p>
     <div class="d-flex flex-wrap mt-3 mb-1 me-3">
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/homelab/">homelab</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/linux/">linux</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/linux/">linux</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/homelab/">homelab</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/selfhosted/">selfhosted</a>
@@ -5136,7 +5125,7 @@ IP &gt; 192.168.135.137</p>
         <a class="post-tag btn btn-outline-primary" href="/tags/guide/">guide</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/kioptrix/">kioptrix</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/install/">install</a>
       
     </div>
   </section>
@@ -5150,8 +5139,12 @@ IP &gt; 192.168.135.137</p>
 
 
 
-  <section id="toc-wrapper" class="ps-0 pe-4">
-    <h2 class="panel-heading ps-3 pt-2 mb-2">Contents</h2>
+
+
+
+  <div class="toc-border-cover z-3"></div>
+  <section id="toc-wrapper" class="invisible position-sticky ps-0 pe-4 pb-4">
+    <h2 class="panel-heading ps-3 pb-2 mb-0">Contents</h2>
     <nav id="toc"></nav>
   </section>
 
@@ -5188,46 +5181,47 @@ IP &gt; 192.168.135.137</p>
 
 
 
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
   
 
   
     
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
 
 
 
@@ -5243,83 +5237,11 @@ IP &gt; 192.168.135.137</p>
     <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
       
         <article class="col">
-          <a href="/posts/Bitwarden/" class="post-preview card h-100">
-            <div class="card-body">
-              <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1677152071"
-  data-df="ll"
-  
->
-  Feb 23, 2023
-</time>
-
-              <h4 class="pt-0 my-2">You need to use Password Manager right NOW!!</h4>
-              <div class="text-muted">
-                <p>
-                  
-
-
-
-
-
-                  Let’s see how many account do you have in the internet? Facebook, Gmail, Instagram, Twitter, Bank Account. Ah yeah Bank Account. Do you use same password for everything or atleast multiple accounts...
-                </p>
-              </div>
-            </div>
-          </a>
-        </article>
-      
-        <article class="col">
-          <a href="/posts/Vulnhub-Kioptrix-P-1/" class="post-preview card h-100">
-            <div class="card-body">
-              <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1671365491"
-  data-df="ll"
-  
->
-  Dec 18, 2022
-</time>
-
-              <h4 class="pt-0 my-2">Vulnhub Kioptrix Walkthrough Part 1</h4>
-              <div class="text-muted">
-                <p>
-                  
-
-
-
-
-
-                  This is part of the TCM Security Practical Ethical Hacking course. Kioptrix is a classic beginner-friendly vulnerable machine available on Vulnhub. The idea is to compromise the machine and underst...
-                </p>
-              </div>
-            </div>
-          </a>
-        </article>
-      
-        <article class="col">
           <a href="/posts/Vulnhub-Kioptrix-P-2/" class="post-preview card h-100">
             <div class="card-body">
               <!--
   Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
+  See: ${JS_ROOT}/modules/components/locale-datetime.js
 -->
 
 
@@ -5336,15 +5258,63 @@ IP &gt; 192.168.135.137</p>
 
               <h4 class="pt-0 my-2">Vulnhub Kioptrix Walkthrough Part 2</h4>
               <div class="text-muted">
-                <p>
-                  
+                <p>Vulnhub Kioptrix Level 2 walkthrough covering web app enumeration with Nikto, directory brute-forcing with Dirbuster, and exploitation techniques using Burpsuite.</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
+          <a href="/posts/Vulnhub-Kioptrix-P-1/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/modules/components/locale-datetime.js
+-->
 
 
 
 
+<time
+  
+  data-ts="1671365491"
+  data-df="ll"
+  
+>
+  Dec 18, 2022
+</time>
 
-                  Continuing from Kioptrix Part 1 where we did network discovery and port scanning. Now we go deeper into the web application running on the target. The main tools here are Nikto, Dirbuster, and Burp...
-                </p>
+              <h4 class="pt-0 my-2">Vulnhub Kioptrix Walkthrough Part 1</h4>
+              <div class="text-muted">
+                <p>Step-by-step walkthrough of Vulnhub Kioptrix Level 1. Covers network discovery with net-discover and arp-scan, service enumeration, and exploitation. TCM Security training series.</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
+          <a href="/posts/Bitwarden/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/modules/components/locale-datetime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1677152071"
+  data-df="ll"
+  
+>
+  Feb 23, 2023
+</time>
+
+              <h4 class="pt-0 my-2">You need to use Password Manager right NOW!!</h4>
+              <div class="text-muted">
+                <p>With data breaches everywhere, internet security is a major concern. Even if you do not want to go through any hassle, here are the minimum steps that will put you from easy targets to hard.</p>
               </div>
             </div>
           </a>
@@ -5385,79 +5355,6 @@ IP &gt; 192.168.135.137</p>
 </nav>
 
             
-              
-              <!--  The comments switcher -->
-
-  
-  <!-- https://giscus.app/ -->
-<script type="text/javascript">
-  (function () {
-    const origin = 'https://giscus.app';
-    const iframe = 'iframe.giscus-frame';
-    const lightTheme = 'light';
-    const darkTheme = 'dark_dimmed';
-
-    let initTheme = lightTheme;
-    const html = document.documentElement;
-
-    if (
-      (html.hasAttribute('data-mode') &&
-        html.getAttribute('data-mode') === 'dark') ||
-      (!html.hasAttribute('data-mode') &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
-      initTheme = darkTheme;
-    }
-
-    let giscusAttributes = {
-      src: 'https://giscus.app/client.js',
-      'data-repo': 'ghimireaacs/ghimireaacs.github.io',
-      'data-repo-id': 'R_kgDOMtvk9Q',
-      'data-category': 'Comments',
-      'data-category-id': 'DIC_kwDOMtvk9c4Ci5wE',
-      'data-mapping': 'pathname',
-      'data-reactions-enabled': '1',
-      'data-emit-metadata': '0',
-      'data-theme': initTheme,
-      'data-input-position': 'bottom',
-      'data-lang': 'en',
-      'data-loading': 'lazy',
-      crossorigin: 'anonymous',
-      async: ''
-    };
-
-    let giscusScript = document.createElement('script');
-    Object.entries(giscusAttributes).forEach(([key, value]) =>
-      giscusScript.setAttribute(key, value)
-    );
-    document.getElementById('tail-wrapper').appendChild(giscusScript);
-
-    addEventListener('message', (event) => {
-      if (
-        event.source === window &&
-        event.data &&
-        event.data.direction === ModeToggle.ID
-      ) {
-        /* global theme mode changed */
-        const mode = event.data.message;
-        const theme = mode === ModeToggle.DARK_MODE ? darkTheme : lightTheme;
-
-        const message = {
-          setConfig: {
-            theme: theme
-          }
-        };
-
-        const giscus = document.querySelector(iframe).contentWindow;
-        giscus.postMessage({ giscus: message }, origin);
-      }
-    });
-  })();
-</script>
-
-
-
-            
 
             <!-- The Footer -->
 
@@ -5493,7 +5390,7 @@ IP &gt; 192.168.135.137</p>
 
         <!-- The Search results -->
 
-<div id="search-result-wrapper" class="d-flex justify-content-center unloaded">
+<div id="search-result-wrapper" class="d-flex justify-content-center d-none">
   <div class="col-11 content">
     <div id="search-hints">
       <!-- The trending tags list -->
@@ -5662,172 +5559,6 @@ IP &gt; 192.168.135.137</p>
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
   
     
     
@@ -5876,205 +5607,6 @@ IP &gt; 192.168.135.137</p>
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -6330,122 +5862,242 @@ IP &gt; 192.168.135.137</p>
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
 
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
   
     
     
@@ -6762,6 +6414,207 @@ IP &gt; 192.168.135.137</p>
     
     
     
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
   
     
     
@@ -7421,31 +7274,6 @@ IP &gt; 192.168.135.137</p>
     
     
       
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
     
   
     
@@ -7478,10 +7306,10 @@ IP &gt; 192.168.135.137</p>
     <div class="d-flex flex-wrap mt-3 mb-1 me-3">
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/homelab/">homelab</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/linux/">linux</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/linux/">linux</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/homelab/">homelab</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/selfhosted/">selfhosted</a>
@@ -7505,7 +7333,7 @@ IP &gt; 192.168.135.137</p>
         <a class="post-tag btn btn-outline-primary" href="/tags/guide/">guide</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/kioptrix/">kioptrix</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/install/">install</a>
       
     </div>
   </section>
@@ -7525,134 +7353,70 @@ IP &gt; 192.168.135.137</p>
       </aside>
     </div>
 
-    <div id="mask"></div>
+    <div id="mask" class="d-none position-fixed w-100 h-100 z-1"></div>
 
     
 
-    <!-- JavaScripts -->
-
-    <!-- JS selector for site. -->
-
-<!-- commons -->
-
-
-
-<!-- layout specified -->
-
-
-
-
-  
-
-  
-    <!-- image lazy-loading & popup & clipboard -->
-    
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-    
+    <!-- Embedded scripts -->
 
     
+      
+      <!-- The comments switcher -->
 
   
+  <!-- https://giscus.app/ -->
+<script>
+  (function () {
+    const themeMapper = Theme.getThemeMapper('light', 'dark_dimmed');
+    const initTheme = themeMapper[Theme.visualState];
 
-  
-    
+    let lang = 'en';if (lang.length > 2 && !lang.startsWith('zh')) {
+      lang = lang.slice(0, 2);
+    }
 
-    
+    let giscusAttributes = {
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'ghimireaacs/ghimireaacs.github.io',
+      'data-repo-id': 'R_kgDOMtvk9Q',
+      'data-category': 'Comments',
+      'data-category-id': 'DIC_kwDOMtvk9c4Ci5wE',
+      'data-mapping': 'pathname',
+      'data-strict' : '0',
+      'data-reactions-enabled': '1',
+      'data-emit-metadata': '0',
+      'data-theme': initTheme,
+      'data-input-position': 'bottom',
+      'data-lang': lang,
+      'data-loading': 'lazy',
+      crossorigin: 'anonymous',
+      async: ''
+    };
 
-  
+    let giscusNode = document.createElement('script');
+    Object.entries(giscusAttributes).forEach(([key, value]) =>
+      giscusNode.setAttribute(key, value)
+    );
 
-  
-    
+    const $footer = document.querySelector('footer');
+    $footer.insertAdjacentElement("beforebegin", giscusNode);
 
-    
+    addEventListener('message', (event) => {
+      if (event.source === window && event.data && event.data.id === Theme.ID) {
+        const newTheme = themeMapper[Theme.visualState];
 
-  
+        const message = {
+          setConfig: {
+            theme: newTheme
+          }
+        };
 
-  
-    
-
-    
-
-  
-
-  
-    
-
-    
-
-  
-
-  
-    
-
-    
-
-  
-
-  
-    
-
-    
-
-  
-
-  
-    
-
-    
-
-  
-
-  
-    
-
-    
-
-  
-
-  
-    
-
-    
-
-  
-
-  
-    
-
-    
-
-  
-
-
-
-  <script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.7.1/dist/jquery.min.js,npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js,npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/magnific-popup@1.1.0/dist/jquery.magnific-popup.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.10/dayjs.min.js,npm/dayjs@1.11.10/locale/en.min.js,npm/dayjs@1.11.10/plugin/relativeTime.min.js,npm/dayjs@1.11.10/plugin/localizedFormat.min.js,npm/tocbot@4.25.0/dist/tocbot.min.js"></script>
-
-
-
-
-
-
-<script defer src="/assets/js/dist/post.min.js"></script>
-
-
-
+        const giscus =
+          document.getElementsByClassName('giscus-frame')[0].contentWindow;
+        giscus.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+    });
+  })();
+</script>
 
 
 
@@ -7668,30 +7432,32 @@ IP &gt; 192.168.135.137</p>
 
 
 <script>
-  /* Note: dependent library will be loaded in `js-selector.html` */
-  SimpleJekyllSearch({
-    searchInput: document.getElementById('search-input'),
-    resultsContainer: document.getElementById('search-results'),
-    json: '/assets/js/data/search.json',
-    searchResultTemplate: '  <article class="px-1 px-sm-2 px-lg-4 px-xl-0">    <header>      <h2><a href="{url}">{title}</a></h2>      <div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1">        {categories}        {tags}      </div>    </header>    <p>{snippet}</p>  </article>',
-    noResultsText: '<p class="mt-5"></p>',
-    templateMiddleware: function(prop, value, template) {
-      if (prop === 'categories') {
-        if (value === '') {
-          return `${value}`;
-        } else {
-          return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`;
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    SimpleJekyllSearch({
+      searchInput: document.getElementById('search-input'),
+      resultsContainer: document.getElementById('search-results'),
+      json: '/assets/js/data/search.json',
+      searchResultTemplate: '  <article class="px-1 px-sm-2 px-lg-4 px-xl-0">    <header>      <h2><a href="{url}">{title}</a></h2>      <div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1">        {categories}        {tags}      </div>    </header>    <p>{content}</p>  </article>',
+      noResultsText: '<p class="mt-5">Oops! No results found.</p>',
+      templateMiddleware: function(prop, value, template) {
+        if (prop === 'categories') {
+          if (value === '') {
+            return `${value}`;
+          } else {
+            return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`;
+          }
         }
-      }
 
-      if (prop === 'tags') {
-        if (value === '') {
-          return `${value}`;
-        } else {
-          return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`;
+        if (prop === 'tags') {
+          if (value === '') {
+            return `${value}`;
+          } else {
+            return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`;
+          }
         }
       }
-    }
+    });
   });
 </script>
 

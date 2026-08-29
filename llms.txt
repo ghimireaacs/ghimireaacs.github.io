@@ -1,0 +1,72 @@
+# Ashish Ghimire
+
+> Homelab, self-hosting and cybersecurity write-ups: hands-on guides for Proxmox, Docker, Linux, networking and Windows, from a lab that actually runs.
+
+This is the personal engineering blog of Ashish Ghimire, an IT graduate
+based in Sydney, Australia. Every post is a first-hand write-up of something
+built, broken or fixed in a real home lab: Proxmox and Docker infrastructure, OPNsense
+and VLAN networking, self-hosted services, Linux and Windows administration, and
+offensive-security walkthroughs. Posts include the failures and dead ends, not just the
+happy path.
+
+Author: Ashish Ghimire — https://ashishghimire.com/about/
+Contact: https://ashishghimire.com, https://tryhackme.com/p/ghostaacs, https://linktr.ee/aacsghimire
+License: content is the author's own; cite with a link to the post URL.
+
+## Posts
+
+Grouped by top-level category, newest first within each.
+
+
+
+### Homelab
+
+- [OPNsense Logging to Grafana via Loki: Three Gotchas That Will Catch You](https://ashishghimire.com/posts/opnsense-logging-loki-grafana/) — Ship OPNsense firewall logs to Grafana with syslog-ng, Promtail and Loki, and fix the three silent failures that leave the dashboard empty. Category: Homelab > Networking. Published 2026-04-21, updated 2026-08-30. Tags: opnsense, grafana, loki, promtail, syslog-ng, kubernetes, selfhosted, observability, filterlog.
+
+- [My Electricity Bill Jumped From $300 to $800 in One Quarter. My Homelab Did It.](https://ashishghimire.com/posts/homelab-electricity-bill-ram-fix/) — A homelab pushed my power bill from $300 to $800 a quarter. How I traced the waste with Grafana, cut idle VMs and RAM, and got the bill back down. Category: Homelab > Self-Hosting. Published 2026-04-11, updated 2026-08-30. Tags: proxmox, kubernetes, homelab, electricity, ram, cost, selfhosted, ollama, ai.
+
+- [I Finally Know If Anyone Reads This Blog](https://ashishghimire.com/posts/blog-analytics-umami/) — Self-hosted Umami analytics on a free Oracle VM: Docker deploy, Cloudflare tunnel and SSL, and privacy-friendly stats without Google Analytics. Category: Homelab > Self-Hosting. Published 2026-03-21, updated 2026-08-30. Tags: umami, analytics, selfhosted, cloudflare, jekyll, oracle.
+
+- [Syncthing Three-Way Sync Across VLANs](https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/) — Syncthing stopped syncing once devices sat on separate VLANs. How to get three-way sync working with static addresses and OPNsense firewall rules. Category: Homelab > Networking. Published 2026-03-20, updated 2026-08-30. Tags: syncthing, vlan, networking, opnsense, docker, selfhosted.
+
+- [Broken Docker DNS Due to Pi-hole](https://ashishghimire.com/posts/Broken-Docker-DNS-Due-to-PiHole/) — Docker containers could not resolve DNS despite a correct daemon.json. The real cause was leftover Pi-hole nftables rules sending DNS to a dead port. Category: Homelab > Networking. Published 2026-03-11, updated 2026-08-30. Tags: docker, dns, pihole, networking, debugging.
+
+- [How I Utilize Github to Store and Download My Public SSH Keys](https://ashishghimire.com/posts/How-I-Utilize-Github-For-SSH/) — Store your public SSH key on GitHub and pull it onto any new machine with one ssh-import-id-gh command. Covers ed25519 keygen and GitHub setup. Category: Homelab > Self-Hosting. Published 2025-08-09, updated 2026-08-30. Tags: ssh, linux, github, homelab, security, keygen, ed25519.
+
+- [Installing Proxmox and Post Installation](https://ashishghimire.com/posts/Install-Proxmox-And-Post-Installation/) — Turn an old PC into a home server with Proxmox VE: install from USB, set a static IP, then run the post-install community helper script. Category: Homelab > Self-Hosting. Published 2025-07-23, updated 2026-08-30. Tags: proxmox, linux, homelab, virtualization, selfhosted, hypervisor.
+
+- [Installing Docker and Setting Permission](https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/) — Install Docker on Ubuntu from the official apt repository and fix permissions with the docker group so you can run containers without sudo. Category: Homelab > Self-Hosting. Published 2025-07-06, updated 2026-08-30. Tags: docker, linux, ubuntu, containers, homelab, permissions.
+
+### Linux
+
+- [SSH + Zsh Prompt Duplication, Broken Nano, and the One-Line Fix](https://ashishghimire.com/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/) — Zsh prompt duplicated and nano rendered broken when SSH-ing from Ghostty. The cause was a TERM mismatch, and one environment variable fixed both. Category: Linux. Published 2026-01-07, updated 2026-08-30. Tags: ssh, zsh, linux, ghostty, powerlevel10k, oh-my-zsh, terminal, homelab.
+
+- [Installing Arch Linux Hard Way](https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way/) — Install Arch Linux manually without archinstall: partitioning, mounting, base system, bootloader, network and a KDE Plasma desktop, step by step. Category: Linux. Published 2025-07-06, updated 2026-08-30. Tags: arch, linux, install, bootloader, kde, plasma, partitioning.
+
+- [Install AppImage Softwares in Linux](https://ashishghimire.com/posts/Installing-AppImage-Softwares-In-Linux/) — How to run AppImage apps on any Linux distro: download, make executable, integrate into the app menu and uninstall. No package manager needed. Category: Linux. Published 2023-02-17, updated 2026-08-30. Tags: linux, appimage, software, install.
+
+### Security
+
+- [Setting Up Active Directory](https://ashishghimire.com/posts/Setting-Up-Active-Directory/) — Build an Active Directory pentest lab: Windows Server 2022 domain controller, Windows 10 clients, users, groups, OUs and domain join, PNPT style. Category: Security > Pentesting. Published 2025-07-05, updated 2026-08-30. Tags: Active-Directory, windows-server, pentesting, TCM-SEC, PNPT, cybersecurity, AD.
+
+- [Useful Linux Commands for Hacking](https://ashishghimire.com/posts/Useful-Commands/) — Linux commands for pentesting and CTFs: enumeration, privilege escalation checks, file transfers and reverse shells, in one quick-reference sheet. Category: Security > Pentesting. Published 2023-03-19, updated 2026-08-30. Tags: commands, Hacking, Privilege-Escalation.
+
+- [Let’s Block Our Ads For Free and Also Keep Our Children safe](https://ashishghimire.com/posts/Dns/) — Block ads, trackers and adult content on every device with NextDNS. DNS-based filtering, nothing to install, covers phones, TVs and guest devices. Category: Security > Privacy. Published 2023-03-05, updated 2026-08-30. Tags: NextDNS, dns, adblock, networking, privacy, parental-controls.
+
+- [You need to use Password Manager right NOW!!](https://ashishghimire.com/posts/Bitwarden/) — Why you need a password manager and how to set up Bitwarden: vault, generated passwords, browser and phone sync, and a recovery plan that works. Category: Security > Privacy. Published 2023-02-23, updated 2026-08-30. Tags: security, password, bitwarden, password-manager, cybersecurity.
+
+- [Vulnhub Kioptrix Walkthrough Part 2](https://ashishghimire.com/posts/Vulnhub-Kioptrix-P-2/) — Vulnhub Kioptrix Level 2 walkthrough: Nikto scanning, Dirbuster directory brute force, Burp Suite request tampering and command injection. Category: Security > Walkthrough. Published 2022-12-22, updated 2026-08-30. Tags: vulnhub, kioptrix, guide, walkthrough, TCM-SEC, nikto, dirbuster, burpsuite.
+
+- [Vulnhub Kioptrix Walkthrough Part 1](https://ashishghimire.com/posts/Vulnhub-Kioptrix-P-1/) — Vulnhub Kioptrix Level 1 walkthrough: host discovery with netdiscover and arp-scan, Nmap service enumeration, and exploitation to root. Category: Security > Walkthrough. Published 2022-12-18, updated 2026-08-30. Tags: vulnhub, kioptrix, guide, walkthrough, TCM-SEC, net-discover, arp-scan.
+
+### Windows
+
+- [Update All Apps with One Line Of Code in Windows](https://ashishghimire.com/posts/Install-Package-Manager-In-Windows-11/) — Winget is the built-in Windows package manager. Install, upgrade and list every app from one PowerShell command, the way apt works on Linux. Category: Windows. Published 2024-10-21, updated 2026-08-30. Tags: windows, winget, windows-11, package-manager, cli, powershell.
+
+
+## Index pages
+
+- [All posts](https://ashishghimire.com/all-posts/) — full chronological archive
+- [Categories](https://ashishghimire.com/categories/) — posts grouped by topic
+- [About](https://ashishghimire.com/about/) — who writes this and why
+- [Sitemap](https://ashishghimire.com/sitemap.xml)

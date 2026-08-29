@@ -22,26 +22,49 @@
     name="viewport"
     content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
   ><!-- Setup Open Graph image -->
+  <!--
+    Local override of the jekyll-theme-chirpy 7.6.0 include. Only this Open
+    Graph block differs from the gem: social scrapers are pointed at the
+    1200x630 JPEG twin in /assets/img/og/ (built by tools/gen-og-images.py),
+    because LinkedIn does not render WebP and the on-page headers are smaller
+    than the 1200x630 a large card wants. Re-sync when bumping the theme.
+  -->
 
+  
+
+  
   
 
   <!-- Begin Jekyll SEO tag v2.9.0 -->
 <meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="Ashish Ghimire" />
+<meta name="author" content="Ashish Ghimire" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="Ashish Ghimire’s blog on homelab, cybersecurity, self-hosting, and IT. Walkthroughs, writeups, and hands-on guides for Linux, Docker, Proxmox, networking, and more." />
-<meta name="twitter:description" property="og:description" content="Ashish Ghimire’s blog on homelab, cybersecurity, self-hosting, and IT. Walkthroughs, writeups, and hands-on guides for Linux, Docker, Proxmox, networking, and more." />
+<meta name="description" content="Homelab, self-hosting and cybersecurity write-ups: hands-on guides for Proxmox, Docker, Linux, networking and Windows, from a lab that actually runs." />
+<meta name="twitter:description" property="og:description" content="Homelab, self-hosting and cybersecurity write-ups: hands-on guides for Proxmox, Docker, Linux, networking and Windows, from a lab that actually runs." />
 <link rel="canonical" href="https://ashishghimire.com/" />
 <meta property="og:url" content="https://ashishghimire.com/" />
 <meta property="og:site_name" content="Ashish Ghimire" />
 <meta property="og:type" content="website" />
 <link rel="next" href="https://ashishghimire.com/page2" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:image" content="https://ashishghimire.com/assets/img/og/site-preview.jpg" /><meta name="twitter:card" content="summary_large_image" />
+      <meta property="twitter:image" content="https://ashishghimire.com/assets/img/og/site-preview.jpg" />
 <meta name="twitter:title" content="Ashish Ghimire" />
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","description":"Ashish Ghimire’s blog on homelab, cybersecurity, self-hosting, and IT. Walkthroughs, writeups, and hands-on guides for Linux, Docker, Proxmox, networking, and more.","headline":"Ashish Ghimire","name":"Ashish Ghimire","sameAs":["https://ashishghimire.com","https://tryhackme.com/p/ghostaacs","https://linktr.ee/aacsghimire"],"url":"https://ashishghimire.com/"}</script>
+
 <!-- End Jekyll SEO tag -->
 
+
+  
+    <!-- Dimensions let scrapers lay the card out before the image is fetched -->
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Ashish Ghimire">
+  
+
+  
+
+  
 
   <title>Ashish Ghimire</title>
 
@@ -199,7 +222,12 @@
 
   
 
-  <link rel="preconnect" href="https://umami.ashishghimire.com">
+  <script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{ "@type": "Person", "@id": "https://ashishghimire.com/#person", "name": "Ashish Ghimire", "url": "https://ashishghimire.com/about/", "image": "https://ashishghimire.com/assets/img/propic.webp", "description": "IT graduate in Sydney, Australia writing first-hand homelab, self-hosting, networking and cybersecurity write-ups.", "knowsAbout": ["Home lab infrastructure", "Self-hosting", "Proxmox", "Docker", "Linux system administration", "Computer networking", "Cybersecurity", "Penetration testing"], "sameAs":["https://github.com/ghimireaacs","https://tryhackme.com/p/ghostaacs","https://linktr.ee/aacsghimire","https://www.youtube.com/@ashishghimire"] }, { "@type": "WebSite", "@id": "https://ashishghimire.com/#website", "url": "https://ashishghimire.com/", "name": "Ashish Ghimire", "alternateName": "IT | Cybersecurity | HomeLab | Self-Hosting", "description": "Homelab, self-hosting and cybersecurity write-ups: hands-on guides for Proxmox, Docker, Linux, networking and Windows, from a lab that actually runs.", "inLanguage": "en", "publisher": { "@id": "https://ashishghimire.com/#person" }, "author": { "@id": "https://ashishghimire.com/#person" } },{ "@type": "Blog", "@id": "https://ashishghimire.com/#blog", "url": "https://ashishghimire.com/", "name": "Ashish Ghimire", "description": "Homelab, self-hosting and cybersecurity write-ups: hands-on guides for Proxmox, Docker, Linux, networking and Windows, from a lab that actually runs.", "isPartOf": { "@id": "https://ashishghimire.com/#website" }, "author": { "@id": "https://ashishghimire.com/#person" }, "blogPost": [{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/opnsense-logging-loki-grafana/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/homelab-electricity-bill-ram-fix/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/blog-analytics-umami/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/Broken-Docker-DNS-Due-to-PiHole/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/How-I-Utilize-Github-For-SSH/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/Install-Proxmox-And-Post-Installation/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/Setting-Up-Active-Directory/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/Install-Package-Manager-In-Windows-11/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/Useful-Commands/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/Dns/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/Bitwarden/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/Installing-AppImage-Softwares-In-Linux/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/Vulnhub-Kioptrix-P-2/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/Vulnhub-Kioptrix-P-1/#post" }] }]}
+</script>
+
+
+<link rel="preconnect" href="https://umami.ashishghimire.com">
 <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
 <link rel="dns-prefetch" href="//www.googletagmanager.com">
 <link rel="dns-prefetch" href="//googleads.g.doubleclick.net">
@@ -1258,7 +1286,7 @@
           
 
           <div class="col-md-5">
-            <div class="preview-img  shimmer"><img src="/assets/img/headers/opnsenseLogging.webp" alt="Preview Image"  loading="eager" fetchpriority="high" decoding="async"></div>
+            <div class="preview-img  shimmer"><img src="/assets/img/headers/opnsenseLogging.webp" alt="OPNsense logging to Grafana header"  loading="eager" fetchpriority="high" decoding="async"></div>
           </div>
 
           
@@ -1269,7 +1297,7 @@
             <h1 class="card-title my-2 mt-md-0">OPNsense Logging to Grafana via Loki: Three Gotchas That Will Catch You</h1>
 
             <div class="card-text content mt-0 mb-3">
-              <p>Getting OPNsense firewall logs into Grafana via syslog-ng, Promtail, and Loki sounds straightforward. Three silent failure points will stop it from working and give you no error to debug.</p>
+              <p>Ship OPNsense firewall logs to Grafana with syslog-ng, Promtail and Loki, and fix the three silent failures that leave the dashboard empty.</p>
             </div>
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">
@@ -1299,7 +1327,8 @@
                   <i class="far fa-folder-open fa-fw me-1"></i>
                   <span class="categories">
                     
-                      Homelab
+                      Homelab,
+                      Networking
                   </span>
                 
               </div>
@@ -1327,7 +1356,7 @@
           
 
           <div class="col-md-5">
-            <div class="preview-img  shimmer"><img src="/assets/img/headers/homelab-electricity-bill.webp" alt="Preview Image"  loading="lazy"></div>
+            <div class="preview-img  shimmer"><img src="/assets/img/headers/homelab-electricity-bill.webp" alt="Homelab electricity bill header"  loading="lazy"></div>
           </div>
 
           
@@ -1338,7 +1367,7 @@
             <h1 class="card-title my-2 mt-md-0">My Electricity Bill Jumped From $300 to $800 in One Quarter. My Homelab Did It.</h1>
 
             <div class="card-text content mt-0 mb-3">
-              <p>Three months of homelab expansion, adding k3s, new storage, local AI, and forgetting to clean up what I was no longer using added $500 to my electricity bill. Here is how I found it and fixed it.</p>
+              <p>A homelab pushed my power bill from $300 to $800 a quarter. How I traced the waste with Grafana, cut idle VMs and RAM, and got the bill back down.</p>
             </div>
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">
@@ -1368,7 +1397,8 @@
                   <i class="far fa-folder-open fa-fw me-1"></i>
                   <span class="categories">
                     
-                      Homelab
+                      Homelab,
+                      Self-Hosting
                   </span>
                 
               </div>
@@ -1396,7 +1426,7 @@
           
 
           <div class="col-md-5">
-            <div class="preview-img  shimmer"><img src="/assets/img/headers/umamiAnalytics.webp" alt="Preview Image"  loading="lazy"></div>
+            <div class="preview-img  shimmer"><img src="/assets/img/headers/umamiAnalytics.webp" alt="Umami self-hosted analytics header"  loading="lazy"></div>
           </div>
 
           
@@ -1407,7 +1437,7 @@
             <h1 class="card-title my-2 mt-md-0">I Finally Know If Anyone Reads This Blog</h1>
 
             <div class="card-text content mt-0 mb-3">
-              <p>Google Analytics felt wrong. I self-host everything else so why am I sending my readers' data to Google? Here is how I set up Umami on my Oracle VM.</p>
+              <p>Self-hosted Umami analytics on a free Oracle VM: Docker deploy, Cloudflare tunnel and SSL, and privacy-friendly stats without Google Analytics.</p>
             </div>
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">
@@ -1437,7 +1467,8 @@
                   <i class="far fa-folder-open fa-fw me-1"></i>
                   <span class="categories">
                     
-                      Homelab
+                      Homelab,
+                      Self-Hosting
                   </span>
                 
               </div>
@@ -1465,7 +1496,7 @@
           
 
           <div class="col-md-5">
-            <div class="preview-img  shimmer"><img src="/assets/img/headers/syncthingVlan.webp" alt="Preview Image"  loading="lazy"></div>
+            <div class="preview-img  shimmer"><img src="/assets/img/headers/syncthingVlan.webp" alt="Syncthing sync across VLANs header"  loading="lazy"></div>
           </div>
 
           
@@ -1476,7 +1507,7 @@
             <h1 class="card-title my-2 mt-md-0">Syncthing Three-Way Sync Across VLANs</h1>
 
             <div class="card-text content mt-0 mb-3">
-              <p>VLANs broke my Syncthing setup. Global discovery off, relay off, and Syncthing had no idea where my devices were. Here is how I fixed it.</p>
+              <p>Syncthing stopped syncing once devices sat on separate VLANs. How to get three-way sync working with static addresses and OPNsense firewall rules.</p>
             </div>
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">
@@ -1506,7 +1537,8 @@
                   <i class="far fa-folder-open fa-fw me-1"></i>
                   <span class="categories">
                     
-                      Homelab
+                      Homelab,
+                      Networking
                   </span>
                 
               </div>
@@ -1534,7 +1566,7 @@
           
 
           <div class="col-md-5">
-            <div class="preview-img  shimmer"><img src="/assets/img/headers/dockerBrokenDNS.webp" alt="Preview Image"  loading="lazy"></div>
+            <div class="preview-img  shimmer"><img src="/assets/img/headers/dockerBrokenDNS.webp" alt="Broken Docker DNS header"  loading="lazy"></div>
           </div>
 
           
@@ -1545,7 +1577,7 @@
             <h1 class="card-title my-2 mt-md-0">Broken Docker DNS Due to Pi-hole</h1>
 
             <div class="card-text content mt-0 mb-3">
-              <p>Docker containers couldn't resolve DNS despite correct daemon.json config. The real culprit was Pi-hole's leftover nftables rules redirecting all DNS traffic to a closed port.</p>
+              <p>Docker containers could not resolve DNS despite a correct daemon.json. The real cause was leftover Pi-hole nftables rules sending DNS to a dead port.</p>
             </div>
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">
@@ -1575,7 +1607,8 @@
                   <i class="far fa-folder-open fa-fw me-1"></i>
                   <span class="categories">
                     
-                      Homelab
+                      Homelab,
+                      Networking
                   </span>
                 
               </div>
@@ -1603,7 +1636,7 @@
           
 
           <div class="col-md-5">
-            <div class="preview-img  shimmer"><img src="/assets/img/headers/p10kbug.webp" alt="Preview Image"  loading="lazy"></div>
+            <div class="preview-img  shimmer"><img src="/assets/img/headers/p10kbug.webp" alt="Broken Zsh prompt over SSH header"  loading="lazy"></div>
           </div>
 
           
@@ -1614,7 +1647,7 @@
             <h1 class="card-title my-2 mt-md-0">SSH + Zsh Prompt Duplication, Broken Nano, and the One-Line Fix</h1>
 
             <div class="card-text content mt-0 mb-3">
-              <p>Zsh prompt duplicating and nano rendering broken when SSH-ing from Ghostty into a remote server. Root cause was a terminal type mismatch. Fixed with one environment variable.</p>
+              <p>Zsh prompt duplicated and nano rendered broken when SSH-ing from Ghostty. The cause was a TERM mismatch, and one environment variable fixed both.</p>
             </div>
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">
@@ -1672,7 +1705,7 @@
           
 
           <div class="col-md-5">
-            <div class="preview-img  shimmer"><img src="/assets/img/headers/githubssh.webp" alt="Preview Image"  loading="lazy"></div>
+            <div class="preview-img  shimmer"><img src="/assets/img/headers/githubssh.webp" alt="GitHub SSH key header"  loading="lazy"></div>
           </div>
 
           
@@ -1683,7 +1716,7 @@
             <h1 class="card-title my-2 mt-md-0">How I Utilize Github to Store and Download My Public SSH Keys</h1>
 
             <div class="card-text content mt-0 mb-3">
-              <p>Store your SSH public keys on GitHub and provision any new Linux server with one command using ssh-import-id-gh. No manual key copying needed.</p>
+              <p>Store your public SSH key on GitHub and pull it onto any new machine with one ssh-import-id-gh command. Covers ed25519 keygen and GitHub setup.</p>
             </div>
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">
@@ -1713,7 +1746,8 @@
                   <i class="far fa-folder-open fa-fw me-1"></i>
                   <span class="categories">
                     
-                      Homelab
+                      Homelab,
+                      Self-Hosting
                   </span>
                 
               </div>
@@ -1741,7 +1775,7 @@
           
 
           <div class="col-md-5">
-            <div class="preview-img  shimmer"><img src="/assets/img/headers/proxmox.webp" alt="Preview Image"  loading="lazy"></div>
+            <div class="preview-img  shimmer"><img src="/assets/img/headers/proxmox.webp" alt="Proxmox VE installation header"  loading="lazy"></div>
           </div>
 
           
@@ -1752,7 +1786,7 @@
             <h1 class="card-title my-2 mt-md-0">Installing Proxmox and Post Installation</h1>
 
             <div class="card-text content mt-0 mb-3">
-              <p>How to install Proxmox VE on an old PC and run essential post-installation configuration using the Proxmox community helper scripts. Turn spare hardware into a home server.</p>
+              <p>Turn an old PC into a home server with Proxmox VE: install from USB, set a static IP, then run the post-install community helper script.</p>
             </div>
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">
@@ -1782,7 +1816,8 @@
                   <i class="far fa-folder-open fa-fw me-1"></i>
                   <span class="categories">
                     
-                      Homelab
+                      Homelab,
+                      Self-Hosting
                   </span>
                 
               </div>
@@ -1810,7 +1845,7 @@
           
 
           <div class="col-md-5">
-            <div class="preview-img  shimmer"><img src="/assets/img/headers/ArchInstall.webp" alt="Preview Image"  loading="lazy"></div>
+            <div class="preview-img  shimmer"><img src="/assets/img/headers/ArchInstall.webp" alt="Installing Arch Linux the hard way header"  loading="lazy"></div>
           </div>
 
           
@@ -1821,7 +1856,7 @@
             <h1 class="card-title my-2 mt-md-0">Installing Arch Linux Hard Way</h1>
 
             <div class="card-text content mt-0 mb-3">
-              <p>A step-by-step guide to installing Arch Linux manually — from disk partitioning and mounting to bootloader setup — without using the archinstall script.</p>
+              <p>Install Arch Linux manually without archinstall: partitioning, mounting, base system, bootloader, network and a KDE Plasma desktop, step by step.</p>
             </div>
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">
@@ -1879,7 +1914,7 @@
           
 
           <div class="col-md-5">
-            <div class="preview-img  shimmer"><img src="/assets/img/headers/dockerInstall.webp" alt="Preview Image"  loading="lazy"></div>
+            <div class="preview-img  shimmer"><img src="/assets/img/headers/dockerInstall.webp" alt="Installing Docker on Linux header"  loading="lazy"></div>
           </div>
 
           
@@ -1890,7 +1925,7 @@
             <h1 class="card-title my-2 mt-md-0">Installing Docker and Setting Permission</h1>
 
             <div class="card-text content mt-0 mb-3">
-              <p>How to install Docker on Linux using the official apt repository and configure user group permissions so you can run containers without sudo.</p>
+              <p>Install Docker on Ubuntu from the official apt repository and fix permissions with the docker group so you can run containers without sudo.</p>
             </div>
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">
@@ -1920,7 +1955,8 @@
                   <i class="far fa-folder-open fa-fw me-1"></i>
                   <span class="categories">
                     
-                      Homelab
+                      Homelab,
+                      Self-Hosting
                   </span>
                 
               </div>
@@ -2043,27 +2079,6 @@
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Installing-AppImage-Softwares-In-Linux/">Install AppImage Softwares in Linux</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/opnsense-logging-loki-grafana/">OPNsense Logging to Grafana via Loki: Three Gotchas That Will Catch You</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/homelab-electricity-bill-ram-fix/">My Electricity Bill Jumped From $300 to $800 in One Quarter. My Homelab Did It.</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
           <a href="/posts/Install-Docker-And-Manage-Permission/">Installing Docker and Setting Permission</a>
         </li>
       
@@ -2071,7 +2086,28 @@
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Vulnhub-Kioptrix-P-1/">Vulnhub Kioptrix Walkthrough Part 1</a>
+          <a href="/posts/Installing-Arch-Linux-Hard-Way/">Installing Arch Linux Hard Way</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Install-Proxmox-And-Post-Installation/">Installing Proxmox and Post Installation</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/How-I-Utilize-Github-For-SSH/">How I Utilize Github to Store and Download My Public SSH Keys</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/">SSH + Zsh Prompt Duplication, Broken Nano, and the One-Line Fix</a>
         </li>
       
     </ul>

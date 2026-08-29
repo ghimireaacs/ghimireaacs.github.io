@@ -3,8 +3,8 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://ashishghimire.com/</id>
   <title>Ashish Ghimire</title>
-  <subtitle>Ashish Ghimire's blog on homelab, cybersecurity, self-hosting, and IT. Walkthroughs, writeups, and hands-on guides for Linux, Docker, Proxmox, networking, and more.</subtitle>
-  <updated>2026-06-23T00:55:12+10:00</updated>
+  <subtitle>Homelab, self-hosting and cybersecurity write-ups: hands-on guides for Proxmox, Docker, Linux, networking and Windows, from a lab that actually runs.</subtitle>
+  <updated>2026-08-30T02:10:56+10:00</updated>
   <author>
     <name>Ashish Ghimire</name>
     <uri>https://ashishghimire.com/</uri>
@@ -24,7 +24,7 @@
     <link href="https://ashishghimire.com/posts/opnsense-logging-loki-grafana/" rel="alternate" type="text/html" title="OPNsense Logging to Grafana via Loki: Three Gotchas That Will Catch You" />
     <published>2026-04-21T23:00:00+10:00</published>
   
-    <updated>2026-04-21T23:00:00+10:00</updated>
+    <updated>2026-08-30T02:10:15+10:00</updated>
   
     <id>https://ashishghimire.com/posts/opnsense-logging-loki-grafana/</id>
     <content type="text/html" src="https://ashishghimire.com/posts/opnsense-logging-loki-grafana/" />
@@ -36,9 +36,11 @@
     
     <category term="Homelab" />
     
+    <category term="Networking" />
+    
   
 
-  <summary>Getting OPNsense firewall logs into Grafana via syslog-ng, Promtail, and Loki sounds straightforward. Three silent failure points will stop it from working and give you no error to debug.</summary>
+  <summary>Ship OPNsense firewall logs to Grafana with syslog-ng, Promtail and Loki, and fix the three silent failures that leave the dashboard empty.</summary>
 
   </entry>
 
@@ -48,7 +50,7 @@
     <link href="https://ashishghimire.com/posts/homelab-electricity-bill-ram-fix/" rel="alternate" type="text/html" title="My Electricity Bill Jumped From $300 to $800 in One Quarter. My Homelab Did It." />
     <published>2026-04-11T23:00:00+10:00</published>
   
-    <updated>2026-04-11T23:00:00+10:00</updated>
+    <updated>2026-08-30T02:10:15+10:00</updated>
   
     <id>https://ashishghimire.com/posts/homelab-electricity-bill-ram-fix/</id>
     <content type="text/html" src="https://ashishghimire.com/posts/homelab-electricity-bill-ram-fix/" />
@@ -60,9 +62,11 @@
     
     <category term="Homelab" />
     
+    <category term="Self-Hosting" />
+    
   
 
-  <summary>Three months of homelab expansion, adding k3s, new storage, local AI, and forgetting to clean up what I was no longer using added $500 to my electricity bill. Here is how I found it and fixed it.</summary>
+  <summary>A homelab pushed my power bill from $300 to $800 a quarter. How I traced the waste with Grafana, cut idle VMs and RAM, and got the bill back down.</summary>
 
   </entry>
 
@@ -72,7 +76,7 @@
     <link href="https://ashishghimire.com/posts/blog-analytics-umami/" rel="alternate" type="text/html" title="I Finally Know If Anyone Reads This Blog" />
     <published>2026-03-21T00:00:00+11:00</published>
   
-    <updated>2026-03-21T00:00:00+11:00</updated>
+    <updated>2026-08-30T02:10:15+10:00</updated>
   
     <id>https://ashishghimire.com/posts/blog-analytics-umami/</id>
     <content type="text/html" src="https://ashishghimire.com/posts/blog-analytics-umami/" />
@@ -84,9 +88,11 @@
     
     <category term="Homelab" />
     
+    <category term="Self-Hosting" />
+    
   
 
-  <summary>Google Analytics felt wrong. I self-host everything else so why am I sending my readers' data to Google? Here is how I set up Umami on my Oracle VM.</summary>
+  <summary>Self-hosted Umami analytics on a free Oracle VM: Docker deploy, Cloudflare tunnel and SSL, and privacy-friendly stats without Google Analytics.</summary>
 
   </entry>
 
@@ -96,7 +102,7 @@
     <link href="https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/" rel="alternate" type="text/html" title="Syncthing Three-Way Sync Across VLANs" />
     <published>2026-03-20T00:00:00+11:00</published>
   
-    <updated>2026-04-11T17:39:25+10:00</updated>
+    <updated>2026-08-30T02:10:15+10:00</updated>
   
     <id>https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/</id>
     <content type="text/html" src="https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/" />
@@ -108,9 +114,11 @@
     
     <category term="Homelab" />
     
+    <category term="Networking" />
+    
   
 
-  <summary>VLANs broke my Syncthing setup. Global discovery off, relay off, and Syncthing had no idea where my devices were. Here is how I fixed it.</summary>
+  <summary>Syncthing stopped syncing once devices sat on separate VLANs. How to get three-way sync working with static addresses and OPNsense firewall rules.</summary>
 
   </entry>
 
@@ -120,7 +128,7 @@
     <link href="https://ashishghimire.com/posts/Broken-Docker-DNS-Due-to-PiHole/" rel="alternate" type="text/html" title="Broken Docker DNS Due to Pi-hole" />
     <published>2026-03-11T00:00:00+11:00</published>
   
-    <updated>2026-03-11T00:00:00+11:00</updated>
+    <updated>2026-08-30T02:10:15+10:00</updated>
   
     <id>https://ashishghimire.com/posts/Broken-Docker-DNS-Due-to-PiHole/</id>
     <content type="text/html" src="https://ashishghimire.com/posts/Broken-Docker-DNS-Due-to-PiHole/" />
@@ -132,9 +140,11 @@
     
     <category term="Homelab" />
     
+    <category term="Networking" />
+    
   
 
-  <summary>Docker containers couldn't resolve DNS despite correct daemon.json config. The real culprit was Pi-hole's leftover nftables rules redirecting all DNS traffic to a closed port.</summary>
+  <summary>Docker containers could not resolve DNS despite a correct daemon.json. The real cause was leftover Pi-hole nftables rules sending DNS to a dead port.</summary>
 
   </entry>
 

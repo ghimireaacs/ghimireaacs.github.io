@@ -22,25 +22,52 @@
     name="viewport"
     content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
   ><!-- Setup Open Graph image -->
+  <!--
+    Local override of the jekyll-theme-chirpy 7.6.0 include. Only this Open
+    Graph block differs from the gem: social scrapers are pointed at the
+    1200x630 JPEG twin in /assets/img/og/ (built by tools/gen-og-images.py),
+    because LinkedIn does not render WebP and the on-page headers are smaller
+    than the 1200x630 a large card wants. Re-sync when bumping the theme.
+  -->
 
+  
+
+  
   
 
   <!-- Begin Jekyll SEO tag v2.9.0 -->
 <meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="commands" />
+<meta name="author" content="Ashish Ghimire" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="Ashish Ghimire’s blog on homelab, cybersecurity, self-hosting, and IT. Walkthroughs, writeups, and hands-on guides for Linux, Docker, Proxmox, networking, and more." />
-<meta name="twitter:description" property="og:description" content="Ashish Ghimire’s blog on homelab, cybersecurity, self-hosting, and IT. Walkthroughs, writeups, and hands-on guides for Linux, Docker, Proxmox, networking, and more." />
+<meta name="description" content="Homelab, self-hosting and cybersecurity write-ups: hands-on guides for Proxmox, Docker, Linux, networking and Windows, from a lab that actually runs." />
+<meta name="twitter:description" property="og:description" content="Homelab, self-hosting and cybersecurity write-ups: hands-on guides for Proxmox, Docker, Linux, networking and Windows, from a lab that actually runs." />
 <link rel="canonical" href="https://ashishghimire.com/tags/commands/" />
 <meta property="og:url" content="https://ashishghimire.com/tags/commands/" />
 <meta property="og:site_name" content="Ashish Ghimire" />
 <meta property="og:type" content="website" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:image" content="https://ashishghimire.com/assets/img/og/site-preview.jpg" /><meta name="twitter:card" content="summary_large_image" />
+      <meta property="twitter:image" content="https://ashishghimire.com/assets/img/og/site-preview.jpg" />
 <meta name="twitter:title" content="commands" />
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","description":"Ashish Ghimire’s blog on homelab, cybersecurity, self-hosting, and IT. Walkthroughs, writeups, and hands-on guides for Linux, Docker, Proxmox, networking, and more.","headline":"commands","url":"https://ashishghimire.com/tags/commands/"}</script>
+
 <!-- End Jekyll SEO tag -->
 
+
+  
+    <!-- Dimensions let scrapers lay the card out before the image is fetched -->
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="commands">
+  
+
+  
+
+  
+    <!-- Tag archives are thin (most hold a single post) and compete with the posts
+         themselves in search. Crawlable for discovery, but kept out of the index. -->
+    <meta name="robots" content="noindex, follow">
+  
 
   <title>commands | Ashish Ghimire</title>
 
@@ -185,7 +212,12 @@
 
   
 
-  <link rel="preconnect" href="https://umami.ashishghimire.com">
+  <script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{ "@type": "Person", "@id": "https://ashishghimire.com/#person", "name": "Ashish Ghimire", "url": "https://ashishghimire.com/about/", "image": "https://ashishghimire.com/assets/img/propic.webp", "description": "IT graduate in Sydney, Australia writing first-hand homelab, self-hosting, networking and cybersecurity write-ups.", "knowsAbout": ["Home lab infrastructure", "Self-hosting", "Proxmox", "Docker", "Linux system administration", "Computer networking", "Cybersecurity", "Penetration testing"], "sameAs":["https://github.com/ghimireaacs","https://tryhackme.com/p/ghostaacs","https://linktr.ee/aacsghimire","https://www.youtube.com/@ashishghimire"] }, { "@type": "WebSite", "@id": "https://ashishghimire.com/#website", "url": "https://ashishghimire.com/", "name": "Ashish Ghimire", "alternateName": "IT | Cybersecurity | HomeLab | Self-Hosting", "description": "Homelab, self-hosting and cybersecurity write-ups: hands-on guides for Proxmox, Docker, Linux, networking and Windows, from a lab that actually runs.", "inLanguage": "en", "publisher": { "@id": "https://ashishghimire.com/#person" }, "author": { "@id": "https://ashishghimire.com/#person" } }]}
+</script>
+
+
+<link rel="preconnect" href="https://umami.ashishghimire.com">
 <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
 <link rel="dns-prefetch" href="//www.googletagmanager.com">
 <link rel="dns-prefetch" href="//googleads.g.doubleclick.net">
@@ -598,27 +630,6 @@
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Installing-AppImage-Softwares-In-Linux/">Install AppImage Softwares in Linux</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/opnsense-logging-loki-grafana/">OPNsense Logging to Grafana via Loki: Three Gotchas That Will Catch You</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/homelab-electricity-bill-ram-fix/">My Electricity Bill Jumped From $300 to $800 in One Quarter. My Homelab Did It.</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
           <a href="/posts/Install-Docker-And-Manage-Permission/">Installing Docker and Setting Permission</a>
         </li>
       
@@ -626,7 +637,28 @@
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Vulnhub-Kioptrix-P-1/">Vulnhub Kioptrix Walkthrough Part 1</a>
+          <a href="/posts/Installing-Arch-Linux-Hard-Way/">Installing Arch Linux Hard Way</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Install-Proxmox-And-Post-Installation/">Installing Proxmox and Post Installation</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/How-I-Utilize-Github-For-SSH/">How I Utilize Github to Store and Download My Public SSH Keys</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/">SSH + Zsh Prompt Duplication, Broken Nano, and the One-Line Fix</a>
         </li>
       
     </ul>

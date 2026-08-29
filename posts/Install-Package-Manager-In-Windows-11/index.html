@@ -22,31 +22,73 @@
     name="viewport"
     content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
   ><!-- Setup Open Graph image -->
+  <!--
+    Local override of the jekyll-theme-chirpy 7.6.0 include. Only this Open
+    Graph block differs from the gem: social scrapers are pointed at the
+    1200x630 JPEG twin in /assets/img/og/ (built by tools/gen-og-images.py),
+    because LinkedIn does not render WebP and the on-page headers are smaller
+    than the 1200x630 a large card wants. Re-sync when bumping the theme.
+  -->
 
+  
+
+  
   
 
   <!-- Begin Jekyll SEO tag v2.9.0 -->
 <meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="Update All Apps with One Line Of Code in Windows" />
+<meta name="author" content="Ashish Ghimire" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="Winget is the Windows package manager. Install, update, and list all your software from the command line — like apt on Linux but for Windows 10 and 11." />
-<meta name="twitter:description" property="og:description" content="Winget is the Windows package manager. Install, update, and list all your software from the command line — like apt on Linux but for Windows 10 and 11." />
+<meta name="description" content="Winget is the built-in Windows package manager. Install, upgrade and list every app from one PowerShell command, the way apt works on Linux." />
+<meta name="twitter:description" property="og:description" content="Winget is the built-in Windows package manager. Install, upgrade and list every app from one PowerShell command, the way apt works on Linux." />
 <link rel="canonical" href="https://ashishghimire.com/posts/Install-Package-Manager-In-Windows-11/" />
 <meta property="og:url" content="https://ashishghimire.com/posts/Install-Package-Manager-In-Windows-11/" />
 <meta property="og:site_name" content="Ashish Ghimire" />
-<meta property="og:image" content="https://ashishghimire.com/assets/img/headers/winget.webp" />
+<meta property="og:image" content="https://ashishghimire.com/assets/img/og/install-package-manager-in-windows-11.jpg" />
+<meta property="og:image:alt" content="Winget Windows package manager header" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2024-10-21T05:19:38+11:00" />
-<meta property="article:modified_time" content="2026-04-11T17:39:25+10:00" />
+<meta property="article:modified_time" content="2026-08-30T02:10:15+10:00" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://ashishghimire.com/assets/img/headers/winget.webp" />
+<meta name="twitter:image" content="https://ashishghimire.com/assets/img/og/install-package-manager-in-windows-11.jpg" />
+<meta name="twitter:image:alt" content="Winget Windows package manager header" />
 <meta name="twitter:title" content="Update All Apps with One Line Of Code in Windows" />
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-04-11T17:39:25+10:00","datePublished":"2024-10-21T05:19:38+11:00","description":"Winget is the Windows package manager. Install, update, and list all your software from the command line — like apt on Linux but for Windows 10 and 11.","headline":"Update All Apps with One Line Of Code in Windows","image":"https://ashishghimire.com/assets/img/headers/winget.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/Install-Package-Manager-In-Windows-11/"},"url":"https://ashishghimire.com/posts/Install-Package-Manager-In-Windows-11/"}</script>
+
 <!-- End Jekyll SEO tag -->
 
 
-  <title>Update All Apps with One Line Of Code in Windows | Ashish Ghimire</title>
+  
+    <!-- Dimensions let scrapers lay the card out before the image is fetched -->
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Winget Windows package manager header">
+  
+
+  
+    <!-- Article metadata: Slack and Discord surface these next to the preview,
+         and Facebook/Google read them for freshness. Reading time uses the same
+         formula as _includes/read-time.html so the card, the byline and the
+         unfurl all agree. --><!-- article:published_time / :modified_time already come from jekyll-seo-tag -->
+    <meta property="article:author" content="Ashish Ghimire">
+      <meta property="article:section" content="Windows">
+      <meta property="article:tag" content="windows">
+      <meta property="article:tag" content="winget">
+      <meta property="article:tag" content="windows-11">
+      <meta property="article:tag" content="package-manager">
+      <meta property="article:tag" content="cli">
+      <meta property="article:tag" content="powershell">
+
+    <meta name="twitter:label1" content="Reading time">
+    <meta name="twitter:data1" content="1 min read">
+    <meta name="twitter:label2" content="Written by">
+    <meta name="twitter:data2" content="Ashish Ghimire">
+  
+
+  
+
+  <title>Update All Windows Apps with Winget | Ashish Ghimire</title>
 
   <!--
   The Favicons for Web, Android, Microsoft, and iOS (iPhone and iPad) Apps
@@ -235,7 +277,12 @@
 
   
 
-  <link rel="preconnect" href="https://umami.ashishghimire.com">
+  <script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{ "@type": "Person", "@id": "https://ashishghimire.com/#person", "name": "Ashish Ghimire", "url": "https://ashishghimire.com/about/", "image": "https://ashishghimire.com/assets/img/propic.webp", "description": "IT graduate in Sydney, Australia writing first-hand homelab, self-hosting, networking and cybersecurity write-ups.", "knowsAbout": ["Home lab infrastructure", "Self-hosting", "Proxmox", "Docker", "Linux system administration", "Computer networking", "Cybersecurity", "Penetration testing"], "sameAs":["https://github.com/ghimireaacs","https://tryhackme.com/p/ghostaacs","https://linktr.ee/aacsghimire","https://www.youtube.com/@ashishghimire"] }, { "@type": "WebSite", "@id": "https://ashishghimire.com/#website", "url": "https://ashishghimire.com/", "name": "Ashish Ghimire", "alternateName": "IT | Cybersecurity | HomeLab | Self-Hosting", "description": "Homelab, self-hosting and cybersecurity write-ups: hands-on guides for Proxmox, Docker, Linux, networking and Windows, from a lab that actually runs.", "inLanguage": "en", "publisher": { "@id": "https://ashishghimire.com/#person" }, "author": { "@id": "https://ashishghimire.com/#person" } },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/Install-Package-Manager-In-Windows-11/#post", "url": "https://ashishghimire.com/posts/Install-Package-Manager-In-Windows-11/", "mainEntityOfPage": { "@type": "WebPage", "@id": "https://ashishghimire.com/posts/Install-Package-Manager-In-Windows-11/" }, "isPartOf": { "@id": "https://ashishghimire.com/#website" }, "headline": "Update All Apps with One Line Of Code in Windows", "description": "Winget is the built-in Windows package manager. Install, upgrade and list every app from one PowerShell command, the way apt works on Linux.", "image": { "@type": "ImageObject", "url": "https://ashishghimire.com/assets/img/og/install-package-manager-in-windows-11.jpg", "width": 1200, "height": 630 }, "datePublished": "2024-10-21T05:19:38+11:00", "dateModified": "2026-08-30T02:10:15+10:00", "author": { "@id": "https://ashishghimire.com/#person" }, "publisher": { "@id": "https://ashishghimire.com/#person" }, "articleSection": ["Windows"], "keywords": "windows, winget, windows-11, package-manager, cli, powershell", "wordCount": 318, "timeRequired": "PT1M", "inLanguage": "en" }, { "@type": "BreadcrumbList", "@id": "https://ashishghimire.com/posts/Install-Package-Manager-In-Windows-11/#breadcrumb", "itemListElement": [ { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://ashishghimire.com/" },{ "@type": "ListItem", "position": 2, "name": "Windows", "item": "https://ashishghimire.com/categories/windows/" },{ "@type": "ListItem", "position": 3, "name": "Update All Apps with One Line Of Code in Windows" } ] }]}
+</script>
+
+
+<link rel="preconnect" href="https://umami.ashishghimire.com">
 <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
 <link rel="dns-prefetch" href="//www.googletagmanager.com">
 <link rel="dns-prefetch" href="//googleads.g.doubleclick.net">
@@ -821,7 +868,7 @@
   <header>
     <h1 data-toc-skip>Update All Apps with One Line Of Code in Windows</h1>
     
-      <p class="post-desc fw-light mb-4">Winget is the Windows package manager. Install, update, and list all your software from the command line — like apt on Linux but for Windows 10 and 11.</p>
+      <p class="post-desc fw-light mb-4">Winget is the built-in Windows package manager. Install, upgrade and list every app from one PowerShell command, the way apt works on Linux.</p>
     
 
     <div class="post-meta text-muted">
@@ -863,13 +910,13 @@
 
 <time
   
-  data-ts="1775893165"
+  data-ts="1788019815"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
   
 >
-  Apr 11, 2026
+  Aug 30, 2026
 </time>
 
         </span>
@@ -883,7 +930,7 @@
         
 
         <div class="mt-3 mb-3">
-          <a href="/assets/img/headers/winget.webp" class="popup img-link preview-img shimmer"><img src="/assets/img/headers/winget.webp"  alt="Preview Image" width="1200" height="630"  loading="lazy"></a></div>
+          <a href="/assets/img/headers/winget.webp" class="popup img-link preview-img shimmer"><img src="/assets/img/headers/winget.webp"  alt="Winget Windows package manager header" width="1200" height="630"  loading="lazy"></a><figcaption class="text-center pt-2 pb-2">Winget Windows package manager header</figcaption></div>
       
 
       <div class="d-flex justify-content-between">
@@ -925,7 +972,7 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="300 words"
+  title="318 words"
 >
   <em>1 min</em> read</span>
 
@@ -1062,6 +1109,8 @@ Done!</p>
   <li>Install, Update and Uninstall from CLI</li>
   <li>Upgrade Everything available with one line</li>
 </ul>
+
+<p>On Linux the closest single-file equivalent is <a href="/posts/Installing-AppImage-Softwares-In-Linux/">AppImage</a>, which ships the app and its dependencies in one executable.</p>
 
   </div>
 
@@ -1246,27 +1295,6 @@ Done!</p>
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Installing-AppImage-Softwares-In-Linux/">Install AppImage Softwares in Linux</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/opnsense-logging-loki-grafana/">OPNsense Logging to Grafana via Loki: Three Gotchas That Will Catch You</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/homelab-electricity-bill-ram-fix/">My Electricity Bill Jumped From $300 to $800 in One Quarter. My Homelab Did It.</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
           <a href="/posts/Install-Docker-And-Manage-Permission/">Installing Docker and Setting Permission</a>
         </li>
       
@@ -1274,7 +1302,28 @@ Done!</p>
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Vulnhub-Kioptrix-P-1/">Vulnhub Kioptrix Walkthrough Part 1</a>
+          <a href="/posts/Installing-Arch-Linux-Hard-Way/">Installing Arch Linux Hard Way</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Install-Proxmox-And-Post-Installation/">Installing Proxmox and Post Installation</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/How-I-Utilize-Github-For-SSH/">How I Utilize Github to Store and Download My Public SSH Keys</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/">SSH + Zsh Prompt Duplication, Broken Nano, and the One-Line Fix</a>
         </li>
       
     </ul>

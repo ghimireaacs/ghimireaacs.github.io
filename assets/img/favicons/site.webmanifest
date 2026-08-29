@@ -3,7 +3,7 @@
 {
   "name": "Ashish Ghimire",
   "short_name": "Ashish Ghimire",
-  "description": "Ashish Ghimire's blog on homelab, cybersecurity, self-hosting, and IT. Walkthroughs, writeups, and hands-on guides for Linux, Docker, Proxmox, networking, and more.",
+  "description": "Homelab, self-hosting and cybersecurity write-ups: hands-on guides for Proxmox, Docker, Linux, networking and Windows, from a lab that actually runs.",
   "icons": [
     {
       "src": "/assets/img/favicons/web-app-manifest-192x192.png",

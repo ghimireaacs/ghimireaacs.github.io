@@ -22,26 +22,49 @@
     name="viewport"
     content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
   ><!-- Setup Open Graph image -->
+  <!--
+    Local override of the jekyll-theme-chirpy 7.6.0 include. Only this Open
+    Graph block differs from the gem: social scrapers are pointed at the
+    1200x630 JPEG twin in /assets/img/og/ (built by tools/gen-og-images.py),
+    because LinkedIn does not render WebP and the on-page headers are smaller
+    than the 1200x630 a large card wants. Re-sync when bumping the theme.
+  -->
 
+  
+
+  
   
 
   <!-- Begin Jekyll SEO tag v2.9.0 -->
 <meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="Ashish Ghimire" />
+<meta name="author" content="Ashish Ghimire" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="Ashish Ghimire’s blog on homelab, cybersecurity, self-hosting, and IT. Walkthroughs, writeups, and hands-on guides for Linux, Docker, Proxmox, networking, and more." />
-<meta name="twitter:description" property="og:description" content="Ashish Ghimire’s blog on homelab, cybersecurity, self-hosting, and IT. Walkthroughs, writeups, and hands-on guides for Linux, Docker, Proxmox, networking, and more." />
+<meta name="description" content="Homelab, self-hosting and cybersecurity write-ups: hands-on guides for Proxmox, Docker, Linux, networking and Windows, from a lab that actually runs." />
+<meta name="twitter:description" property="og:description" content="Homelab, self-hosting and cybersecurity write-ups: hands-on guides for Proxmox, Docker, Linux, networking and Windows, from a lab that actually runs." />
 <link rel="canonical" href="https://ashishghimire.com/page2/" />
 <meta property="og:url" content="https://ashishghimire.com/page2/" />
 <meta property="og:site_name" content="Ashish Ghimire" />
 <meta property="og:type" content="website" />
 <link rel="prev" href="https://ashishghimire.com/" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:image" content="https://ashishghimire.com/assets/img/og/site-preview.jpg" /><meta name="twitter:card" content="summary_large_image" />
+      <meta property="twitter:image" content="https://ashishghimire.com/assets/img/og/site-preview.jpg" />
 <meta name="twitter:title" content="Ashish Ghimire" />
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","description":"Ashish Ghimire’s blog on homelab, cybersecurity, self-hosting, and IT. Walkthroughs, writeups, and hands-on guides for Linux, Docker, Proxmox, networking, and more.","headline":"Ashish Ghimire","url":"https://ashishghimire.com/page2/"}</script>
+
 <!-- End Jekyll SEO tag -->
 
+
+  
+    <!-- Dimensions let scrapers lay the card out before the image is fetched -->
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Ashish Ghimire">
+  
+
+  
+
+  
 
   <title>Ashish Ghimire</title>
 
@@ -199,7 +222,12 @@
 
   
 
-  <link rel="preconnect" href="https://umami.ashishghimire.com">
+  <script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{ "@type": "Person", "@id": "https://ashishghimire.com/#person", "name": "Ashish Ghimire", "url": "https://ashishghimire.com/about/", "image": "https://ashishghimire.com/assets/img/propic.webp", "description": "IT graduate in Sydney, Australia writing first-hand homelab, self-hosting, networking and cybersecurity write-ups.", "knowsAbout": ["Home lab infrastructure", "Self-hosting", "Proxmox", "Docker", "Linux system administration", "Computer networking", "Cybersecurity", "Penetration testing"], "sameAs":["https://github.com/ghimireaacs","https://tryhackme.com/p/ghostaacs","https://linktr.ee/aacsghimire","https://www.youtube.com/@ashishghimire"] }, { "@type": "WebSite", "@id": "https://ashishghimire.com/#website", "url": "https://ashishghimire.com/", "name": "Ashish Ghimire", "alternateName": "IT | Cybersecurity | HomeLab | Self-Hosting", "description": "Homelab, self-hosting and cybersecurity write-ups: hands-on guides for Proxmox, Docker, Linux, networking and Windows, from a lab that actually runs.", "inLanguage": "en", "publisher": { "@id": "https://ashishghimire.com/#person" }, "author": { "@id": "https://ashishghimire.com/#person" } },{ "@type": "Blog", "@id": "https://ashishghimire.com/page2/#blog", "url": "https://ashishghimire.com/page2/", "name": "Ashish Ghimire", "description": "Homelab, self-hosting and cybersecurity write-ups: hands-on guides for Proxmox, Docker, Linux, networking and Windows, from a lab that actually runs.", "isPartOf": { "@id": "https://ashishghimire.com/#website" }, "author": { "@id": "https://ashishghimire.com/#person" }, "blogPost": [{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/opnsense-logging-loki-grafana/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/homelab-electricity-bill-ram-fix/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/blog-analytics-umami/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/Broken-Docker-DNS-Due-to-PiHole/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/How-I-Utilize-Github-For-SSH/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/Install-Proxmox-And-Post-Installation/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/Setting-Up-Active-Directory/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/Install-Package-Manager-In-Windows-11/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/Useful-Commands/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/Dns/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/Bitwarden/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/Installing-AppImage-Softwares-In-Linux/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/Vulnhub-Kioptrix-P-2/#post" },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/Vulnhub-Kioptrix-P-1/#post" }] }]}
+</script>
+
+
+<link rel="preconnect" href="https://umami.ashishghimire.com">
 <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
 <link rel="dns-prefetch" href="//www.googletagmanager.com">
 <link rel="dns-prefetch" href="//googleads.g.doubleclick.net">
@@ -1132,7 +1160,7 @@
           
 
           <div class="col-md-5">
-            <div class="preview-img  shimmer"><img src="/assets/img/headers/activeDirectory.webp" alt="Preview Image"  loading="eager" fetchpriority="high" decoding="async"></div>
+            <div class="preview-img  shimmer"><img src="/assets/img/headers/activeDirectory.webp" alt="Active Directory lab header"  loading="eager" fetchpriority="high" decoding="async"></div>
           </div>
 
           
@@ -1143,7 +1171,7 @@
             <h1 class="card-title my-2 mt-md-0">Setting Up Active Directory</h1>
 
             <div class="card-text content mt-0 mb-3">
-              <p>How to build a local Active Directory lab for penetration testing practice using the PNPT methodology by TCM Security. Includes Windows Server 2022 and Windows 10 setup.</p>
+              <p>Build an Active Directory pentest lab: Windows Server 2022 domain controller, Windows 10 clients, users, groups, OUs and domain join, PNPT style.</p>
             </div>
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">
@@ -1173,7 +1201,8 @@
                   <i class="far fa-folder-open fa-fw me-1"></i>
                   <span class="categories">
                     
-                      Active Directory
+                      Security,
+                      Pentesting
                   </span>
                 
               </div>
@@ -1201,7 +1230,7 @@
           
 
           <div class="col-md-5">
-            <div class="preview-img  shimmer"><img src="/assets/img/headers/winget.webp" alt="Preview Image"  loading="lazy"></div>
+            <div class="preview-img  shimmer"><img src="/assets/img/headers/winget.webp" alt="Winget Windows package manager header"  loading="lazy"></div>
           </div>
 
           
@@ -1212,7 +1241,7 @@
             <h1 class="card-title my-2 mt-md-0">Update All Apps with One Line Of Code in Windows</h1>
 
             <div class="card-text content mt-0 mb-3">
-              <p>Winget is the Windows package manager. Install, update, and list all your software from the command line — like apt on Linux but for Windows 10 and 11.</p>
+              <p>Winget is the built-in Windows package manager. Install, upgrade and list every app from one PowerShell command, the way apt works on Linux.</p>
             </div>
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">
@@ -1270,7 +1299,7 @@
           
 
           <div class="col-md-5">
-            <div class="preview-img  shimmer"><img src="/assets/img/headers/linuxCommands.webp" alt="Preview Image"  loading="lazy"></div>
+            <div class="preview-img  shimmer"><img src="/assets/img/headers/linuxCommands.webp" alt="Linux commands for hacking header"  loading="lazy"></div>
           </div>
 
           
@@ -1281,7 +1310,7 @@
             <h1 class="card-title my-2 mt-md-0">Useful Linux Commands for Hacking</h1>
 
             <div class="card-text content mt-0 mb-3">
-              <p>A quick-reference sheet of common Linux commands used in penetration testing and CTFs — enumeration, privilege escalation, file transfers, and more.</p>
+              <p>Linux commands for pentesting and CTFs: enumeration, privilege escalation checks, file transfers and reverse shells, in one quick-reference sheet.</p>
             </div>
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">
@@ -1311,7 +1340,8 @@
                   <i class="far fa-folder-open fa-fw me-1"></i>
                   <span class="categories">
                     
-                      Hacking
+                      Security,
+                      Pentesting
                   </span>
                 
               </div>
@@ -1339,7 +1369,7 @@
           
 
           <div class="col-md-5">
-            <div class="preview-img  shimmer"><img src="/assets/img/posts/dnsheader.webp" alt="Preview Image"  loading="lazy"></div>
+            <div class="preview-img  shimmer"><img src="/assets/img/posts/dnsheader.webp" alt="NextDNS ad blocking header"  loading="lazy"></div>
           </div>
 
           
@@ -1350,7 +1380,7 @@
             <h1 class="card-title my-2 mt-md-0">Let’s Block Our Ads For Free and Also Keep Our Children safe</h1>
 
             <div class="card-text content mt-0 mb-3">
-              <p>How to block ads, trackers, and adult content for free using NextDNS. A DNS-based adblocker that works on every device without installing anything.</p>
+              <p>Block ads, trackers and adult content on every device with NextDNS. DNS-based filtering, nothing to install, covers phones, TVs and guest devices.</p>
             </div>
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">
@@ -1380,7 +1410,8 @@
                   <i class="far fa-folder-open fa-fw me-1"></i>
                   <span class="categories">
                     
-                      Networking
+                      Security,
+                      Privacy
                   </span>
                 
               </div>
@@ -1408,7 +1439,7 @@
           
 
           <div class="col-md-5">
-            <div class="preview-img  shimmer"><img src="/assets/img/headers/bitwarden.webp" alt="Preview Image"  loading="lazy"></div>
+            <div class="preview-img  shimmer"><img src="/assets/img/headers/bitwarden.webp" alt="Bitwarden password manager header"  loading="lazy"></div>
           </div>
 
           
@@ -1419,7 +1450,7 @@
             <h1 class="card-title my-2 mt-md-0">You need to use Password Manager right NOW!!</h1>
 
             <div class="card-text content mt-0 mb-3">
-              <p>With data breaches everywhere, internet security is a major concern. Even if you do not want to go through any hassle, here are the minimum steps that will put you from easy targets to hard.</p>
+              <p>Why you need a password manager and how to set up Bitwarden: vault, generated passwords, browser and phone sync, and a recovery plan that works.</p>
             </div>
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">
@@ -1449,7 +1480,8 @@
                   <i class="far fa-folder-open fa-fw me-1"></i>
                   <span class="categories">
                     
-                      CyberSecurity
+                      Security,
+                      Privacy
                   </span>
                 
               </div>
@@ -1477,7 +1509,7 @@
           
 
           <div class="col-md-5">
-            <div class="preview-img  shimmer"><img src="/assets/img/headers/appimg.webp" alt="Preview Image"  loading="lazy"></div>
+            <div class="preview-img  shimmer"><img src="/assets/img/headers/appimg.webp" alt="AppImage on Linux header"  loading="lazy"></div>
           </div>
 
           
@@ -1488,7 +1520,7 @@
             <h1 class="card-title my-2 mt-md-0">Install AppImage Softwares in Linux</h1>
 
             <div class="card-text content mt-0 mb-3">
-              <p>AppImage is a portable software format for Linux. Learn how to download, make executable, and run AppImage applications on any Linux distro without a package manager.</p>
+              <p>How to run AppImage apps on any Linux distro: download, make executable, integrate into the app menu and uninstall. No package manager needed.</p>
             </div>
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">
@@ -1546,7 +1578,7 @@
           
 
           <div class="col-md-5">
-            <div class="preview-img  shimmer"><img src="/assets/img/headers/tcmsec.webp" alt="Preview Image"  loading="lazy"></div>
+            <div class="preview-img  shimmer"><img src="/assets/img/headers/tcmsec.webp" alt="Vulnhub Kioptrix Level 2 walkthrough header"  loading="lazy"></div>
           </div>
 
           
@@ -1557,7 +1589,7 @@
             <h1 class="card-title my-2 mt-md-0">Vulnhub Kioptrix Walkthrough Part 2</h1>
 
             <div class="card-text content mt-0 mb-3">
-              <p>Vulnhub Kioptrix Level 2 walkthrough covering web app enumeration with Nikto, directory brute-forcing with Dirbuster, and exploitation techniques using Burpsuite.</p>
+              <p>Vulnhub Kioptrix Level 2 walkthrough: Nikto scanning, Dirbuster directory brute force, Burp Suite request tampering and command injection.</p>
             </div>
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">
@@ -1587,6 +1619,7 @@
                   <i class="far fa-folder-open fa-fw me-1"></i>
                   <span class="categories">
                     
+                      Security,
                       Walkthrough
                   </span>
                 
@@ -1615,7 +1648,7 @@
           
 
           <div class="col-md-5">
-            <div class="preview-img  shimmer"><img src="/assets/img/headers/tcmsec.webp" alt="Preview Image"  loading="lazy"></div>
+            <div class="preview-img  shimmer"><img src="/assets/img/headers/tcmsec.webp" alt="Vulnhub Kioptrix Level 1 walkthrough header"  loading="lazy"></div>
           </div>
 
           
@@ -1626,7 +1659,7 @@
             <h1 class="card-title my-2 mt-md-0">Vulnhub Kioptrix Walkthrough Part 1</h1>
 
             <div class="card-text content mt-0 mb-3">
-              <p>Step-by-step walkthrough of Vulnhub Kioptrix Level 1. Covers network discovery with net-discover and arp-scan, service enumeration, and exploitation. TCM Security training series.</p>
+              <p>Vulnhub Kioptrix Level 1 walkthrough: host discovery with netdiscover and arp-scan, Nmap service enumeration, and exploitation to root.</p>
             </div>
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">
@@ -1656,6 +1689,7 @@
                   <i class="far fa-folder-open fa-fw me-1"></i>
                   <span class="categories">
                     
+                      Security,
                       Walkthrough
                   </span>
                 
@@ -1779,27 +1813,6 @@
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Installing-AppImage-Softwares-In-Linux/">Install AppImage Softwares in Linux</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/opnsense-logging-loki-grafana/">OPNsense Logging to Grafana via Loki: Three Gotchas That Will Catch You</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/homelab-electricity-bill-ram-fix/">My Electricity Bill Jumped From $300 to $800 in One Quarter. My Homelab Did It.</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
           <a href="/posts/Install-Docker-And-Manage-Permission/">Installing Docker and Setting Permission</a>
         </li>
       
@@ -1807,7 +1820,28 @@
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Vulnhub-Kioptrix-P-1/">Vulnhub Kioptrix Walkthrough Part 1</a>
+          <a href="/posts/Installing-Arch-Linux-Hard-Way/">Installing Arch Linux Hard Way</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Install-Proxmox-And-Post-Installation/">Installing Proxmox and Post Installation</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/How-I-Utilize-Github-For-SSH/">How I Utilize Github to Store and Download My Public SSH Keys</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/">SSH + Zsh Prompt Duplication, Broken Nano, and the One-Line Fix</a>
         </li>
       
     </ul>

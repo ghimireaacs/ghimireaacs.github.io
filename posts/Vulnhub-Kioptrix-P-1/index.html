@@ -22,29 +22,72 @@
     name="viewport"
     content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
   ><!-- Setup Open Graph image -->
+  <!--
+    Local override of the jekyll-theme-chirpy 7.6.0 include. Only this Open
+    Graph block differs from the gem: social scrapers are pointed at the
+    1200x630 JPEG twin in /assets/img/og/ (built by tools/gen-og-images.py),
+    because LinkedIn does not render WebP and the on-page headers are smaller
+    than the 1200x630 a large card wants. Re-sync when bumping the theme.
+  -->
 
+  
+
+  
   
 
   <!-- Begin Jekyll SEO tag v2.9.0 -->
 <meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="Vulnhub Kioptrix Walkthrough Part 1" />
+<meta name="author" content="Ashish Ghimire" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="Step-by-step walkthrough of Vulnhub Kioptrix Level 1. Covers network discovery with net-discover and arp-scan, service enumeration, and exploitation. TCM Security training series." />
-<meta name="twitter:description" property="og:description" content="Step-by-step walkthrough of Vulnhub Kioptrix Level 1. Covers network discovery with net-discover and arp-scan, service enumeration, and exploitation. TCM Security training series." />
+<meta name="description" content="Vulnhub Kioptrix Level 1 walkthrough: host discovery with netdiscover and arp-scan, Nmap service enumeration, and exploitation to root." />
+<meta name="twitter:description" property="og:description" content="Vulnhub Kioptrix Level 1 walkthrough: host discovery with netdiscover and arp-scan, Nmap service enumeration, and exploitation to root." />
 <link rel="canonical" href="https://ashishghimire.com/posts/Vulnhub-Kioptrix-P-1/" />
 <meta property="og:url" content="https://ashishghimire.com/posts/Vulnhub-Kioptrix-P-1/" />
 <meta property="og:site_name" content="Ashish Ghimire" />
-<meta property="og:image" content="https://ashishghimire.com/assets/img/headers/tcmsec.webp" />
+<meta property="og:image" content="https://ashishghimire.com/assets/img/og/vulnhub-kioptrix-p-1.jpg" />
+<meta property="og:image:alt" content="Vulnhub Kioptrix Level 1 walkthrough header" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2022-12-18T23:11:31+11:00" />
-<meta property="article:modified_time" content="2026-04-11T22:10:17+10:00" />
+<meta property="article:modified_time" content="2026-08-30T02:10:15+10:00" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://ashishghimire.com/assets/img/headers/tcmsec.webp" />
+<meta name="twitter:image" content="https://ashishghimire.com/assets/img/og/vulnhub-kioptrix-p-1.jpg" />
+<meta name="twitter:image:alt" content="Vulnhub Kioptrix Level 1 walkthrough header" />
 <meta name="twitter:title" content="Vulnhub Kioptrix Walkthrough Part 1" />
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-04-11T22:10:17+10:00","datePublished":"2022-12-18T23:11:31+11:00","description":"Step-by-step walkthrough of Vulnhub Kioptrix Level 1. Covers network discovery with net-discover and arp-scan, service enumeration, and exploitation. TCM Security training series.","headline":"Vulnhub Kioptrix Walkthrough Part 1","image":"https://ashishghimire.com/assets/img/headers/tcmsec.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://ashishghimire.com/posts/Vulnhub-Kioptrix-P-1/"},"url":"https://ashishghimire.com/posts/Vulnhub-Kioptrix-P-1/"}</script>
+
 <!-- End Jekyll SEO tag -->
 
+
+  
+    <!-- Dimensions let scrapers lay the card out before the image is fetched -->
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Vulnhub Kioptrix Level 1 walkthrough header">
+  
+
+  
+    <!-- Article metadata: Slack and Discord surface these next to the preview,
+         and Facebook/Google read them for freshness. Reading time uses the same
+         formula as _includes/read-time.html so the card, the byline and the
+         unfurl all agree. --><!-- article:published_time / :modified_time already come from jekyll-seo-tag -->
+    <meta property="article:author" content="Ashish Ghimire">
+      <meta property="article:section" content="Security">
+      <meta property="article:section" content="Walkthrough">
+      <meta property="article:tag" content="vulnhub">
+      <meta property="article:tag" content="kioptrix">
+      <meta property="article:tag" content="guide">
+      <meta property="article:tag" content="walkthrough">
+      <meta property="article:tag" content="TCM-SEC">
+      <meta property="article:tag" content="net-discover">
+
+    <meta name="twitter:label1" content="Reading time">
+    <meta name="twitter:data1" content="2 min read">
+    <meta name="twitter:label2" content="Written by">
+    <meta name="twitter:data2" content="Ashish Ghimire">
+  
+
+  
 
   <title>Vulnhub Kioptrix Walkthrough Part 1 | Ashish Ghimire</title>
 
@@ -235,7 +278,12 @@
 
   
 
-  <link rel="preconnect" href="https://umami.ashishghimire.com">
+  <script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{ "@type": "Person", "@id": "https://ashishghimire.com/#person", "name": "Ashish Ghimire", "url": "https://ashishghimire.com/about/", "image": "https://ashishghimire.com/assets/img/propic.webp", "description": "IT graduate in Sydney, Australia writing first-hand homelab, self-hosting, networking and cybersecurity write-ups.", "knowsAbout": ["Home lab infrastructure", "Self-hosting", "Proxmox", "Docker", "Linux system administration", "Computer networking", "Cybersecurity", "Penetration testing"], "sameAs":["https://github.com/ghimireaacs","https://tryhackme.com/p/ghostaacs","https://linktr.ee/aacsghimire","https://www.youtube.com/@ashishghimire"] }, { "@type": "WebSite", "@id": "https://ashishghimire.com/#website", "url": "https://ashishghimire.com/", "name": "Ashish Ghimire", "alternateName": "IT | Cybersecurity | HomeLab | Self-Hosting", "description": "Homelab, self-hosting and cybersecurity write-ups: hands-on guides for Proxmox, Docker, Linux, networking and Windows, from a lab that actually runs.", "inLanguage": "en", "publisher": { "@id": "https://ashishghimire.com/#person" }, "author": { "@id": "https://ashishghimire.com/#person" } },{ "@type": "BlogPosting", "@id": "https://ashishghimire.com/posts/Vulnhub-Kioptrix-P-1/#post", "url": "https://ashishghimire.com/posts/Vulnhub-Kioptrix-P-1/", "mainEntityOfPage": { "@type": "WebPage", "@id": "https://ashishghimire.com/posts/Vulnhub-Kioptrix-P-1/" }, "isPartOf": { "@id": "https://ashishghimire.com/#website" }, "headline": "Vulnhub Kioptrix Walkthrough Part 1", "description": "Vulnhub Kioptrix Level 1 walkthrough: host discovery with netdiscover and arp-scan, Nmap service enumeration, and exploitation to root.", "image": { "@type": "ImageObject", "url": "https://ashishghimire.com/assets/img/og/vulnhub-kioptrix-p-1.jpg", "width": 1200, "height": 630 }, "datePublished": "2022-12-18T23:11:31+11:00", "dateModified": "2026-08-30T02:10:15+10:00", "author": { "@id": "https://ashishghimire.com/#person" }, "publisher": { "@id": "https://ashishghimire.com/#person" }, "articleSection": ["Security","Walkthrough"], "keywords": "vulnhub, kioptrix, guide, walkthrough, TCM-SEC, net-discover, arp-scan", "wordCount": 452, "timeRequired": "PT2M", "inLanguage": "en" }, { "@type": "BreadcrumbList", "@id": "https://ashishghimire.com/posts/Vulnhub-Kioptrix-P-1/#breadcrumb", "itemListElement": [ { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://ashishghimire.com/" },{ "@type": "ListItem", "position": 2, "name": "Security", "item": "https://ashishghimire.com/categories/security/" },{ "@type": "ListItem", "position": 3, "name": "Walkthrough", "item": "https://ashishghimire.com/categories/walkthrough/" },{ "@type": "ListItem", "position": 4, "name": "Vulnhub Kioptrix Walkthrough Part 1" } ] }]}
+</script>
+
+
+<link rel="preconnect" href="https://umami.ashishghimire.com">
 <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
 <link rel="dns-prefetch" href="//www.googletagmanager.com">
 <link rel="dns-prefetch" href="//googleads.g.doubleclick.net">
@@ -965,7 +1013,7 @@
   <header>
     <h1 data-toc-skip>Vulnhub Kioptrix Walkthrough Part 1</h1>
     
-      <p class="post-desc fw-light mb-4">Step-by-step walkthrough of Vulnhub Kioptrix Level 1. Covers network discovery with net-discover and arp-scan, service enumeration, and exploitation. TCM Security training series.</p>
+      <p class="post-desc fw-light mb-4">Vulnhub Kioptrix Level 1 walkthrough: host discovery with netdiscover and arp-scan, Nmap service enumeration, and exploitation to root.</p>
     
 
     <div class="post-meta text-muted">
@@ -1007,13 +1055,13 @@
 
 <time
   
-  data-ts="1775909417"
+  data-ts="1788019815"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
   
 >
-  Apr 11, 2026
+  Aug 30, 2026
 </time>
 
         </span>
@@ -1027,7 +1075,7 @@
         
 
         <div class="mt-3 mb-3">
-          <a href="/assets/img/headers/tcmsec.webp" class="popup img-link preview-img shimmer"><img src="/assets/img/headers/tcmsec.webp"  alt="Preview Image" width="1200" height="630"  loading="lazy"></a></div>
+          <a href="/assets/img/headers/tcmsec.webp" class="popup img-link preview-img shimmer"><img src="/assets/img/headers/tcmsec.webp"  alt="Vulnhub Kioptrix Level 1 walkthrough header" width="1200" height="630"  loading="lazy"></a><figcaption class="text-center pt-2 pb-2">Vulnhub Kioptrix Level 1 walkthrough header</figcaption></div>
       
 
       <div class="d-flex justify-content-between">
@@ -1069,7 +1117,7 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="429 words"
+  title="452 words"
 >
   <em>2 min</em> read</span>
 
@@ -1104,6 +1152,8 @@
     <p>This is part of the TCM Security Practical Ethical Hacking course. Kioptrix is a classic beginner-friendly vulnerable machine available on Vulnhub. The idea is to compromise the machine and understand what you are doing at each step, not just copy paste commands. This was one of my first full walkthroughs.</p>
 
 <p>The setup is simple. Download the Kioptrix VM from Vulnhub, run it in VMware or VirtualBox on a host-only or NAT network with your Kali machine. Your job is to find it on the network and get in.</p>
+
+<p>Most of the enumeration commands below are collected in my <a href="/posts/Useful-Commands/">Linux commands for hacking</a> cheat sheet if you want them in one place.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="code-header">
         <span data-label-text="Plaintext"><i class="fas fa-code fa-fw small"></i></span>
@@ -1209,6 +1259,7 @@ We are looking for our matching IP. or <em>Azureware/VMware</em></p>
         <div class="post-meta">
           <i class="far fa-folder-open fa-fw me-1"></i>
           
+            <a href="/categories/security/">Security</a>,
             <a href="/categories/walkthrough/">Walkthrough</a>
         </div>
       
@@ -1388,27 +1439,6 @@ We are looking for our matching IP. or <em>Azureware/VMware</em></p>
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Installing-AppImage-Softwares-In-Linux/">Install AppImage Softwares in Linux</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/opnsense-logging-loki-grafana/">OPNsense Logging to Grafana via Loki: Three Gotchas That Will Catch You</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/homelab-electricity-bill-ram-fix/">My Electricity Bill Jumped From $300 to $800 in One Quarter. My Homelab Did It.</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
           <a href="/posts/Install-Docker-And-Manage-Permission/">Installing Docker and Setting Permission</a>
         </li>
       
@@ -1416,7 +1446,28 @@ We are looking for our matching IP. or <em>Azureware/VMware</em></p>
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Vulnhub-Kioptrix-P-1/">Vulnhub Kioptrix Walkthrough Part 1</a>
+          <a href="/posts/Installing-Arch-Linux-Hard-Way/">Installing Arch Linux Hard Way</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Install-Proxmox-And-Post-Installation/">Installing Proxmox and Post Installation</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/How-I-Utilize-Github-For-SSH/">How I Utilize Github to Store and Download My Public SSH Keys</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/">SSH + Zsh Prompt Duplication, Broken Nano, and the One-Line Fix</a>
         </li>
       
     </ul>
@@ -3424,19 +3475,55 @@ We are looking for our matching IP. or <em>Azureware/VMware</em></p>
   
 
   
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
     
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
   
 
   
@@ -3485,7 +3572,7 @@ We are looking for our matching IP. or <em>Azureware/VMware</em></p>
 
               <h4 class="pt-0 my-2">Vulnhub Kioptrix Walkthrough Part 2</h4>
               <div class="text-muted">
-                <p>Vulnhub Kioptrix Level 2 walkthrough covering web app enumeration with Nikto, directory brute-forcing with Dirbuster, and exploitation techniques using Burpsuite.</p>
+                <p>Vulnhub Kioptrix Level 2 walkthrough: Nikto scanning, Dirbuster directory brute force, Burp Suite request tampering and command injection.</p>
               </div>
             </div>
           </a>
@@ -3513,7 +3600,35 @@ We are looking for our matching IP. or <em>Azureware/VMware</em></p>
 
               <h4 class="pt-0 my-2">Setting Up Active Directory</h4>
               <div class="text-muted">
-                <p>How to build a local Active Directory lab for penetration testing practice using the PNPT methodology by TCM Security. Includes Windows Server 2022 and Windows 10 setup.</p>
+                <p>Build an Active Directory pentest lab: Windows Server 2022 domain controller, Windows 10 clients, users, groups, OUs and domain join, PNPT style.</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
+          <a href="/posts/Useful-Commands/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/modules/components/locale-datetime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1679225671"
+  data-df="ll"
+  
+>
+  Mar 19, 2023
+</time>
+
+              <h4 class="pt-0 my-2">Useful Linux Commands for Hacking</h4>
+              <div class="text-muted">
+                <p>Linux commands for pentesting and CTFs: enumeration, privilege escalation checks, file transfers and reverse shells, in one quick-reference sheet.</p>
               </div>
             </div>
           </a>

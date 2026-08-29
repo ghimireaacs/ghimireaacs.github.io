@@ -2,16 +2,20 @@
 layout: post
 title: "Useful Linux Commands for Hacking"
 date: 2023-03-19 22:34:31 +1100
-category: Hacking
+categories: [Security, Pentesting]
 tags: [commands, Hacking, Privilege-Escalation]
-description: "A quick-reference sheet of common Linux commands used in penetration testing and CTFs — enumeration, privilege escalation, file transfers, and more."
-image: /assets/img/headers/linuxCommands.webp
+description: "Linux commands for pentesting and CTFs: enumeration, privilege escalation checks, file transfers and reverse shells, in one quick-reference sheet."
+image:
+  path: /assets/img/headers/linuxCommands.webp
+  alt: "Linux commands for hacking header"
 ---
 
 
 When you land on a Linux machine during a CTF or a pentest, the first thing you do is figure out where you are and what you have. These are the commands I reach for during the enumeration phase. The goal is to understand the system, find the users, map the network, and look for anything that can be leveraged.
 
 I keep this as a reference for myself. You will use different commands depending on the box and the situation, but these cover most of the basics.
+
+For these in context, see the [Kioptrix Level 1](/posts/Vulnhub-Kioptrix-P-1/) and [Kioptrix Level 2](/posts/Vulnhub-Kioptrix-P-2/) walkthroughs, where most of them get used on a real box.
 
 ## System Enumeration
 

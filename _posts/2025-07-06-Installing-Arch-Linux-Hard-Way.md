@@ -2,10 +2,12 @@
 layout: post
 title: "Installing Arch Linux Hard Way"
 date: 2025-07-06 01:11:31 +1100
-category: Linux
+categories: [Linux]
 tags: [arch, linux, install, bootloader, kde, plasma, partitioning]
-description: "A step-by-step guide to installing Arch Linux manually — from disk partitioning and mounting to bootloader setup — without using the archinstall script."
-image: /assets/img/headers/ArchInstall.webp
+description: "Install Arch Linux manually without archinstall: partitioning, mounting, base system, bootloader, network and a KDE Plasma desktop, step by step."
+image:
+  path: /assets/img/headers/ArchInstall.webp
+  alt: "Installing Arch Linux the hard way header"
 ---
 
 ## Before Installation
@@ -420,6 +422,8 @@ if clocks shows up its installed, click any terminal u see and
 
 
 REBOOT
+
+After the reboot the next thing I set up is the shell. Worth knowing that Zsh with Powerlevel10k can [break in odd ways over SSH](/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/) if the terminal type does not match.
 
 
 

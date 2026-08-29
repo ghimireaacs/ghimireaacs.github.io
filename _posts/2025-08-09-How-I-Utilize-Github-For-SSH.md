@@ -2,10 +2,13 @@
 layout: post
 title: "How I Utilize Github to Store and Download My Public SSH Keys"
 date: 2025-08-09 03:32:00 +1100
-category: Homelab
+categories: [Homelab, Self-Hosting]
 tags: [ssh, linux, github, homelab, security, keygen, ed25519]
-description: "Store your SSH public keys on GitHub and provision any new Linux server with one command using ssh-import-id-gh. No manual key copying needed."
-image: /assets/img/headers/githubssh.webp
+description: "Store your public SSH key on GitHub and pull it onto any new machine with one ssh-import-id-gh command. Covers ed25519 keygen and GitHub setup."
+image:
+  path: /assets/img/headers/githubssh.webp
+  alt: "GitHub SSH key header"
+seo_title: "Store and Fetch Your SSH Key with GitHub"
 ---
 
 The first thing I do after I install a fresh new VM is SSH into that machine and use it locally. Now i will not rant about SSH and its uses and why you need it or why it's better than web console. So, let's get to the point.

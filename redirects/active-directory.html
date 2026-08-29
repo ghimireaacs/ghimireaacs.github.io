@@ -1,0 +1,26 @@
+---
+permalink: /categories/active-directory/
+sitemap: false
+layout: null
+---
+<!DOCTYPE html>
+<!--
+  Redirect for a category archive that no longer exists.
+
+  The taxonomy was consolidated (nine flat categories down to four top-level
+  ones with nested leaves), which retires this URL. GitHub Pages cannot serve a
+  real 301 for a static path, so this is the same meta-refresh plus canonical
+  that jekyll-redirect-from would generate, without the extra dependency.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, follow">
+    <link rel="canonical" href="{{ '/categories/pentesting/' | absolute_url }}">
+    <meta http-equiv="refresh" content="0; url={{ '/categories/pentesting/' | absolute_url }}">
+    <title>Redirecting to Pentesting</title>
+  </head>
+  <body>
+    <p>This category is now <a href="{{ '/categories/pentesting/' | absolute_url }}">Pentesting</a>.</p>
+  </body>
+</html>

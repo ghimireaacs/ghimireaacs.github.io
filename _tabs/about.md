@@ -3,7 +3,7 @@ icon: fas fa-info-circle
 order: 5
 ---
 
-# Hi, I am Ashish.
+## Hi, I am Ashish.
 I am an IT graduate based in Sydney with a focus on cybersecurity, self-hosting, and home lab infrastructure.
 
 On this blog I document what I build, break, and fix. Setting up Proxmox and Docker, troubleshooting networking quirks, CTF walkthroughs, whatever the lab throws at me that week.

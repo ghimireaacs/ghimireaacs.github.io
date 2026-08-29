@@ -2,10 +2,12 @@
 layout: post
 title: "Syncthing Three-Way Sync Across VLANs"
 date: 2026-03-20 00:00:00 +1100
-category: Homelab
+categories: [Homelab, Networking]
 tags: [syncthing, vlan, networking, opnsense, docker, selfhosted]
-description: "VLANs broke my Syncthing setup. Global discovery off, relay off, and Syncthing had no idea where my devices were. Here is how I fixed it."
-image: /assets/img/headers/syncthingVlan.webp
+description: "Syncthing stopped syncing once devices sat on separate VLANs. How to get three-way sync working with static addresses and OPNsense firewall rules."
+image:
+  path: /assets/img/headers/syncthingVlan.webp
+  alt: "Syncthing sync across VLANs header"
 ---
 
 I use Syncthing to sync my Obsidian vault. Server on the utility VM, Windows PC, and my Pixel. The server acts as the middle point so my phone and PC do not need to be online at the same time to stay in sync. It has worked great. A minute or two for changes to sync across, which is totally fine for notes.
@@ -58,7 +60,7 @@ One thing that tripped me up here. Syncthing has a "device defaults" setting und
 
 Even after pinning addresses, the phone and PC would not connect directly to each other. VLAN 20 where the phone lives had no rule allowing it to reach VLAN 50 where the PC is. Needed to add one.
 
-Adding the rule was easy. The order was what got me. OPNsense processes rules top to bottom and stops at the first match. I added the Syncthing pass rule but it ended up below an existing block rule for that VLAN pair. The pass rule was never being evaluated.
+Adding the rule was easy. The order was what got me. [OPNsense](/posts/opnsense-logging-loki-grafana/) processes rules top to bottom and stops at the first match. I added the Syncthing pass rule but it ended up below an existing block rule for that VLAN pair. The pass rule was never being evaluated.
 
 Correct order on the PERSONAL interface:
 

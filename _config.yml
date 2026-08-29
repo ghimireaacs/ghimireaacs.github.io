@@ -25,9 +25,14 @@ title: Ashish Ghimire # the main title
 
 tagline: IT | Cybersecurity | HomeLab | Self-Hosting  # it will display as the sub-title
 
-description: >- # used by seo meta and the atom feed
-    Ashish Ghimire's blog on homelab, cybersecurity, self-hosting, and IT.
-    Walkthroughs, writeups, and hands-on guides for Linux, Docker, Proxmox, networking, and more.
+description: >- # used by seo meta and the atom feed; keep under 160 characters
+    Homelab, self-hosting and cybersecurity write-ups: hands-on guides for Proxmox,
+    Docker, Linux, networking and Windows, from a lab that actually runs.
+
+# Used by jekyll-seo-tag for the author and publisher nodes in the BlogPosting
+# JSON-LD, which Google reads for E-E-A-T signals.
+author: Ashish Ghimire
+logo: /assets/img/propic.webp
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: 'https://ashishghimire.com'
@@ -53,6 +58,10 @@ social:
         - https://ashishghimire.com
         - https://tryhackme.com/p/ghostaacs
         - https://linktr.ee/aacsghimire
+
+# Fallback social card for pages without their own `image:` (home, tabs, archives).
+# Regenerate with `python3 tools/gen-og-default.py`.
+social_preview_image: /assets/img/og/site-preview.jpg
 
 # ↑ --------------------------
 # The end of `jekyll-seo-tag` settings
@@ -192,6 +201,10 @@ compress_html:
         envs: [development]
 
 exclude:
+    # Agent instruction files live at the repo root but must not be published;
+    # Jekyll copies unknown root files into _site verbatim.
+    - AGENTS.md
+    - CLAUDE.md
     - "*.gem"
     - "*.gemspec"
     - docs

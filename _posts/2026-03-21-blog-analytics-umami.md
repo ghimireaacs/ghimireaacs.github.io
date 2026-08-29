@@ -2,13 +2,16 @@
 layout: post
 title: "I Finally Know If Anyone Reads This Blog"
 date: 2026-03-21 00:00:00 +1100
-category: Homelab
+categories: [Homelab, Self-Hosting]
 tags: [umami, analytics, selfhosted, cloudflare, jekyll, oracle]
-description: "Google Analytics felt wrong. I self-host everything else so why am I sending my readers' data to Google? Here is how I set up Umami on my Oracle VM."
-image: /assets/img/headers/umamiAnalytics.webp
+description: "Self-hosted Umami analytics on a free Oracle VM: Docker deploy, Cloudflare tunnel and SSL, and privacy-friendly stats without Google Analytics."
+image:
+  path: /assets/img/headers/umamiAnalytics.webp
+  alt: "Umami self-hosted analytics header"
+seo_title: "Self-Hosted Umami Analytics on an Oracle VM"
 ---
 
-For a while I had Google Analytics on this blog. The ID is still in my `_config.yml`. But here is the thing. I self-host almost everything. My photos, my notes, my automation, my media. And then I turn around and send every visitor's data to Google so I can see a number go up. That felt wrong.
+For a while I had Google Analytics on this blog. The ID is still in my `_config.yml`. But here is the thing. I self-host almost everything. My photos, my notes, my automation, my media. Most of it on the [Proxmox box](/posts/Install-Proxmox-And-Post-Installation/) under my desk. And then I turn around and send every visitor's data to Google so I can see a number go up. That felt wrong.
 
 I also applied for Google Ads a few months back and got rejected. Not enough content yet. So I am building up posts and will try again later. But in the meantime I still want to know if people are actually reading, which posts get traffic, where they come from. Without handing that data to Google.
 

@@ -2,10 +2,13 @@
 layout: post
 title: "OPNsense Logging to Grafana via Loki: Three Gotchas That Will Catch You"
 date: 2026-04-22 00:00:00 +1100
-category: Homelab
+categories: [Homelab, Networking]
 tags: [opnsense, grafana, loki, promtail, syslog-ng, kubernetes, selfhosted, observability, filterlog]
-description: "Getting OPNsense firewall logs into Grafana via syslog-ng, Promtail, and Loki sounds straightforward. Three silent failure points will stop it from working and give you no error to debug."
-image: /assets/img/headers/opnsenseLogging.webp
+description: "Ship OPNsense firewall logs to Grafana with syslog-ng, Promtail and Loki, and fix the three silent failures that leave the dashboard empty."
+image:
+  path: /assets/img/headers/opnsenseLogging.webp
+  alt: "OPNsense logging to Grafana header"
+seo_title: "OPNsense Logs to Grafana via Loki"
 ---
 
 > I run this entire stack on a k3s cluster at home. syslog-ng, Promtail, Loki, and Grafana are all deployed as Kubernetes workloads in the `infra` namespace. If you are running this on bare Docker or a single VM, some of the specifics will differ but the problems are the same.
@@ -148,7 +151,7 @@ Blocked vs passed over time: `sum by (action) (count_over_time({job="opnsense"}[
 
 For a live feed of blocked connections only: `{job="opnsense", action="block"} |= "filterlog"`.
 
-![](assets/img/posts/opnsenseDashboard.webp)
+![Grafana dashboard showing OPNsense firewall logs: blocked versus passed traffic over time, protocol split, and a live feed of blocked connections](assets/img/posts/opnsenseDashboard.webp)
 
 Chuck the dashboard in a ConfigMap and it loads automatically every time Grafana starts. Lives in git with the rest of your infrastructure. No importing JSON through the UI every time you redeploy.
 
@@ -158,3 +161,5 @@ Chuck the dashboard in a ConfigMap and it loads automatically every time Grafana
 - Promtail tails files. It does not receive syslog over UDP. Do not forward syslog to it from syslog-ng.
 - OPNsense filterlog is CSV. Without a Promtail pipeline stage, everything in Loki is unreadable text you cannot filter.
 - Label action, direction, interface, protocol. Keep source and destination IPs out of labels or query performance suffers.
+
+The firewall rules producing these logs are the same ones I had to get right for [Syncthing across VLANs](/posts/Syncthing-Three-Way-Sync-Across-VLANs/).

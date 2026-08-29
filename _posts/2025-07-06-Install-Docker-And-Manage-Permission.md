@@ -2,10 +2,12 @@
 layout: post
 title: "Installing Docker and Setting Permission"
 date: 2025-07-06 01:11:31 +1100
-category: Homelab
+categories: [Homelab, Self-Hosting]
 tags: [docker, linux, ubuntu, containers, homelab, permissions]
-description: "How to install Docker on Linux using the official apt repository and configure user group permissions so you can run containers without sudo."
-image: /assets/img/headers/dockerInstall.webp
+description: "Install Docker on Ubuntu from the official apt repository and fix permissions with the docker group so you can run containers without sudo."
+image:
+  path: /assets/img/headers/dockerInstall.webp
+  alt: "Installing Docker on Linux header"
 ---
 
 

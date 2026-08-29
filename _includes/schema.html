@@ -1,0 +1,148 @@
+{%- comment -%}
+  Structured data for the whole site.
+
+  Included from _includes/metadata-hook.html, Chirpy's hook at the end of
+  <head>. It replaces the JSON-LD that
+  jekyll-seo-tag emits (stripped in head.html) with a single @graph, so the
+  author, the site and the page are linked nodes rather than three unrelated
+  blobs. That gives search engines and AI crawlers one entity to attach the
+  E-E-A-T signals to, and adds the fields seo-tag has no way to know:
+  articleSection, keywords, wordCount, timeRequired and the breadcrumb trail.
+
+  Reading time uses the same formula as _includes/read-time.html so the schema,
+  the byline and the social card all agree.
+{%- endcomment -%}
+
+{%- assign person_id = '#person' | absolute_url -%}
+{%- assign site_id = '#website' | absolute_url -%}
+{%- assign page_id = page.url | absolute_url -%}
+
+{%- capture graph -%}
+  {
+    "@type": "Person",
+    "@id": {{ person_id | jsonify }},
+    "name": {{ site.social.name | jsonify }},
+    "url": {{ '/about/' | absolute_url | jsonify }},
+    "image": {{ site.avatar | absolute_url | jsonify }},
+    "description": "IT graduate in Sydney, Australia writing first-hand homelab, self-hosting, networking and cybersecurity write-ups.",
+    "knowsAbout": ["Home lab infrastructure", "Self-hosting", "Proxmox", "Docker", "Linux system administration", "Computer networking", "Cybersecurity", "Penetration testing"],
+    "sameAs":
+      {%- assign profiles = '' | split: '' -%}
+      {%- if site.github.username -%}
+        {%- capture gh -%}https://github.com/{{ site.github.username }}{%- endcapture -%}
+        {%- assign profiles = profiles | push: gh -%}
+      {%- endif -%}
+      {%- for link in site.social.links -%}
+        {%- unless link contains site.url -%}{%- assign profiles = profiles | push: link -%}{%- endunless -%}
+      {%- endfor -%}
+      {%- assign profiles = profiles | push: 'https://www.youtube.com/@ashishghimire' | uniq -%}
+      {{ profiles | jsonify }}
+  },
+  {
+    "@type": "WebSite",
+    "@id": {{ site_id | jsonify }},
+    "url": {{ '/' | absolute_url | jsonify }},
+    "name": {{ site.title | jsonify }},
+    "alternateName": {{ site.tagline | jsonify }},
+    "description": {{ site.description | strip_newlines | strip | jsonify }},
+    "inLanguage": {{ site.lang | default: 'en' | jsonify }},
+    "publisher": { "@id": {{ person_id | jsonify }} },
+    "author": { "@id": {{ person_id | jsonify }} }
+  }
+
+  {%- if page.layout == 'post' -%}
+    {%- assign words = page.content | strip_html | number_of_words: 'auto' -%}
+    {%- assign minutes = words | divided_by: 180 -%}
+    {%- unless minutes > 0 %}{% assign minutes = 1 %}{% endunless -%}
+    {%- assign trail = page.categories -%}
+    {%- if trail.size == 0 and page.category -%}{%- assign trail = page.category | split: '|' -%}{%- endif -%}
+    {%- assign og_path = '/assets/img/og/' | append: page.slug | downcase | append: '.jpg' -%}
+    {%- assign og_file = site.static_files | where: 'path', og_path | first -%}
+    {%- if og_file -%}
+      {%- assign card = og_path | absolute_url -%}
+    {%- else -%}
+      {%- assign card = page.image.path | default: page.image | absolute_url -%}
+    {%- endif -%}
+    ,{
+      "@type": "BlogPosting",
+      "@id": {{ page_id | append: '#post' | jsonify }},
+      "url": {{ page_id | jsonify }},
+      "mainEntityOfPage": { "@type": "WebPage", "@id": {{ page_id | jsonify }} },
+      "isPartOf": { "@id": {{ site_id | jsonify }} },
+      "headline": {{ page.title | strip_html | jsonify }},
+      "description": {{ page.description | strip_newlines | strip | jsonify }},
+      "image": {
+        "@type": "ImageObject",
+        "url": {{ card | jsonify }},
+        "width": 1200,
+        "height": 630
+      },
+      "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+      "dateModified": {{ page.last_modified_at | default: page.date | date_to_xmlschema | jsonify }},
+      "author": { "@id": {{ person_id | jsonify }} },
+      "publisher": { "@id": {{ person_id | jsonify }} },
+      {%- if trail.size > 0 %}
+      "articleSection": {{ trail | jsonify }},
+      {%- endif %}
+      {%- if page.tags.size > 0 %}
+      "keywords": {{ page.tags | join: ', ' | jsonify }},
+      {%- endif %}
+      "wordCount": {{ words }},
+      "timeRequired": "PT{{ minutes }}M",
+      "inLanguage": {{ site.lang | default: 'en' | jsonify }}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": {{ page_id | append: '#breadcrumb' | jsonify }},
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": {{ '/' | absolute_url | jsonify }} }
+        {%- comment -%} One rung per category level: Home > Security > Walkthrough > post {%- endcomment -%}
+        {%- for category in trail -%}
+          {%- capture category_url -%}/categories/{{ category | slugify }}/{%- endcapture -%}
+          ,{ "@type": "ListItem", "position": {{ forloop.index | plus: 1 }}, "name": {{ category | jsonify }}, "item": {{ category_url | absolute_url | jsonify }} }
+        {%- endfor -%}
+        ,{ "@type": "ListItem", "position": {{ trail.size | plus: 2 }}, "name": {{ page.title | strip_html | jsonify }} }
+      ]
+    }
+
+  {%- elsif page.url == '/about/' -%}
+    ,{
+      "@type": "ProfilePage",
+      "@id": {{ page_id | jsonify }},
+      "url": {{ page_id | jsonify }},
+      "name": {{ page.title | default: 'About' | jsonify }},
+      "isPartOf": { "@id": {{ site_id | jsonify }} },
+      "mainEntity": { "@id": {{ person_id | jsonify }} }
+    }
+
+  {%- elsif page.layout == 'home' -%}
+    ,{
+      "@type": "Blog",
+      "@id": {{ page_id | append: '#blog' | jsonify }},
+      "url": {{ page_id | jsonify }},
+      "name": {{ site.title | jsonify }},
+      "description": {{ site.description | strip_newlines | strip | jsonify }},
+      "isPartOf": { "@id": {{ site_id | jsonify }} },
+      "author": { "@id": {{ person_id | jsonify }} },
+      "blogPost": [
+        {%- for post in site.posts limit: 20 -%}
+        { "@type": "BlogPosting", "@id": {{ post.url | absolute_url | append: '#post' | jsonify }} }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    }
+
+  {%- elsif page.layout == 'page' or page.layout == 'archives' or page.layout == 'categories' -%}
+    ,{
+      "@type": "CollectionPage",
+      "@id": {{ page_id | jsonify }},
+      "url": {{ page_id | jsonify }},
+      "name": {{ page.title | jsonify }},
+      "isPartOf": { "@id": {{ site_id | jsonify }} },
+      "author": { "@id": {{ person_id | jsonify }} }
+    }
+  {%- endif -%}
+{%- endcapture -%}
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{{ graph | strip_newlines | replace: '  ', ' ' | replace: '  ', ' ' | replace: '  ', ' ' }}]}
+</script>

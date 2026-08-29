@@ -2,10 +2,12 @@
 layout: post
 title: "Vulnhub Kioptrix Walkthrough Part 2"
 date: 2022-12-22 23:11:31 +1100
-category: Walkthrough
+categories: [Security, Walkthrough]
 tags: [vulnhub, kioptrix, guide, walkthrough, TCM-SEC, nikto, dirbuster, burpsuite]
-description: "Vulnhub Kioptrix Level 2 walkthrough covering web app enumeration with Nikto, directory brute-forcing with Dirbuster, and exploitation techniques using Burpsuite."
-image: /assets/img/headers/tcmsec.webp
+description: "Vulnhub Kioptrix Level 2 walkthrough: Nikto scanning, Dirbuster directory brute force, Burp Suite request tampering and command injection."
+image:
+  path: /assets/img/headers/tcmsec.webp
+  alt: "Vulnhub Kioptrix Level 2 walkthrough header"
 ---
 Continuing from [Kioptrix Part 1](/posts/Vulnhub-Kioptrix-P-1/) where we did network discovery and port scanning. Now we go deeper into the web application running on the target. The main tools here are Nikto, Dirbuster, and Burpsuite. Each does a different job and together they give you a full picture of what the web application is exposing.
 

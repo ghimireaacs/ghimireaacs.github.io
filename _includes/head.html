@@ -1,0 +1,210 @@
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e">
+  <meta
+    name="viewport"
+    content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
+  >
+
+  {%- capture seo_tags -%}
+    {% seo title=false %}
+  {%- endcapture -%}
+
+  <!-- Setup Open Graph image -->
+  <!--
+    Local override of the jekyll-theme-chirpy 7.6.0 include. Only this Open
+    Graph block differs from the gem: social scrapers are pointed at the
+    1200x630 JPEG twin in /assets/img/og/ (built by tools/gen-og-images.py),
+    because LinkedIn does not render WebP and the on-page headers are smaller
+    than the 1200x630 a large card wants. Re-sync when bumping the theme.
+  -->
+
+  {% assign og_size = false %}
+
+  {% if page.image %}
+    {% assign src = page.image.path | default: page.image %}
+
+    {% unless src contains '://' %}
+      {%- comment -%} page.slug keeps the filename's case; the cards are all lowercase {%- endcomment -%}
+      {% assign og_slug = page.slug | downcase %}
+      {% assign og_path = '/assets/img/og/' | append: og_slug | append: '.jpg' %}
+      {% assign og_file = site.static_files | where: 'path', og_path | first %}
+
+      {% if og_file %}
+        {%- capture img_url -%}{{ og_path | absolute_url }}{%- endcapture -%}
+        {% assign og_size = true %}
+      {% else %}
+        {%- capture img_url -%}
+          {% include media-url.html src=src subpath=page.media_subpath absolute=true %}
+        {%- endcapture -%}
+      {% endif %}
+
+      {%- capture old_url -%}{{ src | absolute_url }}{%- endcapture -%}
+      {%- capture new_url -%}{{ img_url }}{%- endcapture -%}
+
+      {% assign seo_tags = seo_tags | replace: old_url, new_url %}
+    {% endunless %}
+
+  {% elsif site.social_preview_image %}
+    {%- capture img_url -%}
+      {% include media-url.html src=site.social_preview_image absolute=true %}
+    {%- endcapture -%}
+
+    {% if site.social_preview_image contains '/assets/img/og/' %}
+      {% assign og_size = true %}
+    {% endif %}
+
+    {%- capture og_image -%}
+      <meta property="og:image" content="{{ img_url }}" />
+    {%- endcapture -%}
+
+    {%- capture twitter_image -%}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta property="twitter:image" content="{{ img_url }}" />
+    {%- endcapture -%}
+
+    {% assign old_meta_clip = '<meta name="twitter:card" content="summary" />' %}
+    {% assign new_meta_clip = og_image | append: twitter_image %}
+    {% assign seo_tags = seo_tags | replace: old_meta_clip, new_meta_clip %}
+  {% endif %}
+
+  {%- comment -%}
+    jekyll-seo-tag's own JSON-LD is dropped here: _includes/metadata-hook.html
+    emits a richer @graph covering the same page, and two competing BlogPosting
+    blobs on one page is worse than one linked graph.
+  {%- endcomment -%}
+  {% assign ld_parts = seo_tags | split: '<script type="application/ld+json">' %}
+  {% if ld_parts.size > 1 %}
+    {% assign ld_tail = ld_parts[1] | split: '</script>' %}
+    {% assign seo_tags = ld_parts[0] | append: ld_tail[1] %}
+  {% endif %}
+
+  {{ seo_tags }}
+
+  {% if og_size %}
+    <!-- Dimensions let scrapers lay the card out before the image is fetched -->
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    {%- assign og_alt = page.image.alt | default: page.title | default: site.title %}
+    <meta property="og:image:alt" content="{{ og_alt | strip_html | normalize_whitespace | xml_escape }}">
+  {% endif %}
+
+  {% if page.layout == 'post' %}
+    <!-- Article metadata: Slack and Discord surface these next to the preview,
+         and Facebook/Google read them for freshness. Reading time uses the same
+         formula as _includes/read-time.html so the card, the byline and the
+         unfurl all agree. -->
+    {%- assign words = page.content | strip_html | number_of_words: 'auto' -%}
+    {%- assign minutes = words | divided_by: 180 -%}
+    {%- unless minutes > 0 %}{% assign minutes = 1 %}{% endunless -%}
+
+    <!-- article:published_time / :modified_time already come from jekyll-seo-tag -->
+    <meta property="article:author" content="{{ site.social.name }}">
+    {%- for category in page.categories %}
+      <meta property="article:section" content="{{ category }}">
+    {%- endfor %}
+    {%- for tag in page.tags limit: 6 %}
+      <meta property="article:tag" content="{{ tag }}">
+    {%- endfor %}
+
+    <meta name="twitter:label1" content="Reading time">
+    <meta name="twitter:data1" content="{{ minutes }} min read">
+    <meta name="twitter:label2" content="Written by">
+    <meta name="twitter:data2" content="{{ site.social.name }}">
+  {% endif %}
+
+  {% if page.layout == 'tag' %}
+    <!-- Tag archives are thin (most hold a single post) and compete with the posts
+         themselves in search. Crawlable for discovery, but kept out of the index. -->
+    <meta name="robots" content="noindex, follow">
+  {% endif %}
+
+  {%- if site.social.fediverse_handle %}
+    <!-- Fediverse handle/creator -->
+    <meta name="fediverse:creator" content="{{ site.social.fediverse_handle }}">
+  {% endif %}
+
+  <title>
+    {%- unless page.layout == 'home' -%}
+      {%- capture title -%}
+        {%- if page.collection == 'tabs' -%}
+          {%- assign tab_key = page.title | downcase -%}
+          {{- site.data.locales[include.lang].tabs[tab_key] -}}
+        {%- else -%}
+          {{- page.seo_title | default: page.title -}}
+        {%- endif -%}
+      {%- endcapture -%}
+      {{- title | append: ' | ' -}}
+    {%- endunless -%}
+    {{- site.title -}}
+  </title>
+
+  {% include_cached favicons.html %}
+
+  <!-- Resource Hints -->
+  {% unless site.assets.self_host.enabled %}
+    {% for hint in site.data.origin.cors.resource_hints %}
+      {% for link in hint.links %}
+        <link rel="{{ link.rel }}" href="{{ hint.url }}" {{ link.opts | join: ' ' }}>
+      {% endfor %}
+    {% endfor %}
+  {% endunless %}
+
+  <!-- Bootstrap -->
+  {% unless jekyll.environment == 'production' %}
+    <link rel="stylesheet" href="{{ site.data.origin.cors.bootstrap.css }}">
+  {% endunless %}
+
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{ '/assets/css/:THEME.css' | replace: ':THEME', site.theme | relative_url }}">
+
+  <!-- Web Font -->
+  <link rel="stylesheet" href="{{ site.data.origin[type].webfonts | relative_url }}">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="{{ site.data.origin[type].fontawesome.css | relative_url }}">
+
+  <!-- 3rd-party Dependencies -->
+
+  {% if site.toc and page.toc %}
+    <link rel="stylesheet" href="{{ site.data.origin[type].toc.css | relative_url }}">
+  {% endif %}
+
+  {% if page.layout == 'post' or page.layout == 'page' or page.layout == 'home' %}
+    <link rel="stylesheet" href="{{ site.data.origin[type]['lazy-polyfill'].css | relative_url }}">
+  {% endif %}
+
+  {% if page.layout == 'page' or page.layout == 'post' %}
+    <!-- Image Popup -->
+    <link rel="stylesheet" href="{{ site.data.origin[type].glightbox.css | relative_url }}">
+  {% endif %}
+
+  <!-- Scripts -->
+
+  <script src="{{ '/assets/js/dist/theme.min.js' | relative_url }}"></script>
+
+  {% include js-selector.html lang=lang %}
+
+  {% if jekyll.environment == 'production' %}
+    <!-- PWA -->
+    {% if site.pwa.enabled %}
+      <script
+        defer
+        src="{{ '/app.min.js' | relative_url }}?baseurl={{ site.baseurl | default: '' }}&register={{ site.pwa.cache.enabled }}"
+      ></script>
+    {% endif %}
+
+    <!-- Web Analytics -->
+    {% for analytics in site.analytics %}
+      {% capture str %}{{ analytics }}{% endcapture %}
+      {% assign platform = str | split: '{' | first %}
+      {% if site.analytics[platform].id and site.analytics[platform].id != empty %}
+        {% include analytics/{{ platform }}.html %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  {% include metadata-hook.html %}
+</head>

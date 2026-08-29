@@ -2,15 +2,19 @@
 layout: post
 title: "Install AppImage Softwares in Linux"
 date: 2023-02-17 03:10:16 +1100
-category: Linux
+categories: [Linux]
 tags: [linux, appimage, software, install]
-description: "AppImage is a portable software format for Linux. Learn how to download, make executable, and run AppImage applications on any Linux distro without a package manager."
-image: /assets/img/headers/appimg.webp
+description: "How to run AppImage apps on any Linux distro: download, make executable, integrate into the app menu and uninstall. No package manager needed."
+image:
+  path: /assets/img/headers/appimg.webp
+  alt: "AppImage on Linux header"
 ---
 
 I had a piece of software that was only available as an AppImage. No snap package, no apt repo, just the AppImage file. I had no idea what to do with it at first. Turns out it is straightforward once you know the process.
 
 AppImage is a software distribution format for Linux. It is getting popular these days for the following reasons.
+
+Windows has a similar one-command story with [winget](/posts/Install-Package-Manager-In-Windows-11/), though that one is a package manager rather than a self-contained file.
 
 ---
 

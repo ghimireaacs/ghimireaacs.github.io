@@ -2,13 +2,16 @@
 layout: post
 title: "Broken Docker DNS Due to Pi-hole"
 date: 2026-03-11 00:00:00 +1100
-category: Homelab
+categories: [Homelab, Networking]
 tags: [docker, dns, pihole, networking, debugging]
-description: "Docker containers couldn't resolve DNS despite correct daemon.json config. The real culprit was Pi-hole's leftover nftables rules redirecting all DNS traffic to a closed port."
-image: /assets/img/headers/dockerBrokenDNS.webp
+description: "Docker containers could not resolve DNS despite a correct daemon.json. The real cause was leftover Pi-hole nftables rules sending DNS to a dead port."
+image:
+  path: /assets/img/headers/dockerBrokenDNS.webp
+  alt: "Broken Docker DNS header"
+seo_title: "Broken Docker DNS Caused by Pi-hole"
 ---
 
-New container, can't resolve DNS. Classic. Except this time I'd already set the DNS in `daemon.json`, restarted Docker, checked iptables — everything looked right. Ping worked. DNS didn't. Spent way too long on this one.
+New container, can't resolve DNS. Classic. Except this time I'd already set the DNS in `daemon.json`, restarted [Docker](/posts/Install-Docker-And-Manage-Permission/), checked iptables — everything looked right. Ping worked. DNS didn't. Spent way too long on this one.
 
 Here's what actually happened.
 
@@ -26,7 +29,7 @@ Here's what actually happened.
 - systemd override — bare `dockerd` was running and reading `daemon.json` correctly
 - iptables FORWARD chain — DOCKER-FORWARD had all the right ACCEPT rules
 - MASQUERADE rules — all bridge subnets were covered in POSTROUTING
-- Bogon blocking on OPNsense — not enabled
+- Bogon blocking on [OPNsense](/posts/opnsense-logging-loki-grafana/) — not enabled
 - Removed TCP port 2375 exposure — good cleanup but didn't fix DNS
 - `/run/docker.sock` was a **directory** instead of a socket file — fixed it, DNS still broken
 

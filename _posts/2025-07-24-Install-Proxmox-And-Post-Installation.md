@@ -2,10 +2,12 @@
 layout: post
 title: "Installing Proxmox and Post Installation"
 date: 2025-07-24 00:32:00 +1100
-category: Homelab
+categories: [Homelab, Self-Hosting]
 tags: [proxmox, linux, homelab, virtualization, selfhosted, hypervisor]
-description: "How to install Proxmox VE on an old PC and run essential post-installation configuration using the Proxmox community helper scripts. Turn spare hardware into a home server."
-image: /assets/img/headers/proxmox.webp
+description: "Turn an old PC into a home server with Proxmox VE: install from USB, set a static IP, then run the post-install community helper script."
+image:
+  path: /assets/img/headers/proxmox.webp
+  alt: "Proxmox VE installation header"
 ---
 
 Its 2025 most of us have a spare piece of Desktop or Laptop lying around, which seems like is not worth much. But using Proxmox that piece of old tech can make your life easier without a lot of trouble. You will not need a brand new unique system to run a server. Any PC should be fine after 2010, check specs for PCs that are older than 2010.

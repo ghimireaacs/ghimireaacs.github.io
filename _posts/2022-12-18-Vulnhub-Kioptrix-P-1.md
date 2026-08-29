@@ -2,15 +2,19 @@
 layout: post
 title: "Vulnhub Kioptrix Walkthrough Part 1"
 date: 2022-12-18 23:11:31 +1100
-category: Walkthrough
+categories: [Security, Walkthrough]
 tags: [vulnhub, kioptrix, guide, walkthrough, TCM-SEC, net-discover, arp-scan]
-description: "Step-by-step walkthrough of Vulnhub Kioptrix Level 1. Covers network discovery with net-discover and arp-scan, service enumeration, and exploitation. TCM Security training series."
-image: /assets/img/headers/tcmsec.webp
+description: "Vulnhub Kioptrix Level 1 walkthrough: host discovery with netdiscover and arp-scan, Nmap service enumeration, and exploitation to root."
+image:
+  path: /assets/img/headers/tcmsec.webp
+  alt: "Vulnhub Kioptrix Level 1 walkthrough header"
 ---
 
 This is part of the TCM Security Practical Ethical Hacking course. Kioptrix is a classic beginner-friendly vulnerable machine available on Vulnhub. The idea is to compromise the machine and understand what you are doing at each step, not just copy paste commands. This was one of my first full walkthroughs.
 
 The setup is simple. Download the Kioptrix VM from Vulnhub, run it in VMware or VirtualBox on a host-only or NAT network with your Kali machine. Your job is to find it on the network and get in.
+
+Most of the enumeration commands below are collected in my [Linux commands for hacking](/posts/Useful-Commands/) cheat sheet if you want them in one place.
 
 ```
 Default username: John

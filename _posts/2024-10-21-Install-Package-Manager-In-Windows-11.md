@@ -2,10 +2,13 @@
 layout: post
 title: "Update All Apps with One Line Of Code in Windows"
 date: 2024-10-21 05:19:38 +1100
-category: Windows
+categories: [Windows]
 tags: [windows, winget, windows-11, package-manager, cli, powershell]
-description: "Winget is the Windows package manager. Install, update, and list all your software from the command line — like apt on Linux but for Windows 10 and 11."
-image: /assets/img/headers/winget.webp
+description: "Winget is the built-in Windows package manager. Install, upgrade and list every app from one PowerShell command, the way apt works on Linux."
+image:
+  path: /assets/img/headers/winget.webp
+  alt: "Winget Windows package manager header"
+seo_title: "Update All Windows Apps with Winget"
 ---
 
 Its a headache to update each softwares on Windows. Its tough to update something manually.
@@ -79,3 +82,5 @@ Done!
 - Install winget
 - Install, Update and Uninstall from CLI
 - Upgrade Everything available with one line
+
+On Linux the closest single-file equivalent is [AppImage](/posts/Installing-AppImage-Softwares-In-Linux/), which ships the app and its dependencies in one executable.

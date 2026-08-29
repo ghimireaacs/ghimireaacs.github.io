@@ -2,13 +2,18 @@
 layout: post
 title: "Setting Up Active Directory"
 date: 2025-07-05 00:00:00 +0000
-category: Active Directory
+categories: [Security, Pentesting]
 tags: [Active-Directory, windows-server, pentesting, TCM-SEC, PNPT, cybersecurity, AD]
-description: "How to build a local Active Directory lab for penetration testing practice using the PNPT methodology by TCM Security. Includes Windows Server 2022 and Windows 10 setup."
-image: /assets/img/headers/activeDirectory.webp
+description: "Build an Active Directory pentest lab: Windows Server 2022 domain controller, Windows 10 clients, users, groups, OUs and domain join, PNPT style."
+image:
+  path: /assets/img/headers/activeDirectory.webp
+  alt: "Active Directory lab header"
+seo_title: "Build an Active Directory Pentest Lab"
 ---
 
 > ‼️This is a setup for Penetration Testing in Local Network and never meant for production.
+
+This lab follows the same TCM Security path as my [Kioptrix Level 1](/posts/Vulnhub-Kioptrix-P-1/) walkthrough, except the target here is a Windows domain instead of a single Linux box.
 
 At first Download ISOs
 - [Windows Server Eval 2022](https://www.microsoft.com/en-us/evalcenter/download-windows-server-2022)

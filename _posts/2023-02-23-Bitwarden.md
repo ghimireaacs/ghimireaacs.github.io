@@ -2,10 +2,13 @@
 layout: post
 title: "You need to use Password Manager right NOW!!"
 date: 2023-02-23 22:34:31 +1100
-category: CyberSecurity
+categories: [Security, Privacy]
 tags: [security, password, bitwarden, password-manager, cybersecurity]
-description: "With data breaches everywhere, internet security is a major concern. Even if you do not want to go through any hassle, here are the minimum steps that will put you from easy targets to hard."
-image: /assets/img/headers/bitwarden.webp
+description: "Why you need a password manager and how to set up Bitwarden: vault, generated passwords, browser and phone sync, and a recovery plan that works."
+image:
+  path: /assets/img/headers/bitwarden.webp
+  alt: "Bitwarden password manager header"
+seo_title: "Set Up Bitwarden: Password Manager Guide"
 ---
 
 Let's see how many account do you have in the internet? Facebook, Gmail, Instagram, Twitter, <mark>Bank Account</mark>. Ah yeah Bank Account. Do you use same password for everything or atleast multiple accounts and never even changed that 2010 password you created and its everywhere. That my friend is a Red Flag.
@@ -68,3 +71,5 @@ These Password Managers do not only save but also helps you to create passwords 
 - Generate Passwords more than 12 letters.
 - Use Password Managers to Save or help you create Passwords
 - Create a strong Master Password and Remember it.
+
+A vault is also a sensible place to keep a backup of your SSH private key, which pairs with [storing your public key on GitHub](/posts/How-I-Utilize-Github-For-SSH/) so you can pull it onto any new machine.

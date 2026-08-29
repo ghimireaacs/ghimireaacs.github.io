@@ -2,10 +2,13 @@
 layout: post
 title: "SSH + Zsh Prompt Duplication, Broken Nano, and the One-Line Fix"
 date: 2026-01-07 09:02:00 +1100
-category: Linux
+categories: [Linux]
 tags: [ssh, zsh, linux, ghostty, powerlevel10k, oh-my-zsh, terminal, homelab]
-description: "Zsh prompt duplicating and nano rendering broken when SSH-ing from Ghostty into a remote server. Root cause was a terminal type mismatch. Fixed with one environment variable."
-image: /assets/img/headers/p10kbug.webp
+description: "Zsh prompt duplicated and nano rendered broken when SSH-ing from Ghostty. The cause was a TERM mismatch, and one environment variable fixed both."
+image:
+  path: /assets/img/headers/p10kbug.webp
+  alt: "Broken Zsh prompt over SSH header"
+seo_title: "Fix Zsh Prompt Duplication over SSH"
 ---
 ## Background
 So with latest windows Updates its so hard to stay now, almost like they want you out. So i decided to use Linux as main gig again. Now i use Linux on my Laptops and Servers, it's even as secondary boot in my main workstation. But i play invasive games like Valorant, FIFA and GTA Online (Now Borked in Linux) with my friends, i have to run Windows. 
@@ -20,7 +23,7 @@ Here is what i have decided to go with, for my system.
 
 | MAIN RIG     |            |
 | ------------ | ---------- |
-| Distro       | Arch Linux |
+| Distro       | [Arch Linux](/posts/Installing-Arch-Linux-Hard-Way/) |
 | Desktop Env. | KDE Plasma |
 | Shell        | ZSH        |
 | Terminal     | Ghostty    |

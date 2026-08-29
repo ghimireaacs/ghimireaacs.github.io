@@ -1,0 +1,36 @@
+---
+permalink: /llms.txt
+sitemap: false
+---
+# {{ site.title }}
+
+> {{ site.description }}
+
+This is the personal engineering blog of {{ site.social.name }}, an IT graduate
+based in Sydney, Australia. Every post is a first-hand write-up of something
+built, broken or fixed in a real home lab: Proxmox and Docker infrastructure, OPNsense
+and VLAN networking, self-hosted services, Linux and Windows administration, and
+offensive-security walkthroughs. Posts include the failures and dead ends, not just the
+happy path.
+
+Author: {{ site.social.name }} — {{ site.url }}{{ '/about/' | relative_url }}
+Contact: {% for link in site.social.links %}{{ link }}{% unless forloop.last %}, {% endunless %}{% endfor %}
+License: content is the author's own; cite with a link to the post URL.
+
+## Posts
+
+Grouped by top-level category, newest first within each.
+{% assign tops = '' | split: '' %}{% for post in site.posts %}{% assign tops = tops | push: post.categories.first %}{% endfor %}
+{% assign tops = tops | uniq | sort %}
+{% for cat in tops %}
+### {{ cat }}
+{% assign in_cat = site.posts | where_exp: 'post', 'post.categories.first == cat' %}{% for post in in_cat %}
+- [{{ post.title }}]({{ post.url | absolute_url }}) — {{ post.description | strip_newlines }} Category: {{ post.categories | join: ' > ' }}. Published {{ post.date | date: '%Y-%m-%d' }}{% if post.last_modified_at %}, updated {{ post.last_modified_at | date: '%Y-%m-%d' }}{% endif %}. Tags: {{ post.tags | join: ', ' }}.
+{% endfor %}{% endfor %}
+
+## Index pages
+
+- [All posts]({{ '/all-posts/' | absolute_url }}) — full chronological archive
+- [Categories]({{ '/categories/' | absolute_url }}) — posts grouped by topic
+- [About]({{ '/about/' | absolute_url }}) — who writes this and why
+- [Sitemap]({{ '/sitemap.xml' | absolute_url }})

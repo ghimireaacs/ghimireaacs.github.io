@@ -2,10 +2,13 @@
 layout: post
 title: "My Electricity Bill Jumped From $300 to $800 in One Quarter. My Homelab Did It."
 date: 2026-04-12 00:00:00 +1100
-category: Homelab
+categories: [Homelab, Self-Hosting]
 tags: [proxmox, kubernetes, homelab, electricity, ram, cost, selfhosted, ollama, ai]
-description: "Three months of homelab expansion, adding k3s, new storage, local AI, and forgetting to clean up what I was no longer using added $500 to my electricity bill. Here is how I found it and fixed it."
-image: /assets/img/headers/homelab-electricity-bill.webp
+description: "A homelab pushed my power bill from $300 to $800 a quarter. How I traced the waste with Grafana, cut idle VMs and RAM, and got the bill back down."
+image:
+  path: /assets/img/headers/homelab-electricity-bill.webp
+  alt: "Homelab electricity bill header"
+seo_title: "Homelab Added $500 to My Power Bill"
 ---
 
 My last electricity bill was $800 AUD for the quarter. Before the homelab got serious it was around $300. That is a $500 jump in three months and honestly, i did not see it coming.
@@ -20,7 +23,7 @@ The biggest thing was the k3s cluster. I already had a GPU passthrough VM called
 
 On top of that i added a second 8TB drive to TrueNAS to set up a mirror. Two spinning hard drives 24/7 instead of one. Seagate Exos drives are not heavy power consumers but they are not free either, especially during scrubs.
 
-Then there was everything i deployed on the cluster. I went a bit overboard. Sonarr, Radarr, Prowlarr, Readarr, Audiobookshelf, Kavita, the whole arr media stack. Authentik for SSO. Prometheus and Grafana for monitoring. Paperless for documents. karakeep for bookmarks. Most of it was genuinely useful at the time.
+Then there was everything i deployed on the cluster. I went a bit overboard. Sonarr, Radarr, Prowlarr, Readarr, Audiobookshelf, Kavita, the whole arr media stack. Authentik for SSO. Prometheus and [Grafana](/posts/opnsense-logging-loki-grafana/) for monitoring. Paperless for documents. karakeep for bookmarks. Most of it was genuinely useful at the time.
 
 Then life got busy. Got a Netflix subscription. Amazon Prime covers the rest. I stopped using the media stack. But i never stopped running it. All those pods sitting there in memory, nodes drawing power, doing nothing for me.
 
@@ -28,13 +31,13 @@ That is the part that stings.
 
 ## Finding the Waste: The VMs First
 
-First place i looked was Proxmox. I wanted to see what was actually running.
+First place i looked was [Proxmox](/posts/Install-Proxmox-And-Post-Installation/). I wanted to see what was actually running.
 
 Two VMs stood out immediately.
 
 `security` was a VM i provisioned months ago to set up some security tools. Never got around to deploying anything. It was just on. 8 GB of RAM, CPU cores assigned, running nothing.
 
-`ghostmedia` was my old media server VM from before the Kubernetes migration. I had moved everything to the cluster but never deleted this VM. Still running Docker containers, some of them duplicating what was already on the cluster. Also 8 GB of RAM.
+`ghostmedia` was my old media server VM from before the Kubernetes migration. I had moved everything to the cluster but never deleted this VM. Still running [Docker](/posts/Install-Docker-And-Manage-Permission/) containers, some of them duplicating what was already on the cluster. Also 8 GB of RAM.
 
 That is 16 GB sitting on two VMs doing nothing.
 

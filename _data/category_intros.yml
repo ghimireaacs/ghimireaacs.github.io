@@ -1,0 +1,57 @@
+# Intro copy for the category archive pages, rendered by _layouts/category.html
+# and used as the meta description by _plugins/archives-metadata-hook.rb.
+# Keys must match the category names used in post front matter.
+# Keep `description` under 160 characters so it is not truncated in search results.
+
+Homelab:
+  description: "Home lab build notes: Proxmox, Docker, Kubernetes and the self-hosted services I run, including the parts that broke and what the power bill cost."
+  intro: >-
+    Everything I run on the hardware under my desk. Proxmox hosts, Docker and k3s workloads,
+    the networking that ties them together, and the failures worth writing down.
+
+Self-Hosting:
+  description: "Self-hosting guides: install Docker and Proxmox, run your own analytics, manage SSH keys and keep an always-on home server cheap to run."
+  intro: >-
+    Running your own services instead of renting someone else's. Install guides, day-two
+    maintenance, and the running costs nobody mentions up front.
+
+Networking:
+  description: "Home network troubleshooting: VLAN segmentation in OPNsense, Pi-hole and Docker DNS conflicts, firewall rules and log shipping to Grafana."
+  intro: >-
+    Packets, VLANs and DNS. Mostly write-ups of the day something stopped resolving and the
+    hour it took to work out why.
+
+Security:
+  description: "Practical security: password managers, DNS filtering, Active Directory labs and hands-on vulnerable machine walkthroughs from the attacker side."
+  intro: >-
+    Both halves of the job. Defensive basics that take an afternoon to set up, and offensive
+    labs that show why those basics matter.
+
+Walkthrough:
+  description: "Step-by-step vulnerable machine walkthroughs: enumeration, service discovery, exploitation and privilege escalation, with the reasoning at each step."
+  intro: >-
+    Full walkthroughs of intentionally vulnerable machines, written so you can follow the
+    reasoning rather than paste the commands.
+
+Pentesting:
+  description: "Penetration testing notes: building an Active Directory lab, Linux enumeration and privilege escalation commands, and the tooling that goes with them."
+  intro: >-
+    Lab builds and reference material for offensive work. Everything here targets machines
+    I own.
+
+Privacy:
+  description: "Privacy and personal security: set up a password manager, block ads and trackers network-wide with DNS filtering, and cut what you leak by default."
+  intro: >-
+    Small changes with a large payoff. You do not have to be the most secure person online,
+    only harder work than the next target.
+
+Linux:
+  description: "Linux guides: install Arch the manual way, run AppImage software on any distro, and fix terminal and SSH problems that have no obvious cause."
+  intro: >-
+    Desktop and server Linux. Install walkthroughs, package handling, and the fixes for
+    problems whose error messages point in the wrong direction.
+
+Windows:
+  description: "Windows administration: manage and update every installed application from the command line with winget, the built-in Windows package manager."
+  intro: >-
+    Making Windows behave more like a system you can script.

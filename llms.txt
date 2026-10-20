@@ -9,64 +9,105 @@ and VLAN networking, self-hosted services, Linux and Windows administration, and
 offensive-security walkthroughs. Posts include the failures and dead ends, not just the
 happy path.
 
-Author: Ashish Ghimire — https://ashishghimire.com/about/
-Contact: https://ashishghimire.com, https://tryhackme.com/p/ghostaacs, https://linktr.ee/aacsghimire
+Author: [Ashish Ghimire](https://ashishghimire.com/about/).
+Contact: https://ashishghimire.com, https://github.com/ghimireaacs, https://www.youtube.com/@ashishghimire, https://tryhackme.com/p/ghostaacs, https://linktr.ee/aacsghimire
 License: content is the author's own; cite with a link to the post URL.
 
-## Posts
-
-Grouped by top-level category, newest first within each.
+Commands and configurations reflect the software and setup described in each dated article.
 
 
 
-### Homelab
 
-- [OPNsense Logging to Grafana via Loki: Three Gotchas That Will Catch You](https://ashishghimire.com/posts/opnsense-logging-loki-grafana/) — Ship OPNsense firewall logs to Grafana with syslog-ng, Promtail and Loki, and fix the three silent failures that leave the dashboard empty. Category: Homelab > Networking. Published 2026-04-21, updated 2026-08-30. Tags: opnsense, grafana, loki, promtail, syslog-ng, kubernetes, selfhosted, observability, filterlog.
 
-- [My Electricity Bill Jumped From $300 to $800 in One Quarter. My Homelab Did It.](https://ashishghimire.com/posts/homelab-electricity-bill-ram-fix/) — A homelab pushed my power bill from $300 to $800 a quarter. How I traced the waste with Grafana, cut idle VMs and RAM, and got the bill back down. Category: Homelab > Self-Hosting. Published 2026-04-11, updated 2026-08-30. Tags: proxmox, kubernetes, homelab, electricity, ram, cost, selfhosted, ollama, ai.
+## Homelab
 
-- [I Finally Know If Anyone Reads This Blog](https://ashishghimire.com/posts/blog-analytics-umami/) — Self-hosted Umami analytics on a free Oracle VM: Docker deploy, Cloudflare tunnel and SSL, and privacy-friendly stats without Google Analytics. Category: Homelab > Self-Hosting. Published 2026-03-21, updated 2026-08-30. Tags: umami, analytics, selfhosted, cloudflare, jekyll, oracle.
 
-- [Syncthing Three-Way Sync Across VLANs](https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/) — Syncthing stopped syncing once devices sat on separate VLANs. How to get three-way sync working with static addresses and OPNsense firewall rules. Category: Homelab > Networking. Published 2026-03-20, updated 2026-08-30. Tags: syncthing, vlan, networking, opnsense, docker, selfhosted.
+- [OPNsense Logging to Grafana via Loki: Three Gotchas That Will Catch You](https://ashishghimire.com/posts/opnsense-logging-loki-grafana/): Three silent failures in my OPNsense logging pipeline, from syslog-ng through Promtail to Loki and Grafana, and how I diagnosed them. Category: Homelab > Networking. Published 2026-04-21, updated 2026-10-20. Tags: opnsense, grafana, loki, promtail, syslog-ng, kubernetes, selfhosted, observability, filterlog.
 
-- [Broken Docker DNS Due to Pi-hole](https://ashishghimire.com/posts/Broken-Docker-DNS-Due-to-PiHole/) — Docker containers could not resolve DNS despite a correct daemon.json. The real cause was leftover Pi-hole nftables rules sending DNS to a dead port. Category: Homelab > Networking. Published 2026-03-11, updated 2026-08-30. Tags: docker, dns, pihole, networking, debugging.
 
-- [How I Utilize Github to Store and Download My Public SSH Keys](https://ashishghimire.com/posts/How-I-Utilize-Github-For-SSH/) — Store your public SSH key on GitHub and pull it onto any new machine with one ssh-import-id-gh command. Covers ed25519 keygen and GitHub setup. Category: Homelab > Self-Hosting. Published 2025-08-09, updated 2026-08-30. Tags: ssh, linux, github, homelab, security, keygen, ed25519.
 
-- [Installing Proxmox and Post Installation](https://ashishghimire.com/posts/Install-Proxmox-And-Post-Installation/) — Turn an old PC into a home server with Proxmox VE: install from USB, set a static IP, then run the post-install community helper script. Category: Homelab > Self-Hosting. Published 2025-07-23, updated 2026-08-30. Tags: proxmox, linux, homelab, virtualization, selfhosted, hypervisor.
+- [My Electricity Bill Jumped From $300 to $800 in One Quarter. My Homelab Did It.](https://ashishghimire.com/posts/homelab-electricity-bill-ram-fix/): My electricity bill rose from $300 to $800 after expanding the homelab. How I investigated RAM pressure, local AI, and unused workloads. Category: Homelab > Self-Hosting. Published 2026-04-11, updated 2026-10-20. Tags: proxmox, kubernetes, homelab, electricity, ram, cost, selfhosted, ollama, ai.
 
-- [Installing Docker and Setting Permission](https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/) — Install Docker on Ubuntu from the official apt repository and fix permissions with the docker group so you can run containers without sudo. Category: Homelab > Self-Hosting. Published 2025-07-06, updated 2026-08-30. Tags: docker, linux, ubuntu, containers, homelab, permissions.
 
-### Linux
 
-- [SSH + Zsh Prompt Duplication, Broken Nano, and the One-Line Fix](https://ashishghimire.com/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/) — Zsh prompt duplicated and nano rendered broken when SSH-ing from Ghostty. The cause was a TERM mismatch, and one environment variable fixed both. Category: Linux. Published 2026-01-07, updated 2026-08-30. Tags: ssh, zsh, linux, ghostty, powerlevel10k, oh-my-zsh, terminal, homelab.
+- [I Finally Know If Anyone Reads This Blog](https://ashishghimire.com/posts/blog-analytics-umami/): How I set up self-hosted Umami analytics on an Oracle VM and connected it to my Jekyll blog to see page views and referrers without cookies. Category: Homelab > Self-Hosting. Published 2026-03-21, updated 2026-10-20. Tags: umami, analytics, selfhosted, cloudflare, jekyll, oracle.
 
-- [Installing Arch Linux Hard Way](https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way/) — Install Arch Linux manually without archinstall: partitioning, mounting, base system, bootloader, network and a KDE Plasma desktop, step by step. Category: Linux. Published 2025-07-06, updated 2026-08-30. Tags: arch, linux, install, bootloader, kde, plasma, partitioning.
 
-- [Install AppImage Softwares in Linux](https://ashishghimire.com/posts/Installing-AppImage-Softwares-In-Linux/) — How to run AppImage apps on any Linux distro: download, make executable, integrate into the app menu and uninstall. No package manager needed. Category: Linux. Published 2023-02-17, updated 2026-08-30. Tags: linux, appimage, software, install.
 
-### Security
+- [Syncthing Three-Way Sync Across VLANs](https://ashishghimire.com/posts/Syncthing-Three-Way-Sync-Across-VLANs/): How I fixed Syncthing across VLANs with discovery and relays disabled, using static device addresses to sync files between three devices. Category: Homelab > Networking. Published 2026-03-20, updated 2026-10-20. Tags: syncthing, vlan, networking, opnsense, docker, selfhosted.
 
-- [Setting Up Active Directory](https://ashishghimire.com/posts/Setting-Up-Active-Directory/) — Build an Active Directory pentest lab: Windows Server 2022 domain controller, Windows 10 clients, users, groups, OUs and domain join, PNPT style. Category: Security > Pentesting. Published 2025-07-05, updated 2026-08-30. Tags: Active-Directory, windows-server, pentesting, TCM-SEC, PNPT, cybersecurity, AD.
 
-- [Useful Linux Commands for Hacking](https://ashishghimire.com/posts/Useful-Commands/) — Linux commands for pentesting and CTFs: enumeration, privilege escalation checks, file transfers and reverse shells, in one quick-reference sheet. Category: Security > Pentesting. Published 2023-03-19, updated 2026-08-30. Tags: commands, Hacking, Privilege-Escalation.
 
-- [Let’s Block Our Ads For Free and Also Keep Our Children safe](https://ashishghimire.com/posts/Dns/) — Block ads, trackers and adult content on every device with NextDNS. DNS-based filtering, nothing to install, covers phones, TVs and guest devices. Category: Security > Privacy. Published 2023-03-05, updated 2026-08-30. Tags: NextDNS, dns, adblock, networking, privacy, parental-controls.
+- [Broken Docker DNS Due to Pi-hole](https://ashishghimire.com/posts/Broken-Docker-DNS-Due-to-PiHole/): Docker DNS kept failing despite correct daemon settings. I traced it to leftover Pi-hole nftables rules redirecting DNS traffic to a closed port. Category: Homelab > Networking. Published 2026-03-11, updated 2026-10-20. Tags: docker, dns, pihole, networking, debugging.
 
-- [You need to use Password Manager right NOW!!](https://ashishghimire.com/posts/Bitwarden/) — Why you need a password manager and how to set up Bitwarden: vault, generated passwords, browser and phone sync, and a recovery plan that works. Category: Security > Privacy. Published 2023-02-23, updated 2026-08-30. Tags: security, password, bitwarden, password-manager, cybersecurity.
 
-- [Vulnhub Kioptrix Walkthrough Part 2](https://ashishghimire.com/posts/Vulnhub-Kioptrix-P-2/) — Vulnhub Kioptrix Level 2 walkthrough: Nikto scanning, Dirbuster directory brute force, Burp Suite request tampering and command injection. Category: Security > Walkthrough. Published 2022-12-22, updated 2026-08-30. Tags: vulnhub, kioptrix, guide, walkthrough, TCM-SEC, nikto, dirbuster, burpsuite.
 
-- [Vulnhub Kioptrix Walkthrough Part 1](https://ashishghimire.com/posts/Vulnhub-Kioptrix-P-1/) — Vulnhub Kioptrix Level 1 walkthrough: host discovery with netdiscover and arp-scan, Nmap service enumeration, and exploitation to root. Category: Security > Walkthrough. Published 2022-12-18, updated 2026-08-30. Tags: vulnhub, kioptrix, guide, walkthrough, TCM-SEC, net-discover, arp-scan.
+- [How I Utilize Github to Store and Download My Public SSH Keys](https://ashishghimire.com/posts/How-I-Utilize-Github-For-SSH/): How I store public SSH keys on GitHub and import them onto new Linux servers with ssh-import-id, without copying keys by hand. Category: Homelab > Self-Hosting. Published 2025-08-09, updated 2026-10-20. Tags: ssh, linux, github, homelab, security, keygen, ed25519.
 
-### Windows
 
-- [Update All Apps with One Line Of Code in Windows](https://ashishghimire.com/posts/Install-Package-Manager-In-Windows-11/) — Winget is the built-in Windows package manager. Install, upgrade and list every app from one PowerShell command, the way apt works on Linux. Category: Windows. Published 2024-10-21, updated 2026-08-30. Tags: windows, winget, windows-11, package-manager, cli, powershell.
+
+- [Installing Proxmox and Post Installation](https://ashishghimire.com/posts/Install-Proxmox-And-Post-Installation/): Turn an old PC into a Proxmox VE server. Prepare a bootable USB, install the hypervisor, and complete the initial configuration. Category: Homelab > Self-Hosting. Published 2025-07-23, updated 2026-10-20. Tags: proxmox, linux, homelab, virtualization, selfhosted, hypervisor.
+
+
+
+- [Installing Docker and Setting Permission](https://ashishghimire.com/posts/Install-Docker-And-Manage-Permission/): Install Docker from its official apt repository and configure docker group permissions. Understand why running Docker without sudo grants root access. Category: Homelab > Self-Hosting. Published 2025-07-06, updated 2026-10-20. Tags: docker, linux, ubuntu, containers, homelab, permissions.
+
+
+## Linux
+
+
+- [SSH + Zsh Prompt Duplication, Broken Nano, and the One-Line Fix](https://ashishghimire.com/posts/SSH-+-Zsh-Prompt-Duplication-Broken-Nano-and-the-One-Line-Fix/): Duplicate Zsh prompts and broken Nano over SSH from Ghostty came down to a terminal type mismatch. Here is the environment variable fix. Category: Linux. Published 2026-01-07, updated 2026-10-20. Tags: ssh, zsh, linux, ghostty, powerlevel10k, oh-my-zsh, terminal, homelab.
+
+
+
+- [Installing Arch Linux Hard Way](https://ashishghimire.com/posts/Installing-Arch-Linux-Hard-Way/): My manual Arch Linux installation guide, covering disk partitions, mounting, base packages, and the bootloader without using archinstall. Category: Linux. Published 2025-07-06, updated 2026-10-20. Tags: arch, linux, install, bootloader, kde, plasma, partitioning.
+
+
+
+- [Install AppImage Softwares in Linux](https://ashishghimire.com/posts/Installing-AppImage-Softwares-In-Linux/): Download, make executable, and run AppImage applications on Linux. Add launcher integration so portable apps fit into your desktop. Category: Linux. Published 2023-02-17, updated 2026-10-20. Tags: linux, appimage, software, install.
+
+
+## Security
+
+
+- [Setting Up Active Directory](https://ashishghimire.com/posts/Setting-Up-Active-Directory/): Build an Active Directory practice lab for TCM Security and PNPT study, using Windows Server 2022 and Windows 10 virtual machines. Category: Security > Pentesting. Published 2025-07-05, updated 2026-10-20. Tags: Active-Directory, windows-server, pentesting, TCM-SEC, PNPT, cybersecurity, AD.
+
+
+
+- [Useful Linux Commands for Hacking](https://ashishghimire.com/posts/Useful-Commands/): My Linux command reference for security labs and CTFs, with practical commands for enumeration, file transfers, and privilege escalation. Category: Security > Pentesting. Published 2023-03-19, updated 2026-10-20. Tags: commands, Hacking, Privilege-Escalation.
+
+
+
+- [Let’s Block Our Ads For Free and Also Keep Our Children safe](https://ashishghimire.com/posts/Dns/): How I use NextDNS to filter ads, trackers, and adult domains. Learn the basics of DNS and set up filtering for your devices. Category: Security > Privacy. Published 2023-03-05, updated 2026-10-20. Tags: NextDNS, dns, adblock, networking, privacy, parental-controls.
+
+
+
+- [You need to use Password Manager right NOW!!](https://ashishghimire.com/posts/Bitwarden/): Why reused passwords put your accounts at risk, how a password manager helps, and why I use Bitwarden to store unique passwords. Category: Security > Privacy. Published 2023-02-23, updated 2026-10-20. Tags: security, password, bitwarden, password-manager, cybersecurity.
+
+
+
+- [Vulnhub Kioptrix Walkthrough Part 2](https://ashishghimire.com/posts/Vulnhub-Kioptrix-P-2/): Continue the Kioptrix lab with web enumeration using Nikto, DirBuster, and Burp Suite. Identify exposed directories and vulnerable services. Category: Security > Walkthrough. Published 2022-12-22, updated 2026-10-20. Tags: vulnhub, kioptrix, guide, walkthrough, TCM-SEC, nikto, dirbuster, burpsuite.
+
+
+
+- [Vulnhub Kioptrix Walkthrough Part 1](https://ashishghimire.com/posts/Vulnhub-Kioptrix-P-1/): A beginner Kioptrix walkthrough from my TCM Security lab: find the VM with arp-scan and netdiscover, then enumerate its ports and services. Category: Security > Walkthrough. Published 2022-12-18, updated 2026-10-20. Tags: vulnhub, kioptrix, guide, walkthrough, TCM-SEC, net-discover, arp-scan.
+
+
+## Windows
+
+
+- [Update All Apps with One Line Of Code in Windows](https://ashishghimire.com/posts/Install-Package-Manager-In-Windows-11/): Use Winget on Windows to install, update, and list apps from the terminal. Export and import your app list when setting up another PC. Category: Windows. Published 2024-10-21, updated 2026-10-20. Tags: windows, winget, windows-11, package-manager, cli, powershell.
+
 
 
 ## Index pages
 
-- [All posts](https://ashishghimire.com/all-posts/) — full chronological archive
-- [Categories](https://ashishghimire.com/categories/) — posts grouped by topic
-- [About](https://ashishghimire.com/about/) — who writes this and why
+- [All posts](https://ashishghimire.com/all-posts/): Full chronological archive.
+- [Categories](https://ashishghimire.com/categories/): Posts grouped by topic.
+- [About](https://ashishghimire.com/about/): Who writes this and why.
+
+## Optional
+
+- [RSS feed](https://ashishghimire.com/feed.xml): New posts and publication dates.
+- [Privacy policy](https://ashishghimire.com/privacy-policy/): Analytics, cookies, and comments.
 - [Sitemap](https://ashishghimire.com/sitemap.xml)

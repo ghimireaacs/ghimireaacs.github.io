@@ -1,10 +1,11 @@
 ---
 layout: post
 title: "Install AppImage Softwares in Linux"
+seo_title: "How to Install and Run AppImages on Linux"
 date: 2023-02-17 03:10:16 +1100
 categories: [Linux]
 tags: [linux, appimage, software, install]
-description: "How to run AppImage apps on any Linux distro: download, make executable, integrate into the app menu and uninstall. No package manager needed."
+description: "Download, make executable, and run AppImage applications on Linux. Add launcher integration so portable apps fit into your desktop."
 image:
   path: /assets/img/headers/appimg.webp
   alt: "AppImage on Linux header"

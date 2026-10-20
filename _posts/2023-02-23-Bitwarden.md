@@ -4,7 +4,7 @@ title: "You need to use Password Manager right NOW!!"
 date: 2023-02-23 22:34:31 +1100
 categories: [Security, Privacy]
 tags: [security, password, bitwarden, password-manager, cybersecurity]
-description: "Why you need a password manager and how to set up Bitwarden: vault, generated passwords, browser and phone sync, and a recovery plan that works."
+description: "Why reused passwords put your accounts at risk, how a password manager helps, and why I use Bitwarden to store unique passwords."
 image:
   path: /assets/img/headers/bitwarden.webp
   alt: "Bitwarden password manager header"

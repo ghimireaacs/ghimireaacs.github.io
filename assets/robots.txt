@@ -1,5 +1,6 @@
 ---
 permalink: /robots.txt
+sitemap: false
 # The robots rules
 ---
 User-agent: *
@@ -7,13 +8,11 @@ Allow: /
 
 User-agent: GPTBot
 Disallow: /
-User-agent: ChatGPT-User
-Disallow: /
+
 User-agent: Google-Extended
 Disallow: /
+
 User-agent: CCBot
 Disallow: /
-User-agent: PerplexityBot
-Disallow: /
 
-Sitemap: https://ashishghimire.com/sitemap.xml
+Sitemap: {{ '/sitemap.xml' | absolute_url }}

@@ -4,7 +4,7 @@ title: "I Finally Know If Anyone Reads This Blog"
 date: 2026-03-21 00:00:00 +1100
 categories: [Homelab, Self-Hosting]
 tags: [umami, analytics, selfhosted, cloudflare, jekyll, oracle]
-description: "Self-hosted Umami analytics on a free Oracle VM: Docker deploy, Cloudflare tunnel and SSL, and privacy-friendly stats without Google Analytics."
+description: "How I set up self-hosted Umami analytics on an Oracle VM and connected it to my Jekyll blog to see page views and referrers without cookies."
 image:
   path: /assets/img/headers/umamiAnalytics.webp
   alt: "Umami self-hosted analytics header"

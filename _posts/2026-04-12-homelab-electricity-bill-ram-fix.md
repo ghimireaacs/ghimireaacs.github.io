@@ -4,7 +4,7 @@ title: "My Electricity Bill Jumped From $300 to $800 in One Quarter. My Homelab 
 date: 2026-04-12 00:00:00 +1100
 categories: [Homelab, Self-Hosting]
 tags: [proxmox, kubernetes, homelab, electricity, ram, cost, selfhosted, ollama, ai]
-description: "A homelab pushed my power bill from $300 to $800 a quarter. How I traced the waste with Grafana, cut idle VMs and RAM, and got the bill back down."
+description: "My electricity bill rose from $300 to $800 after expanding the homelab. How I investigated RAM pressure, local AI, and unused workloads."
 image:
   path: /assets/img/headers/homelab-electricity-bill.webp
   alt: "Homelab electricity bill header"

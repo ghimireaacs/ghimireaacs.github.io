@@ -1,10 +1,11 @@
 ---
 layout: post
 title: "Useful Linux Commands for Hacking"
+seo_title: "Useful Linux Commands for Hacking and CTFs"
 date: 2023-03-19 22:34:31 +1100
 categories: [Security, Pentesting]
 tags: [commands, Hacking, Privilege-Escalation]
-description: "Linux commands for pentesting and CTFs: enumeration, privilege escalation checks, file transfers and reverse shells, in one quick-reference sheet."
+description: "My Linux command reference for security labs and CTFs, with practical commands for enumeration, file transfers, and privilege escalation."
 image:
   path: /assets/img/headers/linuxCommands.webp
   alt: "Linux commands for hacking header"

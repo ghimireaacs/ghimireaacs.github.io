@@ -1,10 +1,11 @@
 ---
+layout: null
 permalink: /llms.txt
 sitemap: false
 ---
 # {{ site.title }}
 
-> {{ site.description }}
+> {{ site.description | normalize_whitespace }}
 
 This is the personal engineering blog of {{ site.social.name }}, an IT graduate
 based in Sydney, Australia. Every post is a first-hand write-up of something
@@ -13,24 +14,35 @@ and VLAN networking, self-hosted services, Linux and Windows administration, and
 offensive-security walkthroughs. Posts include the failures and dead ends, not just the
 happy path.
 
-Author: {{ site.social.name }} — {{ site.url }}{{ '/about/' | relative_url }}
+Author: [{{ site.social.name }}]({{ '/about/' | absolute_url }}).
 Contact: {% for link in site.social.links %}{{ link }}{% unless forloop.last %}, {% endunless %}{% endfor %}
 License: content is the author's own; cite with a link to the post URL.
 
-## Posts
+Commands and configurations reflect the software and setup described in each dated article.
 
-Grouped by top-level category, newest first within each.
-{% assign tops = '' | split: '' %}{% for post in site.posts %}{% assign tops = tops | push: post.categories.first %}{% endfor %}
+{% assign tops = '' | split: '' %}
+{% for post in site.posts %}
+{% unless post.sitemap == false or post.robots contains 'noindex' %}
+{% assign tops = tops | push: post.categories.first %}
+{% endunless %}
+{% endfor %}
 {% assign tops = tops | uniq | sort %}
 {% for cat in tops %}
-### {{ cat }}
+## {{ cat }}
 {% assign in_cat = site.posts | where_exp: 'post', 'post.categories.first == cat' %}{% for post in in_cat %}
-- [{{ post.title }}]({{ post.url | absolute_url }}) — {{ post.description | strip_newlines }} Category: {{ post.categories | join: ' > ' }}. Published {{ post.date | date: '%Y-%m-%d' }}{% if post.last_modified_at %}, updated {{ post.last_modified_at | date: '%Y-%m-%d' }}{% endif %}. Tags: {{ post.tags | join: ', ' }}.
+{% unless post.sitemap == false or post.robots contains 'noindex' %}
+- [{{ post.title | strip_html | replace: '[', '\[' | replace: ']', '\]' }}]({{ post.url | absolute_url }}): {{ post.description | strip_html | normalize_whitespace }} Category: {{ post.categories | join: ' > ' }}. Published {{ post.date | date: '%Y-%m-%d' }}{% if post.last_modified_at %}, updated {{ post.last_modified_at | date: '%Y-%m-%d' }}{% endif %}. Tags: {{ post.tags | join: ', ' }}.
+{% endunless %}
 {% endfor %}{% endfor %}
 
 ## Index pages
 
-- [All posts]({{ '/all-posts/' | absolute_url }}) — full chronological archive
-- [Categories]({{ '/categories/' | absolute_url }}) — posts grouped by topic
-- [About]({{ '/about/' | absolute_url }}) — who writes this and why
+- [All posts]({{ '/all-posts/' | absolute_url }}): Full chronological archive.
+- [Categories]({{ '/categories/' | absolute_url }}): Posts grouped by topic.
+- [About]({{ '/about/' | absolute_url }}): Who writes this and why.
+
+## Optional
+
+- [RSS feed]({{ '/feed.xml' | absolute_url }}): New posts and publication dates.
+- [Privacy policy]({{ '/privacy-policy/' | absolute_url }}): Analytics, cookies, and comments.
 - [Sitemap]({{ '/sitemap.xml' | absolute_url }})

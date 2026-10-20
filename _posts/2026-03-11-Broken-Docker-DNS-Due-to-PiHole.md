@@ -4,7 +4,7 @@ title: "Broken Docker DNS Due to Pi-hole"
 date: 2026-03-11 00:00:00 +1100
 categories: [Homelab, Networking]
 tags: [docker, dns, pihole, networking, debugging]
-description: "Docker containers could not resolve DNS despite a correct daemon.json. The real cause was leftover Pi-hole nftables rules sending DNS to a dead port."
+description: "Docker DNS kept failing despite correct daemon settings. I traced it to leftover Pi-hole nftables rules redirecting DNS traffic to a closed port."
 image:
   path: /assets/img/headers/dockerBrokenDNS.webp
   alt: "Broken Docker DNS header"

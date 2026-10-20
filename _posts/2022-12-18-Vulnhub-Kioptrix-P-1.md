@@ -4,7 +4,7 @@ title: "Vulnhub Kioptrix Walkthrough Part 1"
 date: 2022-12-18 23:11:31 +1100
 categories: [Security, Walkthrough]
 tags: [vulnhub, kioptrix, guide, walkthrough, TCM-SEC, net-discover, arp-scan]
-description: "Vulnhub Kioptrix Level 1 walkthrough: host discovery with netdiscover and arp-scan, Nmap service enumeration, and exploitation to root."
+description: "A beginner Kioptrix walkthrough from my TCM Security lab: find the VM with arp-scan and netdiscover, then enumerate its ports and services."
 image:
   path: /assets/img/headers/tcmsec.webp
   alt: "Vulnhub Kioptrix Level 1 walkthrough header"

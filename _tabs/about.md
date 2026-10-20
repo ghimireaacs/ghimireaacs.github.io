@@ -1,6 +1,7 @@
 ---
 icon: fas fa-info-circle
 order: 5
+description: "Meet Ashish Ghimire, an IT graduate in Sydney documenting hands-on homelab builds, Linux, networking, self-hosting, and cybersecurity."
 ---
 
 ## Hi, I am Ashish.

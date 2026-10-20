@@ -4,7 +4,7 @@ title: "How I Utilize Github to Store and Download My Public SSH Keys"
 date: 2025-08-09 03:32:00 +1100
 categories: [Homelab, Self-Hosting]
 tags: [ssh, linux, github, homelab, security, keygen, ed25519]
-description: "Store your public SSH key on GitHub and pull it onto any new machine with one ssh-import-id-gh command. Covers ed25519 keygen and GitHub setup."
+description: "How I store public SSH keys on GitHub and import them onto new Linux servers with ssh-import-id, without copying keys by hand."
 image:
   path: /assets/img/headers/githubssh.webp
   alt: "GitHub SSH key header"

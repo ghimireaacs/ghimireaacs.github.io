@@ -1,10 +1,11 @@
 ---
 layout: post
 title: "Installing Proxmox and Post Installation"
+seo_title: "Install Proxmox VE on an Old PC: Setup and First Steps"
 date: 2025-07-24 00:32:00 +1100
 categories: [Homelab, Self-Hosting]
 tags: [proxmox, linux, homelab, virtualization, selfhosted, hypervisor]
-description: "Turn an old PC into a home server with Proxmox VE: install from USB, set a static IP, then run the post-install community helper script."
+description: "Turn an old PC into a Proxmox VE server. Prepare a bootable USB, install the hypervisor, and complete the initial configuration."
 image:
   path: /assets/img/headers/proxmox.webp
   alt: "Proxmox VE installation header"

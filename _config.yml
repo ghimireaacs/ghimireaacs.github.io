@@ -31,12 +31,16 @@ description: >- # used by seo meta and the atom feed; keep under 160 characters
 
 # Used by jekyll-seo-tag for the author and publisher nodes in the BlogPosting
 # JSON-LD, which Google reads for E-E-A-T signals.
-author: Ashish Ghimire
+author:
+    name: Ashish Ghimire
+    url: https://ashishghimire.com/about/
+    type: Person
 logo: /assets/img/propic.webp
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: 'https://ashishghimire.com'
 plugins:
+    - jekyll-seo-tag
     - jekyll-sitemap
 
 github:
@@ -56,6 +60,8 @@ social:
     links:
         # The first element serves as the copyright owner's link
         - https://ashishghimire.com
+        - https://github.com/ghimireaacs
+        - https://www.youtube.com/@ashishghimire
         - https://tryhackme.com/p/ghostaacs
         - https://linktr.ee/aacsghimire
 
@@ -168,6 +174,7 @@ defaults:
           type: posts
       values:
           layout: post
+          author: ashish
           comments: true # Enable comments in posts.
           toc: true # Display TOC column in posts.
           # DO NOT modify the following parameter unless you are confident enough
@@ -187,6 +194,11 @@ defaults:
           path: assets/js/dist
       values:
           swcache: true
+    - scope:
+          path: "404.html"
+      values:
+          sitemap: false
+          robots: noindex, follow
 
 sass:
     style: compressed

@@ -4,7 +4,7 @@ title: "Syncthing Three-Way Sync Across VLANs"
 date: 2026-03-20 00:00:00 +1100
 categories: [Homelab, Networking]
 tags: [syncthing, vlan, networking, opnsense, docker, selfhosted]
-description: "Syncthing stopped syncing once devices sat on separate VLANs. How to get three-way sync working with static addresses and OPNsense firewall rules."
+description: "How I fixed Syncthing across VLANs with discovery and relays disabled, using static device addresses to sync files between three devices."
 image:
   path: /assets/img/headers/syncthingVlan.webp
   alt: "Syncthing sync across VLANs header"

@@ -4,7 +4,7 @@ title: "Setting Up Active Directory"
 date: 2025-07-05 00:00:00 +0000
 categories: [Security, Pentesting]
 tags: [Active-Directory, windows-server, pentesting, TCM-SEC, PNPT, cybersecurity, AD]
-description: "Build an Active Directory pentest lab: Windows Server 2022 domain controller, Windows 10 clients, users, groups, OUs and domain join, PNPT style."
+description: "Build an Active Directory practice lab for TCM Security and PNPT study, using Windows Server 2022 and Windows 10 virtual machines."
 image:
   path: /assets/img/headers/activeDirectory.webp
   alt: "Active Directory lab header"

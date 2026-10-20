@@ -4,7 +4,7 @@ title: "SSH + Zsh Prompt Duplication, Broken Nano, and the One-Line Fix"
 date: 2026-01-07 09:02:00 +1100
 categories: [Linux]
 tags: [ssh, zsh, linux, ghostty, powerlevel10k, oh-my-zsh, terminal, homelab]
-description: "Zsh prompt duplicated and nano rendered broken when SSH-ing from Ghostty. The cause was a TERM mismatch, and one environment variable fixed both."
+description: "Duplicate Zsh prompts and broken Nano over SSH from Ghostty came down to a terminal type mismatch. Here is the environment variable fix."
 image:
   path: /assets/img/headers/p10kbug.webp
   alt: "Broken Zsh prompt over SSH header"

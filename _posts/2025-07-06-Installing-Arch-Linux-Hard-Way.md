@@ -1,10 +1,11 @@
 ---
 layout: post
 title: "Installing Arch Linux Hard Way"
+seo_title: "Install Arch Linux Manually: From Partitions to Bootloader"
 date: 2025-07-06 01:11:31 +1100
 categories: [Linux]
 tags: [arch, linux, install, bootloader, kde, plasma, partitioning]
-description: "Install Arch Linux manually without archinstall: partitioning, mounting, base system, bootloader, network and a KDE Plasma desktop, step by step."
+description: "My manual Arch Linux installation guide, covering disk partitions, mounting, base packages, and the bootloader without using archinstall."
 image:
   path: /assets/img/headers/ArchInstall.webp
   alt: "Installing Arch Linux the hard way header"

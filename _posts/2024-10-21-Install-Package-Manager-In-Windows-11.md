@@ -4,7 +4,7 @@ title: "Update All Apps with One Line Of Code in Windows"
 date: 2024-10-21 05:19:38 +1100
 categories: [Windows]
 tags: [windows, winget, windows-11, package-manager, cli, powershell]
-description: "Winget is the built-in Windows package manager. Install, upgrade and list every app from one PowerShell command, the way apt works on Linux."
+description: "Use Winget on Windows to install, update, and list apps from the terminal. Export and import your app list when setting up another PC."
 image:
   path: /assets/img/headers/winget.webp
   alt: "Winget Windows package manager header"

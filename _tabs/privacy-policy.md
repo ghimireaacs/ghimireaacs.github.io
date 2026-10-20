@@ -2,6 +2,7 @@
 icon: fas fa-shield-halved
 order: 6
 title: Privacy Policy
+description: "How Ashish Ghimire's blog uses Google Analytics, AdSense, Umami, and Giscus, including cookies, external links, and contact details."
 ---
 
 This blog is run by Ashish Ghimire at [ashishghimire.com](https://ashishghimire.com). This page explains what data is collected when you visit, and how it is used.

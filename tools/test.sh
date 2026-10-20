@@ -2,7 +2,7 @@
 #
 # Build and test the site content
 #
-# Requirement: html-proofer, jekyll
+# Requirement: Python 3, Jekyll
 #
 # Usage: See help information
 
@@ -59,6 +59,8 @@ main() {
   # build
   JEKYLL_ENV=production bundle exec jekyll b \
     -d "$SITE_DIR$_baseurl" -c "$_config"
+
+  python3 tools/check_seo.py "$SITE_DIR$_baseurl"
 
   # test
   # this causes tons of false positives when checking HTML

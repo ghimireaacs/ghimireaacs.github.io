@@ -4,7 +4,7 @@ title: "OPNsense Logging to Grafana via Loki: Three Gotchas That Will Catch You"
 date: 2026-04-22 00:00:00 +1100
 categories: [Homelab, Networking]
 tags: [opnsense, grafana, loki, promtail, syslog-ng, kubernetes, selfhosted, observability, filterlog]
-description: "Ship OPNsense firewall logs to Grafana with syslog-ng, Promtail and Loki, and fix the three silent failures that leave the dashboard empty."
+description: "Three silent failures in my OPNsense logging pipeline, from syslog-ng through Promtail to Loki and Grafana, and how I diagnosed them."
 image:
   path: /assets/img/headers/opnsenseLogging.webp
   alt: "OPNsense logging to Grafana header"

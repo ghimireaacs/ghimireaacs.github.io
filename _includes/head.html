@@ -4,7 +4,7 @@
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e">
   <meta
     name="viewport"
-    content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
   >
 
   {%- capture seo_tags -%}
@@ -13,8 +13,7 @@
 
   <!-- Setup Open Graph image -->
   <!--
-    Local override of the jekyll-theme-chirpy 7.6.0 include. Only this Open
-    Graph block differs from the gem: social scrapers are pointed at the
+    Local override of the jekyll-theme-chirpy 7.6.0 include. Social scrapers use the
     1200x630 JPEG twin in /assets/img/og/ (built by tools/gen-og-images.py),
     because LinkedIn does not render WebP and the on-page headers are smaller
     than the 1200x630 a large card wants. Re-sync when bumping the theme.
@@ -87,9 +86,13 @@
     <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    {%- assign og_alt = page.image.alt | default: page.title | default: site.title %}
-    <meta property="og:image:alt" content="{{ og_alt | strip_html | normalize_whitespace | xml_escape }}">
   {% endif %}
+
+  {% unless page.image.alt %}
+    {%- assign og_alt = page.title | default: site.title %}
+    <meta property="og:image:alt" content="{{ og_alt | strip_html | normalize_whitespace | xml_escape }}">
+    <meta name="twitter:image:alt" content="{{ og_alt | strip_html | normalize_whitespace | xml_escape }}">
+  {% endunless %}
 
   {% if page.layout == 'post' %}
     <!-- Article metadata: Slack and Discord surface these next to the preview,
@@ -101,7 +104,7 @@
     {%- unless minutes > 0 %}{% assign minutes = 1 %}{% endunless -%}
 
     <!-- article:published_time / :modified_time already come from jekyll-seo-tag -->
-    <meta property="article:author" content="{{ site.social.name }}">
+    <meta property="article:author" content="{{ '/about/' | absolute_url }}">
     {%- for category in page.categories %}
       <meta property="article:section" content="{{ category }}">
     {%- endfor %}
@@ -115,11 +118,15 @@
     <meta name="twitter:data2" content="{{ site.social.name }}">
   {% endif %}
 
-  {% if page.layout == 'tag' %}
+  {% if page.layout == 'tag' or page.url == '/404.html' %}
     <!-- Tag archives are thin (most hold a single post) and compete with the posts
          themselves in search. Crawlable for discovery, but kept out of the index. -->
     <meta name="robots" content="noindex, follow">
+  {% else %}
+    <meta name="robots" content="{{ page.robots | default: 'index, follow, max-image-preview:large' | escape }}">
   {% endif %}
+
+  <link rel="describedby" type="text/plain" href="{{ '/llms.txt' | absolute_url }}">
 
   {%- if site.social.fediverse_handle %}
     <!-- Fediverse handle/creator -->
@@ -127,18 +134,19 @@
   {% endif %}
 
   <title>
-    {%- unless page.layout == 'home' -%}
-      {%- capture title -%}
-        {%- if page.collection == 'tabs' -%}
-          {%- assign tab_key = page.title | downcase -%}
-          {{- site.data.locales[include.lang].tabs[tab_key] -}}
-        {%- else -%}
-          {{- page.seo_title | default: page.title -}}
-        {%- endif -%}
-      {%- endcapture -%}
-      {{- title | append: ' | ' -}}
-    {%- endunless -%}
-    {{- site.title -}}
+    {%- capture title -%}
+      {%- if page.seo_title -%}
+        {{- page.seo_title -}}
+      {%- elsif page.collection == 'tabs' -%}
+        {%- assign tab_key = page.title | downcase -%}
+        {{- site.data.locales[include.lang].tabs[tab_key] | default: page.title -}}
+      {%- else -%}
+        {{- page.seo_title | default: page.title -}}
+      {%- endif -%}
+    {%- endcapture -%}
+    {%- if paginator.page > 1 -%}Page {{ paginator.page }} | {% endif -%}
+    {%- if title != empty -%}{{ title | escape }} | {% endif -%}
+    {{- site.title | escape -}}
   </title>
 
   {% include_cached favicons.html %}

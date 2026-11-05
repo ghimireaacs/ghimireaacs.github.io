@@ -26,7 +26,7 @@ Commands and configurations reflect the software and setup described in each dat
 
 
 
-- [My Electricity Bill Jumped From $300 to $800 in One Quarter. My Homelab Did It.](https://ashishghimire.com/posts/homelab-electricity-bill-ram-fix/): My electricity bill rose from $300 to $800 after expanding the homelab. How I investigated RAM pressure, local AI, and unused workloads. Category: Homelab > Self-Hosting. Published 2026-04-11, updated 2026-10-20. Tags: proxmox, kubernetes, homelab, electricity, ram, cost, selfhosted, ollama, ai.
+- [My Electricity Bill Jumped From $300 to $800 in One Quarter. My Homelab Did It.](https://ashishghimire.com/posts/homelab-electricity-bill-ram-fix/): My electricity bill rose from $300 to $800 after expanding the homelab. How I investigated RAM pressure, local AI, and unused workloads. Category: Homelab > Self-Hosting. Published 2026-04-11, updated 2026-11-05. Tags: proxmox, kubernetes, homelab, electricity, ram, cost, selfhosted, ollama, ai.
 
 
 

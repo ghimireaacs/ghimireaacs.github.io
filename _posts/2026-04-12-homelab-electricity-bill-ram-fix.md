@@ -23,7 +23,7 @@ The biggest thing was the k3s cluster. I already had a GPU passthrough VM called
 
 On top of that i added a second 8TB drive to TrueNAS to set up a mirror. Two spinning hard drives 24/7 instead of one. Seagate Exos drives are not heavy power consumers but they are not free either, especially during scrubs.
 
-Then there was everything i deployed on the cluster. I went a bit overboard. Sonarr, Radarr, Prowlarr, Readarr, Audiobookshelf, Kavita, the whole arr media stack. Authentik for SSO. Prometheus and [Grafana](/posts/opnsense-logging-loki-grafana/) for monitoring. Paperless for documents. karakeep for bookmarks. Most of it was genuinely useful at the time.
+Then there was everything i deployed on the cluster. I went a bit overboard. A whole media stack, Audiobookshelf and Kavita included. Authentik for SSO. Prometheus and [Grafana](/posts/opnsense-logging-loki-grafana/) for monitoring. Paperless for documents. karakeep for bookmarks. Most of it was genuinely useful at the time.
 
 Then life got busy. Got a Netflix subscription. Amazon Prime covers the rest. I stopped using the media stack. But i never stopped running it. All those pods sitting there in memory, nodes drawing power, doing nothing for me.
 
@@ -57,7 +57,7 @@ Some numbers i expected. Paperless at 587 MB, karakeep at 328 MB with its AI fea
 
 What i did not expect: Grafana at 320 MB and Prometheus at 438 MB scraping ten machines every 15 seconds. Chrome, the headless browser karakeep uses for screenshots, sitting at 188 MB with zero limits set.
 
-And the media stack. 937 MB combined across Sonarr, Radarr, Prowlarr, Readarr, Audiobookshelf, Kavita and the rest. Full replicas. For services i had not meaningfully touched since life got busy.
+And the media stack. 937 MB combined across the media apps, Audiobookshelf, Kavita and the rest. Full replicas. For services i had not meaningfully touched since life got busy.
 
 > **Warning:** RAM allocated in Kubernetes is not free. It keeps the node's memory bus active and keeps the CPU managing page tables and caches. Not the same as an idle process doing nothing.
 {: .prompt-warning }
@@ -67,7 +67,7 @@ And the media stack. 937 MB combined across Sonarr, Radarr, Prowlarr, Readarr, A
 **Media stack first.** Scaled everything i was not using to zero:
 
 ```bash
-kubectl scale deployment sonarr radarr prowlarr readarr audiobookshelf kavita lazylibrarian -n media --replicas=0
+kubectl scale deployment --all -n media --replicas=0
 ```
 
 937 MB gone immediately. Can spin back up when i actually need them.
@@ -136,7 +136,7 @@ It is also not done. The library keeps growing as we migrate more. And Paperless
 
 So there is a baseline cost and there are spikes. The Immich scan was a spike i did not plan for. More spikes are coming. That is fine, i would rather process everything locally than hand it to Google or Apple. But knowing when those spikes are coming is the difference between a surprise bill and a planned one.
 
-The local AI services are deliberate. The forgotten arr pods were not. That distinction matters.
+The local AI services are deliberate. The forgotten media pods were not. That distinction matters.
 
 ## This Is Not Just a Homelab Problem
 

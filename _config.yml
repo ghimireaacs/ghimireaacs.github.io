@@ -25,6 +25,13 @@ title: Ashish Ghimire # the main title
 
 tagline: IT | Cybersecurity | HomeLab | Self-Hosting  # it will display as the sub-title
 
+# Homepage intro and post author box (used by _layouts/home.html and _layouts/post.html).
+# Plain text — edit freely.
+home_intro:
+  greeting: "Hi, I'm Ashish."
+  text: "I write about my homelab, networking and security. Mostly things that broke, and how I fixed them."
+author_bio: "IT, cybersecurity, homelab and self-hosting. I write up the problems I hit in my own lab and how I fixed them."
+
 description: >- # used by seo meta and the atom feed; keep under 160 characters
     Homelab, self-hosting and cybersecurity write-ups: hands-on guides for Proxmox,
     Docker, Linux, networking and Windows, from a lab that actually runs.
@@ -217,6 +224,9 @@ exclude:
     # Jekyll copies unknown root files into _site verbatim.
     - AGENTS.md
     - CLAUDE.md
+    - PRODUCT.md
+    - DESIGN.md
+    - .impeccable
     - "*.gem"
     - "*.gemspec"
     - docs

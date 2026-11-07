@@ -4,10 +4,6 @@
   icon: 'fa-solid fa-address-card'
   url:  'https://tryhackme.com/p/ghostaacs'
 -
-  type: youtube
-  icon: 'fab fa-youtube'
-  url: 'https://www.youtube.com/@ashishghimire'
--
   type: github-custom
   icon: 'fab fa-github'
   url: 'https://github.com/ghimireaacs'

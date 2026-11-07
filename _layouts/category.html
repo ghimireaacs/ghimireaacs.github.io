@@ -11,7 +11,7 @@ layout: page
 
 {% include lang.html %}
 
-<div id="page-category">
+<div id="page-category" data-cat="{{ page.title | slugify }}">
   <h1 class="ps-lg-2">
     <i class="far fa-folder-open fa-fw text-muted"></i>
     {{ page.title }}
@@ -24,10 +24,9 @@ layout: page
 
   <ul class="content ps-0">
     {% for post in page.posts %}
-      <li class="d-flex justify-content-between px-md-3">
+      <li class="cat-row">
+        {% include datetime.html date=post.date class='cat-date' lang=lang %}
         <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-        <span class="dash flex-grow-1"></span>
-        {% include datetime.html date=post.date class='text-muted small text-nowrap' lang=lang %}
       </li>
     {% endfor %}
   </ul>

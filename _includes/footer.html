@@ -1,0 +1,34 @@
+<!-- The Footer (overrides Chirpy's): copyright, privacy, and the contact links -->
+
+<footer aria-label="Site Info" class="site-footer">
+  <p class="mb-0">
+    © <time>{{ 'now' | date: '%Y' }}</time> {{ site.social.name | default: site.title }}
+    · <a href="{{ '/privacy-policy/' | relative_url }}">Privacy</a>
+  </p>
+
+  <p class="site-footer-links mb-0">
+    {% for entry in site.data.contact %}
+      {%- assign url = null -%}
+      {% case entry.type %}
+        {% when 'rss' %}
+          {% assign url = '/feed.xml' | relative_url %}
+          {% assign label = 'RSS' %}
+        {% when 'github-custom', 'github' %}
+          {% assign url = entry.url %}
+          {% assign label = 'GitHub' %}
+        {% when 'links' %}
+          {% assign url = entry.url %}
+          {% assign label = 'TryHackMe' %}
+        {% when 'linktree' %}
+          {% assign url = entry.url %}
+          {% assign label = 'Linktree' %}
+        {% else %}
+          {% assign url = entry.url %}
+          {% assign label = entry.type | capitalize %}
+      {% endcase %}
+      {% if url %}
+        <a href="{{ url }}"{% unless entry.noblank %} target="_blank" rel="noopener noreferrer"{% endunless %}>{{ label }}</a>
+      {% endif %}
+    {% endfor %}
+  </p>
+</footer>

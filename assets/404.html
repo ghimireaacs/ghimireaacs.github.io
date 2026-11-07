@@ -1,0 +1,36 @@
+---
+layout: page
+title: "Page not found"
+permalink: /404.html
+---
+
+{%- comment -%}
+  Overrides Chirpy's 404. Search visitors with an old or renamed link get a way
+  forward: site search, the latest fixes, and the four topics.
+{%- endcomment -%}
+
+<div class="nf">
+  <p class="nf-lead">This post may have moved or been renamed. Search for the error you're fixing, or start from one of the latest write-ups.</p>
+
+  <button type="button" class="nf-search" data-open-search>
+    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Search the site
+  </button>
+
+  <h2>Latest fixes</h2>
+  <ul class="nf-list">
+    {% for p in site.posts limit: 6 %}
+      <li><a href="{{ p.url | relative_url }}"><span class="d">{{ p.date | date: '%b %Y' }}</span><span>{{ p.title }}</span></a></li>
+    {% endfor %}
+  </ul>
+
+  {% assign top_cats = '' | split: '' %}
+  {% for p in site.posts %}{% if p.categories.size > 0 %}{% assign top_cats = top_cats | push: p.categories[0] %}{% endif %}{% endfor %}
+  {% assign top_cats = top_cats | uniq | sort %}
+  <h2>Browse by topic</h2>
+  <ul class="nf-topics">
+    {% for c in top_cats %}
+      {% assign cposts = site.posts | where_exp: 'p', 'p.categories.first == c' %}
+      <li data-cat="{{ c | slugify }}"><a href="{{ site.baseurl }}/categories/{{ c | slugify | url_encode }}/"><span>{{ c }}</span><span class="n">{{ cposts | size }}</span></a></li>
+    {% endfor %}
+  </ul>
+</div>

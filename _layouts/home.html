@@ -1,0 +1,173 @@
+---
+layout: default
+---
+
+{%- comment -%}
+  Overrides Chirpy's home layout. Post selection and pagination logic is copied
+  unchanged from jekyll-theme-chirpy 7.6; only the markup is new:
+  intro (page 1) → featured latest post (page 1) → card grid → browse by topic.
+  Intro text lives in _config.yml under `home_intro`.
+{%- endcomment -%}
+
+{% include lang.html %}
+
+{% assign all_pinned = site.posts | where: 'pin', 'true' %}
+{% assign all_normal = site.posts | where_exp: 'item', 'item.pin != true and item.hidden != true' %}
+
+{% assign posts = '' | split: '' %}
+
+{% assign visible_start = paginator.page | minus: 1 | times: paginator.per_page %}
+{% assign visible_end = visible_start | plus: paginator.per_page %}
+
+{% if all_pinned.size > visible_start %}
+  {% if all_pinned.size > visible_end %}
+    {% assign pinned_size = paginator.per_page %}
+  {% else %}
+    {% assign pinned_size = all_pinned.size | minus: visible_start %}
+  {% endif %}
+
+  {% for i in (visible_start..all_pinned.size) limit: pinned_size %}
+    {% assign posts = posts | push: all_pinned[i] %}
+  {% endfor %}
+{% else %}
+  {% assign pinned_size = 0 %}
+{% endif %}
+
+{% assign normal_size = paginator.posts | size | minus: pinned_size %}
+
+{% if normal_size > 0 %}
+  {% if pinned_size > 0 %}
+    {% assign normal_start = 0 %}
+  {% else %}
+    {% assign normal_start = visible_start | minus: all_pinned.size %}
+  {% endif %}
+
+  {% assign normal_end = normal_start | plus: normal_size | minus: 1 %}
+
+  {% for i in (normal_start..normal_end) %}
+    {% assign posts = posts | push: all_normal[i] %}
+  {% endfor %}
+{% endif %}
+
+{% assign first_page = true %}
+{% if paginator.page and paginator.page > 1 %}
+  {% assign first_page = false %}
+{% endif %}
+
+<div id="post-list" class="home">
+  {% if first_page and site.home_intro %}
+    <section class="home-intro">
+      {% if site.avatar %}
+        {%- capture avatar_url -%}{% include media-url.html src=site.avatar %}{%- endcapture -%}
+        <div class="home-avatar" role="img" aria-label="{{ site.title }}" style="background-image: url('{{ avatar_url }}')"></div>
+      {% endif %}
+      <div>
+        <h1 class="home-greeting">{{ site.home_intro.greeting }}</h1>
+        <p class="home-lede">{{ site.home_intro.text }}</p>
+        {%- assign oldest = site.posts | last -%}
+        {%- assign cats_all = '' | split: '' -%}
+        {%- for p in site.posts -%}{%- if p.categories.size > 0 -%}{%- assign cats_all = cats_all | push: p.categories[0] -%}{%- endif -%}{%- endfor -%}
+        {%- assign cats_all = cats_all | uniq -%}
+        <p class="home-meta">{{ site.posts | size }} write-ups across {{ cats_all | size }} topics, since {{ oldest.date | date: '%Y' }}.</p>
+      </div>
+    </section>
+  {% endif %}
+
+  {% for post in posts %}
+    {% assign src = null %}
+    {% if post.image %}
+      {% assign src = post.image.path | default: post.image %}
+      {% if post.media_subpath %}
+        {% unless src contains '://' %}
+          {% assign src = post.media_subpath | append: '/' | append: src | replace: '///', '/' | replace: '//', '/' %}
+        {% endunless %}
+      {% endif %}
+    {% endif %}
+    {% assign alt = post.image.alt | xml_escape | default: post.title | xml_escape %}
+
+    {% if forloop.first and first_page %}
+      <article class="featured-post" data-cat="{{ post.categories | first | slugify }}">
+        <a href="{{ post.url | relative_url }}" class="featured-link">
+          {% if src %}
+            <div class="featured-media"><img class="vt-img" data-vt="vt-{{ post.url | slugify }}" src="{{ src }}" alt="{{ alt }}"></div>
+          {% endif %}
+          <div class="featured-body">
+            <h2 class="featured-title">{{ post.title }}</h2>
+            <p class="featured-desc">{% include post-summary.html %}</p>
+            <span class="post-byline">
+              {% if post.categories.size > 0 %}<span class="post-cat">{{ post.categories | first }}</span>{% endif %}
+              {% include datetime.html date=post.date lang=lang %} ·
+              {% include read-time.html content=post.content lang=lang %}
+            </span>
+          </div>
+        </a>
+      </article>
+
+      {% unless forloop.last %}
+        <div class="section-head">
+          <h2>Recent posts</h2>
+          <a href="{{ '/all-posts/' | relative_url }}">See all {{ site.posts | size }} posts</a>
+        </div>
+        <div class="post-grid">
+      {% endunless %}
+    {% else %}
+      {% if forloop.first %}<div class="post-grid">{% endif %}
+      <article class="post-card" data-cat="{{ post.categories | first | slugify }}">
+        <a href="{{ post.url | relative_url }}" class="post-card-link">
+          {% if src %}
+            <div class="post-card-media"><img class="vt-img" data-vt="vt-{{ post.url | slugify }}" src="{{ src }}" alt="{{ alt }}"></div>
+          {% endif %}
+          <div class="post-card-body">
+            <h3 class="post-card-title">{{ post.title }}</h3>
+            <p class="post-card-desc">{% include post-summary.html %}</p>
+            <span class="post-byline">
+              {% if post.categories.size > 0 %}<span class="post-cat">{{ post.categories | first }}</span>{% endif %}
+              {% include datetime.html date=post.date lang=lang %} ·
+              {% include read-time.html content=post.content lang=lang %}
+            </span>
+          </div>
+        </a>
+      </article>
+      {% if forloop.last %}</div>{% endif %}
+    {% endif %}
+  {% endfor %}
+</div>
+
+{% if paginator.total_pages > 1 %}
+  {% include post-paginator.html %}
+{% endif %}
+
+{% if first_page %}
+  {% assign top_cats = '' | split: '' %}
+  {% for p in site.posts %}
+    {% if p.categories.size > 0 %}
+      {% assign top_cats = top_cats | push: p.categories[0] %}
+    {% endif %}
+  {% endfor %}
+  {% assign top_cats = top_cats | uniq | sort %}
+
+  <section class="topics" id="topics" aria-label="Browse by topic">
+    <div class="section-head">
+      <h2>Topics</h2>
+      <a href="{{ '/categories/' | relative_url }}">All categories</a>
+    </div>
+    <div class="topic-grid">
+      {% for c in top_cats %}
+        {% assign cposts = site.posts | where_exp: 'p', 'p.categories.first == c' %}
+        <div class="topic-card" data-cat="{{ c | slugify }}">
+          <a class="topic-head" href="{{ site.baseurl }}/categories/{{ c | slugify | url_encode }}/">
+            {% assign cslug = c | slugify %}{% case cslug %}{% when 'homelab' %}{% assign cicon = 'fa-server' %}{% when 'linux' %}{% assign cicon = 'fa-terminal' %}{% when 'security' %}{% assign cicon = 'fa-shield-halved' %}{% when 'windows' %}{% assign cicon = 'fa-display' %}{% else %}{% assign cicon = 'fa-folder' %}{% endcase %}
+            <span class="topic-name"><i class="fa-solid {{ cicon }}" aria-hidden="true"></i>{{ c }}</span>
+            <span class="topic-count">{{ cposts | size }} {% if cposts.size == 1 %}post{% else %}posts{% endif %}</span>
+          </a>
+          <ul class="topic-list">
+            {% for p in cposts limit: 4 %}
+              <li><a href="{{ p.url | relative_url }}"><span class="t">{{ p.title }}</span><span class="d">{{ p.date | date: '%b %Y' }}</span></a></li>
+            {% endfor %}
+          </ul>
+          {% if cposts.size > 4 %}<a class="topic-more" href="{{ site.baseurl }}/categories/{{ c | slugify | url_encode }}/">All {{ cposts | size }} →</a>{% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}
